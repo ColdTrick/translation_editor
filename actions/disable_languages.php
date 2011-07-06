@@ -1,0 +1,28 @@
+<?php 
+
+	/**
+	 * jQuery call to disable a set of languages
+	 */
+
+	if(isadminloggedin()){
+		$disabled_languages = get_input("disabled_languages");
+		
+		if(!empty($disabled_languages)){
+			if(is_array($disabled_languages)){
+				$temp_string = implode(",", $disabled_languages);
+			} else {
+				$temp_string = $disabled_languages;
+			}
+			
+			if(set_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, $temp_string, "translation_editor")){
+				echo "OK";
+			} else {
+				echo "FAIL";
+			}
+		} else {
+			set_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, null, "translation_editor");
+		}
+	}
+
+	exit();
+?>
