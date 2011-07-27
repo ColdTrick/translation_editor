@@ -298,18 +298,26 @@
 	function translation_editor_reload_all_translations(){
 		global $CONFIG;
 		
-		foreach($CONFIG->language_paths as $path => $dummy){
-			if($handle = opendir($path)){
-				while($language = readdir($handle)){
-					if(is_file($path . $language)){
-						include($path . $language);
-					}
-				}
-				
-				closedir($handle);
-			}
-		}
+		static $run_once;
 		
+		if(isset($run_once)){
+			$CONFIG->translations = $run_once;
+		} else {
+		
+			foreach($CONFIG->language_paths as $path => $dummy){
+				if($handle = opendir($path)){
+					while($language = readdir($handle)){
+						if(is_file($path . $language)){
+							include($path . $language);
+						}
+					}
+					
+					closedir($handle);
+				}
+			}
+			
+			$run_once = $CONFIG->translations;
+		}
 	}
 	
 	function translation_editor_check_file_structure($current_language){
