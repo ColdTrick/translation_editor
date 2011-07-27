@@ -414,7 +414,7 @@
 		foreach($plugins as $plugin => $data){
 			if($translations = translation_editor_get_plugin($language, $plugin)){
 				foreach($translations["en"] as $key => $value){
-					if(stristr($value, $query) || (array_key_exists($key, $translations["current_language"]) && stristr($translations["current_language"][$key], $query))){
+					if(stristr($key, $query) || stristr($value, $query) || (array_key_exists($key, $translations["current_language"]) && stristr($translations["current_language"][$key], $query))){
 						if(!array_key_exists($plugin, $found)){
 							$found[$plugin] = array(
 								"en" => array(),
