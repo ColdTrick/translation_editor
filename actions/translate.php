@@ -51,7 +51,7 @@
 			}
 			
 			// merge translations
-			translation_editor_merge_translations($current_language, trues);
+			translation_editor_merge_translations($current_language, true);
 		} else {
 			if(!$jquery){
 				register_error(elgg_echo("translation_editor:action:translate:error:input"));
