@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest>
 	<field key="author" value="ColdTrick IT Solutions" />
-	<field key="version" value="0.5.4" />
+	<field key="version" value="0.6" />
 	<field key="description" value="Translation Editor provides an easy way to edit translations" />
 	<field key="website" value="http://www.coldtrick.com/" />
 	<field key="copyright" value="(C) ColdTrick IT Solutions 2010" />
@@ -12,6 +12,11 @@
 =====================
 Version History
 =====================
+0.6 (2011-07-27):
+	- added: key search
+	- fixed: typo in translate action
+	- changed: improved search performance
+
 0.5.4 (2011-05-31):
 	- fixed: translation caching on multisite setup
 
