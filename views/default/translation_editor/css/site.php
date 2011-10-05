@@ -9,7 +9,7 @@
 
 #translation_editor_language_table .translation_editor_flag,
 #translation_editor_language_table .translation_editor_enable {
-	width: 1px;
+	width: 1%;
 	text-align: center;
 }
 
@@ -31,10 +31,6 @@
 	display: inline-block;
 	margin-left: 5px;
 	vertical-align: text-bottom;
-}
-
-#translation_editor_custom_keys_form textarea{
-	width: 98%;
 }
 
 #translation_editor_site_language {
@@ -97,6 +93,9 @@
 .translation_editor_translation_table tr.first_row,
 .translation_editor_translation_table tr[rel='missing']{
 	display: table-row;
+	<!-- 
+	display: inline-block;
+	-->
 }
 
 .translation_editor_plugin_key {

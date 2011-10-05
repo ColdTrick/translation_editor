@@ -67,6 +67,9 @@
 		<style type="text/css">
 			.translation_editor_translation_table tr {
 				display: table-row;
+				<!-- 
+				display: inline-block;
+				-->
 			}
 		</style>
 		<?php 
