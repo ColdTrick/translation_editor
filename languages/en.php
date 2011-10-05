@@ -1,7 +1,7 @@
 <?php 
 
 	$english = array(
-		'translation_editor' => "Translation Editor",
+		//'translation_editor' => "Translation Editor",
 	
 		// global
 		'translation_editor:language' => "Language",
@@ -9,9 +9,6 @@
 	
 		// menu
 		'translation_editor:menu:title' => "Translation Editor",
-	
-		// settings
-		'translation_editor:settings:show_in_tools' => "Show a link to the Translation Editor in Tools menu?",
 	
 		// views
 		// language selector
@@ -27,7 +24,6 @@
 		'translation_editor:plugin_list:exists' => "Translated",
 		'translation_editor:plugin_list:custom' => "Custom",
 		'translation_editor:plugin_list:percentage' => "Percentage complete",
-		'translation_editor:plugin_list:error:no_plugins' => "No components available to translate",
 		
 		'translation_editor:plugin_list:merge' => "Merge to PHP language file",
 		'translation_editor:plugin_list:delete' => "Delete translation",
@@ -45,7 +41,6 @@
 		'translation_editor:custom_keys:translation_info' => "New keys will always be created as an English translation. After creation you can translate it to other languages.",
 	
 		'translation_editor:plugin_edit:title' => "Edit the translations for plugin:",
-		'translation_editor:plugin_edit:back' => "back to plugin list",
 		'translation_editor:plugin_edit:show' => "show",
 		'translation_editor:plugin_edit:show:missing' => "missing",
 		'translation_editor:plugin_edit:show:equal' => "equal",
@@ -66,7 +61,7 @@
 		'translation_editor:action:unmake_translation_editor:success' => "Succesfully removed translator",
 		'translation_editor:action:unmake_translation_editor:error' => "Error while removing the translator role",
 	
-		'translation_editor:action:delete:error:input' => "Incorrect imput to delete translation",
+		'translation_editor:action:delete:error:input' => "Incorrect input to delete translation",
 		'translation_editor:action:delete:error:delete' => "Error while deleting translation",
 		'translation_editor:action:delete:success' => "Translation successfully deleted",
 	
@@ -83,5 +78,3 @@
 	);
 	
 	add_translation("en", $english);
-
-?>

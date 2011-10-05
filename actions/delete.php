@@ -1,7 +1,4 @@
 <?php 
-	global $CONFIG;
-
-	action_gatekeeper();
 	admin_gatekeeper();
 	
 	$lang = get_input("current_language");
@@ -20,6 +17,4 @@
 		register_error(elgg_echo("translation_editor:action:delete:error:input"));
 	}
 
-	forward($CONFIG->wwwroot . "pg/translation_editor/" . $lang);
-
-?>
+	forward("translation_editor/" . $lang);

@@ -4,7 +4,7 @@
 	 * jQuery call to disable a set of languages
 	 */
 
-	if(isadminloggedin()){
+	if(elgg_is_admin_logged_in()){
 		$disabled_languages = get_input("disabled_languages");
 		
 		if(!empty($disabled_languages)){
@@ -14,15 +14,10 @@
 				$temp_string = $disabled_languages;
 			}
 			
-			if(set_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, $temp_string, "translation_editor")){
-				echo "OK";
-			} else {
-				echo "FAIL";
-			}
+			elgg_set_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, $temp_string, "translation_editor");
 		} else {
-			set_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, null, "translation_editor");
+			elgg_unset_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, "translation_editor");
 		}
 	}
-
+	
 	exit();
-?>

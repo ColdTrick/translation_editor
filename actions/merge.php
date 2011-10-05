@@ -1,6 +1,4 @@
 <?php 
-
-	action_gatekeeper();
 	gatekeeper();
 	
 	$current_language = get_input("current_language");
@@ -22,13 +20,10 @@
 		echo var_export($translation);
 		echo ';' . PHP_EOL;
 		echo 'add_translation("' . $current_language . '", $language);'  . PHP_EOL;
-		echo "?>";
 		
 		exit();
 		
 	} else {
 		register_error(elgg_echo("transation_editor:action:translate:error:not_authorized"));
-		forward($_SERVER["HTTP_REFERER"]);
+		forward(REFERER);
 	}
-	
-?>

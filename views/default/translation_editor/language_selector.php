@@ -1,7 +1,5 @@
 <?php 
 
-	global $CONFIG;
-
 	$languages = $vars["languages"];
 	$current_language = $vars["current_language"];
 	$plugin = $vars["plugin"];
@@ -9,39 +7,39 @@
 	$site_language = $vars["site_language"];
 	
 	if(!empty($languages)){
-		$list = "<table id='translation_editor_language_table'>\n";
-		$list .= "<tr>\n";
-		$list .= "<th class='translation_editor_flag'>&nbsp;</th>\n";
-		$list .= "<th>" . elgg_echo("translation_editor:language") . "</th>\n";
-		if(isadminloggedin()){
-			$list .= "<th class='translation_editor_enable'>" . elgg_echo("translation_editor:disabled") . "</th>\n";
+		$list = "<table id='translation_editor_language_table' class='elgg-table' title='" . elgg_echo("translation_editor:language_selector:title") . "'>";
+		$list .= "<tr>";
+		$list .= "<th class='translation_editor_flag'>&nbsp;</th>";
+		$list .= "<th>" . elgg_echo("translation_editor:language") . "</th>";
+		if(elgg_is_admin_logged_in()){
+			$list .= "<th class='translation_editor_enable'>" . elgg_echo("translation_editor:disabled") . "</th>";
 		}
-		$list .= "</tr>\n";
+		$list .= "</tr>";
 		
 		foreach($languages as $language){
-			$list .= "<tr>\n";
+			$list .= "<tr>";
 			
 			// flag
 			$lang_flag_file = "mod/translation_editor/_graphics/flags/" . $language . ".gif";
 	
-			if(file_exists($CONFIG->path . $lang_flag_file)){
+			if(file_exists(elgg_get_root_path() . $lang_flag_file)){
 				$list .= "<td class='translation_editor_flag'>"; 
 				$list .= "<img src='" . $vars['url'] . $lang_flag_file . "' alt='" . elgg_echo($language)  . "' title='" . elgg_echo($language) . "'> ";
-				$list .= "</td>\n";
+				$list .= "</td>";
 			} else {
-				$list .= "<td class='translation_editor_flag'>&nbsp;</td>\n";
+				$list .= "<td class='translation_editor_flag'>&nbsp;</td>";
 			}
 			
 			// language
 			$list .= "<td>";
 			if($language != $current_language){
-				$url = $vars["url"] . "pg/translation_editor/" . $language . "/" . $plugin;
+				$url = $vars["url"] . "translation_editor/" . $language . "/" . $plugin;
 				
 				if($language != "en"){
 					$completeness = translation_editor_get_language_completeness($language); 
 					$list .= "<a href='" . $url . "'>" . elgg_echo($language) . " (" . $completeness . "%)</a>";
 					
-					if(isadminloggedin() && $completeness == 0){
+					if(elgg_is_admin_logged_in() && $completeness == 0){
 						$list .= elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/translation_editor/delete_language?language=" . $language, "class" => "translation_editor_delete_language", "confirm" => elgg_echo("translation_editor:language_selector:remove_language:confirm")));
 					}
 				} else {
@@ -59,10 +57,10 @@
 			if($site_language == $language){
 				$list .= "<span id='translation_editor_site_language'>" . elgg_echo("translation_editor:language_selector:site_language") . "</span>";
 			}
-			$list .= "</td>\n";
+			$list .= "</td>";
 			
 			// checkbox
-			if(isadminloggedin()){
+			if(elgg_is_admin_logged_in()){
 				$list .= "<td class='translation_editor_enable'>";
 				if($language != "en"){
 					$list .= "<input type='checkbox' name='disabled_languages[]' value='" . $language . "' onchange='translation_editor_disable_language();' ";
@@ -71,37 +69,20 @@
 					}
 					$list .= "/>";
 				}
-				$list .= "</td>\n";
+				$list .= "</td>";
 			}
 			
-			$list .= "</tr>\n";
+			$list .= "</tr>";
 		}
 		
-		if(isadminloggedin()){
-			$list .= "<tr>\n";
-			$list .= "<td colspan='3'>";
-			$list .= elgg_view("input/securitytoken");
-			$list .= elgg_view("input/hidden", array("internalname" => "action", "value" => $vars["url"] . "action/translation_editor/disable_languages"));
-			$list .= "</td>";
-			$list .= "</tr>\n";
-		}
+		$list .= "</table>";
 		
-		$list .= "</table>\n";
-	} else {
-		$list = elgg_echo("translation_editor:language_selector:error:no_languages");
+		echo $list;	
 	}
 	
-	if(isadminloggedin()){
+	if(elgg_is_admin_logged_in()){
 		// add a new language
-		$list .= "<div id='translation_editor_add_language'>";
-		$list .= "<a href='javascript:void(0);' onclick='$(\"#translation_editor_add_language_form\").toggle();'><b>+</b> " . elgg_echo("translation_editor:language_selector:add_language") . "</a>";
-		$list .= elgg_view("translation_editor/add_language", array("internalid" => "translation_editor_add_language_form"));
-		
-		$list .= "</div>";
-	}
+		echo elgg_view("translation_editor/add_language");
+	}	
 	
-?>
-<div class="contentWrapper">
-	<h3 class="settings"><?php echo elgg_echo("translation_editor:language_selector:title"); ?></h3>
-	<?php echo $list; ?>
-</div>
+	echo "<br />";

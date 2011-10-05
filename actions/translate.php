@@ -21,9 +21,6 @@
 	// Preparing jQuery result
 	$json_result = array();
 	$json_result["result"] = false;
-	$json_result["ts"] = time();
-	$json_result["token"] = generate_action_token($json_result["ts"]);
-	
 	
 	if(translation_editor_is_translation_editor()){
 		if(!empty($current_language) && !empty($translate_input) && !empty($plugin)){
@@ -64,8 +61,7 @@
 	}
 	
 	if(!$jquery){
-		//forward($CONFIG->wwwroot . "pg/translation_editor/" . $current_language);
-		forward($_SERVER["HTTP_REFERER"]);
+		forward(REFERER);
 	} else {
 		// Send JSON data
 		$json_string = json_encode($json_result);
@@ -78,4 +74,3 @@
 		echo $json_string;
 		exit();
 	}
-?>

@@ -1,26 +1,12 @@
 <?php 
 
-	function translation_editor_get_active_plugins(){
-		static $result;
-		
-		if(!isset($result)){
-			$result = false;
-			$plugins = get_plugin_list();
-			
-			if(!empty($plugins)){
-				$result = array();
-				
-				foreach($plugins as $order => $plugin){
-					if(is_plugin_enabled($plugin)){
-						$result[] = $plugin;
-					}
-				}
-			}
-		}
-		
-		return $result;
-	}
-	
+	/**
+	 * Returns array of all available plugins and their individual language keys
+	 * 
+	 * @param string $current_language
+	 * 
+	 * @return array || false
+	 */
 	function translation_editor_get_plugins($current_language){
 		global $CONFIG;
 		
@@ -31,14 +17,16 @@
 			translation_editor_load_translations($current_language);
 			
 			$result = array();
-			$backup_full = $CONFIG->translations;
-			$plugins = translation_editor_get_active_plugins();
+			$core = array();
+			$custom_keys = array();
+			$plugins_result = array();
 			
-			$base_path = $CONFIG->path;
+			$backup_full = $CONFIG->translations;
+			$plugins = elgg_get_plugins();
 			
 			// Core translation
 			$CONFIG->translations = array();
-			$plugin_language = $base_path . "languages" . DIRECTORY_SEPARATOR . "en.php";
+			$plugin_language = $CONFIG->path . "languages" . DIRECTORY_SEPARATOR . "en.php";
 			
 			if(file_exists($plugin_language)){
 				include($plugin_language);
@@ -94,10 +82,14 @@
 			
 			// Plugin translations
 			foreach($plugins as $plugin){
+				
+				$title = $plugin->title;
+				
 				$CONFIG->translations = array();
-				$plugin_language = $base_path . "mod" . DIRECTORY_SEPARATOR . $plugin . DIRECTORY_SEPARATOR. "languages" .  DIRECTORY_SEPARATOR . "en.php";
+				$plugin_language = $plugin->getPath() . DIRECTORY_SEPARATOR. "languages" .  DIRECTORY_SEPARATOR . "en.php";
 				
 				if(file_exists($plugin_language)){
+					
 					include($plugin_language);
 					
 					unset($CONFIG->translations["en"][""]);
@@ -108,21 +100,21 @@
 					
 					$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
 					
-					if($custom_content = translation_editor_read_translation($current_language, $plugin)){
+					if($custom_content = translation_editor_read_translation($current_language, $title)){
 						$custom_count = count($custom_content);
 					} else {
 						$custom_count = 0;
 					}
 					
-					$result[$plugin]["total"] = $key_count;
-					$result[$plugin]["exists"] = $exists_count;
-					$result[$plugin]["custom"] = $custom_count;
+					$plugins_result[$title]["total"] = $key_count;
+					$plugins_result[$title]["exists"] = $exists_count;
+					$plugins_result[$title]["custom"] = $custom_count;
 				}
 			}
 			
-			ksort($result);
+			ksort($plugins_result);
 			
-			$result = $core + $custom_keys + $result;
+			$result = $core + $custom_keys + $plugins_result;
 			
 			$CONFIG->translations = $backup_full;
 		}
@@ -130,6 +122,14 @@
 		return $result;
 	}
 	
+	/**
+	 * Returns translation data for a specific plugin
+	 * 
+	 * @param string $current_language
+	 * @param string $plugin
+	 * 
+	 * @return array || false
+	 */
 	function translation_editor_get_plugin($current_language, $plugin){
 		global $CONFIG;
 		
@@ -141,6 +141,8 @@
 			translation_editor_load_translations($current_language);
 			
 			$result = array();
+			$result["total"] = 0;
+			
 			$backup_full = $CONFIG->translations;
 			
 			$CONFIG->translations = array();
@@ -240,12 +242,10 @@
 	}
 	
 	function translation_editor_read_translation($current_language, $plugin){
-		global $CONFIG;
-		
 		$result = false;
 		
 		if(!empty($current_language) && !empty($plugin)){
-			$base_dir = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR;
+			$base_dir = elgg_get_data_path() . "translation_editor" . DIRECTORY_SEPARATOR;
 			
 			if(file_exists($base_dir . $current_language . DIRECTORY_SEPARATOR . $plugin . ".json")){
 				if($contents = file_get_contents($base_dir . $current_language . DIRECTORY_SEPARATOR . $plugin . ".json")){
@@ -286,7 +286,7 @@
 	}
 	
 	function translation_editor_load_custom_languages(){
-		if($custom_languages = get_plugin_setting("custom_languages", "translation_editor")){
+		if($custom_languages = elgg_get_plugin_setting("custom_languages", "translation_editor")){
 			$custom_languages = explode(",", $custom_languages);
 			
 			foreach($custom_languages as $lang){
@@ -321,12 +321,10 @@
 	}
 	
 	function translation_editor_check_file_structure($current_language){
-		global $CONFIG;
-		
 		$result = false;
 		
 		if(!empty($current_language)){
-			$base_dir = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR;
+			$base_dir = elgg_get_data_path() . "translation_editor" . DIRECTORY_SEPARATOR;
 			if(!file_exists($base_dir)){
 				mkdir($base_dir);
 			}
@@ -342,12 +340,10 @@
 	}
 	
 	function translation_editor_delete_translation($current_language, $plugin){
-		global $CONFIG;
-		
 		$result = false;
 		
 		if(!empty($current_language) && !empty($plugin)){
-			$filename = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR . $current_language . DIRECTORY_SEPARATOR . $plugin . ".json";
+			$filename = elgg_get_data_path() . "translation_editor" . DIRECTORY_SEPARATOR . $current_language . DIRECTORY_SEPARATOR . $plugin . ".json";
 			
 			if(file_exists($filename)){
 				$result = unlink($filename);
@@ -381,7 +377,7 @@
 		$result = false;
 		
 		if(empty($user_guid)){
-			$user_guid = get_loggedin_userid();
+			$user_guid = elgg_get_logged_in_user_guid();
 		}
 		
 		if($user = get_user($user_guid)){
@@ -398,7 +394,7 @@
 		
 		$result = false;
 		
-		if($disabled_languages = get_plugin_setting("disabled_languages", "translation_editor")){
+		if($disabled_languages = elgg_get_plugin_setting("disabled_languages", "translation_editor")){
 			$disabled_languages = explode(",", $disabled_languages);
 
 			foreach($CONFIG->translations as $key => $dummy){
@@ -466,9 +462,9 @@
 				$translations += $custom_keys;
 			}
 			
-			if($plugins = translation_editor_get_active_plugins()){
+			if($plugins = elgg_get_plugins()){
 				foreach($plugins as $plugin){
-					if($plugin_translation = translation_editor_read_translation($language, $plugin)){
+					if($plugin_translation = translation_editor_read_translation($language, $plugin->title)){
 						$translations += $plugin_translation;
 					}
 				}
@@ -495,4 +491,3 @@
 		
 		return $result;
 	}
-?>

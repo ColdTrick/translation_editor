@@ -1,6 +1,5 @@
 <?php 
 	
-	action_gatekeeper();
 	admin_gatekeeper();
 	
 	$result = false;
@@ -20,5 +19,5 @@
 	} else {
 		system_message(elgg_echo("translation_editor:action:make_translation_editor:success"));
 	}
-	forward($_SERVER['HTTP_REFERER']);
-?>
+	
+	forward(REFERER);

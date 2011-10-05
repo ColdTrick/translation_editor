@@ -155,13 +155,13 @@
 	
 	asort($options);
 	
-	$form_body .= elgg_view("input/pulldown", array("options_values" => $options, "internalname" => "code"));
+	$form_body .= elgg_view("input/pulldown", array("options_values" => $options, "name" => "code"));
 	$form_body .= " ";
 	$form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
 	
-	$form = elgg_view("input/form", array("body" => $form_body, "action" => $vars["url"] . "action/translation_editor/add_language", "internalid" => $vars["internalid"]));
-	
+	$form = elgg_view("input/form", array("body" => $form_body, "action" => $vars["url"] . "action/translation_editor/add_language", "id" => "translation_editor_add_language_form", "class" => "hidden"));
+
+	echo "<div>";
+	echo "<a href='javascript:void(0);' onclick='$(\"#translation_editor_add_language_form\").toggle();'><b>+</b> " . elgg_echo("translation_editor:language_selector:add_language") . "</a>";
 	echo $form;
-
-
-?>
+	echo "</div>";

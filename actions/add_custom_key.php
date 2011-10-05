@@ -25,7 +25,7 @@
 					
 					$custom_translations[$key] = $translation;					
 					
-					$base_dir = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR;
+					$base_dir = elgg_get_data_path() . "translation_editor" . DIRECTORY_SEPARATOR;
 					if(!file_exists($base_dir)){
 						mkdir($base_dir);
 					}
@@ -62,4 +62,3 @@
 	}
 	
 	forward(REFERER);
-?>
