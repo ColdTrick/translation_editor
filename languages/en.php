@@ -46,6 +46,7 @@
 		'translation_editor:plugin_edit:show:equal' => "equal",
 		'translation_editor:plugin_edit:show:all' => "all",
 		'translation_editor:plugin_edit:show:custom' => "custom",
+		'translation_editor:plugin_edit:show:params' => "missing params",
 	
 		// actions
 		'translation_editor:action:translate:error:input' => "Incorrect input provided to add a translation",

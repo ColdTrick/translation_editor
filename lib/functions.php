@@ -491,3 +491,33 @@
 		
 		return $result;
 	}
+
+	/**
+	 *  parses a string meant for printf and returns an array of found parameters
+	 *  
+	 *  @param string $string
+	 *  @return array
+	 */
+	function translation_editor_get_string_parameters($string, $count = true) {
+		$valid = '/^(?:%%|%(?:[0-9]+\$)?[+-]?(?:[ 0]|\'.)?-?[0-9]*(?:\.[0-9]+)?[bcdeufFosxX])/';
+		$originalString = $string;
+	
+		$result = array();
+		
+		while(strlen($string)) {
+			if(!$string = preg_replace('/^[^%]*/', '', $string)){
+				break;
+			}
+	
+			if(preg_match($valid, $string, $matches)) {
+				$result[] = $matches[0];
+				$string = substr($string, strlen($matches[0]));
+			}
+		}
+		
+		if($count){
+			$result = count($result);
+		}
+		
+		return $result;
+	}

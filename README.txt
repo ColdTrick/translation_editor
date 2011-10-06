@@ -15,6 +15,9 @@ Manage translations
 - Caching of language files
 
 == 2. Version History ==
+x.x:
+- added: check on missing params in sprintf strings
+
 1.0 beta (2011-10-05):
 
 - added: shortcut link from translation search results to related plugins

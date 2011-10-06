@@ -22,9 +22,12 @@
 	
 	$missing_count = 0;
 	$equal_count = 0;
+	$params_count = 0;
 	$custom_count = 0;
 	
 	foreach($english as $en_key => $en_value){
+		$en_params = translation_editor_get_string_parameters($en_value);
+		$cur_params = translation_editor_get_string_parameters($translated_language[$en_key]);
 		
 		if(!array_key_exists($en_key, $translated_language)){
 			$row_rel = "rel='missing'";
@@ -32,6 +35,9 @@
 		} elseif($en_value == $translated_language[$en_key]){
 			$row_rel = "rel='equal'";
 			$equal_count++;
+		} elseif($en_params != $cur_params){
+			$row_rel = "rel='params'";
+			$params_count++;
 		} elseif(array_key_exists($en_key, $custom)){
 			$row_rel = "rel='custom'";
 			$custom_count++;
@@ -81,6 +87,7 @@
 	
 	$missing_class = "";
 	$equal_class = "";
+	$params_class = "";
 	$custom_class = "";
 	$all_class = "";
 	
@@ -97,10 +104,14 @@
 		case "custom":
 			$custom_class = "view_mode_active";
 			break;
+		case "params":
+			$params_class = "view_mode_active";
+			break;
 	}
 	
 	$toggle .= "<a class='$missing_class' id='view_mode_missing' href='javascript:toggleViewMode(\"missing\");'>" . elgg_echo("translation_editor:plugin_edit:show:missing") . "</a> (" . $missing_count . "), ";
 	$toggle .= "<a class='$equal_class' id='view_mode_equal' href='javascript:toggleViewMode(\"equal\");'>" . elgg_echo("translation_editor:plugin_edit:show:equal") . "</a> (" . $equal_count . "), ";
+	$toggle .= "<a class='$params_class' id='view_mode_params' href='javascript:toggleViewMode(\"params\");'>" . elgg_echo("translation_editor:plugin_edit:show:params") . "</a> (" . $params_count . "), ";
 	$toggle .= "<a class='$custom_class' id='view_mode_custom' href='javascript:toggleViewMode(\"custom\");'>" . elgg_echo("translation_editor:plugin_edit:show:custom") . "</a> (" . $custom_count . "), ";
 	$toggle .= "<a class='$all_class' id='view_mode_all' href='javascript:toggleViewMode(\"all\");'>" . elgg_echo("translation_editor:plugin_edit:show:all") . "</a> (" . $vars['translation']['total'] . ")";
 	$toggle .= "</span>";
