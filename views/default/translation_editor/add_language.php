@@ -155,7 +155,7 @@
 	
 	asort($options);
 	
-	$form_body .= elgg_view("input/pulldown", array("options_values" => $options, "name" => "code"));
+	$form_body .= elgg_view("input/dropdown", array("options_values" => $options, "name" => "code"));
 	$form_body .= " ";
 	$form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
 	

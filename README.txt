@@ -18,6 +18,7 @@ Manage translations
 x.x:
 - added: check on missing params in sprintf strings
 - fixed: removing of custom translations failed due to missing JS function
+- fixed: depricated notice in add language form
 - changed: links to merge and delete custom translation
 
 1.0 beta (2011-10-05):
