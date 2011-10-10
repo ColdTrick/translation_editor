@@ -17,6 +17,8 @@ Manage translations
 == 2. Version History ==
 x.x:
 - added: check on missing params in sprintf strings
+- fixed: removing of custom translations failed due to missing JS function
+- changed: links to merge and delete custom translation
 
 1.0 beta (2011-10-05):
 
