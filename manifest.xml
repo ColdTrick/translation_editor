@@ -8,10 +8,11 @@
 	<website>http://www.coldtrick.com/</website>
 	<copyright>(C) ColdTrick IT Solutions 2009 - 2011</copyright>
 	<license>GNU Public License version 2</license>
+	
 	<requires>
 		<type>elgg_version</type>
 		<version>2011061200</version>
 	</requires>
+	
  	<category>ColdTrick</category>
-	<admin_interface>simple</admin_interface>
 </plugin_manifest>
