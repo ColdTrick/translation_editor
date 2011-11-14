@@ -3,6 +3,7 @@
 	define("TRANSLATION_EDITOR_DISABLED_LANGUAGE", "disabled_languages");
 
 	require_once(dirname(__FILE__) . "/lib/functions.php");
+	require_once(dirname(__FILE__) . "/lib/hooks.php");
 	
 	function translation_editor_init(){
 		global $CONFIG;
@@ -95,31 +96,16 @@
 		}
 	}
 	
-	function translation_editor_user_hover_menu($hook, $type, $return, $params) {
-		$user = $params['entity'];
-	
-		if (elgg_is_admin_logged_in() && !($user->isAdmin())){
-			// TODO: replace with a single toggle editor action?
-			if(translation_editor_is_translation_editor($user->getGUID())){
-				$url = "action/translation_editor/unmake_translation_editor?user=" . $user->getGUID();
-				$title = elgg_echo("translation_editor:action:unmake_translation_editor");	
-			} else {
-				$url = "action/translation_editor/make_translation_editor?user=" . $user->getGUID();
-				$title = elgg_echo("translation_editor:action:make_translation_editor");
-			}
-			
-			$item = new ElggMenuItem('translation_editor', $title, $url);
-			$item->setSection('admin');
-			$item->setConfirmText(elgg_echo("question:areyousure"));
-			$return[] = $item;
-		
-			return $return;
-		}
-	}
-	
 	// Plugin init
 	elgg_register_event_handler('plugins_boot', 'system', 'translation_editor_plugins_boot_event', 50); // before normal execution to prevent conflicts with plugins like language_selector
 	elgg_register_event_handler('init', 'system', 'translation_editor_init');
+	
+	// register hooks
+	elgg_register_plugin_hook_handler("action", "admin/plugins/activate", "translation_editor_actions_hook");
+	elgg_register_plugin_hook_handler("action", "admin/plugins/deactivate", "translation_editor_actions_hook");
+	elgg_register_plugin_hook_handler("action", "admin/plugins/activate_all", "translation_editor_actions_hook");
+	elgg_register_plugin_hook_handler("action", "admin/plugins/deactivate_all", "translation_editor_actions_hook");
+	elgg_register_plugin_hook_handler("action", "admin/plugins/set_priority", "translation_editor_actions_hook");
 	
 	// Register actions
 	elgg_register_action("translation_editor/translate", dirname(__FILE__) . "/actions/translate.php");
