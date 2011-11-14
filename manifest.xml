@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest>
 	<field key="author" value="ColdTrick IT Solutions" />
-	<field key="version" value="0.6" />
+	<field key="version" value="0.6.1" />
 	<field key="description" value="Translation Editor provides an easy way to edit translations" />
 	<field key="website" value="http://www.coldtrick.com/" />
 	<field key="copyright" value="(C) ColdTrick IT Solutions 2010" />
@@ -12,7 +12,7 @@
 =====================
 Version History
 =====================
-x.x:
+0.6.1 (2011-11-11):
 	- fixed: custom translations not correctly updated after plugin enabled/disable/reorder
 	- fixed: custom translations not correctly updated when running upgrade.php
 
