@@ -1,5 +1,5 @@
 =  Version history =
-x.x:
+1.0 (2011-11-14):
 
 - added: check on missing params in sprintf strings
 - fixed: removing of custom translations failed due to missing JS function
