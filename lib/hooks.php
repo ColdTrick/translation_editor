@@ -28,7 +28,8 @@
 			"admin/plugins/deactivate",
 			"admin/plugins/activate_all",
 			"admin/plugins/deactivate_all",
-			"admin/plugins/set_priority"
+			"admin/plugins/set_priority",
+			"upgrading" // not actualy an action but comes from events.php
 		);
 		
 		if(!empty($type) && in_array($type, $allowed_actions)){

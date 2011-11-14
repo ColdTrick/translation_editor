@@ -4,6 +4,7 @@
 
 	require_once(dirname(__FILE__) . "/lib/functions.php");
 	require_once(dirname(__FILE__) . "/lib/hooks.php");
+	require_once(dirname(__FILE__) . "/lib/events.php");
 	
 	function translation_editor_init(){
 		global $CONFIG;
@@ -106,6 +107,9 @@
 	elgg_register_plugin_hook_handler("action", "admin/plugins/activate_all", "translation_editor_actions_hook");
 	elgg_register_plugin_hook_handler("action", "admin/plugins/deactivate_all", "translation_editor_actions_hook");
 	elgg_register_plugin_hook_handler("action", "admin/plugins/set_priority", "translation_editor_actions_hook");
+	
+	// register events
+	elgg_register_event_handler("upgrade", "system", "translation_editor_upgrade_event");
 	
 	// Register actions
 	elgg_register_action("translation_editor/translate", dirname(__FILE__) . "/actions/translate.php");
