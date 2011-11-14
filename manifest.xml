@@ -12,6 +12,10 @@
 =====================
 Version History
 =====================
+x.x:
+	- fixed: custom translations not correctly updated after plugin enabled/disable/reorder
+	- fixed: custom translations not correctly updated when running upgrade.php
+
 0.6 (2011-07-27):
 	- added: key search
 	- fixed: typo in translate action

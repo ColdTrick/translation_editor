@@ -3,6 +3,7 @@
 	define("TRANSLATION_EDITOR_DISABLED_LANGUAGE", "disabled_languages");
 
 	require_once(dirname(__FILE__) . "/lib/functions.php");
+	require_once(dirname(__FILE__) . "/lib/hooks.php");
 	
 	function translation_editor_init(){
 		global $CONFIG;
@@ -21,6 +22,10 @@
 			if(get_plugin_setting("show_in_tools", "translation_editor") != "no"){
 				add_menu(elgg_echo("translation_editor:menu:title"), $CONFIG->wwwroot . "pg/translation_editor/");
 			}
+		}
+		
+		if(defined("upgrading") && (upgrading == "upgrading")){
+			translation_editor_actions_hook();
 		}
 	}
 	
@@ -96,6 +101,13 @@
 	register_elgg_event_handler('plugins_boot', 'system', 'translation_editor_plugins_boot_event', 50); // before normal execution to prevent conflicts with plugins like language_selector
 	register_elgg_event_handler('init', 'system', 'translation_editor_init');
 	register_elgg_event_handler('pagesetup','system','translation_editor_pagesetup');
+	
+	// register plugin hooks
+	register_plugin_hook("action", "admin/plugins/reorder", "translation_editor_actions_hook");
+	register_plugin_hook("action", "admin/plugins/enable", "translation_editor_actions_hook");
+	register_plugin_hook("action", "admin/plugins/disable", "translation_editor_actions_hook");
+	register_plugin_hook("action", "admin/plugins/enableall", "translation_editor_actions_hook");
+	register_plugin_hook("action", "admin/plugins/disableall", "translation_editor_actions_hook");
 	
 	// Register actions
 	register_action("translation_editor/translate", false, dirname(__FILE__) . "/actions/translate.php");
