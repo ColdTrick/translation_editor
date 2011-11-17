@@ -481,6 +481,10 @@
 			}
 		}
 		
+		if($result){
+			elgg_trigger_event("language:merge", "translation_editor", $language);
+		}
+		
 		// reset language cache on all sites
 		if($update){
 			$ts = time();

@@ -1,4 +1,8 @@
 =  Version history =
+x.x:
+
+- added: event trigger on merge of a translation "language:merge" => "translation_editor"
+
 1.0 (2011-11-14):
 
 - added: check on missing params in sprintf strings
