@@ -12,6 +12,9 @@
 =====================
 Version History
 =====================
+x.x:
+	- added: event trigger on merge of a translation "language:merge" => "translation_editor"
+
 0.6.1 (2011-11-11):
 	- fixed: custom translations not correctly updated after plugin enabled/disable/reorder
 	- fixed: custom translations not correctly updated when running upgrade.php
