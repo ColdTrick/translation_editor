@@ -1,5 +1,5 @@
 =  Version history =
-x.x:
+1.1 (2011-11-28):
 
 - added: event trigger on merge of a translation "language:merge" => "translation_editor"
 - fixed: page_handler issue with Elgg 1.8.1
