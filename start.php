@@ -61,7 +61,9 @@
 					forward("translation_editor/" . $current_language);
 				}
 				break;
-		} 
+		}
+		
+		return true;
 	}
 	
 	function translation_editor_plugins_boot_event(){
