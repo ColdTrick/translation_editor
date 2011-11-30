@@ -1,4 +1,8 @@
 =  Version history =
+x.x:
+
+- added: French translation for version 1.1, thanks to Jean-Baptiste Duclos (http://community.elgg.org/pg/profile/Duclos) 
+
 1.1 (2011-11-28):
 
 - added: event trigger on merge of a translation "language:merge" => "translation_editor"
