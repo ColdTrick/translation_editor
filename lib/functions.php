@@ -503,19 +503,15 @@
 	 *  @return array
 	 */
 	function translation_editor_get_string_parameters($string, $count = true) {
-		$valid = '/^(?:%%|%(?:[0-9]+\$)?[+-]?(?:[ 0]|\'.)?-?[0-9]*(?:\.[0-9]+)?[bcdeufFosxX])/';
-		$originalString = $string;
-	
+		$valid = '/%[-+]?(?:[ 0]|\'.)?a?\d*(?:\.\d*)?[%bcdeEufFgGosxX]/';
+		
 		$result = array();
 		
-		while(strlen($string)) {
+		if(!empty($string)){
 			if(!$string = preg_replace('/^[^%]*/', '', $string)){
-				break;
-			}
-	
-			if(preg_match($valid, $string, $matches)) {
-				$result[] = $matches[0];
-				$string = substr($string, strlen($matches[0]));
+				// no results
+			} elseif(preg_match_all($valid, $string, $matches)) {
+				$result = $matches[0];
 			}
 		}
 		
