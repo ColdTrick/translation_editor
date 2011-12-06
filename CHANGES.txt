@@ -1,5 +1,5 @@
 =  Version history =
-x.x:
+1.2 (2011-12-06):
 
 - added: French translation for version 1.1, thanks to Jean-Baptiste Duclos (http://community.elgg.org/pg/profile/Duclos) 
 - fixed: a deadloop problem with detecting vsprintf aguments is some cases
