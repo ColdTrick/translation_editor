@@ -84,9 +84,21 @@
 			translation_editor_unregister_translations(); 
 		}
 		
-		// add custom translations
-		translation_editor_load_translations(); 
+		// load custom translations
+		$user_language = get_current_language();
+		$elgg_default_language = "en";
 		
+		$load_languages = array($user_language, $elgg_default_language);
+		$load_languages = array_unique($load_languages);
+		
+		$disabled_languages = translation_editor_get_disabled_languages();
+		
+		foreach($load_languages as $language){
+			if(empty($disabled_languages) || !in_array($language, $disabled_languages)){
+				// add custom translations
+				translation_editor_load_translations($language);
+			}
+		}
 	}
 	
 	function translation_editor_version_053(){
@@ -123,4 +135,3 @@
 	register_action("translation_editor/add_custom_key", false, dirname(__FILE__) . "/actions/add_custom_key.php", true);
 	register_action("translation_editor/delete_language", false, dirname(__FILE__) . "/actions/delete_language.php", true);
 	
-?>

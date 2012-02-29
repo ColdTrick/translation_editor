@@ -12,6 +12,9 @@
 =====================
 Version History
 =====================
+x.x:
+	- fixed: custom translations not loaded in some cases
+
 0.7 (2011-11-29):
 	- added: event trigger on merge of a translation "language:merge" => "translation_editor"
 

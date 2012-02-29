@@ -398,9 +398,7 @@
 		
 		$result = false;
 		
-		if($disabled_languages = get_plugin_setting("disabled_languages", "translation_editor")){
-			$disabled_languages = explode(",", $disabled_languages);
-
+		if($disabled_languages = translation_editor_get_disabled_languages()){
 			foreach($CONFIG->translations as $key => $dummy){
 				if(in_array($key, $disabled_languages)){
 					unset($CONFIG->translations[$key]);
@@ -499,4 +497,17 @@
 		
 		return $result;
 	}
-?>
+	
+	function translation_editor_get_disabled_languages(){
+		static $result;
+		
+		if(!isset($result)){
+			$result = false;
+			
+			if($disabled_languages = get_plugin_setting("disabled_languages", "translation_editor")){
+				$result = string_to_tag_array($disabled_languages);
+			}
+		}
+		
+		return $result;
+	}
