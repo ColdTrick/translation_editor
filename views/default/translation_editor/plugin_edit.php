@@ -81,7 +81,7 @@
 		<?php 
 	}
 
-	$toggle = "<span id='translation_editor_plugin_toggle' class='right'>";
+	$toggle = "<span id='translation_editor_plugin_toggle' class='float-alt'>";
 		
 	$toggle .= elgg_echo("translation_editor:plugin_edit:show") . " ";
 	

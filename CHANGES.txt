@@ -1,4 +1,8 @@
 =  Version history =
+x.x:
+
+- fixed: CSS issue on plugin edit
+
 1.2 (2011-12-06):
 
 - added: French translation for version 1.1, thanks to Jean-Baptiste Duclos (http://community.elgg.org/pg/profile/Duclos) 
