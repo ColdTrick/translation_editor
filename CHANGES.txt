@@ -2,6 +2,7 @@
 x.x:
 
 - fixed: CSS issue on plugin edit
+- fixed: custom translations not loaded in some cases
 
 1.2 (2011-12-06):
 
