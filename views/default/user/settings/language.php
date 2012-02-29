@@ -11,6 +11,8 @@
 global $CONFIG;
 $user = page_owner_entity();
 
+translation_editor_unregister_translations();
+
 $installed_languages = get_installed_translations();
 
 if (!empty($user) && ($user instanceof ElggUser)){
