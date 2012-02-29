@@ -6,9 +6,9 @@
  * @subpackage Core
  */
 
-$user = elgg_get_page_owner_entity();
-
-if ($user) {
+if ($user = elgg_get_page_owner_entity()) {
+	translation_editor_unregister_translations();
+	
 	$translations = get_installed_translations();
 	
 	$value = $CONFIG->language;
