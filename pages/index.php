@@ -6,7 +6,6 @@
 
 	// Build elements
 	$title_text = elgg_echo("translation_editor:menu:title");
-	$title = elgg_view_title($title_text);
 	
 	elgg_push_breadcrumb($title_text, "translation_editor");
 	
@@ -60,7 +59,8 @@
 	
 	// Build page
 	$page_data = elgg_view_layout('one_column', array(
-		'content' => "<div class='elgg-head'>" . $title . "</div>" . $body
+		'title' => $title_text,
+		'content' => $body
 	));
 
 	echo elgg_view_page($title_text, $page_data);
