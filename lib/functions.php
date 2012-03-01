@@ -37,7 +37,11 @@
 				
 				$key_count = count($plugin_keys);
 				
-				$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+				if(array_key_exists($current_language, $backup_full)){
+					$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+				} else {
+					$exists_count = 0;
+				}
 				
 				if($custom_content = translation_editor_read_translation($current_language, "core")){
 					$custom_count = count($custom_content);
@@ -63,7 +67,11 @@
 				
 				$key_count = count($plugin_keys);
 				
-				$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+				if(array_key_exists($current_language, $backup_full)){
+					$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+				} else {
+					$exists_count = 0;
+				}
 				
 				if($custom_content = translation_editor_read_translation($current_language, "custom_keys")){
 					$custom_count = count($custom_content);
@@ -98,7 +106,11 @@
 					
 					$key_count = count($plugin_keys);
 					
-					$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+					if(array_key_exists($current_language, $backup_full)){
+						$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+					} else {
+						$exists_count = 0;
+					}
 					
 					if($custom_content = translation_editor_read_translation($current_language, $title)){
 						$custom_count = count($custom_content);
@@ -168,7 +180,11 @@
 				
 				$key_count = count($plugin_keys);
 				
-				$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+				if(array_key_exists($current_language, $backup_full)){
+					$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+				} else {
+					$exists_count = 0;
+				}
 				
 				if($custom_content = translation_editor_read_translation($current_language, $plugin)){
 					$custom = $custom_content;

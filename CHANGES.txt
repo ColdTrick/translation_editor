@@ -6,6 +6,7 @@ x.x:
 - fixed: language selection (on settings) sometimes displays to many languages
 - fixed: not using an available function
 - fixed: using define in stead of string
+- fixed: issue where disabled languages could not be removed
 - changed: layout to be consistent with Elgg design
 - removed: some icons where replaced by Elgg default icons
 
