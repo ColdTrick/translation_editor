@@ -22,10 +22,7 @@
 	
 	$languages = array_keys($CONFIG->translations);
 	
-	$disabled_languages = elgg_get_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, "translation_editor");
-	if(!empty($disabled_languages)){
-		$disabled_languages = explode(",", $disabled_languages);
-	} else {
+	if(!($disabled_languages = translation_editor_get_disabled_languages())){
 		$disabled_languages = array();
 	}
 	
