@@ -526,7 +526,7 @@
 		if(!isset($result)){
 			$result = false;
 			
-			if($disabled_languages = elgg_get_plugin_setting("disabled_languages", "translation_editor")){
+			if($disabled_languages = elgg_get_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, "translation_editor")){
 				$result = string_to_tag_array($disabled_languages);
 			}
 		}
