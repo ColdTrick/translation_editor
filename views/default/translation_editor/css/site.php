@@ -24,15 +24,6 @@
 	width: 100%;
 }
 
-.translation_editor_delete_language {
-	background: url("<?php echo $graphics_folder; ?>delete.png") transparent 0 0;
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-	margin-left: 5px;
-	vertical-align: text-bottom;
-}
-
 #translation_editor_site_language {
 	color: gray;
 	margin-left: 10px;
@@ -40,26 +31,6 @@
 
 #translation_editor_custom_keys_translation_info {
 	color: gray;
-}
-
-.translation_editor_plugin_list_merge {
-	background: url("<?php echo $graphics_folder; ?>merge.png") transparent 0 0;
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-}
-
-.translation_editor_plugin_list_delete {
-	background: url("<?php echo $graphics_folder; ?>delete.png") transparent 0 0;
-	width: 16px;
-	height: 16px;
-	display: inline-block;
-	margin-left: 3px;
-}
-
-.translation_editor_plugin_list_merge:hover,
-.translation_editor_plugin_list_delete:hover {
-	cursor: pointer;
 }
 
 .translation_editor_translation_complete {

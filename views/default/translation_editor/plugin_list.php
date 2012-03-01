@@ -56,11 +56,11 @@
 				$merge_url = $vars["url"] . "action/translation_editor/merge?current_language=" . $current_language . "&plugin=" . $plugin_name;
 				
 				$list .= "<td>";
-				$list .= elgg_view("output/url", array("href" => $merge_url, "is_action" => true, "title" => elgg_echo("translation_editor:plugin_list:merge"), "class" => "translation_editor_plugin_list_merge", "text" => "&nbsp;"));
+				$list .= elgg_view("output/url", array("href" => $merge_url, "is_action" => true, "title" => elgg_echo("translation_editor:plugin_list:merge"), "text" => elgg_view_icon("download")));
 				if(elgg_is_admin_logged_in()){
 					$delete_url = $vars["url"] . "action/translation_editor/delete?current_language=" . $current_language . "&plugin=" . $plugin_name;
 					
-					$list .= elgg_view("output/confirmlink", array("href" => $delete_url, "title" => elgg_echo("delete"), "class" => "translation_editor_plugin_list_delete", "text" => "&nbsp;"));
+					$list .= elgg_view("output/confirmlink", array("href" => $delete_url, "title" => elgg_echo("delete"), "text" => elgg_view_icon("delete-alt")));
 				}
 				$list .= "</td>";
 			} else {

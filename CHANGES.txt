@@ -7,6 +7,7 @@ x.x:
 - fixed: not using an available function
 - fixed: using define in stead of string
 - changed: layout to be consistent with Elgg design
+- removed: some icons where replaced by Elgg default icons
 
 1.2 (2011-12-06):
 
