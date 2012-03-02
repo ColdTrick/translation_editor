@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest>
 	<field key="author" value="ColdTrick IT Solutions" />
-	<field key="version" value="0.7" />
+	<field key="version" value="0.7.1" />
 	<field key="description" value="Translation Editor provides an easy way to edit translations" />
 	<field key="website" value="http://www.coldtrick.com/" />
 	<field key="copyright" value="(C) ColdTrick IT Solutions 2010" />
@@ -12,7 +12,7 @@
 =====================
 Version History
 =====================
-x.x:
+0.7.1 (2012-03-02):
 	- fixed: custom translations not loaded in some cases
 	- fixed: language selection (on settings) sometimes displays to many languages
 
