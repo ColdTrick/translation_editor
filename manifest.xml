@@ -13,6 +13,7 @@
 Version History
 =====================
 x.x:
+	- fixed: admin users no longer have the (un)make translator option in the user pulldown
 	- changed: internal function for better performance
 
 0.7.1 (2012-03-02):
