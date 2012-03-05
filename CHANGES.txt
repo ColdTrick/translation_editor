@@ -1,4 +1,8 @@
 =  Version history =
+x.x:
+
+changed: internal function for better performance
+
 1.2.1 (2012-03-02):
 
 - fixed: CSS issue on plugin edit
