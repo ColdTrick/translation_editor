@@ -378,14 +378,38 @@
 	}
 	
 	function translation_editor_is_translation_editor($user_guid = 0){
+		static $editors_cache;
+		
 		$result = false;
 		
 		if(empty($user_guid)){
 			$user_guid = get_loggedin_userid();
 		}
 		
-		if($user = get_user($user_guid)){
-			if(($user->translation_editor == true) || ($user->isAdmin())){
+		if(!empty($user_guid)){
+			// preload all editors
+			if(!isset($editors_cache)){
+				$editors_cache = array();
+				
+				$options = array(
+					"type" => "user",
+					"limit" => false,
+					"metadata_name_value_pairs" => array(
+						"name" => "translation_editor",
+						"value" => true
+					),
+					"callback" => "translation_editor_guid_only"
+				);
+				
+				if($guids = elgg_get_entities_from_metadata($options)){
+					$editors_cache = $guids;
+				}
+			}
+		
+			// is the user an editor or an admin
+			if(in_array($user_guid, $editors_cache)){
+				$result = true;
+			} elseif(($user = get_user($user_guid)) && $user->isAdmin()){
 				$result = true;
 			}
 		}
@@ -510,4 +534,8 @@
 		}
 		
 		return $result;
+	}
+	
+	function translation_editor_guid_only($row){
+		return (int) $row->guid;
 	}

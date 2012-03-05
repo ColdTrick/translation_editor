@@ -12,6 +12,9 @@
 =====================
 Version History
 =====================
+x.x:
+	- changed: internal function for better performance
+
 0.7.1 (2012-03-02):
 	- fixed: custom translations not loaded in some cases
 	- fixed: language selection (on settings) sometimes displays to many languages
