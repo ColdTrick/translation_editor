@@ -1,7 +1,8 @@
 =  Version history =
 x.x:
 
-changed: internal function for better performance
+- changed: internal function for better performance
+- removed: some legacy code
 
 1.2.1 (2012-03-02):
 

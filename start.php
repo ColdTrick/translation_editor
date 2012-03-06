@@ -21,10 +21,7 @@
 		}
 		
 		if (elgg_is_admin_logged_in()){
-			// Extend context menu with admin links
-   			elgg_extend_view('profile/menu/adminlinks','translation_editor/adminlinks');
-
-   			// add to admin menu
+			// add to admin menu
    			elgg_register_menu_item('page', array(
 				'name' => "translation_editor",
 				'href' => "translation_editor",
