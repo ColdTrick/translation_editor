@@ -1,6 +1,7 @@
 =  Version history =
 x.x:
 
+- added: german translation (thanks to Originalhardy http://community.elgg.org/pg/profile/Originalhardy)
 - changed: internal function for better performance
 - removed: some legacy code
 
