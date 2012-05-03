@@ -7,7 +7,7 @@
 		$exists = 0; 
 		$custom = 0;
 		
-		$list .= "<table id='translation_editor_plugin_list' class='elgg-table' title='" . elgg_echo("translation_editor:plugin_list:title") . "'>";
+		$list = "<table id='translation_editor_plugin_list' class='elgg-table' title='" . elgg_echo("translation_editor:plugin_list:title") . "'>";
 		$list .= "<tr>";
 		$list .= "<th class='first_col'>" . elgg_echo("translation_editor:plugin_list:plugin") . "</th>";
 		$list .= "<th>" . elgg_echo("translation_editor:plugin_list:total") . "</th>";

@@ -11,31 +11,19 @@ if ($user = elgg_get_page_owner_entity()) {
 	
 	$translations = get_installed_translations();
 	
-	$value = $CONFIG->language;
+	$value = elgg_get_config("language");
 	if (!empty($user->language)) {
 		$value = $user->language;
 	}
 	
 	if(count($translations ) > 1){
-	?>
-	<div class="elgg-module elgg-module-info">
-		<div class="elgg-head">
-			<h3><?php echo elgg_echo('user:set:language'); ?></h3>
-		</div>
-		<div class="elgg-body">
-			<p>
-				<?php echo elgg_echo('user:language:label'); ?>:
-				<?php
-				echo elgg_view("input/dropdown", array(
-					'name' => 'language',
-					'value' => $value,
-					'options_values' => $translations 
-				));
-				?>
-			</p>
-		</div>
-	</div>
-	<?php
+		
+		$title = elgg_echo('user:set:language');
+		
+		$body = elgg_echo('user:language:label');
+		$body .= "&nbsp;" . elgg_view("input/dropdown", array('name' => 'language', 'value' => $value, 'options_values' => $translations));
+		
+		echo elgg_view_module("info", $title, $body);
 	} else {
 		echo elgg_view("input/hidden", array("name" => "language", "value" => $value));
 	}

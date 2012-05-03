@@ -1,15 +1,15 @@
 <?php 
 
-	$current_language = $vars["current_language"];
-	$q = $vars["query"];
-	$in_search = $vars["in_search"];
+	$current_language = elgg_extract("current_language", $vars);
+	$q = elgg_extract("query", $vars);
+	$in_search = elgg_extract("in_search", $vars);
 	
 	if(empty($q)){
 		$q = elgg_echo("translation_editor:forms:search:default");
 	}
 	
 	// build form
-	$form_data .= "<table><tr><td>";
+	$form_data = "<table><tr><td>";
 	
 	$form_data .= elgg_view("input/text", array("name" => "translation_editor_search", "value" => $q));
 	

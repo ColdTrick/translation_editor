@@ -21,7 +21,7 @@
 	elgg_push_breadcrumb(elgg_echo($language), "translation_editor/" . $language);
 	elgg_push_breadcrumb($title_text);
 	
-	$body .= elgg_view("translation_editor/search", array("current_language" => $language, "query" => $q));
+	$body = elgg_view("translation_editor/search", array("current_language" => $language, "query" => $q));
 	$body .= elgg_view("translation_editor/search_results", array("results" => $found, "current_language" => $language));
 
 	// Build page

@@ -1,7 +1,7 @@
 <?php 
 
-	$search_results = $vars["results"];
-	$current_language = $vars["current_language"];
+	$search_results = elgg_extract("results", $vars);
+	$current_language = elgg_extract("current_language", $vars);
 
 	if(!empty($search_results)){
 		$en_flag_file = "mod/translation_editor/_graphics/flags/en.gif";
@@ -20,8 +20,9 @@
 			$lang_flag = $current_language;
 		}
 		
+		$list = "";
 		foreach($search_results as $plugin => $data){
-			$translated_language = $data["current_language"];
+			$translated_language = elgg_extract("current_language", $data);
 			
 			$list .= "<table class='elgg-table translation_editor_translation_table'>";
 			$list .= "<col class='first_col'/>";
@@ -45,7 +46,7 @@
 				$list .= "<td>" . $lang_flag . "</td>";
 				$list .= "<td>";
 				$list .= "<textarea name='translation[" . $plugin . "][" . $key . "]' onchange='translationEditorJQuerySearchSave();'>";
-				$list .= $translated_language[$key];
+				$list .= elgg_extract($key, $translated_language);
 				$list .= "</textarea>";
 				$list .= "</td>";
 				$list .= "</tr>";
@@ -63,7 +64,7 @@
 												"action" => $vars["url"] . "action/translation_editor/translate_search",
 												"id" => "translation_editor_search_result_form"));
 	} else {
-		$list .= elgg_echo("translation_editor:search_results:no_results");
+		$list = elgg_echo("translation_editor:search_results:no_results");
 	}
 
 	echo $list;

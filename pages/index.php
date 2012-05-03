@@ -32,7 +32,7 @@
 		$site_language = "en";
 	}
 	
-	$body .= elgg_view("translation_editor/language_selector", array("current_language" => $current_language, "plugin" => $plugin, "languages" => $languages, "disabled_languages" => $disabled_languages, "site_language" => $site_language));
+	$body = elgg_view("translation_editor/language_selector", array("current_language" => $current_language, "plugin" => $plugin, "languages" => $languages, "disabled_languages" => $disabled_languages, "site_language" => $site_language));
 	
 	if(empty($plugin)){
 		// show plugin list
