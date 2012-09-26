@@ -403,17 +403,18 @@
 			if(!isset($editors_cache)){
 				$editors_cache = array();
 				
+				$translation_editor_id = add_metastring("translation_editor");
+				$true_id = add_metastring(true);
+				
 				$options = array(
 					"type" => "user",
 					"limit" => false,
-					"metadata_name_value_pairs" => array(
-						"name" => "translation_editor",
-						"value" => true
-					),
+					"joins" => array("JOIN " . elgg_get_config("dbprefix") . "metadata md ON e.guid = md.entity_guid"),
+					"wheres" => array("(md.name_id = " . $translation_editor_id ." AND md.value_id = " . $true_id . ")"),
 					"callback" => "translation_editor_guid_only"
 				);
 				
-				if($guids = elgg_get_entities_from_metadata($options)){
+				if($guids = elgg_get_entities($options)){
 					$editors_cache = $guids;
 				}
 			}
