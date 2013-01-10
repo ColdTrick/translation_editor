@@ -12,7 +12,7 @@
 		$list .= "<th class='translation_editor_flag'>&nbsp;</th>";
 		$list .= "<th>" . elgg_echo("translation_editor:language") . "</th>";
 		if(elgg_is_admin_logged_in()){
-			$list .= "<th class='translation_editor_enable'>" . elgg_echo("translation_editor:disabled") . "</th>";
+			$list .= "<th class='translation_editor_enable'>" . elgg_echo("disable") . "</th>";
 		}
 		$list .= "</tr>";
 		

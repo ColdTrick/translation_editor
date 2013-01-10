@@ -5,8 +5,7 @@
 	
 		// global
 		'translation_editor:language' => "Language",
-		'translation_editor:disabled' => "Disable",
-	
+		
 		// menu
 		'translation_editor:menu:title' => "Translation Editor",
 	

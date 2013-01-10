@@ -1,7 +1,6 @@
 <?php
 $language = array (
   'translation_editor:language' => 'Sprache',
-  'translation_editor:disabled' => 'Ausschalten',
   'translation_editor:menu:title' => 'Übersetzungseditor',
   'translation_editor:language_selector:title' => 'Wähle die Sprache, die du bearbeiten möchtest',
   'translation_editor:language_selector:add_language' => 'Füge eine neue Sprache hinzu',

@@ -5,7 +5,6 @@ $language = array (
 	
 		// global
   'translation_editor:language' => 'Langage',
-  'translation_editor:disabled' => 'Indisponible',
 	
 		// menu
   'translation_editor:menu:title' => 'Editeur de traduction',

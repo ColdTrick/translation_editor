@@ -1,7 +1,6 @@
 <?php
 $language = array (
   'translation_editor:language' => 'Taal',
-  'translation_editor:disabled' => 'Uitschakelen',
   'translation_editor:search' => 'Zoekresultaten',
   'translation_editor:forms:search:default' => 'Zoek een vertaling',
   'translation_editor:search_results:no_results' => 'Geen vertalingen gevonden',
