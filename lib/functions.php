@@ -438,8 +438,13 @@
 		$result = false;
 		
 		if($disabled_languages = translation_editor_get_disabled_languages()){
+			$system_cache = elgg_get_system_cache();
+			
 			foreach($CONFIG->translations as $key => $dummy){
 				if(in_array($key, $disabled_languages)){
+					if($system_cache) {
+						$system_cache->delete($key . ".lang");
+					}
 					unset($CONFIG->translations[$key]);
 				}
 			}
