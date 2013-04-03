@@ -363,6 +363,8 @@
 			
 			if(file_exists($filename)){
 				$result = unlink($filename);
+			} else {
+				$result = true;
 			}
 		}
 		

@@ -4,6 +4,7 @@ x.x:
 - added: german translation (thanks to Originalhardy http://community.elgg.org/pg/profile/Originalhardy)
 - changed: internal function for better performance
 - changed: code cleanup and PHP warning fixes
+- fixed: incorrect result in function
 - removed: some legacy code
 
 1.2.1 (2012-03-02):
