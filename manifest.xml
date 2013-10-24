@@ -5,8 +5,10 @@
 	<version>1.3</version>
 	<description>Translation Editor provides an easy way to edit translations.</description>
 	<website>http://www.coldtrick.com/</website>
+	<repository>https://github.com/ColdTrick/translation_editor</repository>
+	<bugtracker>https://github.com/ColdTrick/translation_editor/issues</bugtracker>
 	<copyright>(C) ColdTrick IT Solutions 2009 - 2013</copyright>
-	<license>GNU Public License version 2</license>
+	<license>GNU General Public License version 2</license>
 	
 	<requires>
 		<type>elgg_release</type>
