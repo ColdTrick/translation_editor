@@ -1,4 +1,4 @@
-<?php 
+<?php
 	$graphics_folder = $vars["url"] . "mod/translation_editor/_graphics/";
 ?>
 
@@ -41,30 +41,30 @@
 	color: red;
 }
 
-.translation_editor_translation_table textarea {	
+.translation_editor_translation_table textarea {
 	height: 70px;
 }
 
 .view_mode_active {
 	font-weight: bold;
-} 
+}
 
-.translation_editor_translation_table tr{
+.translation_editor_translation_table tr {
 	display: none;
 }
 
-.translation_editor_translation_table tr.first_row th{
+.translation_editor_translation_table tr.first_row th {
 	font-weight: bold;
 }
 
-.translation_editor_translation_table tr.first_row th span{
+.translation_editor_translation_table tr.first_row th span {
 	font-weight: normal;
 }
 
 .translation_editor_translation_table tr.first_row,
-.translation_editor_translation_table tr[rel='missing']{
+.translation_editor_translation_table tr[rel='missing'] {
 	display: table-row;
-	<!-- 
+	<!--
 	display: inline-block;
 	-->
 }
@@ -85,7 +85,7 @@
 	margin-bottom: 5px;
 }
 
-.translation_editor_translation_table td{
+.translation_editor_translation_table td {
 	white-space: nowrap;
 }
 
