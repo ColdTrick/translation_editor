@@ -390,7 +390,17 @@ function translation_editor_reload_all_translations() {
 	if (isset($run_once)) {
 		$CONFIG->translations = $run_once;
 	} else {
-	
+		
+		if ($CONFIG->i18n_loaded_from_cache) {
+			// make sure all plugins have registered their paths
+			$plugins = elgg_get_plugins();
+			if (!empty($plugins)) {
+				foreach ($plugins as $plugin) {
+					$plugin->start(ELGG_PLUGIN_REGISTER_LANGUAGES);
+				}
+			}
+		}
+		
 		// include all languages in the configured paths
 		foreach ($CONFIG->language_paths as $path => $dummy) {
 			$handle = opendir($path);

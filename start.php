@@ -32,6 +32,8 @@ function translation_editor_plugins_boot_event() {
 
 	translation_editor_load_custom_languages();
 
+	translation_editor_reload_all_translations();
+	
 	if (!elgg_in_context("translation_editor")) {
 		// remove disabled languages
 		translation_editor_unregister_translations();
