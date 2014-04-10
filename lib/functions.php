@@ -778,3 +778,17 @@ function translation_editor_invalidate_site_cache($site_guid = 0) {
 		}
 	}
 }
+
+/**
+ * Protect pages for only translation editor
+ *
+ * @return void
+ */
+function translation_editor_gatekeeper() {
+	gatekeeper();
+	
+	if (!translation_editor_is_translation_editor()) {
+		register_error(elgg_echo("translation_editor:gatekeeper"));
+		forward();
+	}
+}

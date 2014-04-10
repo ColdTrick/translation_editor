@@ -5,7 +5,7 @@
 
 global $CONFIG;
 
-gatekeeper();
+translation_editor_gatekeeper();
 
 // Build elements
 $title_text = elgg_echo("translation_editor:menu:title");

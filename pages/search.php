@@ -3,7 +3,7 @@
  * display the search results
  */
 
-gatekeeper();
+translation_editor_gatekeeper();
 
 // get inputs
 $q = get_input("translation_editor_search");

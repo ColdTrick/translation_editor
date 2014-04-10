@@ -1,10 +1,11 @@
-<?php 
+<?php
 
 	$english = array(
 		//'translation_editor' => "Translation Editor",
 	
 		// global
 		'translation_editor:language' => "Language",
+		'translation_editor:gatekeeper' => "You're not an authorized translation editor",
 		
 		// menu
 		'translation_editor:menu:title' => "Translation Editor",
