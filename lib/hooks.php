@@ -52,27 +52,8 @@ function translation_editor_user_hover_menu($hook, $type, $return, $params) {
  * @return void
  */
 function translation_editor_actions_hook($hook, $type, $return, $params) {
-	$allowed_actions = array(
-		"admin/plugins/activate",
-		"admin/plugins/deactivate",
-		"admin/plugins/activate_all",
-		"admin/plugins/deactivate_all",
-		"admin/plugins/set_priority",
-		"upgrading" // not actualy an action but comes from events.php
-	);
-	
-	if (!empty($type) && in_array($type, $allowed_actions)) {
-		// make sure we have all translations
-		translation_editor_reload_all_translations();
-		
-		$languages = get_installed_translations();
-		if (!empty($languages) && is_array($languages)) {
-			foreach ($languages as $key => $desc) {
-				$site = elgg_get_site_entity();
-				remove_private_setting($site->getGUID(), "te_last_update_" . $key);
-			}
-		}
-	}
+	// invalidate site cache
+	translation_editor_invalidate_site_cache();
 }
 
 /**

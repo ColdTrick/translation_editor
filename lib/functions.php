@@ -750,3 +750,31 @@ function translation_editor_get_disabled_languages() {
 function translation_editor_guid_only($row) {
 	return (int) $row->guid;
 }
+
+/**
+ * Reset the site timestamp that tracks the merged translation status.
+ *
+ * This will recreate the translation editor cache
+ *
+ * @param int $site_guid which site to invalidate (defaults to current site)
+ *
+ * @return void
+ */
+function translation_editor_invalidate_site_cache($site_guid = 0) {
+	
+	$site_guid = sanitize_int($site_guid, false);
+	
+	// make sure we have all translations
+	translation_editor_reload_all_translations();
+	
+	$languages = get_installed_translations();
+	if (!empty($languages) && is_array($languages)) {
+		$site = elgg_get_site_entity($site_guid);
+		
+		if (!empty($site)) {
+			foreach ($languages as $key => $desc) {
+				remove_private_setting($site->getGUID(), "te_last_update_" . $key);
+			}
+		}
+	}
+}

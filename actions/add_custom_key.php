@@ -47,6 +47,9 @@ if (!empty($key) && !empty($translation)) {
 				
 				if (file_put_contents($location . "en.php", $file_contents)) {
 					
+					// invalidate cache
+					translation_editor_invalidate_site_cache();
+					
 					system_message(elgg_echo("translation_editor:action:add_custom_key:success"));
 				} else {
 					register_error(elgg_echo("translation_editor:action:add_custom_key:file_error"));
