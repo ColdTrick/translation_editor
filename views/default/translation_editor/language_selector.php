@@ -3,14 +3,14 @@
  * show the list of available languages to translate
  */
 
-$languages = $vars["languages"];
-$current_language = $vars["current_language"];
-$plugin = $vars["plugin"];
-$disabled_languages = $vars["disabled_languages"];
-$site_language = $vars["site_language"];
+$languages = elgg_extract("languages", $vars);
+$current_language = elgg_extract("current_language", $vars);
+$plugin = elgg_extract("plugin", $vars);
+$disabled_languages = elgg_extract("disabled_languages", $vars);
+$site_language = elgg_extract("site_language", $vars);
 
 if (!empty($languages)) {
-	$list = "<table id='translation_editor_language_table' class='elgg-table' title='" . elgg_echo("translation_editor:language_selector:title") . "'>";
+	$list = "<table id='translation_editor_language_table' class='elgg-table mbm' title='" . elgg_echo("translation_editor:language_selector:title") . "'>";
 	$list .= "<tr>";
 	$list .= "<th class='translation_editor_flag'>&nbsp;</th>";
 	$list .= "<th>" . elgg_echo("translation_editor:language") . "</th>";
@@ -23,31 +23,34 @@ if (!empty($languages)) {
 		$list .= "<tr>";
 		
 		// flag
-		$lang_flag_file = "mod/translation_editor/_graphics/flags/" . $language . ".gif";
-
-		if (file_exists(elgg_get_root_path() . $lang_flag_file)) {
-			$list .= "<td class='translation_editor_flag'>";
-			$list .= "<img src='" . $vars['url'] . $lang_flag_file . "' alt='" . elgg_echo($language)  . "' title='" . elgg_echo($language) . "'> ";
-			$list .= "</td>";
-		} else {
-			$list .= "<td class='translation_editor_flag'>&nbsp;</td>";
-		}
+		$list .= "<td class='translation_editor_flag'>";
+		$list .= elgg_view("output/te_flag", array("language" => $language));
+		$list .= "</td>";
 		
 		// language
 		$list .= "<td>";
 		if ($language != $current_language) {
-			$url = $vars["url"] . "translation_editor/" . $language . "/" . $plugin;
+			$url = "translation_editor/" . $language . "/" . $plugin;
 			
 			if ($language != "en") {
 				$completeness = translation_editor_get_language_completeness($language);
-				$list .= "<a href='" . $url . "'>" . elgg_echo($language) . " (" . $completeness . "%)</a>";
+				$list .= elgg_view("output/url", array(
+					"text" => elgg_echo($language) . " (" . $completeness . "%)",
+					"href" => $url
+				));
 				
 				if (elgg_is_admin_logged_in() && empty($completeness)) {
-					$list .= elgg_view("output/confirmlink", array("href" => $vars["url"] . "action/translation_editor/delete_language?language=" . $language, "confirm" => elgg_echo("translation_editor:language_selector:remove_language:confirm"), "text" => elgg_view_icon("delete-alt")));
+					$list .= elgg_view("output/confirmlink", array(
+						"href" => "action/translation_editor/delete_language?language=" . $language,
+						"confirm" => elgg_echo("translation_editor:language_selector:remove_language:confirm"),
+						"text" => elgg_view_icon("delete-alt")
+					));
 				}
 			} else {
-				$list .= "<a href='" . $url . "'>" . elgg_echo($language) . "</a>";
-				
+				$list .= elgg_view("output/url", array(
+					"text" => elgg_echo($language),
+					"href" => $url
+				));
 			}
 		} else {
 			if ($language != "en") {
@@ -66,11 +69,18 @@ if (!empty($languages)) {
 		if (elgg_is_admin_logged_in()) {
 			$list .= "<td class='translation_editor_enable'>";
 			if ($language != "en") {
-				$list .= "<input type='checkbox' name='disabled_languages[]' value='" . $language . "' onchange='elgg.translation_editor.disable_language();' ";
+				$options = array(
+					"name" => "disabled_languages[]",
+					"value" => $language,
+					"onchange" => "elgg.translation_editor.disable_language();",
+					"default" => false
+				);
+				
 				if (in_array($language, $disabled_languages)) {
-					$list .= "checked='checked' ";
+					$options["checked"] = "checked";
 				}
-				$list .= "/>";
+				
+				$list .= elgg_view("input/checkbox", $options);
 			}
 			$list .= "</td>";
 		}
@@ -87,5 +97,3 @@ if (elgg_is_admin_logged_in()) {
 	// add a new language
 	echo elgg_view("translation_editor/add_language");
 }
-
-echo "<br />";

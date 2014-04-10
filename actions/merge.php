@@ -18,6 +18,11 @@ if (translation_editor_is_translation_editor()) {
 	$translation = $translation['current_language'];
 	
 	echo "<?php" . PHP_EOL;
+	echo '/**' . PHP_EOL;
+	echo ' * This file was created by Translation Editor v' . elgg_get_plugin_from_id("translation_editor")->getManifest()->getVersion() . PHP_EOL;
+	echo ' * On ' . date("Y-m-d H:i") . "" . PHP_EOL;
+	echo ' */' . PHP_EOL;
+	echo PHP_EOL;
 	echo '$language = ';
 	echo var_export($translation);
 	echo ';' . PHP_EOL;

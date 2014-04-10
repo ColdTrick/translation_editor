@@ -14,14 +14,12 @@ elgg_push_breadcrumb($title_text, "translation_editor");
 
 // Get inputs
 $current_language = get_input("current_language", get_current_language());
+$plugin = get_input("plugin");
 
 $translations = get_installed_translations();
-
 if (!(array_key_exists($current_language, $translations))) {
 	forward("translation_editor");
 }
-
-$plugin = get_input("plugin");
 
 $languages = array_keys($CONFIG->translations);
 
@@ -50,7 +48,17 @@ if (empty($plugin)) {
 	
 	$plugins = translation_editor_get_plugins($current_language);
 	
-	$body .= elgg_view("translation_editor/search", array("current_language" => $current_language, "query" => get_input("q")));
+	$form_vars = array(
+		"id" => "translation_editor_search_form",
+		"action" => "translation_editor/search",
+		"disable_security" => true,
+		"class" => "mbl"
+	);
+	$body_vars  = array(
+		"current_language" => $current_language,
+	);
+	$body .= elgg_view_form("translation_editor/search", $form_vars, $body_vars);
+	
 	$body .= elgg_view("translation_editor/plugin_list", array("plugins" => $plugins, "current_language" => $current_language));
 } else {
 	// show plugin keys
@@ -59,9 +67,19 @@ if (empty($plugin)) {
 	
 	$translation = translation_editor_get_plugin($current_language, $plugin);
 	if (($plugin == "custom_keys") && elgg_is_admin_logged_in()) {
-		$body .= elgg_view("translation_editor/add_custom_key");
+		$body .= elgg_view_form("translation_editor/add_custom_key", array("class" => "mbm"));
 	}
-	$body .= elgg_view("translation_editor/plugin_edit", array("plugin" => $plugin, "current_language" => $current_language, "translation" => $translation));
+	
+	$form_vars = array(
+		"id" => "translation_editor_plugin_form",
+		"action" => "action/translation_editor/translate"
+	);
+	$body_vars = array(
+		"plugin" => $plugin,
+		"current_language" => $current_language,
+		"translation" => $translation
+	);
+	$body .= elgg_view_form("translation_editor/plugin_edit", $form_vars, $body_vars);
 }
 
 // Build page

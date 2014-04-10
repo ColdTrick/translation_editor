@@ -21,8 +21,6 @@ elgg_register_event_handler("init", "system", "translation_editor_init");
 function translation_editor_plugins_boot_event() {
 	global $CONFIG;
 
-	run_function_once("translation_editor_version_053");
-
 	// add the custom_keys_locations to language paths
 	$custom_keys_path = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR . "custom_keys" . DIRECTORY_SEPARATOR;
 	if (is_dir($custom_keys_path)) {
@@ -64,8 +62,8 @@ function translation_editor_plugins_boot_event() {
 function translation_editor_init() {
 	
 	// extend JS/CSS
-	elgg_extend_view("css/elgg", "translation_editor/css/site");
-	elgg_extend_view("js/elgg", "translation_editor/js/site");
+	elgg_extend_view("css/elgg", "css/translation_editor/site");
+	elgg_extend_view("js/elgg", "js/translation_editor/site");
 	
 	elgg_register_page_handler("translation_editor", "translation_editor_page_handler");
 	
@@ -131,18 +129,3 @@ function translation_editor_page_handler($page) {
 	
 	return true;
 }
-
-/**
- * An upgrade function to merge custom translation into a single file
- *
- * @return void
- */
-function translation_editor_version_053() {
-	$languages = get_installed_translations();
-	if (!empty($languages) && is_array($languages)) {
-		foreach ($languages as $lang => $name) {
-			translation_editor_merge_translations($lang);
-		}
-	}
-}
-	

@@ -3,15 +3,15 @@
  * Show a listing off all the available plugins to translate
  */
 
-$plugins = $vars["plugins"];
-$current_language = $vars["current_language"];
+$plugins = elgg_extract("plugins", $vars);
+$current_language = elgg_extract("current_language", $vars);
 
 if (!empty($plugins)) {
 	$total = 0;
 	$exists = 0;
 	$custom = 0;
 	
-	$list = "<table id='translation_editor_plugin_list' class='elgg-table' title='" . elgg_echo("translation_editor:plugin_list:title") . "'>";
+	$list = "<table " . elgg_format_attributes(array("id" => "translation_editor_plugin_list", "class" => "elgg-table", "title" => elgg_echo("translation_editor:plugin_list:title"))) . ">";
 	$list .= "<tr>";
 	$list .= "<th class='first_col'>" . elgg_echo("translation_editor:plugin_list:plugin") . "</th>";
 	$list .= "<th>" . elgg_echo("translation_editor:plugin_list:total") . "</th>";
@@ -22,8 +22,7 @@ if (!empty($plugins)) {
 	$list .= "</tr>";
 	
 	foreach ($plugins as $plugin_name => $plugin_stats) {
-		
-		$url = $vars["url"] . "translation_editor/" . $current_language . "/" . $plugin_name;
+		$url = "translation_editor/" . $current_language . "/" . $plugin_name;
 		
 		$total += $plugin_stats["total"];
 		$exists += $plugin_stats["exists"];
@@ -44,7 +43,7 @@ if (!empty($plugins)) {
 		}
 		
 		$list .= "<tr>";
-		$list .= "<td class='first_col'><a href='" . $url . "'>" . $plugin_name . "</a></td>";
+		$list .= "<td class='first_col'>" . elgg_view("output/url", array("text" => $plugin_name, "href" => $url)) . "</td>";
 		$list .= "<td>" . $plugin_stats["total"] . "</td>";
 		$list .= "<td>" . $plugin_stats["exists"] . "</td>";
 		
@@ -57,12 +56,12 @@ if (!empty($plugins)) {
 		$list .= "<td" . $complete_class . ">" . $percentage . "%</td>";
 		
 		if ($plugin_stats["custom"] > 0) {
-			$merge_url = $vars["url"] . "action/translation_editor/merge?current_language=" . $current_language . "&plugin=" . $plugin_name;
+			$merge_url = "action/translation_editor/merge?current_language=" . $current_language . "&plugin=" . $plugin_name;
 			
 			$list .= "<td>";
 			$list .= elgg_view("output/url", array("href" => $merge_url, "is_action" => true, "title" => elgg_echo("translation_editor:plugin_list:merge"), "text" => elgg_view_icon("download")));
 			if (elgg_is_admin_logged_in()) {
-				$delete_url = $vars["url"] . "action/translation_editor/delete?current_language=" . $current_language . "&plugin=" . $plugin_name;
+				$delete_url = "action/translation_editor/delete?current_language=" . $current_language . "&plugin=" . $plugin_name;
 				
 				$list .= elgg_view("output/confirmlink", array("href" => $delete_url, "title" => elgg_echo("delete"), "text" => elgg_view_icon("delete-alt")));
 			}

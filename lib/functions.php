@@ -32,7 +32,10 @@ function translation_editor_get_plugins($current_language) {
 		$plugin_language = $CONFIG->path . "languages" . DIRECTORY_SEPARATOR . "en.php";
 		
 		if (file_exists($plugin_language)) {
-			include($plugin_language);
+			$core_language_array = include($plugin_language);
+			if (is_array($core_language_array)) {
+				add_translation("en", $core_language_array);
+			}
 			
 			unset($CONFIG->translations["en"][""]);
 			
@@ -63,7 +66,10 @@ function translation_editor_get_plugins($current_language) {
 		$custom_keys_original = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR . "custom_keys" . DIRECTORY_SEPARATOR . "en.php";
 		
 		if (file_exists($custom_keys_original)) {
-			include($custom_keys_original);
+			$custom_language_array = include($custom_keys_original);
+			if (is_array($custom_language_array)) {
+				add_translation("en", $custom_language_array);
+			}
 			
 			unset($CONFIG->translations["en"][""]);
 			
@@ -102,8 +108,10 @@ function translation_editor_get_plugins($current_language) {
 			$plugin_language = $plugin->getPath() . DIRECTORY_SEPARATOR . "languages" . DIRECTORY_SEPARATOR . "en.php";
 			
 			if (file_exists($plugin_language)) {
-				
-				include($plugin_language);
+				$plugin_language_array = include($plugin_language);
+				if (is_array($plugin_language_array)) {
+					add_translation("en", $plugin_language_array);
+				}
 				
 				unset($CONFIG->translations["en"][""]);
 				
@@ -178,7 +186,10 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		
 		// Fetch translations
 		if (file_exists($plugin_language)) {
-			include($plugin_language);
+			$plugin_language_array = include($plugin_language);
+			if (is_array($plugin_language_array)) {
+				add_translation("en", $plugin_language_array);
+			}
 			
 			unset($CONFIG->translations["en"][""]);
 			
@@ -385,10 +396,13 @@ function translation_editor_reload_all_translations() {
 			$handle = opendir($path);
 			if (!empty($handle)) {
 				// proccess all files
-				while ($language = readdir($handle)) {
+				while (($language = readdir($handle)) !== false) {
 					// do we have a file (not a directory)
 					if (is_file($path . $language)) {
-						include($path . $language);
+						$result = include($path . $language);
+						if (is_array($result)) {
+							add_translation(basename($language, '.php'), $result);
+						}
 					}
 				}
 				
@@ -504,8 +518,8 @@ function translation_editor_is_translation_editor($user_guid = 0) {
 		if (!isset($editors_cache)) {
 			$editors_cache = array();
 			
-			$translation_editor_id = add_metastring("translation_editor");
-			$true_id = add_metastring(true);
+			$translation_editor_id = elgg_get_metastring_id("translation_editor");
+			$true_id = elgg_get_metastring_id(true);
 			
 			$options = array(
 				"type" => "user",

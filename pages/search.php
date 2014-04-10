@@ -16,16 +16,43 @@ if (!array_key_exists($language, $trans)) {
 	forward("translation_editor");
 }
 
-// build page elements
 $title_text = elgg_echo("translation_editor:search");
-$title = elgg_view_title($title_text);
 
+// breadcrumb
 elgg_push_breadcrumb(elgg_echo("translation_editor:menu:title"), "translation_editor");
 elgg_push_breadcrumb(elgg_echo($language), "translation_editor/" . $language);
 elgg_push_breadcrumb($title_text);
 
-$body = elgg_view("translation_editor/search", array("current_language" => $language, "query" => $q));
-$body .= elgg_view("translation_editor/search_results", array("results" => $found, "current_language" => $language));
+// build page elements
+$title = elgg_view_title($title_text);
+
+// build search form
+$form_vars = array(
+	"id" => "translation_editor_search_form",
+	"action" => "translation_editor/search",
+	"disable_security" => true,
+	"class" => "mbl"
+);
+$body_vars  = array(
+	"current_language" => $language,
+	"query" => $q
+);
+$body .= elgg_view_form("translation_editor/search", $form_vars, $body_vars);
+
+// display search results
+if (!empty($found)) {
+	$form_vars = array(
+		"id" => "translation_editor_search_result_form",
+		"action" => "action/translation_editor/translate_search"
+	);
+	$body_vars = array(
+		"results" => $found,
+		"current_language" => $language
+	);
+	$body .= elgg_view_form("translation_editor/search_results", $form_vars, $body_vars);
+} else {
+	$body .= elgg_view("output/longtext", array("value" => elgg_echo("translation_editor:search_results:no_results")));
+}
 
 // Build page
 $page_data = elgg_view_layout("one_column", array(

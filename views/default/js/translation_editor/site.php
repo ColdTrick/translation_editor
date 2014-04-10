@@ -20,7 +20,7 @@ elgg.translation_editor.disable_language = function() {
 
 elgg.translation_editor.toggle_view_mode = function(mode) {
 	$("#translation_editor_plugin_toggle a").removeClass("view_mode_active");
-	$("#view_mode_" + mode).addClass("view_mode_active");
+	$("#translation_editor_plugin_toggle a[rel='" + mode + "']").addClass("view_mode_active");
 	
 	if (mode == "all") {
 		$("#translation_editor_plugin_form tr").show();
@@ -58,17 +58,6 @@ elgg.translation_editor.init = function() {
 	// search result edit form
 	$('#translation_editor_search_result_form textarea').live("change", function() {
 		elgg.translation_editor.save_search();
-	});
-	
-	// search form
-	$('#translation_editor_search_form input[name="translation_editor_search"]').live("focus", function() {
-		if ($(this).val() == elgg.echo("translation_editor:forms:search:default")) {
-			$(this).val("");
-		}
-	}).live("blur", function() {
-		if ($(this).val() == "") {
-			$(this).val(elgg.echo("translation_editor:forms:search:default"));
-		}
 	});
 }
 

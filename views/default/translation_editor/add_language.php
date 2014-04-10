@@ -158,17 +158,16 @@ foreach ($installed_languages as $index => $lang) {
 asort($options);
 
 $form_body = elgg_view("input/dropdown", array("options_values" => $options, "name" => "code"));
-$form_body .= " ";
-$form_body .= elgg_view("input/submit", array("value" => elgg_echo("save")));
+$form_body .= elgg_view("input/submit", array("value" => elgg_echo("save"), "class" => "mls elgg-button-submit"));
 
 $form = elgg_view("input/form", array(
 	"body" => $form_body,
-	"action" => $vars["url"] . "action/translation_editor/add_language",
+	"action" => "action/translation_editor/add_language",
 	"id" => "translation_editor_add_language_form",
 	"class" => "hidden"
 ));
 
-echo "<div>";
-echo "<a href='javascript:void(0);' onclick='$(\"#translation_editor_add_language_form\").toggle();'><b>+</b> " . elgg_echo("translation_editor:language_selector:add_language") . "</a>";
+echo "<div class='mbm'>";
+echo "<a href='#translation_editor_add_language_form' rel='toggle'><b>+</b> " . elgg_echo("translation_editor:language_selector:add_language") . "</a>";
 echo $form;
 echo "</div>";
