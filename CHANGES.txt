@@ -6,6 +6,7 @@ x.x:
 - fixed: invalidate translation cache when adding custom keys #1
 - fixed: translation editor pages available for normal users #3
 - fixed: disabled languages are not manageable with system cache enabled
+- fixed: PHP warning
 
 1.3 (2013-04-05):
 

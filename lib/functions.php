@@ -603,7 +603,7 @@ function translation_editor_search_translation($query, $language = "en") {
 		
 		foreach ($plugins as $plugin => $data) {
 			$translations = translation_editor_get_plugin($language, $plugin);
-			if (!empty($translations)) {
+			if (!empty($translations) && elgg_extract("total", $translations)) {
 				foreach ($translations["en"] as $key => $value) {
 					if (stristr($key, $query) || stristr($value, $query) || (array_key_exists($key, $translations["current_language"]) && stristr($translations["current_language"][$key], $query))) {
 						if (!array_key_exists($plugin, $found)) {
