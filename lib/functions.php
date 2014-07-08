@@ -391,6 +391,8 @@ function translation_editor_reload_all_translations() {
 		$CONFIG->translations = $run_once;
 	} else {
 		
+		$CONFIG->translations = array();
+		
 		if ($CONFIG->i18n_loaded_from_cache) {
 			// make sure all plugins have registered their paths
 			$plugins = elgg_get_plugins();
@@ -687,6 +689,10 @@ function translation_editor_merge_translations($language = "", $update = false) 
 	}
 	
 	if ($result) {
+		// clear system cache
+		$cache = elgg_get_system_cache();
+		$cache->delete($language . ".lang");
+		
 		// let others know this happend
 		elgg_trigger_event("language:merge", "translation_editor", $language);
 	}
