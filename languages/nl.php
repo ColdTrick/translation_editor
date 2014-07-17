@@ -1,5 +1,11 @@
 <?php
+/**
+ * This file was created by Translation Editor v2.0
+ * On 2014-07-17 10:21
+ */
+
 $language = array (
+  'translation_editor:gatekeeper' => 'Je bent geen geautoriseerde vertaler',
   'translation_editor:language' => 'Taal',
   'translation_editor:search' => 'Zoekresultaten',
   'translation_editor:forms:search:default' => 'Zoek een vertaling',
