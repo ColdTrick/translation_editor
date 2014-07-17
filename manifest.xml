@@ -4,6 +4,7 @@
 	<author>ColdTrick IT Solutions</author>
 	<version>2.0</version>
 	<description>Translation Editor provides an easy way to edit translations.</description>
+	<id>translation_editor</id>
 	<website>http://www.coldtrick.com/</website>
 	<repository>https://github.com/ColdTrick/translation_editor</repository>
 	<bugtracker>https://github.com/ColdTrick/translation_editor/issues</bugtracker>
