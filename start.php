@@ -20,34 +20,36 @@ elgg_register_event_handler("init", "system", "translation_editor_init");
  */
 function translation_editor_plugins_boot_event() {
 	global $CONFIG;
-
+	
 	// add the custom_keys_locations to language paths
 	$custom_keys_path = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR . "custom_keys" . DIRECTORY_SEPARATOR;
 	if (is_dir($custom_keys_path)) {
 		$CONFIG->language_paths[$custom_keys_path] = true;
 	}
-
+	
 	// force creation of static to prevent reload of unwanted translations
 	reload_all_translations();
-
+	
 	translation_editor_load_custom_languages();
-
-	translation_editor_reload_all_translations();
+	
+	if (elgg_in_context("translation_editor") || elgg_in_context("settings") || elgg_in_context("admin")) {
+		translation_editor_reload_all_translations();
+	}
 	
 	if (!elgg_in_context("translation_editor")) {
 		// remove disabled languages
 		translation_editor_unregister_translations();
 	}
-
+	
 	// load custom translations
 	$user_language = get_current_language();
 	$elgg_default_language = "en";
-
+	
 	$load_languages = array($user_language, $elgg_default_language);
 	$load_languages = array_unique($load_languages);
-
+	
 	$disabled_languages = translation_editor_get_disabled_languages();
-
+	
 	foreach ($load_languages as $language) {
 		if (empty($disabled_languages) || !in_array($language, $disabled_languages)) {
 			// add custom translations
