@@ -3,6 +3,7 @@
 2.0:
 
 - prepared for Elgg 1.9
+- changed: language file format to prefered Elgg 1.9 format
 - fixed: invalidate translation cache when adding custom keys #1
 - fixed: translation editor pages available for normal users #3
 - fixed: disabled languages are not manageable with system cache enabled

@@ -8,7 +8,7 @@ $plugin = get_input("plugin");
 
 if (translation_editor_is_translation_editor()) {
 	
-	// We'll be outputting a CSV
+	// We'll be outputting a text file
 	header("Content-Type: text/plain");
 		
 	// It will be called $lang.php
@@ -18,15 +18,14 @@ if (translation_editor_is_translation_editor()) {
 	$translation = $translation['current_language'];
 	
 	echo "<?php" . PHP_EOL;
-	echo '/**' . PHP_EOL;
-	echo ' * This file was created by Translation Editor v' . elgg_get_plugin_from_id("translation_editor")->getManifest()->getVersion() . PHP_EOL;
-	echo ' * On ' . date("Y-m-d H:i") . "" . PHP_EOL;
-	echo ' */' . PHP_EOL;
+	echo "/**" . PHP_EOL;
+	echo " * This file was created by Translation Editor v" . elgg_get_plugin_from_id("translation_editor")->getManifest()->getVersion() . PHP_EOL;
+	echo " * On " . date("Y-m-d H:i") . "" . PHP_EOL;
+	echo " */" . PHP_EOL;
 	echo PHP_EOL;
-	echo '$language = ';
-	echo var_export($translation);
-	echo ';' . PHP_EOL;
-	echo 'add_translation("' . $current_language . '", $language);'  . PHP_EOL;
+	echo "return ";
+	echo var_export($translation, true);
+	echo ";" . PHP_EOL;
 	
 	exit();
 	
