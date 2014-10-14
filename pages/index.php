@@ -70,16 +70,12 @@ if (empty($plugin)) {
 		$body .= elgg_view_form("translation_editor/add_custom_key", array("class" => "mbm"));
 	}
 	
-	$form_vars = array(
-		"id" => "translation_editor_plugin_form",
-		"action" => "action/translation_editor/translate"
-	);
 	$body_vars = array(
 		"plugin" => $plugin,
 		"current_language" => $current_language,
 		"translation" => $translation
 	);
-	$body .= elgg_view_form("translation_editor/plugin_edit", $form_vars, $body_vars);
+	$body .= elgg_view("translation_editor/plugin_edit", $body_vars);
 }
 
 // Build page

@@ -30,7 +30,6 @@ $language = array (
   'translation_editor:plugin_edit:show:custom' => 'übersetzt',
   'translation_editor:plugin_edit:show:params' => 'fehlender Parameter',
   'translation_editor:action:translate:error:input' => 'Falsche Eingabe, um eine neue Übersetzung hinzuzufügen',
-  'translation_editor:action:translate:no_changed_values' => 'Keine Übersetzung erforderlich.',
   'translation_editor:action:translate:error:write' => 'Fehler beim Speichern der Übersetzung',
   'translation_editor:action:translate:error:not_authorized' => 'Du bist nicht zum Übersetzen authorisiert',
   'translation_editor:action:translate:success' => 'Übersetzung erfolgreich gespeichert',

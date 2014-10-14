@@ -39,8 +39,3 @@ foreach ($search_results as $plugin => $data) {
 }
 
 echo $list;
-
-echo "<div class='elgg-foot'>";
-echo elgg_view("input/hidden", array("name" => "current_language", "value" => $current_language));
-echo elgg_view("input/submit", array("value" => elgg_echo("save")));
-echo "</div>";

@@ -30,7 +30,6 @@ $language = array (
   'translation_editor:plugin_edit:show:custom' => 'مخصص',
   'translation_editor:plugin_edit:show:params' => 'ينقصها مُعطيات',
   'translation_editor:action:translate:error:input' => 'بيانات إضافة اللغة غير صحيحة',
-  'translation_editor:action:translate:no_changed_values' => 'لا حاجة لإضافة أية ترجمات',
   'translation_editor:action:translate:error:write' => 'حدث خطأ في حفظ الترجمة',
   'translation_editor:action:translate:error:not_authorized' => 'ليست لديك صلاحيات الترجمة',
   'translation_editor:action:translate:success' => 'تم حفظ الترجمات',

@@ -50,7 +50,6 @@ $language = array (
   'translation_editor:plugin_edit:show:all' => 'alle',
   'translation_editor:plugin_edit:show:custom' => 'aangepast',
   'translation_editor:plugin_edit:show:params' => 'ontbrekende variabele',
-  'translation_editor:action:translate:no_changed_values' => 'het was niet nodig vertalingen toe te voegen',
   'translation_editor:action:make_translation_editor' => 'Maak vertaler',
   'translation_editor:action:make_translation_editor:error' => 'Fout tijdens het toewijzen van de vertaler',
   'translation_editor:action:unmake_translation_editor:error' => 'Fout tijdens het verwijderen van de vertaler rol',

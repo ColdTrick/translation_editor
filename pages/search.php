@@ -41,15 +41,12 @@ $body .= elgg_view_form("translation_editor/search", $form_vars, $body_vars);
 
 // display search results
 if (!empty($found)) {
-	$form_vars = array(
-		"id" => "translation_editor_search_result_form",
-		"action" => "action/translation_editor/translate_search"
-	);
+
 	$body_vars = array(
 		"results" => $found,
 		"current_language" => $language
 	);
-	$body .= elgg_view_form("translation_editor/search_results", $form_vars, $body_vars);
+	$body .= elgg_view("translation_editor/search_results", $body_vars);
 } else {
 	$body .= elgg_view("output/longtext", array("value" => elgg_echo("translation_editor:search_results:no_results")));
 }

@@ -6,7 +6,7 @@
  * @uses $vars['translation'] as array('key' => $language_key, 'value' =>  => $translated_value)
  * @uses $vars['language'] the language being translated
  * @uses $vars['row_rel'] a special rel to put on the rows
- * @uses $vars['plugin'] (optional) translation for a specific plugin
+ * @uses $vars['plugin'] plugin id
  */
 
 $current_language = elgg_extract("language", $vars);
@@ -14,10 +14,6 @@ $english = elgg_extract("english", $vars);
 $translation = elgg_extract("translation", $vars);
 $plugin = elgg_extract("plugin", $vars);
 $row_rel = elgg_extract("row_rel", $vars);
-
-if (!empty($plugin)) {
-	$plugin = "[" . $plugin . "]";
-}
 
 if (!empty($row_rel)) {
 	$row_rel = "rel='" . $row_rel . "'";
@@ -38,10 +34,12 @@ $row .= "</tr>";
 // Custom language information
 $translation_value = elgg_extract("value", $translation);
 $row_count = max(2, count(explode("\n", $translation_value)));
+$key = $translation["key"];
 $text_options = array(
-	"name" => "translation" . $plugin . "[" . $translation["key"] . "]",
+	"name" => "translation[{$current_language}][{$plugin}][{$key}]",
 	"value" => $translation_value,
-	"rows" => $row_count
+	"rows" => $row_count,
+	"class" => "translation-editor-input"
 );
 
 $row .= "<tr " . $row_rel . ">";

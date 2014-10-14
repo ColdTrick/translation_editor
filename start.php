@@ -87,7 +87,6 @@ function translation_editor_init() {
 	
 	// Register actions
 	elgg_register_action("translation_editor/translate", dirname(__FILE__) . "/actions/translate.php");
-	elgg_register_action("translation_editor/translate_search", dirname(__FILE__) . "/actions/translate_search.php");
 	elgg_register_action("translation_editor/merge", dirname(__FILE__) . "/actions/merge.php");
 	
 	// Admin only actions

@@ -49,6 +49,7 @@ if (!empty($english)) {
 				"key" => $en_key,
 				"value" => elgg_extract($en_key, $translated_language)
 			),
+			"plugin" => $plugin,
 			"language" => $current_language,
 			"row_rel" => $row_rel
 		));
@@ -144,9 +145,3 @@ $list .= "</table>";
 
 // show all
 echo $list;
-
-echo "<div class='elgg-foot'>";
-echo elgg_view("input/hidden", array("name" => "current_language", "value" => $current_language));
-echo elgg_view("input/hidden", array("name" => "plugin", "value" => $plugin));
-echo elgg_view("input/submit", array("value" => elgg_echo("save")));
-echo "</div>";
