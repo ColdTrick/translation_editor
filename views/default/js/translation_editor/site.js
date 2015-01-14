@@ -1,7 +1,3 @@
-<?php
-
-?>
-//<script>
 elgg.provide("elgg.translation_editor");
 
 elgg.translation_editor.disable_language = function() {

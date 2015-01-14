@@ -7,6 +7,8 @@ global $CONFIG;
 
 translation_editor_gatekeeper();
 
+elgg_require_js("translation_editor/site");
+
 // Build elements
 $title_text = elgg_echo("translation_editor:menu:title");
 

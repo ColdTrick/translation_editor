@@ -67,7 +67,6 @@ function translation_editor_init() {
 	
 	// extend JS/CSS
 	elgg_extend_view("css/elgg", "css/translation_editor/site");
-	elgg_extend_view("js/elgg", "js/translation_editor/site");
 	
 	elgg_register_page_handler("translation_editor", "translation_editor_page_handler");
 	

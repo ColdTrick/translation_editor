@@ -5,6 +5,8 @@
 
 translation_editor_gatekeeper();
 
+elgg_require_js("translation_editor/site");
+
 // get inputs
 $q = get_input("translation_editor_search");
 $language = get_input("language", "en");
