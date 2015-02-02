@@ -3,11 +3,9 @@
  * Get an overview of the translations, eighter a listing off all plugins or an overview of the available keys in a plugin
  */
 
-global $CONFIG;
-
 translation_editor_gatekeeper();
 
-elgg_require_js("translation_editor/site");
+elgg_require_js("translation_editor/edit");
 
 // Build elements
 $title_text = elgg_echo("translation_editor:menu:title");
@@ -23,16 +21,16 @@ if (!(array_key_exists($current_language, $translations))) {
 	forward("translation_editor");
 }
 
-$languages = array_keys($CONFIG->translations);
+$site_translations = elgg_get_config("translations");
+$languages = array_keys($site_translations);
 
 $disabled_languages = translation_editor_get_disabled_languages();
 if (empty($disabled_languages)) {
 	$disabled_languages = array();
 }
 
-if (!empty($CONFIG->language)) {
-	$site_language = $CONFIG->language;
-} else {
+$site_language = elgg_get_config("language");
+if (empty($site_language)) {
 	$site_language = "en";
 }
 

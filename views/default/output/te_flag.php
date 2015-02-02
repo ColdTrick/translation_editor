@@ -7,17 +7,18 @@
 
 $language = elgg_extract("language", $vars);
 
-$result = "&nbsp;";
-if (!empty($language)) {
-	$flag_location = elgg_get_plugins_path() . "translation_editor/_graphics/flags/" . $language . ".gif";
-	
-	if (file_exists($flag_location)) {
-		$result = elgg_view("output/img", array(
-			"src" => "mod/translation_editor/_graphics/flags/" . $language . ".gif",
-			"alt" => elgg_echo($language),
-			"title" => elgg_echo($language)
-		));
-	}
+if (empty($language)) {
+	return "&nbsp;";
 }
 
-echo $result;
+$flag_location = elgg_get_plugins_path() . "translation_editor/_graphics/flags/" . $language . ".gif";
+
+if (!file_exists($flag_location)) {
+	return "&nbsp;";
+}
+
+echo elgg_view("output/img", array(
+	"src" => "mod/translation_editor/_graphics/flags/" . $language . ".gif",
+	"alt" => elgg_echo($language),
+	"title" => elgg_echo($language)
+));

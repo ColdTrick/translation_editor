@@ -6,8 +6,6 @@
 define("TRANSLATION_EDITOR_DISABLED_LANGUAGE", "disabled_languages");
 
 require_once(dirname(__FILE__) . "/lib/functions.php");
-require_once(dirname(__FILE__) . "/lib/hooks.php");
-require_once(dirname(__FILE__) . "/lib/events.php");
 
 // plugin init
 elgg_register_event_handler("plugins_boot", "system", "translation_editor_plugins_boot_event", 50); // before normal execution to prevent conflicts with plugins like language_selector
@@ -19,12 +17,15 @@ elgg_register_event_handler("init", "system", "translation_editor_init");
  * @return void
  */
 function translation_editor_plugins_boot_event() {
-	global $CONFIG;
 	
 	// add the custom_keys_locations to language paths
-	$custom_keys_path = $CONFIG->dataroot . "translation_editor" . DIRECTORY_SEPARATOR . "custom_keys" . DIRECTORY_SEPARATOR;
+	$custom_keys_path = elgg_get_config("dataroot") . "translation_editor" . DIRECTORY_SEPARATOR . "custom_keys" . DIRECTORY_SEPARATOR;
 	if (is_dir($custom_keys_path)) {
-		$CONFIG->language_paths[$custom_keys_path] = true;
+		$language_paths = elgg_get_config("language_paths");
+		
+		$language_paths[$custom_keys_path] = true;
+		
+		elgg_set_config("language_paths", $language_paths);
 	}
 	
 	// force creation of static to prevent reload of unwanted translations
@@ -67,22 +68,23 @@ function translation_editor_init() {
 	
 	// extend JS/CSS
 	elgg_extend_view("css/elgg", "css/translation_editor/site");
+	elgg_extend_view("js/elgg", "js/translation_editor/site.js");
 	
-	elgg_register_page_handler("translation_editor", "translation_editor_page_handler");
+	elgg_register_page_handler("translation_editor", array("\ColdTrick\TranslationEditor\PageHandler", "translationEditor"));
 	
 	// register hooks
-	elgg_register_plugin_hook_handler("action", "admin/plugins/activate", "translation_editor_actions_hook");
-	elgg_register_plugin_hook_handler("action", "admin/plugins/deactivate", "translation_editor_actions_hook");
-	elgg_register_plugin_hook_handler("action", "admin/plugins/activate_all", "translation_editor_actions_hook");
-	elgg_register_plugin_hook_handler("action", "admin/plugins/deactivate_all", "translation_editor_actions_hook");
-	elgg_register_plugin_hook_handler("action", "admin/plugins/set_priority", "translation_editor_actions_hook");
+	elgg_register_plugin_hook_handler("action", "admin/plugins/activate", array("\ColdTrick\TranslationEditor\ActionHandler", "invalidateCache"));
+	elgg_register_plugin_hook_handler("action", "admin/plugins/deactivate", array("\ColdTrick\TranslationEditor\ActionHandler", "invalidateCache"));
+	elgg_register_plugin_hook_handler("action", "admin/plugins/activate_all", array("\ColdTrick\TranslationEditor\ActionHandler", "invalidateCache"));
+	elgg_register_plugin_hook_handler("action", "admin/plugins/deactivate_all", array("\ColdTrick\TranslationEditor\ActionHandler", "invalidateCache"));
+	elgg_register_plugin_hook_handler("action", "admin/plugins/set_priority", array("\ColdTrick\TranslationEditor\ActionHandler", "invalidateCache"));
 	
-	elgg_register_plugin_hook_handler("register", "menu:user_hover", "translation_editor_user_hover_menu");
-	elgg_register_plugin_hook_handler("register", "menu:page", "translation_editor_page_menu");
-	elgg_register_plugin_hook_handler("register", "menu:site", "translation_editor_site_menu");
+	elgg_register_plugin_hook_handler("register", "menu:user_hover", array("\ColdTrick\TranslationEditor\UserHoverMenu", "register"));
+	elgg_register_plugin_hook_handler("register", "menu:page", array("\ColdTrick\TranslationEditor\PageMenu", "register"));
+	elgg_register_plugin_hook_handler("register", "menu:site", array("\ColdTrick\TranslationEditor\SiteMenu", "register"));
 	
 	// register events
-	elgg_register_event_handler("upgrade", "system", "translation_editor_upgrade_event");
+	elgg_register_event_handler("upgrade", "system", array("\ColdTrick\TranslationEditor\UpgradeHandler", "system"));
 	
 	// Register actions
 	elgg_register_action("translation_editor/translate", dirname(__FILE__) . "/actions/translate.php");
@@ -96,38 +98,4 @@ function translation_editor_init() {
 	elgg_register_action("translation_editor/add_language", dirname(__FILE__) . "/actions/add_language.php", "admin");
 	elgg_register_action("translation_editor/add_custom_key", dirname(__FILE__) . "/actions/add_custom_key.php", "admin");
 	elgg_register_action("translation_editor/delete_language", dirname(__FILE__) . "/actions/delete_language.php", "admin");
-}
-
-/**
- * The page handler for the nice url's of this plugin
- *
- * @param array $page the url elements
- *
- * @return bool
- */
-function translation_editor_page_handler($page) {
-	
-	switch ($page[0]) {
-		case "search":
-			$q = get_input("translation_editor_search");
-			if (!empty($q)) {
-				include(dirname(__FILE__) . "/pages/search.php");
-				break;
-			}
-		default:
-			if (!empty($page[0])) {
-				set_input("current_language", $page[0]);
-				if (!empty($page[1])) {
-					set_input("plugin", $page[1]);
-				}
-				
-				include(dirname(__FILE__) . "/pages/index.php");
-			} else {
-				$current_language = get_current_language();
-				forward("translation_editor/" . $current_language);
-			}
-			break;
-	}
-	
-	return true;
 }

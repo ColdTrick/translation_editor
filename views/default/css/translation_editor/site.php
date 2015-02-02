@@ -1,5 +1,7 @@
 <?php
-	$graphics_folder = elgg_get_site_url() . "mod/translation_editor/_graphics/";
+	
+$graphics_folder = elgg_get_site_url() . "mod/translation_editor/_graphics/";
+
 ?>
 
 #translation_editor_language_table th,

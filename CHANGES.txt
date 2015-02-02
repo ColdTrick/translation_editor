@@ -1,6 +1,11 @@
 Version history
 ===============
 
+3.0:
+
+- small changes for Elgg 1.10
+- changed: using classes for callback function 
+
 2.0.1 (2015-02-02):
 
 - changed: only load js when needed

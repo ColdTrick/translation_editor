@@ -1,5 +1,9 @@
 Translation Editor
 ==================
+
+[![Build Status](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/?branch=master)
+
 Manage translations
 
 Note

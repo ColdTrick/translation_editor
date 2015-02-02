@@ -9,7 +9,11 @@ $q = elgg_extract("query", $vars);
 // build form
 $form_data = "<table><tr>";
 $form_data .= "<td>";
-$form_data .= elgg_view("input/text", array("name" => "translation_editor_search", "value" => $q, "placeholder" => elgg_echo("translation_editor:forms:search:default")));
+$form_data .= elgg_view("input/text", array(
+	"name" => "translation_editor_search",
+	"value" => $q,
+	"placeholder" => elgg_echo("translation_editor:forms:search:default")
+));
 $form_data .= "</td>";
 
 $form_data .= "<td>";

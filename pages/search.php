@@ -5,7 +5,7 @@
 
 translation_editor_gatekeeper();
 
-elgg_require_js("translation_editor/site");
+elgg_require_js("translation_editor/edit");
 
 // get inputs
 $q = get_input("translation_editor_search");

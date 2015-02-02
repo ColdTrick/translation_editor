@@ -10,7 +10,13 @@ $disabled_languages = elgg_extract("disabled_languages", $vars);
 $site_language = elgg_extract("site_language", $vars);
 
 if (!empty($languages)) {
-	$list = "<table id='translation_editor_language_table' class='elgg-table mbm' title='" . elgg_echo("translation_editor:language_selector:title") . "'>";
+	$table_attributes = array(
+		"id" => "translation_editor_language_table",
+		"class" => "elgg-table mbm",
+		"title" => elgg_echo("translation_editor:language_selector:title")
+	);
+	
+	$list = "<table " . elgg_format_attributes($table_attributes) . ">";
 	$list .= "<tr>";
 	$list .= "<th class='translation_editor_flag'>&nbsp;</th>";
 	$list .= "<th>" . elgg_echo("translation_editor:language") . "</th>";
@@ -40,7 +46,7 @@ if (!empty($languages)) {
 				));
 				
 				if (elgg_is_admin_logged_in() && empty($completeness)) {
-					$list .= elgg_view("output/confirmlink", array(
+					$list .= elgg_view("output/url", array(
 						"href" => "action/translation_editor/delete_language?language=" . $language,
 						"confirm" => elgg_echo("translation_editor:language_selector:remove_language:confirm"),
 						"text" => elgg_view_icon("delete-alt")

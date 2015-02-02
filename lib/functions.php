@@ -483,7 +483,7 @@ function translation_editor_delete_translation($current_language, $plugin) {
  *
  * @param string $current_language the language to check
  *
- * @return int|bool
+ * @return int|false
  */
 function translation_editor_get_language_completeness($current_language) {
 	$result = false;
