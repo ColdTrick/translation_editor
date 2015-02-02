@@ -2,7 +2,7 @@ elgg.provide("elgg.translation_editor");
 
 elgg.translation_editor.disable_language = function() {
 	
-	var lan = new Array();
+	var lan = [];
 	$('#translation_editor_language_table input[name="disabled_languages[]"]:checked').each(function(index, elm){
 		lan.push($(this).val());
 	});
@@ -12,7 +12,7 @@ elgg.translation_editor.disable_language = function() {
 			disabled_languages: lan
 		}
 	});
-}
+};
 
 elgg.translation_editor.toggle_view_mode = function(mode) {
 	$("#translation_editor_plugin_toggle a").removeClass("view_mode_active");
@@ -26,7 +26,7 @@ elgg.translation_editor.toggle_view_mode = function(mode) {
 		$table.find("tr[rel='" + mode + "']").show();
 		$table.find("tr:first").show();
 	}
-}
+};
 
 elgg.translation_editor.save = function(elem) {
 	var key = $(elem).attr("name");
@@ -38,12 +38,12 @@ elgg.translation_editor.save = function(elem) {
 	elgg.action("translation_editor/translate", {
 		data: data
 	});
-}
+};
 
 elgg.translation_editor.init = function() {
 	$(document).on("change", ".translation-editor-input", function() {
 		elgg.translation_editor.save(this);
 	});
-}
+};
 
 elgg.register_hook_handler("init", "system", elgg.translation_editor.init);
