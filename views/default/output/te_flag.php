@@ -17,8 +17,13 @@ if (!file_exists($flag_location)) {
 	return "&nbsp;";
 }
 
+$title_alt = $language;
+if (elgg_language_key_exists($language)) {
+	$title_alt = elgg_echo($language);
+}
+
 echo elgg_view("output/img", array(
 	"src" => "mod/translation_editor/_graphics/flags/" . $language . ".gif",
-	"alt" => elgg_echo($language),
-	"title" => elgg_echo($language)
+	"alt" => $title_alt,
+	"title" => $title_alt
 ));

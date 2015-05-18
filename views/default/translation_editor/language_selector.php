@@ -34,6 +34,11 @@ if (!empty($languages)) {
 		$list .= "</td>";
 		
 		// language
+		$translated_language = $language;
+		if (elgg_language_key_exists($language)) {
+			$translated_language = elgg_echo($language);
+		}
+		
 		$list .= "<td>";
 		if ($language != $current_language) {
 			$url = "translation_editor/" . $language . "/" . $plugin;
@@ -41,7 +46,7 @@ if (!empty($languages)) {
 			if ($language != "en") {
 				$completeness = translation_editor_get_language_completeness($language);
 				$list .= elgg_view("output/url", array(
-					"text" => elgg_echo($language) . " (" . $completeness . "%)",
+					"text" => "{$translated_language} ({$completeness}%)",
 					"href" => $url
 				));
 				
@@ -54,15 +59,15 @@ if (!empty($languages)) {
 				}
 			} else {
 				$list .= elgg_view("output/url", array(
-					"text" => elgg_echo($language),
+					"text" => $translated_language,
 					"href" => $url
 				));
 			}
 		} else {
 			if ($language != "en") {
-				$list .= elgg_echo($language) . " (" . translation_editor_get_language_completeness($language) . "%)";
+				$list .= "{$translated_language} (" . translation_editor_get_language_completeness($language) . "%)";
 			} else {
-				$list .= elgg_echo($language);
+				$list .= $translated_language;
 			}
 		}
 		
