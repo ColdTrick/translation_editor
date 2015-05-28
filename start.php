@@ -31,11 +31,11 @@ function translation_editor_plugins_boot_event() {
 	// force creation of static to prevent reload of unwanted translations
 	reload_all_translations();
 	
-	translation_editor_load_custom_languages();
-	
 	if (elgg_in_context("translation_editor") || elgg_in_context("settings") || elgg_in_context("admin")) {
 		translation_editor_reload_all_translations();
 	}
+	
+	translation_editor_load_custom_languages();
 	
 	if (!elgg_in_context("translation_editor")) {
 		// remove disabled languages

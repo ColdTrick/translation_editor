@@ -10,7 +10,7 @@ if (empty($language) || ($language === "en")) {
 
 // only remove untranslated languages
 $completeness = translation_editor_get_language_completeness($language);
-if ($completeness !== 0) {
+if ($completeness !== (float) 0) {
 	forward(REFERER);
 }
 

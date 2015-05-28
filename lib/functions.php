@@ -483,7 +483,7 @@ function translation_editor_delete_translation($current_language, $plugin) {
  *
  * @param string $current_language the language to check
  *
- * @return int|false
+ * @return float|false
  */
 function translation_editor_get_language_completeness($current_language) {
 	$result = false;
@@ -502,7 +502,7 @@ function translation_editor_get_language_completeness($current_language) {
 			
 			$result = round(($current_count / $english_count) * 100, 2);
 		} else {
-			$result = 0;
+			$result = (float) 0;
 		}
 	}
 	
