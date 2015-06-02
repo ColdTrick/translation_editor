@@ -19,7 +19,7 @@ class UpgradeHandler {
 	 *
 	 * @return void
 	 */
-	public function system($event, $type, $object) {
+	public static function system($event, $type, $object) {
 		
 		// invalidate site cache
 		translation_editor_invalidate_site_cache();

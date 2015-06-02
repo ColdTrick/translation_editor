@@ -20,7 +20,7 @@ class SiteMenu {
 	 *
 	 * @return \ElggMenuItem[]
 	 */
-	public function register($hook, $type, $return, $params) {
+	public static function register($hook, $type, $return, $params) {
 		
 		if (!translation_editor_is_translation_editor()) {
 			return $return;

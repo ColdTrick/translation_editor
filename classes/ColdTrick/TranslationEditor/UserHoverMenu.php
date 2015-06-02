@@ -20,7 +20,7 @@ class UserHoverMenu {
 	 *
 	 * @return \ElggMenuItem[]
 	 */
-	public function register($hook, $type, $return, $params) {
+	public static function register($hook, $type, $return, $params) {
 		
 		if (empty($params) || !is_array($params)) {
 			// invalid input

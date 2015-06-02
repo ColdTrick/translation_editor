@@ -17,7 +17,7 @@ class PageHandler {
 	 *
 	 * @return bool
 	 */
-	public function translationEditor($page) {
+	public static function translationEditor($page) {
 		
 		$base_path = elgg_get_plugins_path() . "translation_editor/pages/";
 		

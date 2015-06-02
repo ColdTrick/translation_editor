@@ -20,7 +20,7 @@ class ActionHandler {
 	 *
 	 * @return void
 	 */
-	public function invalidateCache($hook, $type, $return, $params) {
+	public static function invalidateCache($hook, $type, $return, $params) {
 		
 		// invalidate site cache
 		translation_editor_invalidate_site_cache();

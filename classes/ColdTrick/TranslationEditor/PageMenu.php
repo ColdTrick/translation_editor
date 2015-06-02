@@ -20,7 +20,7 @@ class PageMenu {
 	 *
 	 * @return \ElggMenuItem[]
 	 */
-	public function register($hook, $type, $return, $params) {
+	public static function register($hook, $type, $return, $params) {
 		
 		if (!elgg_is_admin_logged_in()) {
 			return $return;
