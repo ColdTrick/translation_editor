@@ -1,7 +1,14 @@
 Version history
 ===============
 
-3.0:
+4.0 (2015-07-08):
+
+- changes for Elgg 1.11
+- added: composer support
+- fixed: calling non static functions as static
+- fixed: custom language were not manageable (could not delete or add) #10
+
+3.0 (2015-07-08):
 
 - small changes for Elgg 1.10
 - changed: using classes for callback function 
