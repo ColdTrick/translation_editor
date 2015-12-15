@@ -1,6 +1,11 @@
 Version history
 ===============
 
+4.0.1 (2015-12-15):
+
+- chore: refactored the functions library
+- fixed: unable to make translations with beginning/trailing spaces (fixes #8)
+
 4.0 (2015-07-08):
 
 - changes for Elgg 1.11
