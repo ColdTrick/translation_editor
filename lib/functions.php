@@ -247,8 +247,15 @@ function translation_editor_compare_translations($current_language, $translated)
 	translation_editor_reload_all_translations();
 	
 	foreach ($translated as $key => $value) {
-		$original = translation_editor_clean_line_breaks(trim(html_entity_decode($CONFIG->translations[$current_language][$key], ENT_NOQUOTES, 'UTF-8')));
-		$new = translation_editor_clean_line_breaks(trim(html_entity_decode($value, ENT_NOQUOTES, 'UTF-8')));
+		$original = translation_editor_clean_line_breaks(html_entity_decode($CONFIG->translations[$current_language][$key], ENT_NOQUOTES, 'UTF-8'));
+		$new = translation_editor_clean_line_breaks(html_entity_decode($value, ENT_NOQUOTES, 'UTF-8'));
+		
+		// if original string contains beginning/trailing spaces (eg ' in the group '),
+		// don't trim translated
+		$trim_needed = (strlen($original) === strlen(trim($original)));
+		if ($trim_needed) {
+			$new = trim($new);
+		}
 		
 		if (($original != $new) && strlen($new) > 0) {
 			$result[$key] = $new;
