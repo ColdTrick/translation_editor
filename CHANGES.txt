@@ -1,6 +1,10 @@
 Version history
 ===============
 
+5.0 (2015-12-16):
+
+- rework for Elgg 2.0
+
 4.0.1 (2015-12-15):
 
 - chore: refactored the functions library
