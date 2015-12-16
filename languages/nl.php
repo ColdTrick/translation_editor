@@ -1,13 +1,16 @@
 <?php
 /**
- * This file was created by Translation Editor v2.0
- * On 2014-07-17 10:21
+ * This file was created by Translation Editor v5.0
+ * On 2015-12-16 15:53
  */
 
-$language = array (
+return array (
+  'translation_editor:menu:title:plugin' => '%s vertalen naar %s',
+  'translation_editor:search' => 'Zoekresultaten voor \'%s\' in het %s',
+  'translation_editor:show_language_selector' => 'Toon taal selectie',
+  'translation_editor:hide_language_selector' => 'Verberg taal selectie',
   'translation_editor:gatekeeper' => 'Je bent geen geautoriseerde vertaler',
   'translation_editor:language' => 'Taal',
-  'translation_editor:search' => 'Zoekresultaten',
   'translation_editor:forms:search:default' => 'Zoek een vertaling',
   'translation_editor:search_results:no_results' => 'Geen vertalingen gevonden',
   'translation_editor:custom_keys:title' => 'Voeg een custom taal sleutel toe',
@@ -27,8 +30,6 @@ $language = array (
   'translation_editor:action:add_custom_key:invalid_chars' => 'De sleutel bevat ongeldige karakters. Alleen a-z, 0-9, dubbele punt of underscore zijn toegestaan.',
   'translation_editor:action:add_custom_key:key_numeric' => 'Sleutel mag niet uit enkel getallen bestaan',
   'translation_editor:action:add_custom_key:missing_input' => 'Ongeldige invoer. Voer een sleutel en een standaard (Engelse) vertaling in.',
-  'translation_editor:plugin_list:delete' => 'Verwijder vertaling',
-  'translation_editor:plugin_list:delete:confirm' => 'Weet je zeker dat je de vertaling wilt verwijderen? Dit kan niet ongedaan gemaakt worden!',
   'translation_editor:action:delete:error:input' => 'Onjuiste invoer om de vertaling te verwijderen',
   'translation_editor:action:delete:error:delete' => 'Fout tijden het verwijderen van de vertaling',
   'translation_editor:action:delete:success' => 'Vertaling succesvol verwijderd',
@@ -57,4 +58,3 @@ $language = array (
   'translation_editor:action:delete_language:success' => 'Taal succesvol verwijderd',
   'translation_editor:language_selector:site_language' => 'Site taal',
 );
-add_translation("nl", $language);

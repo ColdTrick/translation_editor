@@ -9,6 +9,9 @@ return array(
 	
 	// menu
 	'translation_editor:menu:title' => "Translation Editor",
+	'translation_editor:menu:title:plugin' => "Translating %s to %s",
+	'translation_editor:show_language_selector' => "Show language selector",
+	'translation_editor:hide_language_selector' => "Hide language selector",
 
 	// views
 	// language selector
@@ -28,7 +31,7 @@ return array(
 	'translation_editor:plugin_list:merge' => "Merge to PHP language file",
 	
 	// search
-	'translation_editor:search' => "Search results",
+	'translation_editor:search' => "Search results for '%s' in %s",
 	'translation_editor:forms:search:default' => "Find a translation",
 	'translation_editor:search_results:no_results' => "No translation found",
 
