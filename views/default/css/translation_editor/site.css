@@ -73,3 +73,8 @@ li.elgg-menu-item-translation-editor-hide-language-selector {
 .translation-editor-translation-key {
 	cursor: help;
 }
+
+.translation-editor-cleanup .elgg-output a {
+	color: white;
+	text-decoration: underline;
+}

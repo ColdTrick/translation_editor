@@ -1,10 +1,15 @@
 <?php
 /**
  * This file was created by Translation Editor v5.0
- * On 2015-12-16 15:53
+ * On 2016-04-04 17:38
  */
 
 return array (
+  'translation_editor:cleanup:description' => 'Er zijn %d aangepaste vertalingen opgeschoond. Dit betekend dat de vertalingen niet konden worden gevonden in de plugin waarvan ze deel uit maakten. Je kunt de lijst downloaden door op de Download knop te klikken.
+Als je klaar bent kun je het bestand %s.',
+  'translation_editor:action:cleanup:remove:error:no_file' => 'Het gevraagde bestand kon niet worden gevonden',
+  'translation_editor:action:cleanup:remove:error:remove' => 'Er is een fout opgetreden tijdens het verwijderen van het bestand, probeer het nogmaals',
+  'translation_editor:action:cleanup:remove:success' => 'Het bestand is verwijderd',
   'translation_editor:menu:title:plugin' => '%s vertalen naar %s',
   'translation_editor:search' => 'Zoekresultaten voor \'%s\' in het %s',
   'translation_editor:show_language_selector' => 'Toon taal selectie',

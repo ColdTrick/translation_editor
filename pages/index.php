@@ -92,6 +92,10 @@ if (empty($plugin)) {
 	];
 	$body .= elgg_view_form('translation_editor/search', $form_vars, $body_vars);
 	
+	$body .= elgg_view('translation_editor/cleanup', [
+		'current_language' => $current_language,
+	]);
+	
 	$body .= elgg_view('translation_editor/plugin_list', [
 		'plugins' => $plugins,
 		'current_language' => $current_language,

@@ -30,6 +30,10 @@ return array(
 	
 	'translation_editor:plugin_list:merge' => "Merge to PHP language file",
 	
+	// cleanup
+	'translation_editor:cleanup:description' => "%d custom translations were cleaned-up. This means they could not be found in the plugin they were part of. You can download the list by clicking on the Download button.
+When you're finished you can %s the file.",
+	
 	// search
 	'translation_editor:search' => "Search results for '%s' in %s",
 	'translation_editor:forms:search:default' => "Find a translation",
@@ -74,6 +78,9 @@ return array(
 	'translation_editor:action:add_custom_key:exists' => "Can't add this key as it already exists. Enter a unique key.",
 	'translation_editor:action:add_custom_key:invalid_chars' => "Key contains invalid characters. Only a-z, 0-9, colon or underscore are allowed.",
 	'translation_editor:action:add_custom_key:key_numeric' => "Key can not contain only numbers",
-	'translation_editor:action:add_custom_key:missing_input' => "Invalid input. Please enter a key and a default (English) translation."
+	'translation_editor:action:add_custom_key:missing_input' => "Invalid input. Please enter a key and a default (English) translation.",
 
+	'translation_editor:action:cleanup:remove:error:no_file' => "The requested file to delete could not be found",
+	'translation_editor:action:cleanup:remove:error:remove' => "An error occured while deleting the file, please try again",
+	'translation_editor:action:cleanup:remove:success' => "The file was deleted",
 );

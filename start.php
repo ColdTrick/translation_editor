@@ -78,10 +78,13 @@ function translation_editor_init() {
 	
 	// register events
 	elgg_register_event_handler('cache:flush', 'system', '\ColdTrick\TranslationEditor\CacheHandler::resetTranslationCache');
+	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\TranslationEditor\Upgrade::cleanupCustomTranslations');
 	
 	// Register actions
 	elgg_register_action('translation_editor/translate', dirname(__FILE__) . '/actions/translate.php');
 	elgg_register_action('translation_editor/merge', dirname(__FILE__) . '/actions/merge.php');
+	elgg_register_action('translation_editor/remove_cleanup', dirname(__FILE__) . '/actions/cleanup/remove.php');
+	elgg_register_action('translation_editor/download_cleanup', dirname(__FILE__) . '/actions/cleanup/download.php');
 	
 	// Admin only actions
 	elgg_register_action('translation_editor/make_translation_editor', dirname(__FILE__) . '/actions/make_translation_editor.php', 'admin');
