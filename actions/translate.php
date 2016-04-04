@@ -40,12 +40,21 @@ foreach ($translation as $language => $plugins) {
 			continue;
 		}
 		
+		// get plugin translation
+		$plugin_translation = translation_editor_get_plugin($language, $plugin_name);
+		
 		// merge with existing custom translations
-		$custom_translation = translation_editor_read_translation($language, $plugin_name);
+		$custom_translation = elgg_extract('custom', $plugin_translation);
 		if (!empty($custom_translation)) {
 			$translate_input = array_merge($custom_translation, $translate_input);
 		}
-			
+		
+		// get original plugin keys
+		$original_keys = elgg_extract('en', $plugin_translation);
+		// only keep keys which are present in the plugin
+		$translate_input = array_intersect_key($translate_input, $original_keys);
+		
+		// check if translated
 		$translated = translation_editor_compare_translations($language, $translate_input);
 			
 		if (!empty($translated)) {
