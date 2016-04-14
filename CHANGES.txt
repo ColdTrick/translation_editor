@@ -1,6 +1,11 @@
 Version history
 ===============
 
+5.1 (2016-04-14):
+
+- added: upgrade script to cleanup custom translations
+- changed: custom translations can only contain keys present in the original (en) translation
+
 5.0 (2015-12-16):
 
 - rework for Elgg 2.0
