@@ -8,8 +8,8 @@ translation_editor_gatekeeper();
 elgg_require_js('translation_editor/edit');
 
 // Get inputs
-$current_language = get_input('current_language', get_current_language());
-$plugin = get_input('plugin');
+$current_language = elgg_extract('current_language', $vars, get_current_language());
+$plugin = elgg_extract('plugin_id', $vars);
 
 $translations = get_installed_translations();
 if (!(array_key_exists($current_language, $translations))) {
