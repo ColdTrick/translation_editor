@@ -4,6 +4,9 @@
  */
 global $CONFIG;
 
+// make sure all languages are loaded
+translation_editor_reload_all_translations();
+
 // Fixes for KSES filtering
 // fix to allow javascript in href
 $CONFIG->allowedprotocols[] = 'javascript';
@@ -27,6 +30,7 @@ if (!is_array($translation)) {
 $trans = get_installed_translations();
 
 foreach ($translation as $language => $plugins) {
+	
 	if (!array_key_exists($language, $trans)) {
 		continue;
 	}
@@ -36,6 +40,7 @@ foreach ($translation as $language => $plugins) {
 	}
 	
 	foreach ($plugins as $plugin_name => $translate_input) {
+		
 		if (!is_array($translate_input)) {
 			continue;
 		}
@@ -56,7 +61,7 @@ foreach ($translation as $language => $plugins) {
 		
 		// check if translated
 		$translated = translation_editor_compare_translations($language, $translate_input);
-			
+		
 		if (!empty($translated)) {
 			if (translation_editor_write_translation($language, $plugin_name, $translated)) {
 				system_message(elgg_echo('translation_editor:action:translate:success'));
