@@ -3,24 +3,24 @@
  * Form to add a custom language key
  */
 
-$form_body = '<div>';
-$form_body .= elgg_format_element('label', ['for' => 'translation-editor-add-key-key'], elgg_echo('translation_editor:custom_keys:key'));
-$form_body .= elgg_view('input/text', [
+echo elgg_view_field([
+	'#type' => 'text',
+	'#label' => elgg_echo('translation_editor:custom_keys:key'),
 	'name' => 'key',
-	'id' => 'translation-editor-add-key-key',
 ]);
 
-$form_body .= elgg_format_element('label', ['for' => 'translation-editor-add-key-value'], elgg_echo('translation_editor:custom_keys:translation'));
-$form_body .= elgg_view('input/plaintext', [
+echo elgg_view_field([
+	'#type' => 'plaintext',
+	'#label' => elgg_echo('translation_editor:custom_keys:translation'),
+	'#help' => elgg_echo('translation_editor:custom_keys:translation_info'),
 	'name' => 'translation',
 	'rows' => 3,
-	'id' => 'translation-editor-add-key-value',
 ]);
-$form_body .= elgg_format_element('span', ['class' => 'elgg-quiet'], elgg_echo('translation_editor:custom_keys:translation_info'));
-$form_body .= '</div>';
 
-$form_body .= elgg_view('input/submit', [
+// form footer
+$footer = elgg_view_field([
+	'#type' => 'submit',
 	'value' => elgg_echo('save'),
 ]);
 
-echo elgg_view_module('info', elgg_echo('translation_editor:custom_keys:title'), $form_body);
+elgg_set_form_footer($footer);
