@@ -291,25 +291,10 @@ function translation_editor_clean_line_breaks($string) {
  *
  * @return false|int
  */
-function translation_editor_write_translation($current_language, $plugin, $translation) {
+function translation_editor_write_translation($current_language, $plugin, $translations) {
 	
-	if (empty($current_language) || empty($plugin) || empty($translation)) {
-		return false;
-	}
-	
-	translation_editor_check_file_structure($current_language);
-	
-	$base_dir = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR;
-	$file_name = $base_dir . $current_language . DIRECTORY_SEPARATOR . $plugin . '.json';
-	
-	$contents = json_encode($translation);
-	
-	$bytes = file_put_contents($file_name, $contents);
-	if (empty($bytes)) {
-		return false;
-	}
-	
-	return $bytes;
+	$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+	return $translation->saveTranslations($translations);
 }
 
 /**
@@ -321,24 +306,8 @@ function translation_editor_write_translation($current_language, $plugin, $trans
  * @return false|array
  */
 function translation_editor_read_translation($current_language, $plugin) {
-	
-	if (empty($current_language) || empty($plugin)) {
-		return false;
-	}
-	
-	$base_dir = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR;
-	$file_name = $base_dir . $current_language . DIRECTORY_SEPARATOR . $plugin . '.json';
-	
-	if (!file_exists($file_name)) {
-		return false;
-	}
-	
-	$contents = file_get_contents($file_name);
-	if (empty($contents)) {
-		return false;
-	}
-	
-	return json_decode($contents, true);
+	$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+	return $translation->readTranslations();
 }
 
 /**
@@ -446,29 +415,6 @@ function translation_editor_reload_all_translations() {
 }
 
 /**
- * Make sure the expected folder structure exists in dataroot
- *
- * @param string $current_language the language to check to structure for
- *
- * @return void
- */
-function translation_editor_check_file_structure($current_language) {
-	
-	if (empty($current_language)) {
-		return;
-	}
-	
-	$base_dir = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR;
-	if (!file_exists($base_dir)) {
-		mkdir($base_dir, 0755, true);
-	}
-	
-	if (!file_exists($base_dir . $current_language . DIRECTORY_SEPARATOR)) {
-		mkdir($base_dir . $current_language . DIRECTORY_SEPARATOR, 0755, true);
-	}
-}
-
-/**
  * Remove the custom translations for a plugin
  *
  * @param string $current_language the language to remove
@@ -477,18 +423,8 @@ function translation_editor_check_file_structure($current_language) {
  * @return bool
  */
 function translation_editor_delete_translation($current_language, $plugin) {
-	
-	if (empty($current_language) || empty($plugin)) {
-		return false;
-	}
-	
-	$filename = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . $current_language . DIRECTORY_SEPARATOR . $plugin . '.json';
-	
-	if (file_exists($filename)) {
-		return unlink($filename);
-	}
-	
-	return true;
+	$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+	return $translation->removeTranslations();
 }
 
 /**
@@ -556,7 +492,9 @@ function translation_editor_is_translation_editor($user_guid = 0) {
 			'limit' => false,
 			'joins' => array('JOIN ' . elgg_get_config('dbprefix') . 'metadata md ON e.guid = md.entity_guid'),
 			'wheres' => array("(md.name_id = {$translation_editor_id} AND md.value_id = {$true_id})"),
-			'callback' => 'translation_editor_guid_only'
+			'callback' => function ($row) {
+				return (int) $row->guid;
+			},
 		);
 		
 		$guids = elgg_get_entities($options);
@@ -759,17 +697,6 @@ function translation_editor_get_disabled_languages() {
 	}
 
 	return $result;
-}
-
-/**
- * Custom callback function for elgg_get_entities_* to only return the GUID
- *
- * @param stdClass $row the current table row
- *
- * @return int
- */
-function translation_editor_guid_only($row) {
-	return (int) $row->guid;
 }
 
 /**
