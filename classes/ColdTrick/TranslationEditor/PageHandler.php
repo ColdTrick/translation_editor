@@ -24,7 +24,15 @@ class PageHandler {
 			case 'search':
 				echo elgg_view_resource('translation_editor/search');
 				return true;
-
+			case 'import':
+			case 'export':
+				$current_language = array_shift($segments);
+				set_input('current_language', $current_language);
+				
+				echo elgg_view_resource("translation_editor/{$page}", [
+					'current_language' => $current_language,
+				]);
+				return true;
 			default:
 				if (empty($page)) {
 					$language = get_current_language();

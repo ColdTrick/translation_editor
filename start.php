@@ -75,6 +75,7 @@ function translation_editor_init() {
 	elgg_register_plugin_hook_handler('register', 'menu:user_hover', '\ColdTrick\TranslationEditor\UserHoverMenu::register');
 	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\TranslationEditor\PageMenu::register');
 	elgg_register_plugin_hook_handler('register', 'menu:site', '\ColdTrick\TranslationEditor\SiteMenu::register');
+	elgg_register_plugin_hook_handler('register', 'menu:title', '\ColdTrick\TranslationEditor\TitleMenu::register');
 	
 	// register events
 	elgg_register_event_handler('cache:flush', 'system', '\ColdTrick\TranslationEditor\CacheHandler::resetTranslationCache');
@@ -94,4 +95,6 @@ function translation_editor_init() {
 	elgg_register_action('translation_editor/add_language', dirname(__FILE__) . '/actions/add_language.php', 'admin');
 	elgg_register_action('translation_editor/add_custom_key', dirname(__FILE__) . '/actions/add_custom_key.php', 'admin');
 	elgg_register_action('translation_editor/delete_language', dirname(__FILE__) . '/actions/delete_language.php', 'admin');
+	elgg_register_action('translation_editor/import', dirname(__FILE__) . '/actions/import.php', 'admin');
+	elgg_register_action('translation_editor/export', dirname(__FILE__) . '/actions/export.php', 'admin');
 }

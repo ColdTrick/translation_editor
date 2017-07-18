@@ -30,6 +30,15 @@ return array(
 	
 	'translation_editor:plugin_list:merge' => "Merge to PHP language file",
 	
+	// export
+	'translation_editor:export' => 'Export custom translations',
+	'translation_editor:export:no_plugins' => 'No exportable translations found.',
+	'translation_editor:export:plugins' => 'Select plugins to export',
+	
+	// import
+	'translation_editor:import' => 'Import custom translations',
+	'translation_editor:import:file' => 'Select importable file from previous export',
+	
 	// cleanup
 	'translation_editor:cleanup:description' => "%d custom translations were cleaned-up. This means they could not be found in the plugin they were part of. You can download the list by clicking on the Download button.
 When you're finished you can %s the file.",
@@ -72,6 +81,10 @@ When you're finished you can %s the file.",
 
 	'translation_editor:action:add_language:success' => "Language successfully added",
 	'translation_editor:action:delete_language:success' => "Language successfully removed",
+
+	'translation_editor:action:import:incorrect_language' => "The import does not contain translations for %s",
+	'translation_editor:action:import:no_plugins' => "The import does not contain plugins to be imported",
+	'translation_editor:action:import:success' => "Successfully imported translations",
 
 	'translation_editor:action:add_custom_key:success' => "Custom key successfully added",
 	'translation_editor:action:add_custom_key:file_error' => "Error when saving the custom key to the file",
