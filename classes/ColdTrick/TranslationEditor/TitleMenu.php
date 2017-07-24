@@ -52,7 +52,7 @@ class TitleMenu {
 				'name' => 'translation-editor-merge',
 				'text' => elgg_echo('download'),
 				'title' => elgg_echo('translation_editor:plugin_list:merge'),
-				'href' => "action/translation_editor/merge?current_language={$current_language}&plugin={$plugin}",
+				'href' => "action/translation_editor/merge?current_language={$current_language}&plugin={$plugin_id}",
 				'link_class' => 'elgg-button elgg-button-action',
 				'priority' => 300,
 				'is_action' => true,
