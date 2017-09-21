@@ -18,13 +18,11 @@ $CONFIG->allowedtags['span']['id'] = array();
 $translation = get_input('translation');
 
 if (!translation_editor_is_translation_editor()) {
-	register_error(elgg_echo('translation_editor:action:translate:error:not_authorized'));
-	forward();
+	return elgg_error_response(elgg_echo('translation_editor:action:translate:error:not_authorized'));
 }
 
 if (!is_array($translation)) {
-	register_error(elgg_echo('translation_editor:action:translate:error:input'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('translation_editor:action:translate:error:input'));
 }
 
 $trans = get_installed_translations();

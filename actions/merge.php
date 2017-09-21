@@ -7,8 +7,7 @@ $current_language = get_input('current_language');
 $plugin = get_input('plugin');
 
 if (!translation_editor_is_translation_editor()) {
-	register_error(elgg_echo('transation_editor:action:translate:error:not_authorized'));
-	forward(REFERER);
+	return elgg_error_response(elgg_echo('transation_editor:action:translate:error:not_authorized'));
 }
 
 // We'll be outputting a text file
