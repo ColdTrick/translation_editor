@@ -12,7 +12,6 @@ echo elgg_view_field([
 	'value' => elgg_extract('current_language', $vars),
 ]);
 
-
 $footer = elgg_view_field([
 	'#type' => 'submit',
 	'value' => elgg_echo('import'),
