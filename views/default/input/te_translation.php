@@ -19,8 +19,8 @@ if (!empty($row_rel)) {
 	$row_rel = 'rel="' . $row_rel . '"';
 }
 
-$en_flag = elgg_view('output/te_flag', ['language' => 'en']);
-$lang_flag = elgg_view('output/te_flag', ['language' => $current_language]);
+$en_flag = elgg_view('translation_editor/flag', ['language' => 'en']);
+$lang_flag = elgg_view('translation_editor/flag', ['language' => $current_language]);
 
 // English information
 $row = '<tr ' . $row_rel . '>';
