@@ -19,13 +19,11 @@ foreach ($installed_languages as $index => $lang) {
 
 asort($options);
 
-$form_body = elgg_view('input/dropdown', [
+echo elgg_view('input/select', [
 	'options_values' => $options,
 	'name' => 'code',
 ]);
-$form_body .= elgg_view('input/submit', [
+echo elgg_view('input/submit', [
 	'value' => elgg_echo('save'),
 	'class' => 'mls elgg-button-submit',
 ]);
-
-echo $form_body;

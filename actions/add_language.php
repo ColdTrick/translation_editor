@@ -5,7 +5,7 @@
 
 $code = get_input('code');
 if (empty($code)) {
-	forward(REFERER);
+	return elgg_error_response();
 }
 
 // check for existing custom languages
@@ -22,6 +22,4 @@ elgg_set_plugin_setting('custom_languages', $code, 'translation_editor');
 // invalidate cache
 elgg_flush_caches();
 
-system_message(elgg_echo('translation_editor:action:add_language:success'));
-
-forward(REFERER);
+return elgg_ok_response('', elgg_echo('translation_editor:action:add_language:success'));

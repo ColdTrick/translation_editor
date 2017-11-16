@@ -6,8 +6,8 @@
 $search_results = elgg_extract('results', $vars);
 $current_language = elgg_extract('current_language', $vars);
 
-$en_flag = elgg_view('output/te_flag', ['language' => 'en']);
-$lang_flag = elgg_view('output/te_flag', ['language' => $current_language]);
+$en_flag = elgg_view('translation_editor/flag', ['language' => 'en']);
+$lang_flag = elgg_view('translation_editor/flag', ['language' => $current_language]);
 
 $list = '';
 foreach ($search_results as $plugin => $data) {

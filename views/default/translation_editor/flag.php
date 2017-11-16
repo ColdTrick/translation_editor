@@ -11,8 +11,8 @@ if (empty($language)) {
 	return '&nbsp;';
 }
 
-$flag_location = elgg_get_plugins_path() . "translation_editor/_graphics/flags/{$language}.gif";
-if (!file_exists($flag_location)) {
+$view = "translation_editor/flags/{$language}.gif";
+if (!elgg_view_exists($view)) {
 	return '&nbsp;';
 }
 
@@ -24,7 +24,7 @@ if (elgg_language_key_exists($language, $language)) {
 }
 
 echo elgg_view('output/img', [
-	'src' => "mod/translation_editor/_graphics/flags/{$language}.gif",
+	'src' => elgg_get_simplecache_url($view),
 	'alt' => $title_alt,
 	'title' => $title_alt,
 ]);

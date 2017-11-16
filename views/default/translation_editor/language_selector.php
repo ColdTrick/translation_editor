@@ -35,7 +35,7 @@ if (!empty($languages)) {
 		
 		// flag
 		$list .= '<td class="translation_editor_flag">';
-		$list .= elgg_view('output/te_flag', ['language' => $language]);
+		$list .= elgg_view('translation_editor/flag', ['language' => $language]);
 		$list .= '</td>';
 		
 		// language

@@ -3,7 +3,6 @@
  * jQuery call to disable a set of languages
  */
 
-
 $disabled_languages = get_input('disabled_languages');
 
 if (!empty($disabled_languages)) {
@@ -21,4 +20,4 @@ if (!empty($disabled_languages)) {
 // invalidate cache
 elgg_flush_caches();
 
-system_message(elgg_echo('save:success'));
+return elgg_ok_response('', elgg_echo('save:success'));
