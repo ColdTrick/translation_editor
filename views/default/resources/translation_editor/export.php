@@ -26,7 +26,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 		continue;
 	}
 	
-	$exportable_plugins[$plugin->getFriendlyName()] = $plugin_id;
+	$exportable_plugins[$plugin->getDisplayName()] = $plugin_id;
 }
 
 if (empty($exportable_plugins)) {

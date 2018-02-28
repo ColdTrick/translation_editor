@@ -104,7 +104,7 @@ function translation_editor_get_plugins($current_language) {
 	// Plugin translations
 	foreach ($plugins as $plugin) {
 		
-		$title = $plugin->title;
+		$plugin_id = $plugin->getID();
 		
 		$_ELGG->translations = [];
 		$plugin_language = $plugin->getPath() . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
@@ -127,16 +127,16 @@ function translation_editor_get_plugins($current_language) {
 				$exists_count = 0;
 			}
 			
-			$custom_content = translation_editor_read_translation($current_language, $title);
+			$custom_content = translation_editor_read_translation($current_language, $plugin_id);
 			if (!empty($custom_content)) {
 				$custom_count = count($custom_content);
 			} else {
 				$custom_count = 0;
 			}
 			
-			$plugins_result[$title]['total'] = $key_count;
-			$plugins_result[$title]['exists'] = $exists_count;
-			$plugins_result[$title]['custom'] = $custom_count;
+			$plugins_result[$plugin_id]['total'] = $key_count;
+			$plugins_result[$plugin_id]['exists'] = $exists_count;
+			$plugins_result[$plugin_id]['custom'] = $custom_count;
 		}
 	}
 	
@@ -325,13 +325,13 @@ function translation_editor_load_translations($current_language = "") {
 	}
 	
 	// check if update is needed
-	$main_ts = (int) datalist_get("te_last_update_{$current_language}");
-	$site_ts = (int) get_private_setting($site->getGUID(), "te_last_update_{$current_language}");
+	$main_ts = (int) elgg_get_config("te_last_update_{$current_language}");
+	$site_ts = (int) $site->getPrivateSetting("te_last_update_{$current_language}");
 	
 	if (!empty($main_ts)) {
 		if (empty($site_ts) || ($main_ts > $site_ts)) {
 			if (translation_editor_merge_translations($current_language)) {
-				set_private_setting($site->getGUID(), "te_last_update_{$current_language}", time());
+				$site->setPrivateSetting("te_last_update_{$current_language}", time());
 			}
 		}
 	} else {
@@ -609,7 +609,7 @@ function translation_editor_merge_translations($language = "", $update = false) 
 		if (!empty($plugins)) {
 			foreach ($plugins as $plugin) {
 				// add plugin translations
-				$plugin_translation = translation_editor_read_translation($language, $plugin->title);
+				$plugin_translation = translation_editor_read_translation($language, $plugin->getID());
 				if (!empty($plugin_translation)) {
 					$translations += $plugin_translation;
 				}
@@ -642,8 +642,8 @@ function translation_editor_merge_translations($language = "", $update = false) 
 	if ($update) {
 		$ts = time();
 		
-		datalist_set("te_last_update_{$language}", $ts);
-		set_private_setting($site->getGUID(), "te_last_update_{$language}", $ts);
+		elgg_save_config("te_last_update_{$language}", $ts);
+		$site->setPrivateSetting("te_last_update_{$language}", $ts);
 	}
 	
 	return $result;

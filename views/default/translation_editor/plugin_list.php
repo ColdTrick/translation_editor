@@ -44,7 +44,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	
 	$plugin = elgg_get_plugin_from_id($plugin_id);
 	if ($plugin instanceof ElggPlugin) {
-		$plugin_title = $plugin->getFriendlyName();
+		$plugin_title = $plugin->getDisplayName();
 	}
 	
 	$url = "translation_editor/{$current_language}/{$plugin_id}";
