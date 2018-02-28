@@ -3,7 +3,7 @@
 	"description": "Provide an easy way to edit translations",
 	"type": "elgg-plugin",
 	"keywords": ["elgg", "plugin", "i18n"],
-	"license": "GPL-2.0",
+	"license": "GPL-2.0-only",
 	"support": {
 		"source": "https://github.com/ColdTrick/translation_editor",
 		"issues": "https://github.com/ColdTrick/translation_editor/issues"
