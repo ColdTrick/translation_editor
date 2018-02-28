@@ -57,10 +57,13 @@ if (!empty($english)) {
 }
 
 $selected_view_mode = 'missing';
-$table_class = 'translation_editor_translation_table mbl';
+$table_class = [
+	'elgg-table',
+	'translation-editor-translation-table',
+];
 if (empty($missing_count)) {
 	$selected_view_mode = 'all';
-	$table_class .= ' translation-editor-translation-table-no-missing';
+	$table_class[] = 'translation-editor-translation-table-no-missing';
 }
 
 // toggle between different filters
@@ -134,14 +137,12 @@ $toggle .= elgg_view('output/url', [
 $toggle .= '</span>';
 
 // build the edit table
-$list = "<table class='elgg-table {$table_class}'>";
-$list .= '<col class="first_col" />';
+$list = '<col class="first_col" />';
 $list .= '<tr class="first_row"><th colspan="2">';
 $list .= $toggle;
 $list .= elgg_echo('translation_editor:plugin_edit:title') . ' ' . $plugin;
 $list .= '</th></tr>';
 $list .= $translation;
-$list .= '</table>';
 
 // show all
-echo $list;
+echo elgg_format_element('table', ['class' => $table_class], $list);

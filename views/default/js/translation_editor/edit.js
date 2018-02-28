@@ -18,7 +18,7 @@ elgg.translation_editor.toggle_view_mode = function(mode) {
 	$("#translation_editor_plugin_toggle a").removeClass("view_mode_active");
 	$("#translation_editor_plugin_toggle a[rel='" + mode + "']").addClass("view_mode_active");
 
-	var $table = $(".translation_editor_translation_table");
+	var $table = $(".translation-editor-translation-table");
 	if (mode == "all") {
 		$table.find("tr").show();
 	} else {

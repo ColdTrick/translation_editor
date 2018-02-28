@@ -3,6 +3,9 @@
  * All helper function for this plugin are bundled here
  */
 
+use Elgg\Project\Paths;
+use Elgg\Includer;
+
 /**
  * Returns array of all available plugins and their individual language keys
  *
@@ -16,9 +19,12 @@ function translation_editor_get_plugins($current_language) {
 		return false;
 	}
 	
-	global $_ELGG;
+	$translator = elgg()->translator;
 	
-	translation_editor_reload_all_translations();
+	$translator->reloadAllTranslations();
+	$translator->loadTranslations($current_language);
+		
+// 	translation_editor_reload_all_translations();
 	translation_editor_load_translations($current_language);
 	
 	$result = [];
@@ -26,22 +32,14 @@ function translation_editor_get_plugins($current_language) {
 	$custom_keys = [];
 	$plugins_result = [];
 	
-	$backup_full = $_ELGG->translations;
+	$backup_full = $translator->getLoadedTranslations();
 	$plugins = elgg_get_plugins();
 	
 	// Core translation
-	$_ELGG->translations = [];
-	$plugin_language = dirname(elgg_get_engine_path()) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
+	$plugin_language = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
 	
 	if (file_exists($plugin_language)) {
-		$core_language_array = include($plugin_language);
-		if (is_array($core_language_array)) {
-			add_translation('en', $core_language_array);
-		}
-		
-		unset($_ELGG->translations['en']['']);
-		
-		$plugin_keys = $_ELGG->translations['en'];
+		$plugin_keys = Includer::includeFile($plugin_language);
 		
 		$key_count = count($plugin_keys);
 		
@@ -64,18 +62,10 @@ function translation_editor_get_plugins($current_language) {
 	}
 	
 	// Custom Keys
-	$_ELGG->translations = [];
 	$custom_keys_original = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR . 'en.php';
 	
 	if (file_exists($custom_keys_original)) {
-		$custom_language_array = include($custom_keys_original);
-		if (is_array($custom_language_array)) {
-			add_translation('en', $custom_language_array);
-		}
-		
-		unset($_ELGG->translations['en']['']);
-		
-		$plugin_keys = $_ELGG->translations['en'];
+		$plugin_keys = Includer::includeFile($custom_keys_original);
 		
 		$key_count = count($plugin_keys);
 		
@@ -106,18 +96,10 @@ function translation_editor_get_plugins($current_language) {
 		
 		$plugin_id = $plugin->getID();
 		
-		$_ELGG->translations = [];
-		$plugin_language = $plugin->getPath() . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
+		$plugin_language = $plugin->getPath() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
 		
 		if (file_exists($plugin_language)) {
-			$plugin_language_array = include($plugin_language);
-			if (is_array($plugin_language_array)) {
-				add_translation('en', $plugin_language_array);
-			}
-			
-			unset($_ELGG->translations['en']['']);
-			
-			$plugin_keys = $_ELGG->translations['en'];
+			$plugin_keys = Includer::includeFile($plugin_language);
 			
 			$key_count = count($plugin_keys);
 			
@@ -144,8 +126,6 @@ function translation_editor_get_plugins($current_language) {
 	
 	$result = $core + $custom_keys + $plugins_result;
 	
-	$_ELGG->translations = $backup_full;
-
 	return $result;
 }
 
@@ -155,7 +135,7 @@ function translation_editor_get_plugins($current_language) {
  * @param string $current_language which language to return
  * @param string $plugin           for which plugin do you want the translations
  *
- * @return fasle|array
+ * @return false|array
  */
 function translation_editor_get_plugin($current_language, $plugin) {
 	
@@ -163,11 +143,9 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		return false;
 	}
 
-	global $_ELGG;
-	
 	if ($plugin == 'core') {
 		// Core translation
-		$plugin_language = dirname(elgg_get_engine_path()) . DIRECTORY_SEPARATOR . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
+		$plugin_language = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
 	} elseif ($plugin == 'custom_keys') {
 		$plugin_language = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR . 'en.php';
 	} else {
@@ -179,26 +157,20 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		$plugin_language = $plugin_object->getPath() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
 	}
 	
-	translation_editor_reload_all_translations();
+	$translator = elgg()->translator;
+	$translator->reloadAllTranslations();
+	
 	translation_editor_load_translations($current_language);
 	
 	$result = [
 		'total' => 0
 	];
 	
-	$backup_full = $_ELGG->translations;
-	$_ELGG->translations = [];
+	$backup_full = $translator->getLoadedTranslations();
 	
 	// Fetch translations
 	if (file_exists($plugin_language)) {
-		$plugin_language_array = include($plugin_language);
-		if (is_array($plugin_language_array)) {
-			add_translation('en', $plugin_language_array);
-		}
-		
-		unset($_ELGG->translations['en']['']);
-		
-		$plugin_keys = $_ELGG->translations['en'];
+		$plugin_keys = Includer::includeFile($plugin_language);
 		
 		$key_count = count($plugin_keys);
 		
@@ -221,8 +193,6 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		$result['current_language'] = array_intersect_key($backup_full[$current_language], $plugin_keys);
 		$result['custom'] = $custom;
 	}
-	
-	$_ELGG->translations = $backup_full;
 	
 	return $result;
 }
@@ -317,7 +287,7 @@ function translation_editor_read_translation($current_language, $plugin) {
  *
  * @return void
  */
-function translation_editor_load_translations($current_language = "") {
+function translation_editor_load_translations($current_language = '') {
 	$site = elgg_get_site_entity();
 	
 	if (empty($current_language)) {

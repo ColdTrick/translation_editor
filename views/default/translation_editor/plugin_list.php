@@ -15,7 +15,7 @@ $exists = 0;
 $custom = 0;
 
 $table_attributes = [
-	'id' => 'translation_editor_plugin_list',
+	'id' => 'translation-editor-plugin-list',
 	'class' => 'elgg-table',
 ];
 
@@ -24,7 +24,7 @@ $list = '<table ' . elgg_format_attributes($table_attributes) . '>';
 // header
 $list .= '<thead>';
 $list .= '<tr>';
-$list .= '<th class="first_col">' . elgg_echo('translation_editor:plugin_list:plugin') . '</th>';
+$list .= '<th>' . elgg_echo('translation_editor:plugin_list:plugin') . '</th>';
 $list .= '<th>' . elgg_echo('translation_editor:plugin_list:total') . '</th>';
 $list .= '<th>' . elgg_echo('translation_editor:plugin_list:exists') . '</th>';
 $list .= '<th>' . elgg_echo('translation_editor:plugin_list:custom') . '</th>';
@@ -47,8 +47,6 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 		$plugin_title = $plugin->getDisplayName();
 	}
 	
-	$url = "translation_editor/{$current_language}/{$plugin_id}";
-	
 	$total += $plugin_stats['total'];
 	$exists += $plugin_stats['exists'];
 	$custom += $plugin_stats['custom'];
@@ -59,19 +57,22 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 		$percentage = 100;
 	}
 	
-	$complete_class = '';
+	$complete_class = [];
 	
 	if ($percentage == 100) {
-		$complete_class = ' class="translation_editor_translation_complete"';
+		$complete_class[] = 'translation-editor-translation-complete';
 	} elseif ($percentage == 0) {
-		$complete_class = ' class="translation_editor_translation_needed"';
+		$complete_class[] = 'translation-editor-translation-needed';
 	}
 	
 	$list .= '<tr>';
-	$list .= '<td class="first_col">';
+	$list .= '<td>';
 	$list .= elgg_view('output/url', [
 		'text' => $plugin_id,
-		'href' => $url,
+		'href' => elgg_generate_url('default:translation_editor:plugin', [
+			'current_language' => $current_language,
+			'plugin_id' => $plugin_id,
+		]),
 	]);
 	if (!empty($plugin_title)) {
 		$list .= elgg_format_element('span', ['class' => 'elgg-subtext mls'], $plugin_title);
@@ -86,7 +87,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 		$list .= '<td>&nbsp;</td>';
 	}
 	
-	$list .= '<td' . $complete_class . '>' . $percentage . '%</td>';
+	$list .= elgg_format_element('td', ['class' => $complete_class], "{$percentage}%");
 	
 	if ($plugin_stats['custom'] > 0) {
 		$merge_url = 'action/translation_editor/merge?current_language=' . $current_language . '&plugin=' . $plugin_id;
@@ -121,13 +122,13 @@ $list .= '</tbody>';
 
 // footer
 $list .= '<tfoot>';
-$list .= '<tr class="translation_editor_plugin_list_total_row">';
-$list .= '<td>&nbsp;</td>';
-$list .= '<td>' . $total . '</td>';
-$list .= '<td>' . $exists . '</td>';
-$list .= '<td>' . $custom . '</td>';
-$list .= '<td>' . round(($exists / $total) * 100, 2) . '%</td>';
-$list .= '<td>&nbsp;</td>';
+$list .= '<tr>';
+$list .= '<th>&nbsp;</td>';
+$list .= '<th>' . $total . '</th>';
+$list .= '<th>' . $exists . '</th>';
+$list .= '<th>' . $custom . '</th>';
+$list .= '<th>' . round(($exists / $total) * 100, 2) . '%</th>';
+$list .= '<th>&nbsp;</th>';
 $list .= '</tr>';
 $list .= '</tfoot>';
 

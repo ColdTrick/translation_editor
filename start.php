@@ -8,7 +8,7 @@ define('TRANSLATION_EDITOR_DISABLED_LANGUAGE', 'disabled_languages');
 require_once(dirname(__FILE__) . '/lib/functions.php');
 
 // plugin init
-elgg_register_event_handler('plugins_boot', 'system', 'translation_editor_plugins_boot_event', 50); // before normal execution to prevent conflicts with plugins like language_selector
+// elgg_register_event_handler('plugins_boot', 'system', 'translation_editor_plugins_boot_event', 50); // before normal execution to prevent conflicts with plugins like language_selector
 elgg_register_event_handler('init', 'system', 'translation_editor_init');
 
 /**

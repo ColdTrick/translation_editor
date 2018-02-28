@@ -13,7 +13,7 @@ $list = '';
 foreach ($search_results as $plugin => $data) {
 	$translated_language = elgg_extract('current_language', $data);
 	
-	$list .= '<table class="elgg-table translation_editor_translation_table translation-editor-translation-table-no-missing mbl">';
+	$list .= '<table class="elgg-table translation-editor-translation-table translation-editor-translation-table-no-missing mbl">';
 	$list .= '<col class="first_col" />';
 	$list .= '<tr class="first_row"><th colspan="2">';
 	$list .= elgg_view('output/url', [

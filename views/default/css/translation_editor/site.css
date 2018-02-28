@@ -1,6 +1,3 @@
-#translation_editor_language_table th,
-#translation_editor_plugin_list th,
-.translation_editor_translation_table tr.first_row th,
 .view_mode_active {
 	font-weight: bold;
 }
@@ -11,53 +8,59 @@
 	text-align: center;
 }
 
-#translation_editor_plugin_list th,
-#translation_editor_plugin_list td {
-	text-align: center;
-	white-space: nowrap;
+#translation-editor-plugin-list {
+	th,
+	td {
+		text-align: center;
+		white-space: nowrap;
+	}
+	
+	th:first-child,
+	td:first-child {
+		text-align: left;
+		width: 100%;
+	}
+	
+	.translation-editor-translation-complete {
+		color: green;
+	}
+	
+	.translation-editor-translation-needed {
+		color: red;
+	}
 }
 
-#translation_editor_plugin_list .first_col {
-	text-align: left;
-	width: 100%;
-}
+.translation-editor-translation-table {
+	tr {
+		display: none;
+	}
 
-.translation_editor_translation_complete {
-	color: green;
-}
+	tr.first_row th span {
+		font-weight: normal;
+	}
 
-.translation_editor_translation_needed {
-	color: red;
-}
+	tr.first_row,
+	tr[rel='missing'],
+	&.translation-editor-translation-table-no-missing tr {
+		display: table-row;
+		<!--
+		display: inline-block;
+		-->
+	}
 
-.translation_editor_translation_table tr {
-	display: none;
-}
+	pre {
+		white-space: normal;
+		margin-bottom: 5px;
+	}
 
-.translation_editor_translation_table tr.first_row th span {
-	font-weight: normal;
-}
+	td {
+		white-space: nowrap;
+	}
 
-.translation_editor_translation_table tr.first_row,
-.translation_editor_translation_table tr[rel='missing'],
-.translation_editor_translation_table.translation-editor-translation-table-no-missing tr {
-	display: table-row;
-	<!--
-	display: inline-block;
-	-->
-}
-
-.translation_editor_translation_table pre {
-	white-space: normal;
-	margin-bottom: 5px;
-}
-
-.translation_editor_translation_table td {
-	white-space: nowrap;
-}
-
-.translation_editor_translation_table .first_col {
-	width: 33px;
+	.first_col {
+		width: 33px;
+		padding: 0;
+	}
 }
 
 #translation_editor_search_form td {
