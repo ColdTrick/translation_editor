@@ -13,27 +13,19 @@ class UserHoverMenu {
 	/**
 	 * Add menu items to the usericon dropdown
 	 *
-	 * @param string          $hook   the name of the hook
-	 * @param string          $type   the type of the hook
-	 * @param \ElggMenuItem[] $return the current menu items
-	 * @param array           $params provided params to see who's dropdown menu we're handling
+	 * @param \Elgg\Hook $hook 'register', 'menu:user_hover'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function register($hook, $type, $return, $params) {
-		
-		if (empty($params) || !is_array($params)) {
-			// invalid input
-			return;
-		}
+	public static function register(\Elgg\Hook $hook) {
 		
 		if (!elgg_is_admin_logged_in()) {
 			// only for admins
 			return;
 		}
 		
-		$user = elgg_extract('entity', $params);
-		if (empty($user) || !elgg_instanceof($user, 'user')) {
+		$user = $hook->getEntityParam();
+		if (!$user instanceof \ElggUser) {
 			// no user
 			return;
 		}
@@ -43,28 +35,31 @@ class UserHoverMenu {
 			return;
 		}
 		
-		// TODO: replace with a single toggle editor action?
-		$is_editor = translation_editor_is_translation_editor($user->getGUID());
+		$is_editor = translation_editor_is_translation_editor($user->guid);
 		
-		$return[] = \ElggMenuItem::factory(array(
+		$return = $hook->getValue();
+		
+		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor_make_editor',
 			'text' => elgg_echo('translation_editor:action:make_translation_editor'),
-			'href' => "action/translation_editor/make_translation_editor?user={$user->getGUID()}",
-			'is_action' => true,
+			'href' => elgg_generate_action_url('translation_editor/admin/toggle_translation_editor', [
+				'user' => $user->guid,
+			]),
 			'section' => 'admin',
 			'item_class' => $is_editor ? 'hidden' : '',
-			'priority' => 500
-		));
+			'priority' => 500,
+		]);
 		
-		$return[] = \ElggMenuItem::factory(array(
+		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor_unmake_editor',
 			'text' => elgg_echo('translation_editor:action:unmake_translation_editor'),
-			'href' => "action/translation_editor/unmake_translation_editor?user={$user->getGUID()}",
-			'is_action' => true,
+			'href' => elgg_generate_action_url('translation_editor/admin/toggle_translation_editor', [
+				'user' => $user->guid,
+			]),
 			'section' => 'admin',
 			'item_class' => $is_editor ? '' : 'hidden',
-			'priority' => 501
-		));
+			'priority' => 501,
+		]);
 				
 		return $return;
 	}

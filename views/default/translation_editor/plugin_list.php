@@ -99,12 +99,14 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 			'text' => elgg_view_icon('download'),
 		]);
 		if (elgg_is_admin_logged_in()) {
-			$delete_url = 'action/translation_editor/delete?current_language=' . $current_language . '&plugin=' . $plugin_id;
-			
 			$list .= elgg_view('output/url', [
-				'href' => $delete_url,
+				'href' => elgg_generate_action_url('translation_editor/admin/delete', [
+					'current_language' => $current_language,
+					'plugin' => $plugin_id,
+				]),
 				'title' => elgg_echo('delete'),
-				'text' => elgg_view_icon('delete-alt'),
+				'text' => elgg_echo('delete'),
+				'icon' => 'delete-alt',
 				'confirm' => elgg_echo('deleteconfirm'),
 			]);
 		}

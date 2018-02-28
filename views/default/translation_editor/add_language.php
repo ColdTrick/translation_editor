@@ -7,10 +7,11 @@ $form_vars = [
 	'id' => 'translation_editor_add_language_form',
 	'class' => 'hidden',
 ];
-$form = elgg_view_form('translation_editor/add_language', $form_vars);
+$form = elgg_view_form('translation_editor/admin/add_language', $form_vars);
 
 $toggle_link = elgg_view('output/url', [
-	'text' => elgg_format_element('b', ['class' => 'mrs'], '+') . elgg_echo('translation_editor:language_selector:add_language'),
+	'text' => elgg_echo('translation_editor:language_selector:add_language'),
+	'icon' => 'plus',
 	'href' => '#translation_editor_add_language_form',
 	'rel' => 'toggle',
 ]);

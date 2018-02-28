@@ -61,9 +61,13 @@ if (!empty($languages)) {
 				
 				if (elgg_is_admin_logged_in() && empty($completeness)) {
 					$list .= elgg_view('output/url', [
-						'href' => "action/translation_editor/delete_language?language={$language}",
+						'href' => elgg_generate_action_url('translation_editor/admin/delete_language', [
+							'language' => $language,
+						]),
 						'confirm' => elgg_echo('translation_editor:language_selector:remove_language:confirm'),
-						'text' => elgg_view_icon('delete-alt', ['class' => 'mls']),
+						'text' => elgg_echo('delete'),
+						'title' => elgg_echo('delete'),
+						'icon' => 'delete-alt',
 					]);
 				}
 			} else {

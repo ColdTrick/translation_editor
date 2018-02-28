@@ -1,6 +1,6 @@
 <?php
 
-admin_gatekeeper();
+elgg_admin_gatekeeper();
 
 $title_text = elgg_echo('translation_editor:export');
 
@@ -38,7 +38,7 @@ if (empty($exportable_plugins)) {
 		'current_language' => $current_language,
 		'exportable_plugins' => $exportable_plugins,
 	];
-	$body = elgg_view_form('translation_editor/export', [], $body_vars);
+	$body = elgg_view_form('translation_editor/adminexport', [], $body_vars);
 }
 
 // Build page

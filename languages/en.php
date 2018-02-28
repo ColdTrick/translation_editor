@@ -69,12 +69,10 @@ When you're finished you can %s the file.",
 	'translation_editor:action:translate:success' => "Translations saved successfully",
 
 	'translation_editor:action:make_translation_editor' => "Make Translator",
-	'translation_editor:action:make_translation_editor:success' => "Succesfully made a translator",
-	'translation_editor:action:make_translation_editor:error' => "Error while making the user a translator",
 	'translation_editor:action:unmake_translation_editor' => "UnMake Translator",
-	'translation_editor:action:unmake_translation_editor:success' => "Succesfully removed translator",
-	'translation_editor:action:unmake_translation_editor:error' => "Error while removing the translator role",
-
+	'translation_editor:action:toggle_translation_editor:make' => "%s is now a translator",
+	'translation_editor:action:toggle_translation_editor:remove' => "%s is no longer a translator",
+	
 	'translation_editor:action:delete:error:input' => "Incorrect input to delete translation",
 	'translation_editor:action:delete:error:delete' => "Error while deleting translation",
 	'translation_editor:action:delete:success' => "Translation successfully deleted",

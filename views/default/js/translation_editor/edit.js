@@ -7,7 +7,7 @@ elgg.translation_editor.disable_language = function() {
 		lan.push($(this).val());
 	});
 
-	elgg.action("translation_editor/disable_languages", {
+	elgg.action("translation_editor/admin/disable_languages", {
 		data: {
 			disabled_languages: lan
 		}

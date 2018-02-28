@@ -80,21 +80,4 @@ function translation_editor_init() {
 	// register events
 	elgg_register_event_handler('cache:flush', 'system', '\ColdTrick\TranslationEditor\CacheHandler::resetTranslationCache');
 	elgg_register_event_handler('upgrade', 'system', '\ColdTrick\TranslationEditor\Upgrade::cleanupCustomTranslations');
-	
-	// Register actions
-	elgg_register_action('translation_editor/translate', dirname(__FILE__) . '/actions/translate.php');
-	elgg_register_action('translation_editor/merge', dirname(__FILE__) . '/actions/merge.php');
-	elgg_register_action('translation_editor/remove_cleanup', dirname(__FILE__) . '/actions/cleanup/remove.php');
-	elgg_register_action('translation_editor/download_cleanup', dirname(__FILE__) . '/actions/cleanup/download.php');
-	
-	// Admin only actions
-	elgg_register_action('translation_editor/make_translation_editor', dirname(__FILE__) . '/actions/make_translation_editor.php', 'admin');
-	elgg_register_action('translation_editor/unmake_translation_editor', dirname(__FILE__) . '/actions/unmake_translation_editor.php', 'admin');
-	elgg_register_action('translation_editor/delete', dirname(__FILE__) . '/actions/delete.php', 'admin');
-	elgg_register_action('translation_editor/disable_languages', dirname(__FILE__) . '/actions/disable_languages.php', 'admin');
-	elgg_register_action('translation_editor/add_language', dirname(__FILE__) . '/actions/add_language.php', 'admin');
-	elgg_register_action('translation_editor/add_custom_key', dirname(__FILE__) . '/actions/add_custom_key.php', 'admin');
-	elgg_register_action('translation_editor/delete_language', dirname(__FILE__) . '/actions/delete_language.php', 'admin');
-	elgg_register_action('translation_editor/import', dirname(__FILE__) . '/actions/import.php', 'admin');
-	elgg_register_action('translation_editor/export', dirname(__FILE__) . '/actions/export.php', 'admin');
 }

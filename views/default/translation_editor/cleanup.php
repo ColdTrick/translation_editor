@@ -20,15 +20,17 @@ foreach ($cleaned as $plugin_id => $removed_translations){
 
 $download = elgg_view('output/url', [
 	'text' => elgg_echo('download'),
-	'href' => "action/translation_editor/download_cleanup?language={$current_translation}",
-	'is_action' => true,
+	'href' => elgg_generate_action_url('translation_editor/cleanup/download', [
+		'language' => $current_translation,
+	]),
 	'class' => 'elgg-button elgg-button-action float-alt',
 ]);
 
 $remove = elgg_view('output/url', [
-	'text' => strtolower(elgg_echo('delete')),
-	'href' => "action/translation_editor/remove_cleanup?language={$current_translation}",
-	'is_action' => true,
+	'text' => elgg_echo('delete'),
+	'href' => elgg_generate_action_url('translation_editor/cleanup/remove', [
+		'language' => $current_translation,
+	]),
 	'confirm' => elgg_echo('deleteconfirm'),
 ]);
 

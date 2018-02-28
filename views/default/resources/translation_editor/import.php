@@ -1,6 +1,6 @@
 <?php
 
-admin_gatekeeper();
+elgg_admin_gatekeeper();
 
 $title_text = elgg_echo('translation_editor:import');
 
@@ -24,7 +24,7 @@ $form_vars = [
 $body_vars = [
 	'current_language' => $current_language,
 ];
-$body = elgg_view_form('translation_editor/import', $form_vars, $body_vars);
+$body = elgg_view_form('translation_editor/admin/import', $form_vars, $body_vars);
 
 // Build page
 $page_data = elgg_view_layout('one_column', [

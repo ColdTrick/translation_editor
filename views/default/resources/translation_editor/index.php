@@ -81,7 +81,7 @@ if (empty($plugin)) {
 	// page elements
 	$translation = translation_editor_get_plugin($current_language, $plugin);
 	if (($plugin == 'custom_keys') && elgg_is_admin_logged_in()) {
-		$form = elgg_view_form('translation_editor/add_custom_key');
+		$form = elgg_view_form('translation_editor/admin/add_custom_key');
 		
 		$body .= elgg_view_module('info', elgg_echo('translation_editor:custom_keys:title'), $form);
 	}
