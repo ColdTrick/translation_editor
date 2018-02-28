@@ -69,8 +69,6 @@ function translation_editor_init() {
 	elgg_extend_view('css/elgg', 'css/translation_editor/site.css');
 	elgg_extend_view('js/elgg', 'js/translation_editor/site.js');
 	
-	elgg_register_page_handler('translation_editor', '\ColdTrick\TranslationEditor\PageHandler::translationEditor');
-	
 	// register hooks
 	elgg_register_plugin_hook_handler('register', 'menu:user_hover', '\ColdTrick\TranslationEditor\UserHoverMenu::register');
 	elgg_register_plugin_hook_handler('register', 'menu:page', '\ColdTrick\TranslationEditor\PageMenu::register');

@@ -1,7 +1,5 @@
 <?php
 
-elgg_admin_gatekeeper();
-
 $title_text = elgg_echo('translation_editor:export');
 
 $current_language = elgg_extract('current_language', $vars);

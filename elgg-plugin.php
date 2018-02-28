@@ -1,5 +1,8 @@
 <?php
 
+use Elgg\Router\Middleware\AdminGatekeeper;
+use ColdTrick\TranslationEditor\EditorGatekeeper;
+
 return [
 	'actions' => [
 		'translation_editor/admin/toggle_translation_editor' => [
@@ -30,5 +33,42 @@ return [
 		'translation_editor/merge' => [],
 		'translation_editor/cleanup/remove' => [],
 		'translation_editor/cleanup/download' => [],
+	],
+	'routes' => [
+		'default:translation_editor:import' => [
+			'path' => '/translation_editor/import/{current_language?}',
+			'resource' => 'translation_editor/import',
+			'middleware' => [
+				AdminGatekeeper::class,
+			],
+		],
+		'default:translation_editor:export' => [
+			'path' => '/translation_editor/export/{current_language?}',
+			'resource' => 'translation_editor/export',
+			'middleware' => [
+				AdminGatekeeper::class,
+			],
+		],
+		'default:translation_editor:search' => [
+			'path' => '/translation_editor/search',
+			'resource' => 'translation_editor/search',
+			'middleware' => [
+				EditorGatekeeper::class,
+			],
+		],
+		'default:translation_editor:plugin' => [
+			'path' => '/translation_editor/{current_language}/{plugin_id}',
+			'resource' => 'translation_editor/plugin',
+			'middleware' => [
+				EditorGatekeeper::class,
+			],
+		],
+		'default:translation_editor' => [
+			'path' => '/translation_editor/{current_language?}',
+			'resource' => 'translation_editor/index',
+			'middleware' => [
+				EditorGatekeeper::class,
+			],
+		],
 	],
 ];

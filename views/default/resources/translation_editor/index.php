@@ -3,8 +3,6 @@
  * Get an overview of the translations, eighter a listing off all plugins or an overview of the available keys in a plugin
  */
 
-translation_editor_gatekeeper();
-
 elgg_require_js('translation_editor/edit');
 
 // Get inputs

@@ -1,7 +1,5 @@
 <?php
 
-elgg_admin_gatekeeper();
-
 $title_text = elgg_echo('translation_editor:import');
 
 // breadcrumb

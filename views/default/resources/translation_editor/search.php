@@ -3,8 +3,6 @@
  * display the search results
  */
 
-translation_editor_gatekeeper();
-
 elgg_require_js('translation_editor/edit');
 
 // get inputs
