@@ -1,5 +1,6 @@
 <?php
-$language = array (
+
+return array (
   'translation_editor:language' => 'اللغة',
   'translation_editor:menu:title' => 'مُحرّر الترجمات',
   'translation_editor:language_selector:title' => 'اختر اللغة التي تريد تعديلها',
@@ -51,4 +52,3 @@ $language = array (
   'translation_editor:action:add_custom_key:key_numeric' => 'لا يجب أن تحتوي كلمة الترجمة على أرقام فقط.',
   'translation_editor:action:add_custom_key:missing_input' => 'حدث خطأ. رجاء اكتب الكلمة وترجمة (انجليزية) افتراضية.',
 );
-add_translation("ar", $language);

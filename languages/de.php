@@ -1,5 +1,6 @@
 <?php
-$language = array (
+
+return array (
   'translation_editor:language' => 'Sprache',
   'translation_editor:menu:title' => 'Übersetzungseditor',
   'translation_editor:language_selector:title' => 'Wähle die Sprache, die du bearbeiten möchtest',
@@ -51,4 +52,3 @@ $language = array (
   'translation_editor:action:add_custom_key:key_numeric' => 'Schlüssel darf nur Zahlen enthalten.',
   'translation_editor:action:add_custom_key:missing_input' => 'Falsche Eingabe. Bitte gib einen Schlüssel und eine englische Übersetzung ein.',
 );
-add_translation("de", $language);
