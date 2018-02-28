@@ -1,6 +1,12 @@
 Version history
 ===============
 
+6.1 (2018-02-28):
+
+- added: Spanish translation
+- changed: moved flags into views system
+- fixed: potential content encoding issue in merged file
+
 6.0 (2017-07-31):
 
 - added: import/export features for custom translations
