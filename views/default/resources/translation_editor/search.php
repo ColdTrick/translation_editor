@@ -3,8 +3,6 @@
  * display the search results
  */
 
-elgg_require_js('translation_editor/edit');
-
 // get inputs
 $q = get_input('q');
 if (empty($q)) {

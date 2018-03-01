@@ -3,8 +3,6 @@
  * Get an overview of the translations, eighter a listing off all plugins or an overview of the available keys in a plugin
  */
 
-elgg_require_js('translation_editor/edit');
-
 // Get inputs
 $current_language = elgg_extract('current_language', $vars, get_current_language());
 

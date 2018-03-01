@@ -65,17 +65,17 @@ class TitleMenu {
 	/**
 	 * Add language selector menu items to the title menu
 	 *
-	 * @param string          $hook   the name of the hook
-	 * @param string          $type   the type of the hook
-	 * @param \ElggMenuItem[] $return current menu items
-	 * @param array           $params provided params
+	 * @param \Elgg\Hook $hook 'register', 'menu:title'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function registerLanguageSelector($hook, $type, $return, $params) {
+	public static function registerLanguageSelector(\Elgg\Hook $hook) {
+		
 		if (!elgg_in_context('translation_editor')) {
 			return;
 		}
+		
+		$return = $hook->getValue();
 		
 		// language selector
 		$return[] = \ElggMenuItem::factory([

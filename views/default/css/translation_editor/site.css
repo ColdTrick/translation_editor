@@ -1,11 +1,22 @@
-.view_mode_active {
-	font-weight: bold;
+#translation-editor-language-table {
+	
+	td.translation-editor-flag,
+	td.translation-editor-disable,
+	td.translation-editor-delete {
+		width: 1%;
+		text-align: center;
+		white-space: nowrap;
+	}
+	
+	td.translation-editor-delete {
+		.elgg-anchor-label {
+			display: none;
+		}
+	}
 }
 
-#translation_editor_language_table .translation_editor_flag,
-#translation_editor_language_table .translation_editor_enable {
-	width: 1%;
-	text-align: center;
+img.translation-editor-flag {
+	max-width: unset;
 }
 
 #translation-editor-plugin-list {
@@ -28,6 +39,12 @@
 	.translation-editor-translation-needed {
 		color: red;
 	}
+	
+	.translation-editor-plugin-actions {
+		.elgg-anchor-label {
+			display: none;
+		}
+	}
 }
 
 .translation-editor-translation-table {
@@ -35,11 +52,6 @@
 		display: none;
 	}
 
-	tr.first_row th span {
-		font-weight: normal;
-	}
-
-	tr.first_row,
 	tr[rel='missing'],
 	&.translation-editor-translation-table-no-missing tr {
 		display: table-row;
@@ -56,25 +68,45 @@
 	td {
 		white-space: nowrap;
 	}
-
-	.first_col {
-		width: 33px;
-		padding: 0;
+	
+	td.translation-editor-flag,
+	td.translation-editor-translation-key {
+		width: 1%;
+		text-align: center;
+		white-space: nowrap;
+	}
+	
+	td.translation-editor-translation-key {
+		cursor: help;
 	}
 }
 
-#translation_editor_search_form td {
-	width: 100%;
-	white-space: nowrap;
+.elgg-form-translation-editor-search {
+	.elgg-fieldset {
+		display: flex;
+		
+		>.elgg-field:first-child {
+			width: 100%;
+		}
+	}
 }
 
-li.elgg-menu-item-translation-editor-show-language-selector,
-li.elgg-menu-item-translation-editor-hide-language-selector {
-	margin: 0;
-}
-
-.translation-editor-translation-key {
-	cursor: help;
+.elgg-menu-translation-editor-plugin-edit-container {
+	.elgg-menu-hz {
+		li {
+			margin-left: 0.5rem;
+		}
+	}
+	
+	li.elgg-state-selected {
+		a {
+			font-weight: bold;
+		}
+	}
+	
+	.elgg-badge {
+		margin-left: 0.2rem;
+	}
 }
 
 .translation-editor-cleanup .elgg-output a {

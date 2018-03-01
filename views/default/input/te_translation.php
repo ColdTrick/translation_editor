@@ -9,44 +9,40 @@
  * @uses $vars['plugin'] plugin id
  */
 
+elgg_require_js('translation_editor/edit_translation');
+
 $current_language = elgg_extract('language', $vars);
 $english = elgg_extract('english', $vars);
 $translation = elgg_extract('translation', $vars);
 $plugin = elgg_extract('plugin', $vars);
 $row_rel = elgg_extract('row_rel', $vars);
 
-if (!empty($row_rel)) {
-	$row_rel = 'rel="' . $row_rel . '"';
-}
-
-$en_flag = elgg_view('translation_editor/flag', ['language' => 'en']);
-$lang_flag = elgg_view('translation_editor/flag', ['language' => $current_language]);
+$rows = [];
 
 // English information
-$row = '<tr ' . $row_rel . '>';
-$row .= '<td>' . $en_flag . '</td>';
-$row .= '<td>';
-$row .= elgg_view_icon('key', ['title' => $english['key'], 'class' => 'float-alt translation-editor-translation-key']);
-$row .= elgg_format_element('pre', ['class' => 'translation_editor_pre'], nl2br(htmlspecialchars($english['value'])));
-$row .= '</td>';
-$row .= '</tr>';
+$row = [];
+$row[] = elgg_format_element('td', ['class' => 'translation-editor-flag'], elgg_view('translation_editor/flag', ['language' => 'en']));
+$row[] = elgg_format_element('td', [
+	'class' => 'translation-editor-translation-english',
+], elgg_format_element('pre', [], nl2br(htmlspecialchars($english['value']))));
+$row[] = elgg_format_element('td', ['class' => 'translation-editor-translation-key'], elgg_view_icon('key', ['title' => $english['key']]));
+
+$rows[] = elgg_format_element('tr', ['rel' => $row_rel], implode(PHP_EOL, $row));
 
 // Custom language information
+$row = [];
 $translation_value = elgg_extract('value', $translation);
 $row_count = max(2, count(explode('\n', $translation_value)));
 $key = elgg_extract('key', $translation);
-$text_options = [
+
+$row[] = elgg_format_element('td', ['class' => 'translation-editor-flag'], elgg_view('translation_editor/flag', ['language' => $current_language]));
+$row[] = elgg_format_element('td', ['colspan' => 2], elgg_view('input/plaintext', [
 	'name' => "translation[{$current_language}][{$plugin}][{$key}]",
 	'value' => $translation_value,
 	'rows' => $row_count,
 	'class' => 'translation-editor-input',
-];
+]));
 
-$row .= '<tr ' . $row_rel . '>';
-$row .= '<td>' . $lang_flag . '</td>';
-$row .= '<td>';
-$row .= elgg_view('input/plaintext', $text_options);
-$row .= '</td>';
-$row .= '</tr>';
+$rows[] = elgg_format_element('tr', ['rel' => $row_rel], implode(PHP_EOL, $row));
 
-echo $row;
+echo implode(PHP_EOL, $rows);

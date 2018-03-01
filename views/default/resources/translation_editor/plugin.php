@@ -6,8 +6,6 @@
  * @uses $vars['plugin_id'] the plugin id for the plugin to edit
  */
 
-elgg_require_js('translation_editor/edit');
-
 // Get inputs
 $current_language = elgg_extract('current_language', $vars);
 $plugin = elgg_extract('plugin_id', $vars);

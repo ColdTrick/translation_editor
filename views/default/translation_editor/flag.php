@@ -27,4 +27,5 @@ echo elgg_view('output/img', [
 	'src' => elgg_get_simplecache_url($view),
 	'alt' => $title_alt,
 	'title' => $title_alt,
+	'class' => elgg_extract_class($vars, ['translation-editor-flag']),
 ]);

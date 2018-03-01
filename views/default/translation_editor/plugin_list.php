@@ -69,6 +69,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	$list .= '<td>';
 	$list .= elgg_view('output/url', [
 		'text' => $plugin_id,
+		'title' => $plugin_title,
 		'href' => elgg_generate_url('default:translation_editor:plugin', [
 			'current_language' => $current_language,
 			'plugin_id' => $plugin_id,
@@ -89,15 +90,16 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	
 	$list .= elgg_format_element('td', ['class' => $complete_class], "{$percentage}%");
 	
-	if ($plugin_stats['custom'] > 0) {
-		$merge_url = 'action/translation_editor/merge?current_language=' . $current_language . '&plugin=' . $plugin_id;
-		
-		$list .= '<td>';
+	if ($plugin_stats['custom'] > -1) {
+		$list .= '<td class="translation-editor-plugin-actions">';
 		$list .= elgg_view('output/url', [
-			'href' => $merge_url,
-			'is_action' => true,
+			'href' => elgg_generate_action_url('translation_editor/merge', [
+				'current_language' => $current_language,
+				'plugin' => $plugin_id,
+			]),
 			'title' => elgg_echo('translation_editor:plugin_list:merge'),
-			'text' => elgg_view_icon('download'),
+			'text' => elgg_echo('translation_editor:plugin_list:merge'),
+			'icon' => elgg_view_icon('download'),
 		]);
 		if (elgg_is_admin_logged_in()) {
 			$list .= elgg_view('output/url', [
@@ -109,6 +111,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 				'text' => elgg_echo('delete'),
 				'icon' => 'delete-alt',
 				'confirm' => elgg_echo('deleteconfirm'),
+				'class' => 'mlm',
 			]);
 		}
 		$list .= '</td>';

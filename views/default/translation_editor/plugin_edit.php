@@ -16,7 +16,7 @@ $equal_count = 0;
 $params_count = 0;
 $custom_count = 0;
 
-$translation = '';
+$translation = [];
 if (!empty($english)) {
 	foreach ($english as $en_key => $en_value) {
 		$en_params = translation_editor_get_string_parameters($en_value);
@@ -25,7 +25,7 @@ if (!empty($english)) {
 			$cur_params = translation_editor_get_string_parameters($translated_language[$en_key]);
 		}
 		
-		$row_rel = '';
+		$row_rel = null;
 		if (!array_key_exists($en_key, $translated_language)) {
 			$row_rel = 'missing';
 			$missing_count++;
@@ -40,7 +40,7 @@ if (!empty($english)) {
 			$custom_count++;
 		}
 		
-		$translation .= elgg_view('input/te_translation', [
+		$translation[] = elgg_view('input/te_translation', [
 			'english' => [
 				'key' => $en_key,
 				'value' => $en_value,
@@ -55,6 +55,7 @@ if (!empty($english)) {
 		]);
 	}
 }
+$table_content = elgg_format_element('tbody', [], implode(PHP_EOL, $translation));
 
 $selected_view_mode = 'missing';
 $table_class = [
@@ -67,82 +68,63 @@ if (empty($missing_count)) {
 }
 
 // toggle between different filters
-$toggle = '<span id="translation_editor_plugin_toggle" class="float-alt">';
-	
-$toggle .= elgg_echo('translation_editor:plugin_edit:show') . ' ';
+elgg_require_js('translation_editor/toggle_translations');
 
-$missing_class = '';
-$equal_class = '';
-$params_class = '';
-$custom_class = '';
-$all_class = '';
+$menu_items = [];
 
-switch ($selected_view_mode) {
-	case 'missing':
-		$missing_class = 'view_mode_active';
-		break;
-	case 'all':
-		$all_class = 'view_mode_active';
-		break;
-	case 'equal':
-		$equal_class = 'view_mode_active';
-		break;
-	case 'custom':
-		$custom_class = 'view_mode_active';
-		break;
-	case 'params':
-		$params_class = 'view_mode_active';
-		break;
-}
+$menu_items[] = [
+	'name' => 'title',
+	'text' => elgg_echo('translation_editor:plugin_edit:show'),
+	'href' => false,
+];
 
-$toggle .= elgg_view('output/url', [
+$menu_items[] = [
+	'name' => 'missing',
 	'text' => elgg_echo('translation_editor:plugin_edit:show:missing'),
-	'class' => $missing_class,
-	'onclick' => 'elgg.translation_editor.toggle_view_mode("missing");',
-	'href' => 'javascript:void(0);',
+	'href' => false,
 	'rel' => 'missing',
-]) . " ({$missing_count}), ";
-
-$toggle .= elgg_view('output/url', [
+	'badge' => $missing_count,
+	'selected' => $selected_view_mode === 'missing',
+];
+$menu_items[] = [
+	'name' => 'equal',
 	'text' => elgg_echo('translation_editor:plugin_edit:show:equal'),
-	'class' => $equal_class,
-	'onclick' => 'elgg.translation_editor.toggle_view_mode("equal");',
-	'href' => 'javascript:void(0);',
+	'href' => false,
 	'rel' => 'equal',
-]) . " ({$equal_count}), ";
-
-$toggle .= elgg_view('output/url', [
+	'badge' => $equal_count,
+	'selected' => $selected_view_mode === 'equal',
+];
+$menu_items[] = [
+	'name' => 'params',
 	'text' => elgg_echo('translation_editor:plugin_edit:show:params'),
-	'class' => $params_class,
-	'onclick' => 'elgg.translation_editor.toggle_view_mode("params");',
-	'href' => 'javascript:void(0);',
+	'href' => false,
 	'rel' => 'params',
-]) . " ({$params_count}), ";
-
-$toggle .= elgg_view('output/url', [
+	'badge' => $params_count,
+	'selected' => $selected_view_mode === 'params',
+];
+$menu_items[] = [
+	'name' => 'custom',
 	'text' => elgg_echo('translation_editor:plugin_edit:show:custom'),
-	'class' => $custom_class,
-	'onclick' => 'elgg.translation_editor.toggle_view_mode("custom");',
-	'href' => 'javascript:void(0);',
+	'href' => false,
 	'rel' => 'custom',
-]) . " ({$custom_count}), ";
-
-$toggle .= elgg_view('output/url', [
+	'badge' => $custom_count,
+	'selected' => $selected_view_mode === 'custom',
+];
+$menu_items[] = [
+	'name' => 'all',
 	'text' => elgg_echo('translation_editor:plugin_edit:show:all'),
-	'class' => $all_class,
-	'onclick' => 'elgg.translation_editor.toggle_view_mode("all");',
-	'href' => 'javascript:void(0);',
+	'href' => false,
 	'rel' => 'all',
-]) . " ({$working_translation['total']})";
-$toggle .= '</span>';
-
-// build the edit table
-$list = '<col class="first_col" />';
-$list .= '<tr class="first_row"><th colspan="2">';
-$list .= $toggle;
-$list .= elgg_echo('translation_editor:plugin_edit:title') . ' ' . $plugin;
-$list .= '</th></tr>';
-$list .= $translation;
+	'badge' => $working_translation['total'],
+	'selected' => $selected_view_mode === 'all',
+];
 
 // show all
-echo elgg_format_element('table', ['class' => $table_class], $list);
+$table = elgg_format_element('table', ['class' => $table_class], $table_content);
+
+echo elgg_view_module('info', elgg_echo('translation_editor:plugin_edit:title') . ' ' . $plugin, $table, [
+	'menu' => elgg_view_menu('translation-editor-plugin-edit', [
+		'items' => $menu_items,
+		'class' => 'elgg-menu-hz',
+	]),
+]);

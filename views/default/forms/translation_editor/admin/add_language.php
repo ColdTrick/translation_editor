@@ -2,7 +2,7 @@
 
 $options = [];
 $current_language = get_current_language();
-$keys = Elgg\I18n\Translator::getAllLanguageCodes();
+$keys = elgg()->translator->getAllLanguageCodes();
 foreach ($keys as $lang_key) {
 	$trans_key = $lang_key;
 	if (elgg_language_key_exists($lang_key, $current_language) || elgg_language_key_exists($lang_key)) {
@@ -19,11 +19,18 @@ foreach ($installed_languages as $index => $lang) {
 
 asort($options);
 
-echo elgg_view('input/select', [
-	'options_values' => $options,
-	'name' => 'code',
-]);
-echo elgg_view('input/submit', [
-	'value' => elgg_echo('save'),
-	'class' => 'mls elgg-button-submit',
+echo elgg_view_field([
+	'#type' => 'fieldset',
+	'fields' => [
+		[
+			'#type' => 'select',
+			'options_values' => $options,
+			'name' => 'code',
+		],
+		[
+			'#type' => 'submit',
+			'value' => elgg_echo('save'),
+		],
+	],
+	'align' => 'horizontal',
 ]);
