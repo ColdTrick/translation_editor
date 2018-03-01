@@ -13,24 +13,25 @@ class SiteMenu {
 	/**
 	 * Add menu items to the site menu
 	 *
-	 * @param string          $hook   the name of the hook
-	 * @param string          $type   the type of the hook
-	 * @param \ElggMenuItem[] $return current menu items
-	 * @param array           $params provided params
+	 * @param \Elgg\Hook $hook 'register', 'menu:site'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function register($hook, $type, $return, $params) {
+	public static function register(\Elgg\Hook $hook) {
 		
 		if (!translation_editor_is_translation_editor()) {
 			return;
 		}
 		
-		$return[] = \ElggMenuItem::factory(array(
+		$return = $hook->getValue();
+		
+		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor',
 			'text' => elgg_echo('translation_editor:menu:title'),
-			'href' => 'translation_editor'
-		));
+			'href' => elgg_generate_url('default:translation_editor', [
+				'current_language' => get_current_language(),
+			]),
+		]);
 		
 		return $return;
 	}
