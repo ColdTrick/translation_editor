@@ -547,11 +547,10 @@ function translation_editor_search_translation($query, $language = 'en') {
  * Merge all custom translations into a single file for performance
  *
  * @param string $language the language to merge
- * @param bool   $update   force and update to other sites
  *
  * @return bool
  */
-function translation_editor_merge_translations($language = "", $update = false) {
+function translation_editor_merge_translations($language = '') {
 	$result = false;
 	$site = elgg_get_site_entity();
 	
@@ -559,61 +558,54 @@ function translation_editor_merge_translations($language = "", $update = false) 
 		$language = get_current_language();
 	}
 	
-	if (!empty($language)) {
-		$translations = array();
-		
-		// get core translations
-		$core = translation_editor_read_translation($language, 'core');
-		if (!empty($core)) {
-			$translations = $core;
-		}
-		
-		// get the customo keys
-		$custom_keys = translation_editor_read_translation($language, 'custom_keys');
-		if (!empty($custom_keys)) {
-			$translations += $custom_keys;
-		}
-		
-		// proccess all plugins
-		$plugins = elgg_get_plugins();
-		if (!empty($plugins)) {
-			foreach ($plugins as $plugin) {
-				// add plugin translations
-				$plugin_translation = translation_editor_read_translation($language, $plugin->getID());
-				if (!empty($plugin_translation)) {
-					$translations += $plugin_translation;
-				}
+	if (empty($language)) {
+		return $result;
+	}
+	
+	$translations = [];
+	
+	// get core translations
+	$core = translation_editor_read_translation($language, 'core');
+	if (!empty($core)) {
+		$translations = $core;
+	}
+	
+	// get the customo keys
+	$custom_keys = translation_editor_read_translation($language, 'custom_keys');
+	if (!empty($custom_keys)) {
+		$translations += $custom_keys;
+	}
+	
+	// proccess all plugins
+	$plugins = elgg_get_plugins();
+	if (!empty($plugins)) {
+		foreach ($plugins as $plugin) {
+			// add plugin translations
+			$plugin_translation = translation_editor_read_translation($language, $plugin->getID());
+			if (!empty($plugin_translation)) {
+				$translations += $plugin_translation;
 			}
 		}
-		
-		if (!empty($translations)) {
-			// write all to disk
-			if (translation_editor_write_translation($language, "translation_editor_merged_{$site->getGUID()}", $translations)) {
-				$result = true;
-			}
-		} else {
-			// no custom translations, so remove the cache file
-			if (translation_editor_delete_translation($language, "translation_editor_merged_{$site->getGUID()}")) {
-				$result = true;
-			}
+	}
+	
+	if (!empty($translations)) {
+		// write all to disk
+		if (translation_editor_write_translation($language, "translation_editor_merged_{$site->getGUID()}", $translations)) {
+			$result = true;
+		}
+	} else {
+		// no custom translations, so remove the cache file
+		if (translation_editor_delete_translation($language, "translation_editor_merged_{$site->getGUID()}")) {
+			$result = true;
 		}
 	}
 	
 	if ($result) {
 		// clear system cache
-		$cache = elgg_get_system_cache();
-		$cache->delete("{$language}.lang");
-		
+		elgg_delete_system_cache("{$language}.lang");
+				
 		// let others know this happend
-		elgg_trigger_event("language:merge", "translation_editor", $language);
-	}
-	
-	// reset language cache on all sites
-	if ($update) {
-		$ts = time();
-		
-		elgg_save_config("te_last_update_{$language}", $ts);
-		$site->setPrivateSetting("te_last_update_{$language}", $ts);
+		elgg_trigger_event('language:merge', 'translation_editor', $language);
 	}
 	
 	return $result;
