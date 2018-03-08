@@ -7,6 +7,7 @@ echo elgg_view_field([
 	'#type' => 'text',
 	'#label' => elgg_echo('translation_editor:custom_keys:key'),
 	'name' => 'key',
+	'required' => true,
 ]);
 
 echo elgg_view_field([
@@ -15,6 +16,7 @@ echo elgg_view_field([
 	'#help' => elgg_echo('translation_editor:custom_keys:translation_info'),
 	'name' => 'translation',
 	'rows' => 3,
+	'required' => true,
 ]);
 
 // form footer
