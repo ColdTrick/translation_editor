@@ -23,8 +23,7 @@ function translation_editor_get_plugins($current_language) {
 	
 	$translator->reloadAllTranslations();
 	$translator->loadTranslations($current_language);
-		
-// 	translation_editor_reload_all_translations();
+	
 	translation_editor_load_translations($current_language);
 	
 	$result = [];
@@ -211,17 +210,13 @@ function translation_editor_compare_translations($current_language, $translated)
 		return false;
 	}
 	
-	global $_ELGG;
-	
 	$result = [];
 	
-	$backup_full = $_ELGG->translations;
-	
-	$_ELGG->translations = [];
-	translation_editor_reload_all_translations();
+	$translator = elgg()->translator;
+	$translations = $translator->getLoadedTranslations();
 	
 	foreach ($translated as $key => $value) {
-		$original = translation_editor_clean_line_breaks(html_entity_decode($_ELGG->translations[$current_language][$key], ENT_NOQUOTES, 'UTF-8'));
+		$original = translation_editor_clean_line_breaks(html_entity_decode($translations[$current_language][$key], ENT_NOQUOTES, 'UTF-8'));
 		$new = translation_editor_clean_line_breaks(html_entity_decode($value, ENT_NOQUOTES, 'UTF-8'));
 		
 		// if original string contains beginning/trailing spaces (eg ' in the group '),
@@ -235,8 +230,6 @@ function translation_editor_compare_translations($current_language, $translated)
 			$result[$key] = $new;
 		}
 	}
-	
-	$_ELGG->translations = $backup_full;
 	
 	return $result;
 }
@@ -262,7 +255,6 @@ function translation_editor_clean_line_breaks($string) {
  * @return false|int
  */
 function translation_editor_write_translation($current_language, $plugin, $translations) {
-	
 	$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 	return $translation->saveTranslations($translations);
 }
@@ -288,28 +280,19 @@ function translation_editor_read_translation($current_language, $plugin) {
  * @return void
  */
 function translation_editor_load_translations($current_language = '') {
-	$site = elgg_get_site_entity();
 	
 	if (empty($current_language)) {
 		$current_language = get_current_language();
 	}
 	
-	// check if update is needed
-	$main_ts = (int) elgg_get_config("te_last_update_{$current_language}");
-	$site_ts = (int) $site->getPrivateSetting("te_last_update_{$current_language}");
-	
-	if (!empty($main_ts)) {
-		if (empty($site_ts) || ($main_ts > $site_ts)) {
-			if (translation_editor_merge_translations($current_language)) {
-				$site->setPrivateSetting("te_last_update_{$current_language}", time());
-			}
-		}
-	} else {
-		translation_editor_merge_translations($current_language, true);
+	// load translations
+	$translations = elgg_load_system_cache("translation_editor_merged_{$current_language}");
+	if (!is_array($translations)) {
+		// cache was reset rebuild it
+		translation_editor_merge_translations($current_language);
+		$translations = elgg_load_system_cache("translation_editor_merged_{$current_language}");
 	}
 	
-	// load translations
-	$translations = translation_editor_read_translation($current_language, "translation_editor_merged_{$site->getGUID()}");
 	if (!empty($translations)) {
 		add_translation($current_language, $translations);
 	}
@@ -326,61 +309,11 @@ function translation_editor_load_custom_languages() {
 		return;
 	}
 	
+	$translator = elgg()->translator;
+	
 	$custom_languages = explode(',', $custom_languages);
-	
 	foreach ($custom_languages as $lang) {
-		add_translation($lang, ['' => '']);
-	}
-}
-
-/**
- * Custom implementation of reload_all_translations() to be able to reset the translations
- *
- * @see reload_all_translations()
- *
- * @return void
- */
-function translation_editor_reload_all_translations() {
-	global $_ELGG;
-	
-	static $run_once;
-	
-	if (isset($run_once)) {
-		$_ELGG->translations = $run_once;
-	} else {
-		
-		$_ELGG->translations = array();
-		
-		if ($_ELGG->i18n_loaded_from_cache) {
-			// make sure all plugins have registered their paths
-			$plugins = elgg_get_plugins();
-			if (!empty($plugins)) {
-				foreach ($plugins as $plugin) {
-					$plugin->start(ELGG_PLUGIN_REGISTER_LANGUAGES);
-				}
-			}
-		}
-		
-		// include all languages in the configured paths
-		foreach ($_ELGG->language_paths as $path => $dummy) {
-			$handle = opendir($path);
-			if (!empty($handle)) {
-				// proccess all files
-				while (($language = readdir($handle)) !== false) {
-					// do we have a file (not a directory)
-					if (is_file($path . $language)) {
-						$result = include($path . $language);
-						if (is_array($result)) {
-							add_translation(basename($language, '.php'), $result);
-						}
-					}
-				}
-				
-				closedir($handle);
-			}
-		}
-		
-		$run_once = $_ELGG->translations;
+		$translator->addTranslation($lang, ['' => '']);
 	}
 }
 
@@ -449,55 +382,31 @@ function translation_editor_is_translation_editor($user_guid = 0) {
 	if (elgg_is_admin_user($user_guid)) {
 		return true;
 	}
-		
+	
 	// preload all editors
 	if (!isset($editors_cache)) {
-		$editors_cache = array();
+		$editors_cache = [];
 		
-		$translation_editor_id = elgg_get_metastring_id('translation_editor');
-		$true_id = elgg_get_metastring_id(true);
-		
-		$options = array(
+		$options = [
 			'type' => 'user',
 			'limit' => false,
-			'joins' => array('JOIN ' . elgg_get_config('dbprefix') . 'metadata md ON e.guid = md.entity_guid'),
-			'wheres' => array("(md.name_id = {$translation_editor_id} AND md.value_id = {$true_id})"),
+			'metadata_name_value_pairs' => [
+				'name' => 'translation_editor',
+				'value' => true,
+			],
 			'callback' => function ($row) {
 				return (int) $row->guid;
 			},
-		);
+		];
 		
 		$guids = elgg_get_entities($options);
 		if (!empty($guids)) {
 			$editors_cache = $guids;
 		}
 	}
-
+	
 	// is the user an editor or an admin
 	return in_array($user_guid, $editors_cache);
-}
-
-/**
- * Remove disabled languages from the available languages
- *
- * @return void
- */
-function translation_editor_unregister_translations() {
-	
-	$disabled_languages = translation_editor_get_disabled_languages();
-	if (empty($disabled_languages)) {
-		return;
-	}
-	
-	global $_ELGG;
-	
-	foreach ($_ELGG->translations as $key => $dummy) {
-		if (!in_array($key, $disabled_languages)) {
-			continue;
-		}
-		
-		unset($_ELGG->translations[$key]);
-	}
 }
 
 /**
@@ -551,15 +460,13 @@ function translation_editor_search_translation($query, $language = 'en') {
  * @return bool
  */
 function translation_editor_merge_translations($language = '') {
-	$result = false;
-	$site = elgg_get_site_entity();
 	
 	if (empty($language)) {
 		$language = get_current_language();
 	}
 	
 	if (empty($language)) {
-		return $result;
+		return false;
 	}
 	
 	$translations = [];
@@ -588,27 +495,16 @@ function translation_editor_merge_translations($language = '') {
 		}
 	}
 	
-	if (!empty($translations)) {
-		// write all to disk
-		if (translation_editor_write_translation($language, "translation_editor_merged_{$site->getGUID()}", $translations)) {
-			$result = true;
-		}
-	} else {
-		// no custom translations, so remove the cache file
-		if (translation_editor_delete_translation($language, "translation_editor_merged_{$site->getGUID()}")) {
-			$result = true;
-		}
-	}
+	// write merged to cache
+	elgg_save_system_cache("translation_editor_merged_{$language}", $translations);
 	
-	if ($result) {
-		// clear system cache
-		elgg_delete_system_cache("{$language}.lang");
-				
-		// let others know this happend
-		elgg_trigger_event('language:merge', 'translation_editor', $language);
-	}
+	// clear system cache
+	elgg_delete_system_cache("{$language}.lang");
+			
+	// let others know this happend
+	elgg_trigger_event('language:merge', 'translation_editor', $language);
 	
-	return $result;
+	return true;
 }
 
 /**
@@ -662,37 +558,6 @@ function translation_editor_get_disabled_languages() {
 }
 
 /**
- * Reset the site timestamp that tracks the merged translation status.
- *
- * This will recreate the translation editor cache
- *
- * @param int $site_guid which site to invalidate (defaults to current site)
- *
- * @return void
- */
-function translation_editor_invalidate_site_cache($site_guid = 0) {
-	
-	$site_guid = sanitize_int($site_guid, false);
-	
-	// make sure we have all translations
-	translation_editor_reload_all_translations();
-	
-	$languages = get_installed_translations();
-	if (empty($languages) || !is_array($languages)) {
-		return;
-	}
-	
-	$site = elgg_get_site_entity($site_guid);
-	if (empty($site)) {
-		return;
-	}
-	
-	foreach ($languages as $key => $desc) {
-		remove_private_setting($site->getGUID(), "te_last_update_{$key}");
-	}
-}
-
-/**
  * Protect pages for only translation editor
  *
  * @return void
@@ -704,6 +569,6 @@ function translation_editor_gatekeeper() {
 		return;
 	}
 	
-	register_error(elgg_echo("translation_editor:gatekeeper"));
+	register_error(elgg_echo('translation_editor:gatekeeper'));
 	forward();
 }

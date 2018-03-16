@@ -2,18 +2,6 @@
 /**
  * Add translations for the current plugin
  */
-global $CONFIG;
-
-// make sure all languages are loaded
-translation_editor_reload_all_translations();
-
-// Fixes for KSES filtering
-// fix to allow javascript in href
-$CONFIG->allowedprotocols[] = 'javascript';
-
-// fix allowed tags
-$CONFIG->allowedtags['a']['onclick'] = array();
-$CONFIG->allowedtags['span']['id'] = array();
 
 $translation = get_input('translation');
 
@@ -73,10 +61,7 @@ foreach ($translation as $language => $plugins) {
 	}
 	
 	// merge translations
-	translation_editor_merge_translations($language, true);
+	translation_editor_merge_translations($language);
 }
 
-// invalidate cache
-elgg_flush_caches();
-
-forward(REFERER);
+return elgg_ok_response();

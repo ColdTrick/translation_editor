@@ -15,9 +15,6 @@ if (!translation_editor_delete_translation($lang, $plugin)) {
 }
 
 // merge translations
-translation_editor_merge_translations($lang, true);
-
-// invalidate cache
-elgg_flush_caches();
+translation_editor_merge_translations($lang);
 
 return elgg_ok_response('', elgg_echo('translation_editor:action:delete:success'), "translation_editor/{$lang}");

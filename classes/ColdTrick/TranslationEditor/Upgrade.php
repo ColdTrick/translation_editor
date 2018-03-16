@@ -54,7 +54,7 @@ class Upgrade {
 			}
 			
 			// merge new translations for this language
-			translation_editor_merge_translations($language, true);
+			translation_editor_merge_translations($language);
 			
 			// close $ldh
 			closedir($ldh);
