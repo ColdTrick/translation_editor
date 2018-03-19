@@ -48,6 +48,7 @@ class UserHoverMenu {
 			'section' => 'admin',
 			'item_class' => $is_editor ? 'hidden' : '',
 			'priority' => 500,
+			'data-toggle' => 'translation_editor_unmake_editor',
 		]);
 		
 		$return[] = \ElggMenuItem::factory([
@@ -59,6 +60,7 @@ class UserHoverMenu {
 			'section' => 'admin',
 			'item_class' => $is_editor ? '' : 'hidden',
 			'priority' => 501,
+			'data-toggle' => 'translation_editor_make_editor',
 		]);
 				
 		return $return;
