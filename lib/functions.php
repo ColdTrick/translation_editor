@@ -289,8 +289,7 @@ function translation_editor_load_translations($current_language = '') {
 	$translations = elgg_load_system_cache("translation_editor_merged_{$current_language}");
 	if (!is_array($translations)) {
 		// cache was reset rebuild it
-		translation_editor_merge_translations($current_language);
-		$translations = elgg_load_system_cache("translation_editor_merged_{$current_language}");
+		$translations = translation_editor_merge_translations($current_language);
 	}
 	
 	if (!empty($translations)) {
@@ -457,7 +456,7 @@ function translation_editor_search_translation($query, $language = 'en') {
  *
  * @param string $language the language to merge
  *
- * @return bool
+ * @return false|array
  */
 function translation_editor_merge_translations($language = '') {
 	
@@ -504,7 +503,7 @@ function translation_editor_merge_translations($language = '') {
 	// let others know this happend
 	elgg_trigger_event('language:merge', 'translation_editor', $language);
 	
-	return true;
+	return $translations;
 }
 
 /**
