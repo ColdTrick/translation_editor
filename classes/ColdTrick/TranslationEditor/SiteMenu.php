@@ -31,6 +31,7 @@ class SiteMenu {
 			'href' => elgg_generate_url('default:translation_editor', [
 				'current_language' => get_current_language(),
 			]),
+			'icon' => 'language',
 		]);
 		
 		return $return;
