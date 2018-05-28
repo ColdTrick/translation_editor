@@ -255,8 +255,14 @@ function translation_editor_clean_line_breaks($string) {
  * @return false|int
  */
 function translation_editor_write_translation($current_language, $plugin, $translations) {
-	$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
-	return $translation->saveTranslations($translations);
+	try {
+		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+		return $translation->saveTranslations($translations);
+	} catch (InvalidArgumentException $e) {
+		elgg_dump($e);
+	}
+	
+	return false;
 }
 
 /**
@@ -268,8 +274,14 @@ function translation_editor_write_translation($current_language, $plugin, $trans
  * @return false|array
  */
 function translation_editor_read_translation($current_language, $plugin) {
-	$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
-	return $translation->readTranslations();
+	try {
+		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+		return $translation->readTranslations();
+	} catch (InvalidArgumentException $e) {
+		elgg_dump($e);
+	}
+	
+	return false;
 }
 
 /**
@@ -325,8 +337,14 @@ function translation_editor_load_custom_languages() {
  * @return bool
  */
 function translation_editor_delete_translation($current_language, $plugin) {
-	$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
-	return $translation->removeTranslations();
+	try {
+		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+		return $translation->removeTranslations();
+	} catch (InvalidArgumentException $e) {
+		elgg_dump($e);
+	}
+	
+	return false;
 }
 
 /**
