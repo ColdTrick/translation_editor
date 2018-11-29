@@ -29,7 +29,7 @@ class PluginTranslation {
 		if (empty($language)) {
 			throw new \InvalidArgumentException('A language must be set');
 		}
-		if (!in_array($language, elgg_get_available_languages())) {
+		if (!in_array($language, translation_editor_get_available_languages())) {
 			throw new \InvalidArgumentException("Language {$language} isn't supported by the system");
 		}
 		

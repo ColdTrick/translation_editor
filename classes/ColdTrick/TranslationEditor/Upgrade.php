@@ -7,13 +7,9 @@ class Upgrade {
 	/**
 	 * Cleanup all custom translations from keys not present in the original plugin
 	 *
-	 * @param string $event  the name of the event
-	 * @param string $type   the type of the event
-	 * @param mixed  $object supplied params
-	 *
 	 * @return void
 	 */
-	public static function cleanupCustomTranslations($event, $type, $object) {
+	public static function cleanupCustomTranslations() {
 		
 		$base_dir = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR;
 		if (!is_dir($base_dir)) {

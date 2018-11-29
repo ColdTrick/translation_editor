@@ -2,8 +2,14 @@
 
 use Elgg\Router\Middleware\AdminGatekeeper;
 use ColdTrick\TranslationEditor\EditorGatekeeper;
+use ColdTrick\TranslationEditor\Bootstrap;
+
+define('TRANSLATION_EDITOR_DISABLED_LANGUAGE', 'disabled_languages');
+
+require_once(__DIR__ . '/lib/functions.php');
 
 return [
+	'bootstrap' => Bootstrap::class,
 	'actions' => [
 		'translation_editor/admin/toggle_translation_editor' => [
 			'access' => 'admin',

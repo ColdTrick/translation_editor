@@ -36,7 +36,7 @@ set_input('current_language', $current_language);
 // build page elements
 $languages = array_keys($translations);
 
-$disabled_languages = translation_editor_get_disabled_languages() ?: [];
+$disabled_languages = translation_editor_get_disabled_languages();
 $site_language = elgg_get_config('language', 'en');
 
 $body = elgg_view('translation_editor/language_selector', [

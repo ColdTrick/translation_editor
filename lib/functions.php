@@ -298,7 +298,9 @@ function translation_editor_load_translations($current_language = '') {
 	}
 	
 	// load translations
-	$translations = elgg_load_system_cache("translation_editor_merged_{$current_language}");
+	// using elgg_get_system_cache() to bypass enabled setting
+	$cache = elgg_get_system_cache();
+	$translations = $cache->load("translation_editor_merged_{$current_language}");
 	if (!is_array($translations)) {
 		// cache was reset rebuild it
 		$translations = translation_editor_merge_translations($current_language);
@@ -306,25 +308,6 @@ function translation_editor_load_translations($current_language = '') {
 	
 	if (!empty($translations)) {
 		add_translation($current_language, $translations);
-	}
-}
-
-/**
- * Load all the custom languages added by this plugin
- *
- * @return void
- */
-function translation_editor_load_custom_languages() {
-	$custom_languages = elgg_get_plugin_setting('custom_languages', 'translation_editor');
-	if (empty($custom_languages)) {
-		return;
-	}
-	
-	$translator = elgg()->translator;
-	
-	$custom_languages = explode(',', $custom_languages);
-	foreach ($custom_languages as $lang) {
-		$translator->addTranslation($lang, ['' => '']);
 	}
 }
 
@@ -513,10 +496,12 @@ function translation_editor_merge_translations($language = '') {
 	}
 	
 	// write merged to cache
-	elgg_save_system_cache("translation_editor_merged_{$language}", $translations);
+	// using elgg_get_system_cache() to bypass enabled setting
+	$cache = elgg_get_system_cache();
+	$cache->save("translation_editor_merged_{$language}", $translations);
 	
 	// clear system cache
-	elgg_delete_system_cache("{$language}.lang");
+	$cache->delete("{$language}.lang");
 			
 	// let others know this happend
 	elgg_trigger_event('language:merge', 'translation_editor', $language);
@@ -555,7 +540,7 @@ function translation_editor_get_string_parameters($string, $count = true) {
 /**
  * Get the disabled languages
  *
- * @return array|bool
+ * @return array
  */
 function translation_editor_get_disabled_languages() {
 	static $result;
@@ -564,7 +549,7 @@ function translation_editor_get_disabled_languages() {
 		return $result;
 	}
 		
-	$result = false;
+	$result = [];
 		
 	$disabled_languages = elgg_get_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, 'translation_editor');
 	if (!empty($disabled_languages)) {
@@ -588,4 +573,24 @@ function translation_editor_gatekeeper() {
 	
 	register_error(elgg_echo('translation_editor:gatekeeper'));
 	forward();
+}
+
+/**
+ * Get available languages on the system
+ *
+ * Used for caching purpose
+ *
+ * @see elgg_get_available_languages()
+ * @return array
+ */
+function translation_editor_get_available_languages() {
+	static $result;
+	
+	if (isset($result)) {
+		return $result;
+	}
+	
+	$result = elgg_get_available_languages();
+	
+	return $result;
 }
