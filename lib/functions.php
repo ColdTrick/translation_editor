@@ -144,16 +144,16 @@ function translation_editor_get_plugin($current_language, $plugin) {
 
 	if ($plugin == 'core') {
 		// Core translation
-		$plugin_language = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
+		$plugin_language_path = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR;
 	} elseif ($plugin == 'custom_keys') {
-		$plugin_language = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR . 'en.php';
+		$plugin_language_path = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR;
 	} else {
 		// plugin translations
 		$plugin_object = elgg_get_plugin_from_id($plugin);
 		if (!($plugin_object instanceof ElggPlugin)) {
 			return false;
 		}
-		$plugin_language = $plugin_object->getPath() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
+		$plugin_language_path = $plugin_object->getPath() . 'languages' . DIRECTORY_SEPARATOR;
 	}
 	
 	$translator = elgg()->translator;
@@ -168,8 +168,8 @@ function translation_editor_get_plugin($current_language, $plugin) {
 	$backup_full = $translator->getLoadedTranslations();
 	
 	// Fetch translations
-	if (file_exists($plugin_language)) {
-		$plugin_keys = Includer::includeFile($plugin_language);
+	if (file_exists("{$plugin_language_path}en.php")) {
+		$plugin_keys = Includer::includeFile("{$plugin_language_path}en.php");
 		
 		$key_count = count($plugin_keys);
 		
@@ -190,6 +190,10 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		$result['exists'] = $exists_count;
 		$result['en'] = $plugin_keys;
 		$result['current_language'] = array_intersect_key($backup_full[$current_language], $plugin_keys);
+		$result['original_language'] = [];
+		if (file_exists("{$plugin_language_path}{$current_language}.php")) {
+			$result['original_language'] = Includer::includeFile("{$plugin_language_path}{$current_language}.php");
+		}
 		$result['custom'] = $custom;
 	}
 	
@@ -199,24 +203,30 @@ function translation_editor_get_plugin($current_language, $plugin) {
 /**
  * Compare the provided translations to filter out the custom translations
  *
- * @param string $current_language the language to check
- * @param array  $translated       the provided translations
+ * @param array $translated      the provided translations
+ * @param array $plugin_original the original language keys/values of the plugin
  *
  * @return false|array
  */
-function translation_editor_compare_translations($current_language, $translated) {
+function translation_editor_compare_translations(array $translated, array $plugin_original) {
 	
-	if (empty($current_language) || empty($translated)) {
+	if (empty($translated)) {
 		return false;
 	}
 	
 	$result = [];
 	
-	$translator = elgg()->translator;
-	$translations = $translator->getLoadedTranslations();
-	
 	foreach ($translated as $key => $value) {
-		$original = translation_editor_clean_line_breaks(html_entity_decode($translations[$current_language][$key], ENT_NOQUOTES, 'UTF-8'));
+		
+		if (!isset($plugin_original[$key])) {
+			// not yet translated
+			$result[$key] = $value;
+			continue;
+		}
+		
+		$original_value = $plugin_original[$key];
+		
+		$original = translation_editor_clean_line_breaks(html_entity_decode($original_value, ENT_NOQUOTES, 'UTF-8'));
 		$new = translation_editor_clean_line_breaks(html_entity_decode($value, ENT_NOQUOTES, 'UTF-8'));
 		
 		// if original string contains beginning/trailing spaces (eg ' in the group '),

@@ -46,8 +46,9 @@ foreach ($translation as $language => $plugins) {
 		$translate_input = array_intersect_key($translate_input, $original_keys);
 		
 		// check if translated
-		$translated = translation_editor_compare_translations($language, $translate_input);
+		$plugin_original = elgg_extract('original_language', $plugin_translation);
 		
+		$translated = translation_editor_compare_translations($translate_input, $plugin_original);
 		if (!empty($translated)) {
 			if (translation_editor_write_translation($language, $plugin_name, $translated)) {
 				system_message(elgg_echo('translation_editor:action:translate:success'));

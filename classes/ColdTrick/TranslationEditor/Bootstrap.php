@@ -54,8 +54,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 */
 	protected function registerCustomLanguages() {
 		
-		_elgg_services()->timer->begin([__METHOD__]);
-		
 		$custom_languages = $this->plugin->getSetting('custom_languages');
 		if (empty($custom_languages)) {
 			return;
@@ -67,8 +65,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 		foreach ($custom_languages as $lang) {
 			$translator->addTranslation($lang, ['' => '']);
 		}
-		
-		_elgg_services()->timer->end([__METHOD__]);
 	}
 	
 	/**
@@ -77,8 +73,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 * @return void
 	 */
 	protected function loadCustomTranslations() {
-		
-		_elgg_services()->timer->begin([__METHOD__]);
 		
 		$translator = $this->elgg()->translator;
 		
@@ -98,14 +92,9 @@ class Bootstrap extends DefaultPluginBootstrap {
 				continue;
 			}
 			
-			_elgg_services()->timer->begin([__METHOD__, $language]);
 			// add custom translations
 			translation_editor_load_translations($language);
-			
-			_elgg_services()->timer->end([__METHOD__, $language]);
 		}
-		
-		_elgg_services()->timer->end([__METHOD__]);
 	}
 	
 	/**
