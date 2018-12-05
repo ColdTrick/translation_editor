@@ -170,6 +170,10 @@ function translation_editor_get_plugin($current_language, $plugin) {
 	// Fetch translations
 	if (file_exists("{$plugin_language_path}en.php")) {
 		$plugin_keys = Includer::includeFile("{$plugin_language_path}en.php");
+		if (!is_array($plugin_keys)) {
+			elgg_log("Please update the language file of '{$plugin}' to return an array", 'WARNING');
+			return false;
+		}
 		
 		$key_count = count($plugin_keys);
 		
