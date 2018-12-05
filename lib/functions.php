@@ -61,33 +61,33 @@ function translation_editor_get_plugins($current_language) {
 	}
 	
 	// Custom Keys
-	$custom_keys_original = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR . 'en.php';
+	$custom_keys['custom_keys']['total'] = 0;
+	$custom_keys['custom_keys']['exists'] = 0;
+	$custom_keys['custom_keys']['custom'] = 0;
 	
+	$custom_keys_original = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR . 'en.php';
 	if (file_exists($custom_keys_original)) {
 		$plugin_keys = Includer::includeFile($custom_keys_original);
-		
-		$key_count = count($plugin_keys);
-		
-		if (array_key_exists($current_language, $backup_full)) {
-			$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
-		} else {
-			$exists_count = 0;
+		if (is_array($plugin_keys)) {
+			$key_count = count($plugin_keys);
+			
+			if (array_key_exists($current_language, $backup_full)) {
+				$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
+			} else {
+				$exists_count = 0;
+			}
+			
+			$custom_content = translation_editor_read_translation($current_language, 'custom_keys');
+			if (!empty($custom_content)) {
+				$custom_count = count($custom_content);
+			} else {
+				$custom_count = 0;
+			}
+			
+			$custom_keys['custom_keys']['total'] = $key_count;
+			$custom_keys['custom_keys']['exists'] = $exists_count;
+			$custom_keys['custom_keys']['custom'] = $custom_count;
 		}
-		
-		$custom_content = translation_editor_read_translation($current_language, 'custom_keys');
-		if (!empty($custom_content)) {
-			$custom_count = count($custom_content);
-		} else {
-			$custom_count = 0;
-		}
-		
-		$custom_keys['custom_keys']['total'] = $key_count;
-		$custom_keys['custom_keys']['exists'] = $exists_count;
-		$custom_keys['custom_keys']['custom'] = $custom_count;
-	} else {
-		$custom_keys['custom_keys']['total'] = 0;
-		$custom_keys['custom_keys']['exists'] = 0;
-		$custom_keys['custom_keys']['custom'] = 0;
 	}
 	
 	// Plugin translations
@@ -99,6 +99,10 @@ function translation_editor_get_plugins($current_language) {
 		
 		if (file_exists($plugin_language)) {
 			$plugin_keys = Includer::includeFile($plugin_language);
+			if (!is_array($plugin_keys)) {
+				elgg_log("Please update the language file of '{$plugin_id}' to return an array", 'WARNING');
+				continue;
+			}
 			
 			$key_count = count($plugin_keys);
 			
