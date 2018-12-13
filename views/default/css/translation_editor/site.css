@@ -1,11 +1,14 @@
 #translation-editor-language-table {
 	
-	td.translation-editor-flag,
-	td.translation-editor-disable,
-	td.translation-editor-delete {
-		width: 1%;
-		text-align: center;
-		white-space: nowrap;
+	td, 
+	th {
+		&.translation-editor-flag,
+		&.translation-editor-disable,
+		&.translation-editor-delete {
+			width: 1%;
+			text-align: center;
+			white-space: nowrap;
+		}
 	}
 	
 	td.translation-editor-delete {
