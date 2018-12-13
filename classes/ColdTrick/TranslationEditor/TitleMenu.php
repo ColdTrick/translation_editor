@@ -33,6 +33,7 @@ class TitleMenu {
 			$return[] = \ElggMenuItem::factory([
 				'name' => 'translation-editor-import',
 				'text' => elgg_echo('import'),
+				'icon' => 'file-import',
 				'href' => "translation_editor/import/{$current_language}",
 				'link_class' => 'elgg-button elgg-button-action',
 				'priority' => 210,
@@ -40,6 +41,7 @@ class TitleMenu {
 			$return[] = \ElggMenuItem::factory([
 				'name' => 'translation-editor-export',
 				'text' => elgg_echo('export'),
+				'icon' => 'file-export',
 				'href' => "translation_editor/export/{$current_language}",
 				'link_class' => 'elgg-button elgg-button-action',
 				'priority' => 220,
@@ -51,6 +53,7 @@ class TitleMenu {
 			$return[] = \ElggMenuItem::factory([
 				'name' => 'translation-editor-merge',
 				'text' => elgg_echo('download'),
+				'icon' => 'download',
 				'title' => elgg_echo('translation_editor:plugin_list:merge'),
 				'href' => "action/translation_editor/merge?current_language={$current_language}&plugin={$plugin_id}",
 				'link_class' => 'elgg-button elgg-button-action',
@@ -81,7 +84,8 @@ class TitleMenu {
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation-editor-show-language-selector',
 			'text' => elgg_echo('translation_editor:show_language_selector'),
-			'href' => '#',
+			'href' => false,
+			'icon' => 'angle-double-down',
 			'link_class' => 'elgg-button elgg-button-action',
 			'priority' => 200,
 			'rel' => 'toggle',
@@ -92,7 +96,8 @@ class TitleMenu {
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation-editor-hide-language-selector',
 			'text' => elgg_echo('translation_editor:hide_language_selector'),
-			'href' => '#',
+			'href' => false,
+			'icon' => 'angle-double-up',
 			'link_class' => 'elgg-button elgg-button-action',
 			'priority' => 201,
 			'style' => 'display: none;', // needed to prevent misallignment
