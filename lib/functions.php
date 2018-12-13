@@ -161,7 +161,8 @@ function translation_editor_get_plugin($current_language, $plugin) {
 	}
 	
 	$translator = elgg()->translator;
-	$translator->reloadAllTranslations();
+	
+	$translator->loadTranslations($current_language);
 	
 	translation_editor_load_translations($current_language);
 	
