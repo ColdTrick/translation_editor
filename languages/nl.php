@@ -1,10 +1,20 @@
 <?php
 /**
- * This file was created by Translation Editor v5.0
- * On 2016-04-04 17:38
+ * This file was created by Translation Editor v7.0-beta
+ * On 2018-12-14 17:07
  */
 
 return array (
+  'translation_editor:action:toggle_translation_editor:make' => '%s is nu een vertaler',
+  'translation_editor:export' => 'Exporteer vertalingen',
+  'translation_editor:export:no_plugins' => 'Geen exporteerbare vertalingen gevonden',
+  'translation_editor:export:plugins' => 'Selecteer de plugins om te exporteren',
+  'translation_editor:import' => 'Importeer vertalingen',
+  'translation_editor:import:file' => 'Selecteer een geëxporteerd bestand om te importeren',
+  'translation_editor:action:toggle_translation_editor:remove' => '%s is geen vertaler meer',
+  'translation_editor:action:import:incorrect_language' => 'De import bevat geen vertalingen voor %s',
+  'translation_editor:action:import:no_plugins' => 'De import bevat geen plugins om te importeren',
+  'translation_editor:action:import:success' => 'Vertalingen succesvol geïmporteerd',
   'translation_editor:cleanup:description' => 'Er zijn %d aangepaste vertalingen opgeschoond. Dit betekend dat de vertalingen niet konden worden gevonden in de plugin waarvan ze deel uit maakten. Je kunt de lijst downloaden door op de Download knop te klikken.
 Als je klaar bent kun je het bestand %s.',
   'translation_editor:action:cleanup:remove:error:no_file' => 'Het gevraagde bestand kon niet worden gevonden',
@@ -26,9 +36,7 @@ Als je klaar bent kun je het bestand %s.',
   'translation_editor:action:translate:error:write' => 'Fout tijdens wegschrijven van vertalingen',
   'translation_editor:action:translate:error:not_authorized' => 'Je bent niet geautoriseerd als vertaler',
   'translation_editor:action:translate:success' => 'Vertalingen opgeslagen',
-  'translation_editor:action:make_translation_editor:success' => 'Vertaler toegevoegd',
   'translation_editor:action:unmake_translation_editor' => 'Verwijder vertaler',
-  'translation_editor:action:unmake_translation_editor:success' => 'Vertaler rol verwijderd',
   'translation_editor:action:add_custom_key:success' => 'Custom sleutel toegevoegd',
   'translation_editor:action:add_custom_key:file_error' => 'Fout tijdens wegschrijven van de custom sleutel',
   'translation_editor:action:add_custom_key:exists' => 'Deze sleutel bestaat al. Voer een unieke sleutel in.',
@@ -57,8 +65,6 @@ Als je klaar bent kun je het bestand %s.',
   'translation_editor:plugin_edit:show:custom' => 'aangepast',
   'translation_editor:plugin_edit:show:params' => 'ontbrekende variabele',
   'translation_editor:action:make_translation_editor' => 'Maak vertaler',
-  'translation_editor:action:make_translation_editor:error' => 'Fout tijdens het toewijzen van de vertaler',
-  'translation_editor:action:unmake_translation_editor:error' => 'Fout tijdens het verwijderen van de vertaler rol',
   'translation_editor:action:add_language:success' => 'Taal succesvol toegevoegd',
   'translation_editor:action:delete_language:success' => 'Taal succesvol verwijderd',
   'translation_editor:language_selector:site_language' => 'Site taal',

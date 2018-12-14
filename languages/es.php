@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v6.0
- * On 2017-10-05 13:19
+ * This file was created by Translation Editor v7.0-beta
+ * On 2018-12-14 17:11
  */
 
 return array (
@@ -48,11 +48,7 @@ Cuando termine, puede %s el archivo.',
   'translation_editor:action:translate:error:not_authorized' => 'No tienes autorización para traducir',
   'translation_editor:action:translate:success' => 'Traducciones guardadas correctamente',
   'translation_editor:action:make_translation_editor' => 'Hacer traductor',
-  'translation_editor:action:make_translation_editor:success' => 'Hecho con éxito un traductor',
-  'translation_editor:action:make_translation_editor:error' => 'Error al hacer al usuario como traductor',
   'translation_editor:action:unmake_translation_editor' => 'Deshacer traductor',
-  'translation_editor:action:unmake_translation_editor:success' => 'Se ha eliminado correctamente el traductor',
-  'translation_editor:action:unmake_translation_editor:error' => 'Error al eliminar el rol de traductor',
   'translation_editor:action:delete:error:input' => 'Entrada incorrecta para borrar la traducción',
   'translation_editor:action:delete:error:delete' => 'Error al eliminar la traducción',
   'translation_editor:action:delete:success' => 'Traducción eliminada correctamente',

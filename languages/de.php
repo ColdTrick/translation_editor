@@ -1,6 +1,11 @@
 <?php
+/**
+ * This file was created by Translation Editor v7.0-beta
+ * On 2018-12-14 17:10
+ */
 
 return array (
+  'translation_editor:search' => 'Suchergebnis für \'%s\' in %s',
   'translation_editor:language' => 'Sprache',
   'translation_editor:menu:title' => 'Übersetzungseditor',
   'translation_editor:language_selector:title' => 'Wähle die Sprache, die du bearbeiten möchtest',
@@ -14,9 +19,6 @@ return array (
   'translation_editor:plugin_list:custom' => 'Selbst erstellt',
   'translation_editor:plugin_list:percentage' => '% Komplett',
   'translation_editor:plugin_list:merge' => 'Kombiniere zu einer PHP-Datei',
-  'translation_editor:plugin_list:delete' => 'Lösche Übersetzung',
-  'translation_editor:plugin_list:delete:confirm' => 'Möchtest du wirklich diese Übersetzung löschen? Das kann nicht rückgängig gemacht werden!',
-  'translation_editor:search' => 'Suchergebnis',
   'translation_editor:forms:search:default' => 'Finde eine Übersetzung',
   'translation_editor:search_results:no_results' => 'Kein Übersetzung gefunden',
   'translation_editor:custom_keys:title' => 'Füge neuen Sprachschlüssel hinzu',
@@ -35,11 +37,7 @@ return array (
   'translation_editor:action:translate:error:not_authorized' => 'Du bist nicht zum Übersetzen authorisiert',
   'translation_editor:action:translate:success' => 'Übersetzung erfolgreich gespeichert',
   'translation_editor:action:make_translation_editor' => 'Zum Übersetzer machen',
-  'translation_editor:action:make_translation_editor:success' => 'Erfolgreich zum Übersetzer gemacht',
-  'translation_editor:action:make_translation_editor:error' => 'Fehler beim Hinzufügen der Übersetzerrolle.',
   'translation_editor:action:unmake_translation_editor' => 'Übersetzerrolle entfernen',
-  'translation_editor:action:unmake_translation_editor:success' => 'Erfolgreich Übersetzerrolle entfernt.',
-  'translation_editor:action:unmake_translation_editor:error' => 'Fehler beim Entfernen der Übersetzerrolle.',
   'translation_editor:action:delete:error:input' => 'Falsche Eingabe, um eine Übersetzung zu löschen',
   'translation_editor:action:delete:error:delete' => 'Fehler beim Löschen der Übersetzung.',
   'translation_editor:action:delete:success' => 'Übersetzung erfolgreich gelöscht',

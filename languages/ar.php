@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file was created by Translation Editor v7.0-beta
+ * On 2018-12-14 17:09
+ */
 
 return array (
   'translation_editor:language' => 'اللغة',
@@ -14,9 +18,6 @@ return array (
   'translation_editor:plugin_list:custom' => 'مخصصة',
   'translation_editor:plugin_list:percentage' => 'نسبة المُكتمل',
   'translation_editor:plugin_list:merge' => 'تنزيل الترجمة بملف PHP',
-  'translation_editor:plugin_list:delete' => 'احذف الترجمة',
-  'translation_editor:plugin_list:delete:confirm' => 'متأكد أنك تريد حذف هذه الترجمة؟ لا يمكن التراجع عن هذا الإجراء!',
-  'translation_editor:search' => 'نتائج البحث',
   'translation_editor:forms:search:default' => 'ابحث عن ترجمة',
   'translation_editor:search_results:no_results' => 'لا يوجد أي ترجمة مطابقة',
   'translation_editor:custom_keys:title' => 'أضف كلمة للترجمة',
@@ -35,11 +36,7 @@ return array (
   'translation_editor:action:translate:error:not_authorized' => 'ليست لديك صلاحيات الترجمة',
   'translation_editor:action:translate:success' => 'تم حفظ الترجمات',
   'translation_editor:action:make_translation_editor' => 'امنح صلاحية المترجمة',
-  'translation_editor:action:make_translation_editor:success' => 'صلاحية الترجمة مُنحت',
-  'translation_editor:action:make_translation_editor:error' => 'حدث خطأ في إعطاء صلاحية المُترجم للمستخدم',
   'translation_editor:action:unmake_translation_editor' => 'إزالة صلاحية المترجمة',
-  'translation_editor:action:unmake_translation_editor:success' => 'تم إزالة الترجمة',
-  'translation_editor:action:unmake_translation_editor:error' => 'حدث خطأ في إزالة صلاحية المترجم',
   'translation_editor:action:delete:error:input' => 'بيانات حذف الترجمة غير صحيحة',
   'translation_editor:action:delete:error:delete' => 'حدث خطأ في حذف الترجمة',
   'translation_editor:action:delete:success' => 'تم حذف الترجمة',
