@@ -7,7 +7,7 @@ $current_language = get_input('current_language');
 $plugin = get_input('plugin');
 
 if (!translation_editor_is_translation_editor()) {
-	return elgg_error_response(elgg_echo('transation_editor:action:translate:error:not_authorized'));
+	return elgg_error_response(elgg_echo('actionunauthorized'));
 }
 
 $translation = translation_editor_get_plugin($current_language, $plugin);
