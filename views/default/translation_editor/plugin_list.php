@@ -89,8 +89,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	}
 	
 	$list .= elgg_format_element('td', ['class' => $complete_class], "{$percentage}%");
-	
-	if ($plugin_stats['custom'] > -1) {
+	if (!empty($plugin_stats['custom'])) {
 		$list .= '<td class="translation-editor-plugin-actions">';
 		$list .= elgg_view('output/url', [
 			'href' => elgg_generate_action_url('translation_editor/merge', [
@@ -99,7 +98,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 			]),
 			'title' => elgg_echo('translation_editor:plugin_list:merge'),
 			'text' => elgg_echo('translation_editor:plugin_list:merge'),
-			'icon' => elgg_view_icon('download'),
+			'icon' => 'download',
 		]);
 		if (elgg_is_admin_logged_in()) {
 			$list .= elgg_view('output/url', [
