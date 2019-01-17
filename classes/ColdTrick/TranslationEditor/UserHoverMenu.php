@@ -41,6 +41,7 @@ class UserHoverMenu {
 		
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor_make_editor',
+			'icon' => 'level-up-alt',
 			'text' => elgg_echo('translation_editor:action:make_translation_editor'),
 			'href' => elgg_generate_action_url('translation_editor/admin/toggle_translation_editor', [
 				'user' => $user->guid,
@@ -53,6 +54,7 @@ class UserHoverMenu {
 		
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor_unmake_editor',
+			'icon' => 'level-down-alt',
 			'text' => elgg_echo('translation_editor:action:unmake_translation_editor'),
 			'href' => elgg_generate_action_url('translation_editor/admin/toggle_translation_editor', [
 				'user' => $user->guid,
