@@ -19,11 +19,12 @@ foreach ($cleaned as $plugin_id => $removed_translations){
 }
 
 $download = elgg_view('output/url', [
+	'icon' => 'download',
 	'text' => elgg_echo('download'),
 	'href' => elgg_generate_action_url('translation_editor/cleanup/download', [
 		'language' => $current_translation,
 	]),
-	'class' => 'elgg-button elgg-button-action float-alt',
+	'class' => 'elgg-button elgg-button-action',
 ]);
 
 $remove = elgg_view('output/url', [
@@ -38,6 +39,6 @@ $content = elgg_format_element('div', [
 	'class' => 'elgg-output mtn',
 ], elgg_echo('translation_editor:cleanup:description', [$count, $remove]));
 
-echo elgg_format_element('div', [
-	'class' => 'elgg-message elgg-state-notice mbm ptm pbl translation-editor-cleanup',
-], $download . $content);
+echo elgg_view_module('info', elgg_echo('translation_editor:cleanup:title'), $content, [
+	'menu' => $download,
+]);

@@ -40,6 +40,7 @@ return array(
 	'translation_editor:import:file' => 'Select importable file from previous export',
 	
 	// cleanup
+	'translation_editor:cleanup:title' => "Translation cleanup",
 	'translation_editor:cleanup:description' => "%d custom translations were cleaned-up. This means they could not be found in the plugin they were part of. You can download the list by clicking on the Download button.
 When you're finished you can %s the file.",
 	
