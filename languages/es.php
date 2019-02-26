@@ -27,8 +27,6 @@ return array (
   'translation_editor:export:plugins' => 'Seleccionar plugins para exportar',
   'translation_editor:import' => 'Importa traducciones personalizadas',
   'translation_editor:import:file' => 'Seleccionar archivo importable de exportación anterior',
-  'translation_editor:cleanup:description' => '%d traducciones personalizadas fueron limpiadas. Esto significa que no se pudieron encontrar en el plugin del que formaban parte. Puede descargar la lista haciendo clic en el botón Descargar.
-Cuando termine, puede %s el archivo.',
   'translation_editor:search' => 'Resultados de la búsqueda para \'%s\' en %s',
   'translation_editor:forms:search:default' => 'Encontrar una traducción',
   'translation_editor:search_results:no_results' => 'No se encontró ninguna traducción',

@@ -15,8 +15,8 @@ return array (
   'translation_editor:action:import:incorrect_language' => 'De import bevat geen vertalingen voor %s',
   'translation_editor:action:import:no_plugins' => 'De import bevat geen plugins om te importeren',
   'translation_editor:action:import:success' => 'Vertalingen succesvol geïmporteerd',
-  'translation_editor:cleanup:description' => 'Er zijn %d aangepaste vertalingen opgeschoond. Dit betekend dat de vertalingen niet konden worden gevonden in de plugin waarvan ze deel uit maakten. Je kunt de lijst downloaden door op de Download knop te klikken.
-Als je klaar bent kun je het bestand %s.',
+  'translation_editor:cleanup:description' => 'Er zijn %d aangepaste vertalingen opgeschoond. Dit betekend dat de vertalingen niet konden worden gevonden in de plugin waarvan ze deel uit maakten. Je kunt de lijst downloaden door op de download knop te klikken.
+Als je klaar bent kun je het bestand verwijderen.',
   'translation_editor:action:cleanup:remove:error:no_file' => 'Het gevraagde bestand kon niet worden gevonden',
   'translation_editor:action:cleanup:remove:error:remove' => 'Er is een fout opgetreden tijdens het verwijderen van het bestand, probeer het nogmaals',
   'translation_editor:action:cleanup:remove:success' => 'Het bestand is verwijderd',

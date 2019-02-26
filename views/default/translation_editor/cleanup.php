@@ -29,16 +29,18 @@ $download = elgg_view('output/url', [
 
 $remove = elgg_view('output/url', [
 	'text' => elgg_echo('delete'),
+	'icon' => 'trash-alt',
 	'href' => elgg_generate_action_url('translation_editor/cleanup/remove', [
 		'language' => $current_translation,
 	]),
 	'confirm' => elgg_echo('deleteconfirm'),
+	'class' => 'elgg-button elgg-button-delete',
 ]);
 
 $content = elgg_format_element('div', [
 	'class' => 'elgg-output mtn',
-], elgg_echo('translation_editor:cleanup:description', [$count, $remove]));
+], elgg_echo('translation_editor:cleanup:description', [$count]));
 
 echo elgg_view_module('info', elgg_echo('translation_editor:cleanup:title'), $content, [
-	'menu' => $download,
+	'menu' => $download . $remove,
 ]);
