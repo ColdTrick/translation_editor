@@ -1,4 +1,6 @@
 <?php
+use Elgg\EntityNotFoundException;
+
 /**
  * Edit the translations of a plugin
  *
@@ -9,6 +11,22 @@
 // Get inputs
 $current_language = elgg_extract('current_language', $vars);
 $plugin = elgg_extract('plugin_id', $vars);
+
+switch($plugin) {
+	case 'core':
+	case 'custom_keys':
+		break;
+	default:
+		$plugin_entity = elgg_get_plugin_from_id($plugin);
+		if (empty($plugin_entity)) {
+			throw new EntityNotFoundException();
+		}
+			
+		if (!$plugin_entity->isActive()) {
+			throw new EntityNotFoundException(elgg_echo('translation_editor:exception:plugin_disabled'));
+		}
+		break;
+}
 
 $translations = get_installed_translations();
 if (!(array_key_exists($current_language, $translations))) {

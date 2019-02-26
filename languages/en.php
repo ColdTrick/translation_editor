@@ -7,6 +7,8 @@ return array(
 	'translation_editor:language' => "Language",
 	'translation_editor:gatekeeper' => "You're not an authorized translation editor",
 	
+	'translation_editor:exception:plugin_disabled' => "You can not translate a disabled plugin",
+	
 	// menu
 	'translation_editor:menu:title' => "Translation Editor",
 	'translation_editor:menu:title:plugin' => "Translating %s to %s",
