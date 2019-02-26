@@ -2,7 +2,7 @@
 
 $options = [];
 $current_language = get_current_language();
-$keys = elgg()->translator->getAllLanguageCodes();
+$keys = elgg()->locale->getLanguageCodes();
 foreach ($keys as $lang_key) {
 	$trans_key = $lang_key;
 	if (elgg_language_key_exists($lang_key, $current_language) || elgg_language_key_exists($lang_key)) {
