@@ -193,6 +193,10 @@ function translation_editor_compare_translations(array $translated, array $plugi
 	$result = [];
 	
 	foreach ($translated as $key => $value) {
+		if (elgg_is_empty(trim($value))) {
+			// no need to return empty values
+			continue;
+		}
 		
 		if (!isset($plugin_original[$key])) {
 			// not yet translated
