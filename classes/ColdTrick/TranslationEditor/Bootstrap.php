@@ -5,20 +5,7 @@ namespace ColdTrick\TranslationEditor;
 use Elgg\DefaultPluginBootstrap;
 
 class Bootstrap extends DefaultPluginBootstrap {
-	
-	/**
-	 * {@inheritDoc}
-	 * @see \Elgg\DefaultPluginBootstrap::load()
-	 */
-	public function load() {
 		
-		// add the custom_keys_locations to language paths
-		$custom_keys_path = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR;
-		if (is_dir($custom_keys_path)) {
-			$this->elgg()->translator->registerLanguagePath($custom_keys_path);
-		}
-	}
-	
 	/**
 	 * {@inheritDoc}
 	 * @see \Elgg\DefaultPluginBootstrap::boot()

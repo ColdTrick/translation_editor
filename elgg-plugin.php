@@ -23,9 +23,6 @@ return [
 		'translation_editor/admin/add_language' => [
 			'access' => 'admin',
 		],
-		'translation_editor/admin/add_custom_key' => [
-			'access' => 'admin',
-		],
 		'translation_editor/admin/delete_language' => [
 			'access' => 'admin',
 		],

@@ -14,7 +14,6 @@ $plugin = elgg_extract('plugin_id', $vars);
 
 switch($plugin) {
 	case 'core':
-	case 'custom_keys':
 		break;
 	default:
 		$plugin_entity = elgg_get_plugin_from_id($plugin);
@@ -78,11 +77,6 @@ $title_text = elgg_echo('translation_editor:menu:title:plugin', [$plugin, $trans
 
 // page elements
 $translation = translation_editor_get_plugin($current_language, $plugin);
-if (($plugin == 'custom_keys') && elgg_is_admin_logged_in()) {
-	$form = elgg_view_form('translation_editor/admin/add_custom_key');
-	
-	$body .= elgg_view_module('info', elgg_echo('translation_editor:custom_keys:title'), $form);
-}
 
 $body_vars = [
 	'plugin' => $plugin,
