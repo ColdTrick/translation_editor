@@ -297,6 +297,9 @@ function translation_editor_load_translations($current_language = '') {
 	}
 	
 	if (!empty($translations)) {
+		// need to make sure translations are loaded in order to append/override existing translations
+		elgg_language_key_exists('ensure_translations_loaded', $current_language);
+		
 		add_translation($current_language, $translations);
 	}
 }
