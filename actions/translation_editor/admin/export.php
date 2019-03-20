@@ -16,12 +16,14 @@ foreach ($plugins as $plugin) {
 	$export[$language][$plugin] = translation_editor_read_translation($language, $plugin);
 }
 
+$result = json_encode($export, JSON_PRETTY_PRINT);
+
 header('Content-Type: application/json');
-header('Content-Length: ' . strlen($export));
+header('Content-Length: ' . strlen($result));
 header("Content-Disposition: attachment; filename=export_plugins_{$language}.json");
 
 header('Pragma: public');
 
-echo json_encode($export, JSON_PRETTY_PRINT);
+echo $result;
 
 exit();
