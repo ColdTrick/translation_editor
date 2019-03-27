@@ -1,10 +1,12 @@
 <?php
 /**
  * This file was created by Translation Editor v7.0-beta
- * On 2018-12-14 17:07
+ * On 2019-03-27 20:21
  */
 
 return array (
+  'translation_editor:exception:plugin_disabled' => 'Je kunt een uitgeschakelde plugin niet vertalen',
+  'translation_editor:cleanup:title' => 'Vertalingen opschonen',
   'translation_editor:action:toggle_translation_editor:make' => '%s is nu een vertaler',
   'translation_editor:export' => 'Exporteer vertalingen',
   'translation_editor:export:no_plugins' => 'Geen exporteerbare vertalingen gevonden',
