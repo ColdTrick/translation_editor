@@ -1,6 +1,21 @@
 Version history
 ===============
 
+7.0 (2019-03-27):
+
+- changed: check for plugin when translating
+- changed: increased minimal Elgg version requirement to 3.0
+- changed: layout changes for Elgg 3.0
+- changed: moved action registration to elgg-plugin file
+- changed: moved page handler to routes
+- changed: moved start.php to Bootstrap class
+- changed: use core features to toggle menu items
+- fixed: custom translations not saved consistently
+- fixed: export working again
+- fixed: make sure translations are loaded before merging custom
+- fixed: untranslated message
+- removed: ability to add custom keys has been removed
+
 6.1 (2018-02-28):
 
 - added: Spanish translation
