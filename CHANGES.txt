@@ -1,6 +1,10 @@
 Version history
 ===============
 
+7.0.1 (2019-03-28):
+
+- several small chores/fixes
+
 7.0 (2019-03-27):
 
 - changed: check for plugin when translating
