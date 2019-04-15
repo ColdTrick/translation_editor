@@ -249,7 +249,7 @@ function translation_editor_write_translation($current_language, $plugin, $trans
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 		return $translation->saveTranslations($translations);
 	} catch (InvalidArgumentException $e) {
-		elgg_dump($e);
+		elgg_log($e->getMessage());
 	}
 	
 	return false;
@@ -268,7 +268,7 @@ function translation_editor_read_translation($current_language, $plugin) {
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 		return $translation->readTranslations();
 	} catch (InvalidArgumentException $e) {
-		elgg_dump($e);
+		elgg_log($e->getMessage());
 	}
 	
 	return false;
@@ -317,7 +317,7 @@ function translation_editor_delete_translation($current_language, $plugin) {
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 		return $translation->removeTranslations();
 	} catch (InvalidArgumentException $e) {
-		elgg_dump($e);
+		elgg_log($e->getMessage());
 	}
 	
 	return false;
