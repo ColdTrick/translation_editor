@@ -21,12 +21,17 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	if (empty($plugin_stats['custom'])) {
 		continue;
 	}
-	$plugin = elgg_get_plugin_from_id($plugin_id);
-	if (!($plugin instanceof ElggPlugin)) {
-		continue;
-	}
 	
-	$exportable_plugins[$plugin->getDisplayName()] = $plugin_id;
+	if ($plugin_id == 'core') {
+		$exportable_plugins[$plugin_id] = $plugin_id;
+	} else {
+		$plugin = elgg_get_plugin_from_id($plugin_id);
+		if (!($plugin instanceof ElggPlugin)) {
+			continue;
+		}
+		
+		$exportable_plugins[$plugin->getDisplayName()] = $plugin_id;
+	}
 }
 
 if (empty($exportable_plugins)) {

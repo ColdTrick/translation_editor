@@ -35,7 +35,7 @@ foreach ($plugins as $plugin => $translations) {
 		continue;
 	}
 	
-	if (!elgg_get_plugin_from_id($plugin)) {
+	if ($plugin !== 'core' && !elgg_get_plugin_from_id($plugin)) {
 		continue;
 	}
 	
