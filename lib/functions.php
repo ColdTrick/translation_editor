@@ -368,19 +368,20 @@ function translation_editor_is_translation_editor($user_guid = 0) {
 		$user_guid = elgg_get_logged_in_user_guid();
 	}
 	
-	if (empty($user_guid)) {
+	$user = get_user($user_guid);
+	if (!$user instanceof \ElggUser) {
 		return false;
 	}
 	
-	if (elgg_is_admin_user($user_guid)) {
+	if ($user->isAdmin()) {
 		return true;
 	}
 	
 	// preload all editors
 	if (!isset($editors_cache)) {
 		$editors_cache = [];
-		
-		$options = [
+
+		$guids = elgg_get_entities([
 			'type' => 'user',
 			'limit' => false,
 			'metadata_name_value_pairs' => [
@@ -390,9 +391,7 @@ function translation_editor_is_translation_editor($user_guid = 0) {
 			'callback' => function ($row) {
 				return (int) $row->guid;
 			},
-		];
-		
-		$guids = elgg_get_entities($options);
+		]);
 		if (!empty($guids)) {
 			$editors_cache = $guids;
 		}

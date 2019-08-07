@@ -13,14 +13,11 @@ class TitleMenu {
 	/**
 	 * Add menu items to the title menu
 	 *
-	 * @param string          $hook   the name of the hook
-	 * @param string          $type   the type of the hook
-	 * @param \ElggMenuItem[] $return current menu items
-	 * @param array           $params provided params
+	 * @param \Elgg\Hook $hook 'register', 'menu:title'
 	 *
 	 * @return void|\ElggMenuItem[]
 	 */
-	public static function register($hook, $type, $return, $params) {
+	public static function register(\Elgg\Hook $hook) {
 		if (!elgg_in_context('translation_editor')) {
 			return;
 		}
@@ -28,6 +25,7 @@ class TitleMenu {
 		$current_language = get_input('current_language');
 		$plugin_id = get_input('plugin_id');
 		
+		$return = $hook->getValue();
 		// show import/export buttons only on language page (not on plugins)
 		if (elgg_is_admin_logged_in() && $current_language && empty($plugin_id)) {
 			$return[] = \ElggMenuItem::factory([
