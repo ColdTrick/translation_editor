@@ -1,6 +1,10 @@
 Version history
 ===============
 
+7.0.4 (2019-08-22):
+
+- several small chores/fixes
+
 7.0.3 (2019-05-02):
 
 - fixed: allow export and import of core translations
