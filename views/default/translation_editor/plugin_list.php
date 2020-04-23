@@ -19,7 +19,7 @@ $table_attributes = [
 	'class' => 'elgg-table',
 ];
 
-$list = '<table ' . elgg_format_attributes($table_attributes) . '>';
+$list = '<table ' . elgg()->html_formatter->formatAttributes($table_attributes) . '>';
 
 // header
 $list .= '<thead>';
@@ -38,7 +38,7 @@ $tbody_attributes = [
 	'title' => elgg_echo('translation_editor:plugin_list:title'),
 ];
 
-$list .= '<tbody ' . elgg_format_attributes($tbody_attributes) . '>';
+$list .= '<tbody ' . elgg()->html_formatter->formatAttributes($tbody_attributes) . '>';
 foreach ($plugins as $plugin_id => $plugin_stats) {
 	$plugin_title = '';
 	
