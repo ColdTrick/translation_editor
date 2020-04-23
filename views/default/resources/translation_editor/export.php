@@ -1,7 +1,5 @@
 <?php
 
-$title_text = elgg_echo('translation_editor:export');
-
 $current_language = elgg_extract('current_language', $vars);
 $translated_language = $current_language;
 if (elgg_language_key_exists($current_language, $current_language)) {
@@ -11,8 +9,13 @@ if (elgg_language_key_exists($current_language, $current_language)) {
 }
 
 // breadcrumb
-elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), 'translation_editor');
-elgg_push_breadcrumb($translated_language, "translation_editor/{$current_language}");
+elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), elgg_generate_url('default:translation_editor'));
+elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translation_editor', [
+	'current_language' => $current_language,
+]));
+
+// build page elements
+$title_text = elgg_echo('translation_editor:export');
 
 $plugins = translation_editor_get_plugins($current_language);
 $exportable_plugins = [];
@@ -44,10 +47,7 @@ if (empty($exportable_plugins)) {
 	$body = elgg_view_form('translation_editor/admin/export', [], $body_vars);
 }
 
-// Build page
-$page_data = elgg_view_layout('one_column', [
-	'title' => $title_text,
+// draw page
+echo elgg_view_page($title_text, [
 	'content' => $body,
 ]);
-
-echo elgg_view_page($title_text, $page_data);

@@ -7,7 +7,7 @@
 $current_language = elgg_extract('current_language', $vars, get_current_language());
 
 $translations = get_installed_translations();
-if (!(array_key_exists($current_language, $translations))) {
+if (!array_key_exists($current_language, $translations)) {
 	forward(elgg_generate_url('default:translation_editor', [
 		'current_language' => get_current_language(),
 	]));
@@ -70,11 +70,8 @@ $body .= elgg_view('translation_editor/plugin_list', [
 	'current_language' => $current_language,
 ]);
 
-// Build page
-$page_data = elgg_view_layout('one_column', [
-	'title' => $title_text,
+// draw page
+echo elgg_view_page($title_text, [
 	'content' => $body,
 ]);
-
-echo elgg_view_page($title_text, $page_data);
 	

@@ -26,8 +26,10 @@ if (elgg_language_key_exists($language, $language)) {
 $title_text = elgg_echo('translation_editor:search', [$q, $trans_lan]);
 
 // breadcrumb
-elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), 'translation_editor');
-elgg_push_breadcrumb($trans_lan, "translation_editor/{$language}");
+elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), elgg_generate_url('default:translation_editor'));
+elgg_push_breadcrumb($trans_lan, elgg_generate_url('default:translation_editor', [
+	'current_language' => $language,
+]));
 
 // build page elements
 
@@ -47,7 +49,6 @@ $body = elgg_view_form('translation_editor/search', $form_vars, $body_vars);
 
 // display search results
 if (!empty($found)) {
-
 	$body_vars = [
 		'results' => $found,
 		'current_language' => $language,
@@ -59,10 +60,7 @@ if (!empty($found)) {
 	]);
 }
 
-// Build page
-$page_data = elgg_view_layout('one_column', [
-	'title' => $title_text,
+// draw page
+echo elgg_view_page($title_text, [
 	'content' => $body,
 ]);
-
-echo elgg_view_page($title_text, $page_data);
