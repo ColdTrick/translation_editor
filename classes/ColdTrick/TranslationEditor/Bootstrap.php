@@ -72,10 +72,9 @@ class Bootstrap extends DefaultPluginBootstrap {
 		];
 		$load_languages = array_unique($load_languages);
 		
-		$disabled_languages = translation_editor_get_disabled_languages();
-		
+		$allowed_languages = $translator->getAllowedLanguages();
 		foreach ($load_languages as $language) {
-			if (in_array($language, $disabled_languages)) {
+			if (!in_array($language, $allowed_languages)) {
 				continue;
 			}
 			
@@ -92,7 +91,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	protected function registerPluginHooks() {
 		$hooks = $this->elgg()->hooks;
 		
-		$hooks->registerHandler('languages', 'translations', __NAMESPACE__ . '\Translator::removeLanguages');
 		$hooks->registerHandler('register', 'menu:page', __NAMESPACE__ . '\PageMenu::register');
 		$hooks->registerHandler('register', 'menu:site', __NAMESPACE__ . '\SiteMenu::register');
 		$hooks->registerHandler('register', 'menu:title', __NAMESPACE__ . '\TitleMenu::register');

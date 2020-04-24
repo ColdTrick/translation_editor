@@ -1,13 +1,16 @@
 <?php
 
 return array(
-	//'translation_editor' => "Translation Editor",
 
 	// global
 	'translation_editor:language' => "Language",
 	'translation_editor:gatekeeper' => "You're not an authorized translation editor",
 	
 	'translation_editor:exception:plugin_disabled' => "You can not translate a disabled plugin",
+	
+	// upgrades
+	'translation_editor:upgrade:2020042401:title' => "Migrate Translation Editor disabled languages",
+	'translation_editor:upgrade:2020042401:description' => "Since allowed language management has moved to Elgg core, you might want to migratie the previous Translation Editor setting.",
 	
 	// menu
 	'translation_editor:menu:title' => "Translation Editor",

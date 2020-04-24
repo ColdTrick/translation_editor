@@ -3,8 +3,7 @@
 use Elgg\Router\Middleware\AdminGatekeeper;
 use ColdTrick\TranslationEditor\EditorGatekeeper;
 use ColdTrick\TranslationEditor\Bootstrap;
-
-define('TRANSLATION_EDITOR_DISABLED_LANGUAGE', 'disabled_languages');
+use ColdTrick\TranslationEditor\Upgrades\MigrateDisabledLanguages;
 
 require_once(__DIR__ . '/lib/functions.php');
 
@@ -15,9 +14,6 @@ return [
 			'access' => 'admin',
 		],
 		'translation_editor/admin/delete' => [
-			'access' => 'admin',
-		],
-		'translation_editor/admin/disable_languages' => [
 			'access' => 'admin',
 		],
 		'translation_editor/admin/add_language' => [
@@ -73,5 +69,8 @@ return [
 				EditorGatekeeper::class,
 			],
 		],
+	],
+	'upgrades' => [
+		MigrateDisabledLanguages::class,
 	],
 ];

@@ -63,7 +63,6 @@ $title_text = elgg_echo('translation_editor:menu:title:plugin', [$plugin, $trans
 
 $languages = array_keys($translations);
 
-$disabled_languages = translation_editor_get_disabled_languages();
 $site_language = elgg_get_config('language', 'en');
 
 // language selector
@@ -71,7 +70,6 @@ $body = elgg_view('translation_editor/language_selector', [
 	'current_language' => $current_language,
 	'plugin' => $plugin,
 	'languages' => $languages,
-	'disabled_languages' => $disabled_languages,
 	'site_language' => $site_language
 ]);
 

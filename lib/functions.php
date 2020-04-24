@@ -524,28 +524,6 @@ function translation_editor_get_string_parameters($string, $count = true) {
 }
 
 /**
- * Get the disabled languages
- *
- * @return array
- */
-function translation_editor_get_disabled_languages() {
-	static $result;
-
-	if (isset($result)) {
-		return $result;
-	}
-		
-	$result = [];
-		
-	$disabled_languages = elgg_get_plugin_setting(TRANSLATION_EDITOR_DISABLED_LANGUAGE, 'translation_editor');
-	if (!empty($disabled_languages)) {
-		$result = string_to_tag_array($disabled_languages);
-	}
-
-	return $result;
-}
-
-/**
  * Protect pages for only translation editor
  *
  * @return void

@@ -3,7 +3,6 @@
 	td, 
 	th {
 		&.translation-editor-flag,
-		&.translation-editor-disable,
 		&.translation-editor-delete {
 			width: 1%;
 			text-align: center;

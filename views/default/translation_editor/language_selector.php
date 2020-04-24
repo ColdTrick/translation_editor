@@ -6,7 +6,6 @@
 $languages = elgg_extract('languages', $vars);
 $current_language = elgg_extract('current_language', $vars);
 $plugin = elgg_extract('plugin', $vars);
-$disabled_languages = elgg_extract('disabled_languages', $vars);
 $site_language = elgg_extract('site_language', $vars);
 
 $language_route = 'default:translation_editor';
@@ -33,7 +32,6 @@ if (!empty($languages)) {
 	$header[] = elgg_format_element('th', ['class' => 'translation-editor-flag'], '&nbsp;');
 	$header[] = elgg_format_element('th', [], elgg_echo('translation_editor:language'));
 	if (elgg_is_admin_logged_in()) {
-		$header[] = elgg_format_element('th', ['class' => 'translation-editor-disable'], elgg_echo('disable'));
 		$header[] = elgg_format_element('th', ['class' => 'translation-editor-delete'], elgg_echo('delete'));
 	}
 	$header = elgg_format_element('tr', [], implode(PHP_EOL, $header));
@@ -93,20 +91,6 @@ if (!empty($languages)) {
 		}
 		
 		if (elgg_is_admin_logged_in()) {
-			elgg_require_js('translation_editor/disable_language');
-			
-			// disable language
-			if ($language !== 'en') {
-				$row[] = elgg_format_element('td', ['class' => 'translation-editor-disable'], elgg_view('input/checkbox', [
-					'name' => 'disabled_languages[]',
-					'value' => $language,
-					'default' => false,
-					'checked' => in_array($language, $disabled_languages),
-				]));
-			} else {
-				$row[] = elgg_format_element('td', ['class' => 'translation-editor-disable'], '&nbsp;');
-			}
-			
 			// delete
 			if ($allow_delete) {
 				$row[] = elgg_format_element('td', ['class' => 'translation-editor-delete'], elgg_view('output/url', [
