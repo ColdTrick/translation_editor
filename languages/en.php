@@ -11,6 +11,8 @@ return array(
 	// upgrades
 	'translation_editor:upgrade:2020042401:title' => "Migrate Translation Editor disabled languages",
 	'translation_editor:upgrade:2020042401:description' => "Since allowed language management has moved to Elgg core, you might want to migratie the previous Translation Editor setting.",
+	'translation_editor:upgrade:2020051801:title' => "Remove remaining custom keys",
+	'translation_editor:upgrade:2020051801:description' => "Custom key support was removed in Translation Editor 7.0. This upgrade removes the left over keys.",
 	
 	// menu
 	'translation_editor:menu:title' => "Translation Editor",
@@ -54,12 +56,7 @@ When you're finished you can delete the file.",
 	'translation_editor:forms:search:default' => "Find a translation",
 	'translation_editor:search_results:no_results' => "No translation found",
 
-	// custom key
-	'translation_editor:custom_keys:title' => "Add a custom language key",
-	'translation_editor:custom_keys:key' => "Key",
-	'translation_editor:custom_keys:translation' => "Translation",
-	'translation_editor:custom_keys:translation_info' => "New keys will always be created as an English translation. After creation you can translate it to other languages.",
-
+	// plugin translation
 	'translation_editor:plugin_edit:title' => "Edit the translations for plugin:",
 	'translation_editor:plugin_edit:show' => "show",
 	'translation_editor:plugin_edit:show:missing' => "missing",

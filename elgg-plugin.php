@@ -4,6 +4,7 @@ use Elgg\Router\Middleware\AdminGatekeeper;
 use ColdTrick\TranslationEditor\EditorGatekeeper;
 use ColdTrick\TranslationEditor\Bootstrap;
 use ColdTrick\TranslationEditor\Upgrades\MigrateDisabledLanguages;
+use ColdTrick\TranslationEditor\Upgrades\RemoveCustomKeysFolder;
 
 require_once(__DIR__ . '/lib/functions.php');
 
@@ -72,5 +73,6 @@ return [
 	],
 	'upgrades' => [
 		MigrateDisabledLanguages::class,
+		RemoveCustomKeysFolder::class,
 	],
 ];
