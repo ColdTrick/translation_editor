@@ -1,10 +1,14 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2019-03-27 20:21
+ * This file was created by Translation Editor v7.0.4
+ * On 2020-05-18 13:14
  */
 
 return array (
+  'translation_editor:upgrade:2020042401:title' => 'Migreer uitgeschakelde talen van Translation Editor',
+  'translation_editor:upgrade:2020042401:description' => 'Omdat het beheren van toegestane talen is verplaatst naar ELgg core kun je de instellingen van Translation Editor migreren naar de nieuwe instelling.',
+  'translation_editor:upgrade:2020051801:title' => 'Verwijder overgebleven eigen vertaalsleutels',
+  'translation_editor:upgrade:2020051801:description' => 'Ondersteuning voor eigen vertaalsleutels in verwijderd in Translation Editor 7.0. Deze upgrade verwijderd ook de achtergebleven sleutels.',
   'translation_editor:exception:plugin_disabled' => 'Je kunt een uitgeschakelde plugin niet vertalen',
   'translation_editor:cleanup:title' => 'Vertalingen opschonen',
   'translation_editor:action:toggle_translation_editor:make' => '%s is nu een vertaler',
