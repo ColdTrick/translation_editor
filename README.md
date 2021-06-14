@@ -1,7 +1,7 @@
 Translation Editor
 ==================
 
-![Elgg 3.3](https://img.shields.io/badge/Elgg-4.0-green.svg)
+![Elgg 4.0](https://img.shields.io/badge/Elgg-4.0-green.svg)
 [![Build Status](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/coldtrick/translation_editor/v/stable.svg)](https://packagist.org/packages/coldtrick/translation_editor)
