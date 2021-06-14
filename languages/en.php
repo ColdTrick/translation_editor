@@ -4,6 +4,7 @@ return array(
 
 	// global
 	'translation_editor:language' => "Language",
+	'translation_editor:language:unsupported' => "Language unsupported",
 	'translation_editor:gatekeeper' => "You're not an authorized translation editor",
 	
 	'translation_editor:exception:plugin_disabled' => "You can not translate a disabled plugin",

@@ -1,10 +1,11 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0.4
- * On 2020-05-18 13:14
+ * This file was created by Translation Editor v8.0
+ * On 2021-06-14 14:39
  */
 
 return array (
+  'translation_editor:language:unsupported' => 'Taal wordt niet ondersteund',
   'translation_editor:upgrade:2020042401:title' => 'Migreer uitgeschakelde talen van Translation Editor',
   'translation_editor:upgrade:2020042401:description' => 'Omdat het beheren van toegestane talen is verplaatst naar ELgg core kun je de instellingen van Translation Editor migreren naar de nieuwe instelling.',
   'translation_editor:upgrade:2020051801:title' => 'Verwijder overgebleven eigen vertaalsleutels',

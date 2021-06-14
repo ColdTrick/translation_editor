@@ -12,7 +12,7 @@ foreach ($keys as $lang_key) {
 	$options[$lang_key] = $trans_key;
 }
 
-$installed_languages = get_installed_translations();
+$installed_languages = elgg()->translator->getInstalledTranslations();
 foreach ($installed_languages as $index => $lang) {
 	unset($options[$index]);
 }

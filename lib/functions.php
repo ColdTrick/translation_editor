@@ -524,27 +524,11 @@ function translation_editor_get_string_parameters($string, $count = true) {
 }
 
 /**
- * Protect pages for only translation editor
- *
- * @return void
- */
-function translation_editor_gatekeeper() {
-	elgg_gatekeeper();
-	
-	if (translation_editor_is_translation_editor()) {
-		return;
-	}
-	
-	register_error(elgg_echo('translation_editor:gatekeeper'));
-	forward();
-}
-
-/**
  * Get available languages on the system
  *
  * Used for caching purpose
  *
- * @see elgg_get_available_languages()
+ * @see elgg()->translator->getAvailableLanguages()()
  * @return array
  */
 function translation_editor_get_available_languages() {
@@ -554,7 +538,7 @@ function translation_editor_get_available_languages() {
 		return $result;
 	}
 	
-	$result = elgg_get_available_languages();
+	$result = elgg()->translator->getAvailableLanguages();
 	
 	return $result;
 }

@@ -1,6 +1,8 @@
 <?php
 
-translation_editor_gatekeeper();
+if (!translation_editor_is_translation_editor()) {
+	return elgg_error_response(elgg_echo('translation_editor:gatekeeper'));
+}
 
 $language = get_input('language');
 if (empty($language)) {

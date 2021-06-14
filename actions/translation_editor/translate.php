@@ -13,7 +13,7 @@ if (!is_array($translation)) {
 	return elgg_error_response(elgg_echo('translation_editor:action:translate:error:input'));
 }
 
-$trans = get_installed_translations();
+$trans = elgg()->translator->getInstalledTranslations();
 
 foreach ($translation as $language => $plugins) {
 	

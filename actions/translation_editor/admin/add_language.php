@@ -17,9 +17,10 @@ if (!empty($custom_languages)) {
 	$code = implode(',', array_unique($custom_languages));
 }
 
-elgg_set_plugin_setting('custom_languages', $code, 'translation_editor');
+$plugin = elgg_get_plugin_from_id('translation_editor');
+$plugin->setSetting('custom_languages', $code);
 
 // invalidate cache
-elgg_flush_caches();
+elgg_invalidate_caches();
 
 return elgg_ok_response('', elgg_echo('translation_editor:action:add_language:success'));

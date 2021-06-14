@@ -1,4 +1,6 @@
 <?php
+use Elgg\Exceptions\Http\BadRequestException;
+
 /**
  * display the search results
  */
@@ -6,16 +8,24 @@
 // get inputs
 $q = get_input('q');
 if (empty($q)) {
-	forward(REFERER);
+	$exception = new BadRequestException(elgg_echo('error:missing_data'));
+	$exception->setRedirectUrl(REFERER);
+	
+	throw $exception;
 }
 
 $language = get_input('language', 'en');
 
 $found = translation_editor_search_translation($q, $language);
-$trans = get_installed_translations();
+$trans = elgg()->translator->getInstalledTranslations();
 
 if (!array_key_exists($language, $trans)) {
-	forward('translation_editor');
+	$exception = new BadRequestException(elgg_echo('translation_editor:language:unsupported'));
+	$exception->setRedirectUrl(elgg_generate_url('default:translation_editor', [
+		'current_language' => get_current_language(),
+	]));
+	
+	throw $exception;
 }
 
 $trans_lan = elgg_echo($language);

@@ -9,6 +9,9 @@ use ColdTrick\TranslationEditor\Upgrades\RemoveCustomKeysFolder;
 require_once(__DIR__ . '/lib/functions.php');
 
 return [
+	'plugin' => [
+		'version' => '8.0',
+	],
 	'bootstrap' => Bootstrap::class,
 	'actions' => [
 		'translation_editor/admin/toggle_translation_editor' => [

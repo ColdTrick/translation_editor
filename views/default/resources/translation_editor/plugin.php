@@ -27,9 +27,10 @@ switch($plugin) {
 		break;
 }
 
-$translations = get_installed_translations();
+$translations = elgg()->translator->getInstalledTranslations();
 if (!array_key_exists($current_language, $translations)) {
-	forward(elgg_generate_url('default:translation_editor', [
+	$exception = new BadRequestException(elgg_echo('translation_editor:language:unsupported'));
+	$exception->setRedirectUrl(elgg_generate_url('default:translation_editor', [
 		'current_language' => get_current_language(),
 	]));
 }
