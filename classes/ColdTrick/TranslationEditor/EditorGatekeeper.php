@@ -3,7 +3,7 @@
 namespace ColdTrick\TranslationEditor;
 
 use Elgg\Request;
-use Elgg\HttpException;
+use Elgg\Exceptions\HttpException;
 
 class EditorGatekeeper {
 	

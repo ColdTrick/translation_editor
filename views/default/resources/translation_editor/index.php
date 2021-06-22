@@ -3,6 +3,8 @@
  * Get an overview of the translations, eighter a listing off all plugins or an overview of the available keys in a plugin
  */
 
+use Elgg\Exceptions\Http\BadRequestException;
+
 // Get inputs
 $current_language = elgg_extract('current_language', $vars, get_current_language());
 

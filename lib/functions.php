@@ -5,6 +5,7 @@
 
 use Elgg\Project\Paths;
 use Elgg\Includer;
+use Elgg\Exceptions\InvalidArgumentException;
 
 /**
  * Returns array of all available plugins and their individual language keys

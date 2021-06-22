@@ -6,7 +6,8 @@
  * @uses $vars['plugin_id'] the plugin id for the plugin to edit
  */
 
-use Elgg\EntityNotFoundException;
+use Elgg\Exceptions\Http\BadRequestException;
+use Elgg\Exceptions\Http\EntityNotFoundException;
 
 // Get inputs
 $current_language = elgg_extract('current_language', $vars);

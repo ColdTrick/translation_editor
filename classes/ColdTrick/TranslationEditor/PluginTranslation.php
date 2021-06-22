@@ -2,6 +2,8 @@
 
 namespace ColdTrick\TranslationEditor;
 
+use Elgg\Exceptions\InvalidArgumentException;
+
 class PluginTranslation {
 	
 	/**
@@ -20,17 +22,17 @@ class PluginTranslation {
 	 * @param string $plugin_id plugin id
 	 * @param string $language  language for the translations
 	 *
-	 * @throws \InvalidArgumentException
+	 * @throws InvalidArgumentException
 	 */
 	public function __construct($plugin_id, $language = 'en') {
 		if (empty($plugin_id)) {
-			throw new \InvalidArgumentException('A plugin id must be set');
+			throw new InvalidArgumentException('A plugin id must be set');
 		}
 		if (empty($language)) {
-			throw new \InvalidArgumentException('A language must be set');
+			throw new InvalidArgumentException('A language must be set');
 		}
 		if (!in_array($language, translation_editor_get_available_languages())) {
-			throw new \InvalidArgumentException("Language {$language} isn't supported by the system");
+			throw new InvalidArgumentException("Language {$language} isn't supported by the system");
 		}
 		
 		$this->plugin_id = $plugin_id;
