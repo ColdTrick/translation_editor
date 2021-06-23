@@ -15,35 +15,35 @@ class RemoveCustomKeysFolder implements AsynchronousUpgrade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getVersion() {
+	public function getVersion(): int {
 		return 2020051801;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function needsIncrementOffset() {
+	public function needsIncrementOffset(): bool {
 		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function shouldBeSkipped() {
+	public function shouldBeSkipped(): bool {
 		return !is_dir($this->getPath());
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function countItems() {
+	public function countItems(): int {
 		return (int) !$this->shouldBeSkipped();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function run(Result $result, $offset) {
+	public function run(Result $result, $offset): Result {
 		
 		if (elgg_delete_directory($this->getPath())) {
 			$result->addSuccesses();
@@ -59,7 +59,7 @@ class RemoveCustomKeysFolder implements AsynchronousUpgrade {
 	 *
 	 * @return string
 	 */
-	protected function getPath() {
+	protected function getPath(): string {
 		return elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR . 'custom_keys' . DIRECTORY_SEPARATOR;
 	}
 }

@@ -13,21 +13,21 @@ class MigrateDisabledLanguages implements AsynchronousUpgrade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function getVersion() {
+	public function getVersion(): int {
 		return 2020042401;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function needsIncrementOffset() {
+	public function needsIncrementOffset(): bool {
 		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function shouldBeSkipped() {
+	public function shouldBeSkipped(): bool {
 		if (!empty(elgg_get_config('allowed_languages'))) {
 			// core already has a setting
 			return true;
@@ -44,14 +44,14 @@ class MigrateDisabledLanguages implements AsynchronousUpgrade {
 	/**
 	 * {@inheritDoc}
 	 */
-	public function countItems() {
+	public function countItems(): int {
 		return (int) !$this->shouldBeSkipped();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public function run(Result $result, $offset) {
+	public function run(Result $result, $offset): Result {
 		$setting = elgg_get_plugin_setting('disabled_languages', 'translation_editor');
 		$setting = explode(',', $setting);
 		
