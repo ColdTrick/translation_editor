@@ -1,5 +1,7 @@
 <?php
 
+use Elgg\Project\Paths;
+
 if (!translation_editor_is_translation_editor()) {
 	return elgg_error_response(elgg_echo('translation_editor:gatekeeper'));
 }
@@ -11,7 +13,7 @@ if (empty($language)) {
 
 $base_path = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR;
 $filename = $base_path . $language . DIRECTORY_SEPARATOR . 'translation_editor_cleanup.json';
-$filename = sanitise_filepath($filename, false);
+$filename = Paths::sanitize($filename, false);
 if (!file_exists($filename)) {
 	return elgg_error_response(elgg_echo('translation_editor:action:cleanup:remove:error:no_file'));
 }
