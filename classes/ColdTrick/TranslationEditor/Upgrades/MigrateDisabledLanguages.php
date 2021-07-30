@@ -52,7 +52,9 @@ class MigrateDisabledLanguages implements AsynchronousUpgrade {
 	 * {@inheritDoc}
 	 */
 	public function run(Result $result, $offset): Result {
-		$setting = elgg_get_plugin_setting('disabled_languages', 'translation_editor');
+		$plugin = elgg_get_plugin_from_id('translation_editor');
+		
+		$setting = $plugin->getSetting('disabled_languages');
 		$setting = explode(',', $setting);
 		
 		$installed_translations = elgg()->translator->getInstalledTranslations();
@@ -61,7 +63,7 @@ class MigrateDisabledLanguages implements AsynchronousUpgrade {
 		$allowed = array_diff($installed_translations, $setting);
 		if (elgg_save_config('allowed_languages', implode(',', $allowed))) {
 			// remove setting from Translation Editor
-			elgg_unset_plugin_setting('disabled_languages', 'translation_editor');
+			$plugin->unsetSetting('disabled_languages');
 			
 			$result->addSuccesses();
 		} else {
