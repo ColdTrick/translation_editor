@@ -11,6 +11,10 @@ if (!translation_editor_is_translation_editor()) {
 }
 
 $translation = translation_editor_get_plugin($current_language, $plugin);
+if (empty($translation)) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
+}
+
 $translation = $translation['current_language'];
 
 $content = [];
