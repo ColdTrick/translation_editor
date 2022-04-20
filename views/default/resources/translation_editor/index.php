@@ -6,7 +6,7 @@
 use Elgg\Exceptions\Http\BadRequestException;
 
 // Get inputs
-$current_language = elgg_extract('current_language', $vars, get_current_language());
+$current_language = elgg_extract('current_language', $vars, get_current_language(), false);
 
 $translations = elgg()->translator->getInstalledTranslations();
 if (!array_key_exists($current_language, $translations)) {
