@@ -51,13 +51,13 @@ foreach ($translation as $language => $plugins) {
 		$translated = translation_editor_compare_translations($translate_input, $plugin_original);
 		if (!empty($translated)) {
 			if (translation_editor_write_translation($language, $plugin_name, $translated)) {
-				system_message(elgg_echo('translation_editor:action:translate:success'));
+				elgg_register_success_message(elgg_echo('translation_editor:action:translate:success'));
 			} else {
-				register_error(elgg_echo('translation_editor:action:translate:error:write'));
+				elgg_register_error_message(elgg_echo('translation_editor:action:translate:error:write'));
 			}
 		} else {
 			translation_editor_delete_translation($language, $plugin_name);
-			system_message(elgg_echo('translation_editor:action:translate:success'));
+			elgg_register_success_message(elgg_echo('translation_editor:action:translate:success'));
 		}
 	}
 	
