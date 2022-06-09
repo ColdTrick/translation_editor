@@ -78,4 +78,11 @@ return [
 		MigrateDisabledLanguages::class,
 		RemoveCustomKeysFolder::class,
 	],
+	'hooks' => [
+		'languages' => [
+			'translations' => [
+				'\ColdTrick\TranslationEditor\Languages::registerCustomLanguages' => [],
+			],
+		],
+	],
 ];

@@ -23,7 +23,7 @@ if (empty($custom_languages)) {
 $custom_languages = string_to_tag_array($custom_languages);
 
 $index = array_search($language, $custom_languages);
-if ($index == false) {
+if ($index === false) {
 	return elgg_ok_response();
 }
 

@@ -73,9 +73,9 @@ if (!empty($languages)) {
 		}
 		
 		$language_url = '';
-		if ($language !== $current_language) {
+		if ($language === $current_language) {
 			$allow_delete = false;
-			
+		} else {
 			$language_route_params['current_language'] = $language;
 			$language_url = elgg_generate_url($language_route, $language_route_params);
 		}

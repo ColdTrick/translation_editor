@@ -11,7 +11,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 * @see \Elgg\DefaultPluginBootstrap::boot()
 	 */
 	public function boot() {
-		$this->registerCustomLanguages();
 		$this->loadCustomTranslations();
 	}
 	
@@ -32,26 +31,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 */
 	public function upgrade() {
 		Upgrade::cleanupCustomTranslations();
-	}
-	
-	/**
-	 * Register custom languages
-	 *
-	 * @return void
-	 */
-	protected function registerCustomLanguages() {
-		
-		$custom_languages = $this->plugin->getSetting('custom_languages');
-		if (empty($custom_languages)) {
-			return;
-		}
-		
-		$translator = $this->elgg()->translator;
-		
-		$custom_languages = explode(',', $custom_languages);
-		foreach ($custom_languages as $lang) {
-			$translator->addTranslation($lang, ['' => '']);
-		}
 	}
 	
 	/**

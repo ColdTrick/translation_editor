@@ -166,7 +166,7 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		$result['total'] = $key_count;
 		$result['exists'] = $exists_count;
 		$result['en'] = $plugin_keys;
-		$result['current_language'] = array_intersect_key($backup_full[$current_language], $plugin_keys);
+		$result['current_language'] = array_intersect_key(elgg_extract($current_language, $backup_full, []), $plugin_keys);
 		$result['original_language'] = [];
 		if (file_exists("{$plugin_language_path}{$current_language}.php")) {
 			$result['original_language'] = Includer::includeFile("{$plugin_language_path}{$current_language}.php");
