@@ -423,7 +423,7 @@ function translation_editor_search_translation($query, $language = 'en') {
 		if (empty($translations) || empty(elgg_extract('total', $translations))) {
 			continue;
 		}
-
+		
 		foreach ($translations['en'] as $key => $value) {
 			if (stristr($key, $query) || stristr($value, $query) || (array_key_exists($key, $translations['current_language']) && stristr($translations['current_language'][$key], $query))) {
 				if (!array_key_exists($plugin, $found)) {
@@ -432,17 +432,14 @@ function translation_editor_search_translation($query, $language = 'en') {
 				
 				$found[$plugin]['en'][$key] = $value;
 				if (array_key_exists($key, $translations['current_language'])) {
+					$found[$plugin]['original_language'][$key] = elgg_extract($key, $translations['original_language']);
 					$found[$plugin]['current_language'][$key] = $translations['current_language'][$key];
 				}
 			}
 		}
 	}
 	
-	if (empty($found)) {
-		return false;
-	}
-
-	return $found;
+	return $found ?: false;
 }
 
 /**

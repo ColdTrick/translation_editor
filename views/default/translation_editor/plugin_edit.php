@@ -9,6 +9,7 @@ $plugin = elgg_extract('plugin', $vars);
 $working_translation = elgg_extract('translation', $vars);
 $english = elgg_extract('en', $working_translation);
 $translated_language = elgg_extract('current_language', $working_translation);
+$original_language = elgg_extract('original_language', $working_translation);
 $custom = elgg_extract('custom', $working_translation);
 
 $missing_count = 0;
@@ -48,6 +49,10 @@ if (!empty($english)) {
 			'translation' => [
 				'key' => $en_key,
 				'value' => elgg_extract($en_key, $translated_language),
+			],
+			'original' => [
+				'key' => $en_key,
+				'value' => elgg_extract($en_key, $original_language),
 			],
 			'plugin' => $plugin,
 			'language' => $current_language,

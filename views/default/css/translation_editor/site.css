@@ -55,7 +55,7 @@ img.translation-editor-flag {
 	}
 
 	tr[rel='missing'],
-	&.translation-editor-translation-table-no-missing tr {
+	&.translation-editor-translation-table-no-missing tr:not(.translation-editor-original) {
 		display: table-row;
 		<!--
 		display: inline-block;
@@ -79,7 +79,15 @@ img.translation-editor-flag {
 	}
 	
 	td.translation-editor-translation-key {
-		cursor: help;
+		text-align: right;
+		
+		.elgg-icon-key {
+			cursor: help;
+		}
+		.elgg-icon-eye {
+			margin-right: .5rem;
+			cursor: pointer;
+		}
 	}
 }
 

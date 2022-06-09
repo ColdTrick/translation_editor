@@ -13,7 +13,9 @@ define(function(require){
 			return;
 		}
 		
-		var $tr = $('.translation-editor-translation-table tbody tr');
+		$('.translation-editor-translation-table tbody tr.translation-editor-original').hide();
+		
+		var $tr = $('.translation-editor-translation-table tbody tr:not(.translation-editor-original)');
 		if (rel === 'all') {
 			$tr.show();
 		} else {

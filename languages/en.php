@@ -57,6 +57,8 @@ When you're finished you can delete the file.",
 	'translation_editor:forms:search:default' => "Find a translation",
 	'translation_editor:search_results:no_results' => "No translation found",
 
+	'translation_editor:show_original' => "Show original translation",
+
 	// plugin translation
 	'translation_editor:plugin_edit:title' => "Edit the translations for plugin:",
 	'translation_editor:plugin_edit:show' => "show",
