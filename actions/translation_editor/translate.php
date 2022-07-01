@@ -3,7 +3,7 @@
  * Add translations for the current plugin
  */
 
-$translation = get_input('translation');
+$translation = get_input('translation', null, false);
 
 if (!translation_editor_is_translation_editor()) {
 	return elgg_error_response(elgg_echo('translation_editor:action:translate:error:not_authorized'));
