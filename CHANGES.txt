@@ -1,6 +1,10 @@
 Version history
 ===============
 
+10.1.1 (2022-07-12):
+
+- fixed: do not strip translation input
+
 10.1 (2022-06-22):
 
 - added: toggle to show original translation
