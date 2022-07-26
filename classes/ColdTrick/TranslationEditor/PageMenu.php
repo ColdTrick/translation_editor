@@ -28,7 +28,7 @@ class PageMenu {
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor',
 			'href' => elgg_generate_url('default:translation_editor', [
-				'current_language' => get_current_language(),
+				'current_language' => elgg_get_current_language(),
 			]),
 			'text' => elgg_echo('translation_editor:menu:title'),
 			'parent_name' => 'configure_utilities',

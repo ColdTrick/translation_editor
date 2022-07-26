@@ -285,7 +285,7 @@ function translation_editor_read_translation($current_language, $plugin) {
 function translation_editor_load_translations($current_language = '') {
 	
 	if (empty($current_language)) {
-		$current_language = get_current_language();
+		$current_language = elgg_get_current_language();
 	}
 	
 	// load translations
@@ -301,7 +301,7 @@ function translation_editor_load_translations($current_language = '') {
 		// need to make sure translations are loaded in order to append/override existing translations
 		elgg_language_key_exists('ensure_translations_loaded', $current_language);
 		
-		add_translation($current_language, $translations);
+		elgg()->translator->addTranslation($current_language, $translations);
 	}
 }
 
@@ -452,7 +452,7 @@ function translation_editor_search_translation($query, $language = 'en') {
 function translation_editor_merge_translations($language = '') {
 	
 	if (empty($language)) {
-		$language = get_current_language();
+		$language = elgg_get_current_language();
 	}
 	
 	if (empty($language)) {

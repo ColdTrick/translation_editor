@@ -22,7 +22,7 @@ $trans = elgg()->translator->getInstalledTranslations();
 if (!array_key_exists($language, $trans)) {
 	$exception = new BadRequestException(elgg_echo('translation_editor:language:unsupported'));
 	$exception->setRedirectUrl(elgg_generate_url('default:translation_editor', [
-		'current_language' => get_current_language(),
+		'current_language' => elgg_get_current_language(),
 	]));
 	
 	throw $exception;

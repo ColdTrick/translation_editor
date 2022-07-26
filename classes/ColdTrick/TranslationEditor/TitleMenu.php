@@ -86,7 +86,7 @@ class TitleMenu {
 			'icon' => 'angle-double-down',
 			'link_class' => 'elgg-button elgg-button-action',
 			'priority' => 200,
-			'rel' => 'toggle',
+			'item_class' => 'elgg-toggle',
 			'data-toggle-selector' => '#translation-editor-language-selection, .elgg-menu-title li[class*="language-selector"] a',
 			'data-toggle-slide' => 0,
 		]);
@@ -99,7 +99,7 @@ class TitleMenu {
 			'link_class' => 'elgg-button elgg-button-action',
 			'priority' => 201,
 			'style' => 'display: none;', // needed to prevent misallignment
-			'rel' => 'toggle',
+			'item_class' => 'elgg-toggle',
 			'data-toggle-selector' => '#translation-editor-language-selection, .elgg-menu-title li[class*="language-selector"] a',
 			'data-toggle-slide' => 0,
 		]);

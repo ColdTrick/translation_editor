@@ -1,7 +1,7 @@
 <?php
 
 $options = [];
-$current_language = get_current_language();
+$current_language = elgg_get_current_language();
 $keys = elgg()->locale->getLanguageCodes();
 foreach ($keys as $lang_key) {
 	$trans_key = $lang_key;

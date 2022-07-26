@@ -29,7 +29,7 @@ class SiteMenu {
 			'name' => 'translation_editor',
 			'text' => elgg_echo('translation_editor:menu:title'),
 			'href' => elgg_generate_url('default:translation_editor', [
-				'current_language' => get_current_language(),
+				'current_language' => elgg_get_current_language(),
 			]),
 			'icon' => 'language',
 		]);

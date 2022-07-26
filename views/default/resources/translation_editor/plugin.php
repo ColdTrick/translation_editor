@@ -32,13 +32,13 @@ $translations = elgg()->translator->getInstalledTranslations();
 if (!array_key_exists($current_language, $translations)) {
 	$exception = new BadRequestException(elgg_echo('translation_editor:language:unsupported'));
 	$exception->setRedirectUrl(elgg_generate_url('default:translation_editor', [
-		'current_language' => get_current_language(),
+		'current_language' => elgg_get_current_language(),
 	]));
 }
 
 // breadcrumb
 elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), elgg_generate_url('default:translation_editor', [
-	'current_language' => get_current_language(),
+	'current_language' => elgg_get_current_language(),
 ]));
 
 // add current language to breadcrumb

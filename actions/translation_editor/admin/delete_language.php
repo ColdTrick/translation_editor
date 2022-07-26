@@ -15,12 +15,12 @@ if ($completeness !== (float) 0) {
 }
 
 // get all the custom languages
-$custom_languages = elgg_get_plugin_setting('custom_languages', 'translation_editor');
+$custom_languages = (string) elgg_get_plugin_setting('custom_languages', 'translation_editor');
 if (empty($custom_languages)) {
 	return elgg_ok_response();
 }
 
-$custom_languages = string_to_tag_array($custom_languages);
+$custom_languages = elgg_string_to_array($custom_languages);
 
 $index = array_search($language, $custom_languages);
 if ($index === false) {

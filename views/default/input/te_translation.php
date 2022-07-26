@@ -10,6 +10,7 @@
  * @uses $vars['plugin'] plugin id
  */
 
+elgg_require_js('elgg/toggle');
 elgg_require_js('translation_editor/edit_translation');
 
 $current_language = elgg_extract('language', $vars);
@@ -40,7 +41,11 @@ $row[] = elgg_format_element('td', ['class' => 'translation-editor-translation-e
 
 $icons = '';
 if ($show_original_translation) {
-	$icons .= elgg_view_icon('eye', ['title' => elgg_echo('translation_editor:show_original'), 'rel' => 'toggle', 'data-toggle-selector' => "#{$toggle_id}"]);
+	$icons .= elgg_view_icon('eye', [
+		'title' => elgg_echo('translation_editor:show_original'),
+		'class' => 'elgg-toggle',
+		'data-toggle-selector' => "#{$toggle_id}",
+	]);
 }
 $icons .= elgg_view_icon('key', ['title' => $english['key']]);
 
