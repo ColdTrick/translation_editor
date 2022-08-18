@@ -52,7 +52,11 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	$custom += $plugin_stats['custom'];
 	
 	if (!empty($plugin_stats['total'])) {
-		$percentage = round(($plugin_stats['exists'] / $plugin_stats['total']) * 100);
+		$percentage = (int) round(($plugin_stats['exists'] / $plugin_stats['total']) * 100);
+		if ($percentage === 100 && $plugin_stats['exists'] !== $plugin_stats['total']) {
+			// rounding up to 100 when not complete
+			$percentage = 99;
+		}
 	} else {
 		$percentage = 100;
 	}
