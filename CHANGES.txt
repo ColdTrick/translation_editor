@@ -1,6 +1,11 @@
 Version history
 ===============
 
+11.0 (2022-08-24):
+
+- changed: updated for Elgg 4.3
+- fixed: show incomplete percentage when rounding up to 100
+
 10.1.1 (2022-07-12):
 
 - fixed: do not strip translation input
