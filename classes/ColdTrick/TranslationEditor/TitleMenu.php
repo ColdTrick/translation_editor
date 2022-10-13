@@ -84,9 +84,8 @@ class TitleMenu {
 			'text' => elgg_echo('translation_editor:show_language_selector'),
 			'href' => false,
 			'icon' => 'angle-double-down',
-			'link_class' => 'elgg-button elgg-button-action',
+			'link_class' => 'elgg-button elgg-button-action elgg-toggle',
 			'priority' => 200,
-			'item_class' => 'elgg-toggle',
 			'data-toggle-selector' => '#translation-editor-language-selection, .elgg-menu-title li[class*="language-selector"] a',
 			'data-toggle-slide' => 0,
 		]);
@@ -96,10 +95,9 @@ class TitleMenu {
 			'text' => elgg_echo('translation_editor:hide_language_selector'),
 			'href' => false,
 			'icon' => 'angle-double-up',
-			'link_class' => 'elgg-button elgg-button-action',
+			'link_class' => 'elgg-button elgg-button-action elgg-toggle',
 			'priority' => 201,
 			'style' => 'display: none;', // needed to prevent misallignment
-			'item_class' => 'elgg-toggle',
 			'data-toggle-selector' => '#translation-editor-language-selection, .elgg-menu-title li[class*="language-selector"] a',
 			'data-toggle-slide' => 0,
 		]);
