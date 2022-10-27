@@ -1,6 +1,10 @@
 Version history
 ===============
 
+11.0.1 (2022-10-27):
+
+- fixed: toggle language selector not working
+
 11.0 (2022-08-24):
 
 - changed: updated for Elgg 4.3
