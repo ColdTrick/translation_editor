@@ -37,14 +37,10 @@ elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translatio
 set_input('current_language', $current_language);
 
 // build page elements
-$languages = array_keys($translations);
-
-$site_language = elgg_get_config('language', 'en');
-
 $body = elgg_view('translation_editor/language_selector', [
 	'current_language' => $current_language,
-	'languages' => $languages,
-	'site_language' => $site_language,
+	'languages' => array_keys($translations),
+	'site_language' => elgg_get_config('language', 'en'),
 ]);
 
 // show plugin list

@@ -84,5 +84,24 @@ return [
 				'\ColdTrick\TranslationEditor\Languages::registerCustomLanguages' => [],
 			],
 		],
+		'register' => [
+			'menu:page' => [
+				'\ColdTrick\TranslationEditor\Menus\Page::register' => [],
+			],
+			'menu:site' => [
+				'\ColdTrick\TranslationEditor\Menus\Site::register' => [],
+			],
+			'menu:title' => [
+				'\ColdTrick\TranslationEditor\Menus\Title::register' => [],
+			],
+			'menu:user_hover' => [
+				'\ColdTrick\TranslationEditor\Menus\UserHover::register' => [],
+			],
+		],
+	],
+	'view_extensions' => [
+		'css/elgg' => [
+			'translation_editor/site.css' => [],
+		],
 	],
 ];

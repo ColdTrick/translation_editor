@@ -14,6 +14,7 @@ echo elgg_view_field([
 	'fields' => [
 		[
 			'#type' => 'text',
+			'#class' => 'elgg-field-stretch',
 			'name' => 'q',
 			'value' => elgg_extract('query', $vars),
 			'placeholder' => elgg_echo('translation_editor:forms:search:default'),

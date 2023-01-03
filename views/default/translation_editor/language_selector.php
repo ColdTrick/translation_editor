@@ -123,6 +123,6 @@ if (empty($content)) {
 	return;
 }
 
-elgg_register_plugin_hook_handler('register', 'menu:title', '\ColdTrick\TranslationEditor\TitleMenu::registerLanguageSelector');
+elgg_register_plugin_hook_handler('register', 'menu:title', '\ColdTrick\TranslationEditor\Menus\Title::registerLanguageSelector');
 
 echo elgg_format_element('div', ['id' => 'translation-editor-language-selection', 'class' => 'hidden'], $content);

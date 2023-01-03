@@ -6,9 +6,6 @@
 $search_results = elgg_extract('results', $vars);
 $current_language = elgg_extract('current_language', $vars);
 
-$en_flag = elgg_view('translation_editor/flag', ['language' => 'en']);
-$lang_flag = elgg_view('translation_editor/flag', ['language' => $current_language]);
-
 $list = '';
 foreach ($search_results as $plugin => $data) {
 	$translated_language = elgg_extract('current_language', $data);
@@ -17,10 +14,7 @@ foreach ($search_results as $plugin => $data) {
 	$list .= '<table class="elgg-table translation-editor-translation-table translation-editor-translation-table-no-missing mbl">';
 	$list .= '<col class="first_col" />';
 	$list .= '<tr class="first_row"><th colspan="2">';
-	$list .= elgg_view('output/url', [
-		'text' => $plugin,
-		'href' => "translation_editor/{$current_language}/{$plugin}",
-	]);
+	$list .= elgg_view_url("translation_editor/{$current_language}/{$plugin}", $plugin);
 	$list .= '</th></tr>';
 	
 	foreach ($data['en'] as $key => $value) {

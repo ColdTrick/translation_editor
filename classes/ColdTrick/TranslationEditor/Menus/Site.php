@@ -1,14 +1,10 @@
 <?php
-
-namespace ColdTrick\TranslationEditor;
+namespace ColdTrick\TranslationEditor\Menus;
 
 /**
  * Add menu items to the site menu
- *
- * @package    ColdTrick
- * @subpackage TranslationEditor
  */
-class SiteMenu {
+class Site {
 	
 	/**
 	 * Add menu items to the site menu

@@ -91,16 +91,6 @@ img.translation-editor-flag {
 	}
 }
 
-.elgg-form-translation-editor-search {
-	.elgg-fieldset {
-		display: flex;
-		
-		>.elgg-field:first-child {
-			width: 100%;
-		}
-	}
-}
-
 .elgg-menu-translation-editor-plugin-edit-container {
 	.elgg-menu-hz {
 		li {
@@ -117,9 +107,4 @@ img.translation-editor-flag {
 	.elgg-badge {
 		margin-left: 0.2rem;
 	}
-}
-
-.translation-editor-cleanup .elgg-output a {
-	color: white;
-	text-decoration: underline;
 }

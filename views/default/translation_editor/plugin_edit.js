@@ -1,7 +1,4 @@
-define(function(require){
-	
-	var $ = require('jquery');
-	
+define(['jquery'], function($){
 	$(document).on('click', '.elgg-menu-translation-editor-plugin-edit a', function() {
 		
 		var $container = $(this).closest('.elgg-menu-container');

@@ -73,7 +73,7 @@ if (empty($missing_count)) {
 }
 
 // toggle between different filters
-elgg_require_js('translation_editor/toggle_translations');
+elgg_require_js('translation_editor/plugin_edit');
 
 $menu_items = [];
 

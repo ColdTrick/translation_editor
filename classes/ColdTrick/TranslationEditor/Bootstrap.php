@@ -16,17 +16,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see \Elgg\DefaultPluginBootstrap::init()
-	 */
-	public function init() {
-		// extend JS/CSS
-		elgg_extend_view('css/elgg', 'css/translation_editor/site.css');
-		
-		$this->registerPluginHooks();
-	}
-	
-	/**
-	 * {@inheritDoc}
 	 * @see \Elgg\DefaultPluginBootstrap::upgrade()
 	 */
 	public function upgrade() {
@@ -60,19 +49,5 @@ class Bootstrap extends DefaultPluginBootstrap {
 			// add custom translations
 			translation_editor_load_translations($language);
 		}
-	}
-	
-	/**
-	 * Register plugin hook handles
-	 *
-	 * @return void
-	 */
-	protected function registerPluginHooks() {
-		$hooks = $this->elgg()->hooks;
-		
-		$hooks->registerHandler('register', 'menu:page', __NAMESPACE__ . '\PageMenu::register');
-		$hooks->registerHandler('register', 'menu:site', __NAMESPACE__ . '\SiteMenu::register');
-		$hooks->registerHandler('register', 'menu:title', __NAMESPACE__ . '\TitleMenu::register');
-		$hooks->registerHandler('register', 'menu:user_hover', __NAMESPACE__ . '\UserHoverMenu::register');
 	}
 }

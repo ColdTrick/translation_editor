@@ -15,20 +15,8 @@ elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translatio
 	'current_language' => $translated_language,
 ]));
 
-// build page elements
-$title_text = elgg_echo('translation_editor:import');
-
-// build search form
-$form_vars = [
-	'enctype' => 'multipart/form-data',
-];
-
-$body_vars = [
-	'current_language' => $current_language,
-];
-$body = elgg_view_form('translation_editor/admin/import', $form_vars, $body_vars);
-
-// draw page
-echo elgg_view_page($title_text, [
-	'content' => $body,
+echo elgg_view_page(elgg_echo('translation_editor:import'), [
+	'content' => elgg_view_form('translation_editor/admin/import', [], [
+		'current_language' => $current_language,
+	]),
 ]);

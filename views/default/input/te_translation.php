@@ -11,7 +11,7 @@
  */
 
 elgg_require_js('elgg/toggle');
-elgg_require_js('translation_editor/edit_translation');
+elgg_require_js('input/te_translation');
 
 $current_language = elgg_extract('language', $vars);
 $english = elgg_extract('english', $vars);

@@ -1,14 +1,10 @@
 <?php
-
-namespace ColdTrick\TranslationEditor;
+namespace ColdTrick\TranslationEditor\Menus;
 
 /**
  * Add menu items to the user_hover menu
- *
- * @package    ColdTrick
- * @subpackage TranslationEditor
  */
-class UserHoverMenu {
+class UserHover {
 	
 	/**
 	 * Add menu items to the usericon dropdown

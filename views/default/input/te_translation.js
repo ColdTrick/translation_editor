@@ -1,16 +1,13 @@
-define(function(require) {
-	
-	var $ = require('jquery');
-	var Ajax = require('elgg/Ajax');
+define(['jquery', 'elgg/Ajax'], function($, Ajax) {
 	
 	var locked = false;
 	var data = new FormData();
 	
-	var submit_data = function() {
-		
+	function submit_data() {
 		if (locked) {
 			return;
 		}
+		
 		locked = true;
 		
 		var sending = data;
@@ -29,7 +26,7 @@ define(function(require) {
 		});
 	};
 	
-	var data_count = function() {
+	function data_count() {
 		var i = 0;
 		for (var entry of data.entries()) {
 			i++;
@@ -38,7 +35,6 @@ define(function(require) {
 	};
 	
 	$(document).on('change', '.translation-editor-input', function() {
-		
 		data.set($(this).prop('name'), $(this).val());
 		
 		submit_data();

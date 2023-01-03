@@ -63,16 +63,12 @@ set_input('plugin_id', $plugin);
 // build page elements
 $title_text = elgg_echo('translation_editor:menu:title:plugin', [$plugin, $translated_language]);
 
-$languages = array_keys($translations);
-
-$site_language = elgg_get_config('language', 'en');
-
 // language selector
 $body = elgg_view('translation_editor/language_selector', [
 	'current_language' => $current_language,
 	'plugin' => $plugin,
-	'languages' => $languages,
-	'site_language' => $site_language
+	'languages' => array_keys($translations),
+	'site_language' => elgg_get_config('language', 'en')
 ]);
 
 // plugin form

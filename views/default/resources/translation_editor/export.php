@@ -14,9 +14,6 @@ elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translatio
 	'current_language' => $current_language,
 ]));
 
-// build page elements
-$title_text = elgg_echo('translation_editor:export');
-
 $plugins = translation_editor_get_plugins($current_language);
 $exportable_plugins = [];
 foreach ($plugins as $plugin_id => $plugin_stats) {
@@ -48,6 +45,6 @@ if (empty($exportable_plugins)) {
 }
 
 // draw page
-echo elgg_view_page($title_text, [
+echo elgg_view_page(elgg_echo('translation_editor:export'), [
 	'content' => $body,
 ]);

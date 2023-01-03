@@ -514,11 +514,7 @@ function translation_editor_get_string_parameters($string, $count = true) {
 		}
 	}
 	
-	if ($count) {
-		$result = count($result);
-	}
-	
-	return $result;
+	return $count ? count($result) : $result;
 }
 
 /**
