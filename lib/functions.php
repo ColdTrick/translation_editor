@@ -12,12 +12,11 @@ use Elgg\Exceptions\InvalidArgumentException;
  *
  * @param string $current_language which language to use
  *
- * @return false|array
+ * @return array
  */
 function translation_editor_get_plugins($current_language) {
-	
 	if (empty($current_language)) {
-		return false;
+		return [];
 	}
 	
 	$translator = elgg()->translator;
@@ -26,78 +25,173 @@ function translation_editor_get_plugins($current_language) {
 	$translator->loadTranslations($current_language);
 	
 	translation_editor_load_translations($current_language);
-	
-	$result = [];
-	$core = [];
-	$plugins_result = [];
-	
-	$backup_full = $translator->getLoadedTranslations();
-	$plugins = elgg_get_plugins();
+
+	$loaded_translations = $translator->getLoadedTranslations();
 	
 	// Core translation
-	$plugin_language = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
-	
-	if (file_exists($plugin_language)) {
-		$plugin_keys = Includer::includeFile($plugin_language);
-		
-		$key_count = count($plugin_keys);
-		
-		if (array_key_exists($current_language, $backup_full)) {
-			$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
-		} else {
-			$exists_count = 0;
-		}
-		
-		$custom_content = translation_editor_read_translation($current_language, 'core');
-		if (!empty($custom_content)) {
-			$custom_count = count($custom_content);
-		} else {
-			$custom_count = 0;
-		}
-		
-		$core['core']['total'] = $key_count;
-		$core['core']['exists'] = $exists_count;
-		$core['core']['custom'] = $custom_count;
-	}
+	$core = ['core' => translation_editor_get_core_statistics($loaded_translations, $current_language)];
 	
 	// Plugin translations
+	$plugins = elgg_get_plugins();
+	$plugins_result = [];
+	
 	foreach ($plugins as $plugin) {
-		
-		$plugin_id = $plugin->getID();
-		
-		$plugin_language = $plugin->getPath() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
-		
-		if (file_exists($plugin_language)) {
-			$plugin_keys = Includer::includeFile($plugin_language);
-			if (!is_array($plugin_keys)) {
-				elgg_log("Please update the language file of '{$plugin_id}' to return an array", 'WARNING');
-				continue;
-			}
-			
-			$key_count = count($plugin_keys);
-			
-			if (array_key_exists($current_language, $backup_full)) {
-				$exists_count = $key_count - count(array_diff_key($plugin_keys, $backup_full[$current_language]));
-			} else {
-				$exists_count = 0;
-			}
-			
-			$custom_content = translation_editor_read_translation($current_language, $plugin_id);
-			if (!empty($custom_content)) {
-				$custom_count = count($custom_content);
-			} else {
-				$custom_count = 0;
-			}
-			
-			$plugins_result[$plugin_id]['total'] = $key_count;
-			$plugins_result[$plugin_id]['exists'] = $exists_count;
-			$plugins_result[$plugin_id]['custom'] = $custom_count;
+		$plugin_stats = translation_editor_get_plugin_statistics($plugin, $loaded_translations, $current_language);
+		if (empty($plugin_stats)) {
+			continue;
 		}
+		
+		$plugins_result[$plugin->getID()] = $plugin_stats;
 	}
 	
 	ksort($plugins_result);
 	
-	$result = $core + $plugins_result;
+	return $core + $plugins_result;
+}
+
+/**
+ * Returns (cached) stats for core translations
+ *
+ * @param array  $loaded_translations currently loaded translations
+ * @param string $language            language to get the stats for
+ *
+ * @return array
+ */
+function translation_editor_get_core_statistics(array $loaded_translations, string $language) {
+	$cache_key = "core_{$language}_translation_stats";
+	$cached_result = elgg_load_system_cache($cache_key);
+	if (!is_null($cached_result)) {
+		return $cached_result;
+	}
+	
+	$language_file = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
+	if (!file_exists($language_file)) {
+		return [];
+	}
+	
+	$core_keys = Includer::includeFile($language_file);
+	
+	$core_translations = [];
+	$garbage_count = 0;
+	$core_language_file = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR . $language . '.php';
+	if (file_exists($core_language_file)) {
+		$core_translations = Includer::includeFile($core_language_file);
+		
+		// cleanup core translations
+		$garbage_count = array_diff_key($core_translations, $core_keys);
+		$core_translations = array_intersect_key($core_translations, $core_keys);
+	}
+	
+	$missing_translations = array_diff_key($core_keys, $loaded_translations[$language]);
+	$custom_translations = translation_editor_read_translation($language, 'core');
+	$custom_existing_translations = array_intersect_key($custom_translations, $core_keys);
+	
+	if (!empty($core_translations)) {
+		// in case language is not yet translated
+		$custom_count = count(array_diff_assoc($custom_existing_translations, $core_translations));
+	} else {
+		$custom_count = count($custom_existing_translations);
+	}
+		
+	$result = [
+		'total' => count($core_keys), // number of keys in en
+		'exists' => 0, // number of translated keys (including runtime and custom translations) in loaded translations
+		'invalid' => 0, // number of translations with an issue in them
+		'custom' => $custom_count, // number of translations made with translation editor of keys that still exist
+		'translated' => count($custom_translations), // number of translations in the plugin language file that no longer exist in the en.php
+		'garbage' => $garbage_count, // number of translations that have been made, but keys no longer exist
+	];
+	
+	if (array_key_exists($language, $loaded_translations)) {
+		$result['exists'] = $result['total'] - count($missing_translations);
+		
+		foreach ($core_keys as $key => $value) {
+			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language]))) {
+				$result['invalid']++;
+			}
+		}
+	}
+		
+	elgg_save_system_cache($cache_key, $result);
+	
+	return $result;
+}
+
+/**
+ * Returns (cached) stats for plugin translations
+ *
+ * @param ElggPlugin $plugin              plugin to get the stats for
+ * @param array      $loaded_translations currently loaded translations
+ * @param string     $language            language to get the stats for
+ *
+ * @return array
+ */
+function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $loaded_translations, string $language) {
+	$plugin_id = $plugin->getID();
+	
+	$cache_key = "{$plugin_id}_{$language}_translation_stats";
+	$cached_result = elgg_load_system_cache($cache_key);
+	if (!is_null($cached_result)) {
+		return $cached_result;
+	}
+	
+	$language_file = $plugin->getPath() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
+	if (!file_exists($language_file)) {
+		return [];
+	}
+	
+	$plugin_keys = Includer::includeFile($language_file);
+	if (!is_array($plugin_keys)) {
+		elgg_log("Please update the language file [en.php] of '{$plugin_id}' to return an array", 'WARNING');
+		return [];
+	}
+	
+	$plugin_translations = [];
+	$garbage_count = 0;
+	$plugin_language_file = $plugin->getPath() . 'languages' . DIRECTORY_SEPARATOR . $language . '.php';
+	if (file_exists($plugin_language_file)) {
+		$plugin_translations = Includer::includeFile($plugin_language_file);
+		if (!is_array($plugin_translations)) {
+			elgg_log("Please update the language file [{$language}.php] of '{$plugin_id}' to return an array", 'WARNING');
+			$plugin_translations = [];
+		} else {
+			// cleanup plugin translations
+			$garbage_count = array_diff_key($plugin_translations, $plugin_keys);
+			$plugin_translations = array_intersect_key($plugin_translations, $plugin_keys);
+		}
+	}
+	
+	$missing_translations = array_diff_key($plugin_keys, $loaded_translations[$language]);
+	$custom_translations = translation_editor_read_translation($language, $plugin_id);
+	$custom_existing_translations = array_intersect_key($custom_translations, $plugin_keys);
+	
+	if (!empty($plugin_translations)) {
+		// in case language is not yet translated
+		$custom_count = count(array_diff_assoc($custom_existing_translations, $plugin_translations));
+	} else {
+		$custom_count = count($custom_existing_translations);
+	}
+	
+	$result = [
+		'total' => count($plugin_keys), // number of keys in en
+		'exists' => 0, // number of translated keys (including runtime and custom translations) in loaded translations
+		'invalid' => 0, // number of translations with an issue in them
+		'custom' => $custom_count, // number of translations made with translation editor of keys that still exist
+		'translated' => count($custom_translations), // number of translations in the plugin language file that no longer exist in the en.php
+		'garbage' => $garbage_count, // number of translations that have been made, but keys no longer exist
+	];
+	
+	if (array_key_exists($language, $loaded_translations)) {
+		$result['exists'] = $result['total'] - count($missing_translations);
+		
+		foreach ($plugin_keys as $key => $value) {
+			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language]))) {
+				$result['invalid']++;
+			}
+		}
+	}
+	
+	elgg_save_system_cache($cache_key, $result);
 	
 	return $result;
 }
@@ -156,13 +250,6 @@ function translation_editor_get_plugin($current_language, $plugin) {
 			$exists_count = 0;
 		}
 		
-		$custom_content = translation_editor_read_translation($current_language, $plugin);
-		if (!empty($custom_content)) {
-			$custom = $custom_content;
-		} else {
-			$custom = [];
-		}
-		
 		$result['total'] = $key_count;
 		$result['exists'] = $exists_count;
 		$result['en'] = $plugin_keys;
@@ -171,7 +258,7 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		if (file_exists("{$plugin_language_path}{$current_language}.php")) {
 			$result['original_language'] = Includer::includeFile("{$plugin_language_path}{$current_language}.php");
 		}
-		$result['custom'] = $custom;
+		$result['custom'] = translation_editor_read_translation($current_language, $plugin);
 	}
 	
 	return $result;
@@ -262,17 +349,17 @@ function translation_editor_write_translation($current_language, $plugin, $trans
  * @param string $current_language the language to fetch
  * @param string $plugin           the plugin to fetch
  *
- * @return false|array
+ * @return array
  */
 function translation_editor_read_translation($current_language, $plugin) {
 	try {
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
-		return $translation->readTranslations();
+		return $translation->readTranslations() ?: [];
 	} catch (InvalidArgumentException $e) {
 		elgg_log($e->getMessage());
 	}
 	
-	return false;
+	return [];
 }
 
 /**
@@ -502,7 +589,7 @@ function translation_editor_merge_translations($language = '') {
  *  @return array
  */
 function translation_editor_get_string_parameters($string, $count = true) {
-	$valid = '/%[-+]?(?:[ 0]|\'.)?a?\d*(?:\.\d*)?[%bcdeEufFgGosxX]/';
+	$valid = '/%(?:\d+\$)?[-+]?(?:[ 0]|\'.)?a?\d*(?:\.\d*)?[%bcdeEufFgGosxX]/';
 	
 	$result = [];
 	
@@ -515,6 +602,25 @@ function translation_editor_get_string_parameters($string, $count = true) {
 	}
 	
 	return $count ? count($result) : $result;
+}
+
+/**
+ * Returns an array of parameters invalid or missing in one of the translations
+ *
+ * @param string $value            original value
+ * @param string $translated_value translated value
+ *
+ * @return array
+ */
+function translation_editor_get_invalid_parameters($value, $translated_value) {
+	if (empty($value) || empty($translated_value)) {
+		return [];
+	}
+	
+	$params = translation_editor_get_string_parameters($value, false);
+	$translated_params = translation_editor_get_string_parameters($translated_value, false);
+	
+	return array_diff($params, $translated_params) + array_diff($translated_params, $params);
 }
 
 /**

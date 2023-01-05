@@ -71,15 +71,10 @@ $body = elgg_view('translation_editor/language_selector', [
 	'site_language' => elgg_get_config('language', 'en')
 ]);
 
-// plugin form
-$translation = translation_editor_get_plugin($current_language, $plugin);
-
-$body_vars = [
+$body .= elgg_view('translation_editor/plugin_edit', [
 	'plugin' => $plugin,
 	'current_language' => $current_language,
-	'translation' => $translation,
-];
-$body .= elgg_view('translation_editor/plugin_edit', $body_vars);
+]);
 
 // draw page
 echo elgg_view_page($title_text, [

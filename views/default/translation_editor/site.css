@@ -50,16 +50,8 @@ img.translation-editor-flag {
 }
 
 .translation-editor-translation-table {
-	tr {
+	tr.translation-editor-original {
 		display: none;
-	}
-
-	tr[rel='missing'],
-	&.translation-editor-translation-table-no-missing tr:not(.translation-editor-original) {
-		display: table-row;
-		<!--
-		display: inline-block;
-		-->
 	}
 
 	pre {
@@ -69,25 +61,27 @@ img.translation-editor-flag {
 
 	td {
 		white-space: nowrap;
-	}
-	
-	td.translation-editor-flag,
-	td.translation-editor-translation-key {
-		width: 1%;
-		text-align: center;
-		white-space: nowrap;
-	}
-	
-	td.translation-editor-translation-key {
-		text-align: right;
 		
-		.elgg-icon-key {
-			cursor: help;
+		&.translation-editor-flag {
+			width: 1%;
+			text-align: center;
+			white-space: nowrap;
 		}
-		.elgg-icon-eye {
-			margin-right: .5rem;
-			cursor: pointer;
+
+		&.translation-editor-translation-key {
+			width: 1%;
+			text-align: right;
+			white-space: nowrap;
+			
+			.elgg-icon-key {
+				cursor: help;
+			}
+			.elgg-icon-eye {
+				margin-right: .5rem;
+				cursor: pointer;
+			}
 		}
+		
 	}
 }
 

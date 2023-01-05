@@ -6,7 +6,7 @@
 $current_language = elgg_extract('current_language', $vars);
 $plugin = elgg_extract('plugin', $vars);
 
-$working_translation = elgg_extract('translation', $vars);
+$working_translation = translation_editor_get_plugin($current_language, $plugin);
 $english = elgg_extract('en', $working_translation);
 $translated_language = elgg_extract('current_language', $working_translation);
 $original_language = elgg_extract('original_language', $working_translation);
@@ -20,11 +20,7 @@ $custom_count = 0;
 $translation = [];
 if (!empty($english)) {
 	foreach ($english as $en_key => $en_value) {
-		$en_params = translation_editor_get_string_parameters($en_value);
-		$cur_params = 0;
-		if (array_key_exists($en_key, $translated_language)) {
-			$cur_params = translation_editor_get_string_parameters($translated_language[$en_key]);
-		}
+		$invalid_params = translation_editor_get_invalid_parameters($en_value, elgg_extract($en_key, $translated_language));
 		
 		$row_rel = null;
 		if (!array_key_exists($en_key, $translated_language)) {
@@ -33,15 +29,15 @@ if (!empty($english)) {
 		} elseif ($en_value == $translated_language[$en_key]) {
 			$row_rel = 'equal';
 			$equal_count++;
-		} elseif ($en_params != $cur_params) {
+		} elseif (count($invalid_params)) {
 			$row_rel = 'params';
 			$params_count++;
-		} elseif (array_key_exists($en_key, $custom)) {
+		} elseif (array_key_exists($en_key, $custom) && ($custom[$en_key] !== $original_language[$en_key])) {
 			$row_rel = 'custom';
 			$custom_count++;
 		}
 		
-		$translation[] = elgg_view('input/te_translation', [
+		$translation[] = [
 			'english' => [
 				'key' => $en_key,
 				'value' => $en_value,
@@ -57,19 +53,20 @@ if (!empty($english)) {
 			'plugin' => $plugin,
 			'language' => $current_language,
 			'row_rel' => $row_rel,
-		]);
+		];
 	}
 }
-$table_content = elgg_format_element('tbody', [], implode(PHP_EOL, $translation));
 
-$selected_view_mode = 'missing';
-$table_class = [
-	'elgg-table',
-	'translation-editor-translation-table',
-];
-if (empty($missing_count)) {
-	$selected_view_mode = 'all';
-	$table_class[] = 'translation-editor-translation-table-no-missing';
+$selected_view_mode = $missing_count ? 'missing' : 'all';
+$selected_view_mode = get_input('view_mode', $selected_view_mode);
+
+$body = '';
+foreach ($translation as $key_edit) {
+	if ($selected_view_mode !== 'all' && $key_edit['row_rel'] !== $selected_view_mode) {
+		$key_edit['row_class'] = 'hidden';
+	}
+	
+	$body .= elgg_view('translation_editor/key_edit', $key_edit);
 }
 
 // toggle between different filters
@@ -125,7 +122,10 @@ $menu_items[] = [
 ];
 
 // show all
-$table = elgg_format_element('table', ['class' => $table_class], $table_content);
+$table = elgg_format_element('table', ['class' => [
+	'elgg-table',
+	'translation-editor-translation-table',
+]], elgg_format_element('tbody', [], $body));
 
 echo elgg_view_module('info', elgg_echo('translation_editor:plugin_edit:title') . ' ' . $plugin, $table, [
 	'menu' => elgg_view_menu('translation-editor-plugin-edit', [

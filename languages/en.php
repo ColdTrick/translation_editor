@@ -34,8 +34,10 @@ return array(
 	'translation_editor:plugin_list:total' => "Total keys",
 	'translation_editor:plugin_list:exists' => "Translated",
 	'translation_editor:plugin_list:custom' => "Custom",
+	'translation_editor:plugin_list:invalid' => "Invalid",
 	'translation_editor:plugin_list:percentage' => "Percentage complete",
 	
+	'translation_editor:plugin_list:garbage' => "The translation contains keys that no longer exist in the English translation",
 	'translation_editor:plugin_list:merge' => "Merge to PHP language file",
 	
 	// export

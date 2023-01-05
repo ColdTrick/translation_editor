@@ -10,9 +10,10 @@ if (empty($plugins)) {
 	return;
 }
 
-$total = 0;
-$exists = 0;
-$custom = 0;
+$running_total = 0;
+$running_exists = 0;
+$running_invalid = 0;
+$running_custom = 0;
 
 $table_attributes = [
 	'id' => 'translation-editor-plugin-list',
@@ -28,17 +29,13 @@ $list .= '<th>' . elgg_echo('translation_editor:plugin_list:plugin') . '</th>';
 $list .= '<th>' . elgg_echo('translation_editor:plugin_list:total') . '</th>';
 $list .= '<th>' . elgg_echo('translation_editor:plugin_list:exists') . '</th>';
 $list .= '<th>' . elgg_echo('translation_editor:plugin_list:custom') . '</th>';
+$list .= '<th>' . elgg_echo('translation_editor:plugin_list:invalid') . '</th>';
 $list .= '<th>' . elgg_echo('translation_editor:plugin_list:percentage') . '</th>';
 $list .= '<th>&nbsp;</th>';
 $list .= '</tr>';
 $list .= '</thead>';
 
-// table body
-$tbody_attributes = [
-	'title' => elgg_echo('translation_editor:plugin_list:title'),
-];
-
-$list .= '<tbody ' . elgg()->html_formatter->formatAttributes($tbody_attributes) . '>';
+$list .= '<tbody>';
 foreach ($plugins as $plugin_id => $plugin_stats) {
 	$plugin_title = '';
 	
@@ -47,9 +44,10 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 		$plugin_title = $plugin->getDisplayName();
 	}
 	
-	$total += $plugin_stats['total'];
-	$exists += $plugin_stats['exists'];
-	$custom += $plugin_stats['custom'];
+	$running_total += $plugin_stats['total'];
+	$running_exists += $plugin_stats['exists'];
+	$running_invalid += $plugin_stats['invalid'];
+	$running_custom += $plugin_stats['custom'];
 	
 	if (!empty($plugin_stats['total'])) {
 		$percentage = (int) round(($plugin_stats['exists'] / $plugin_stats['total']) * 100);
@@ -73,7 +71,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	$list .= '<td>';
 	$list .= elgg_view('output/url', [
 		'text' => $plugin_id,
-		'title' => $plugin_title,
+		'title' => elgg_echo('translation_editor:plugin_list:title'),
 		'href' => elgg_generate_url('default:translation_editor:plugin', [
 			'current_language' => $current_language,
 			'plugin_id' => $plugin_id,
@@ -84,16 +82,41 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	}
 	$list .= '</td>';
 	$list .= '<td>' . $plugin_stats['total'] . '</td>';
-	$list .= '<td>' . $plugin_stats['exists'] . '</td>';
+	
+	$exists = $plugin_stats['exists'];
+	if ($plugin_stats['garbage']) {
+		$exists = elgg_format_element('span', [
+			'class' => ['elgg-state', 'elgg-state-danger'],
+			'title' => elgg_echo('translation_editor:plugin_list:garbage'),
+		], $exists);
+	}
+	
+	$list .= '<td>' . $exists . '</td>';
 	
 	if ($plugin_stats['custom'] > 0) {
-		$list .= '<td>' . $plugin_stats['custom'] . '</td>';
+		$custom_url = elgg_generate_url('default:translation_editor:plugin', [
+			'current_language' => $current_language,
+			'plugin_id' => $plugin_id,
+			'view_mode' => 'custom',
+		]);
+		$list .= '<td>' . elgg_view_url($custom_url, $plugin_stats['custom']) . '</td>';
+	} else {
+		$list .= '<td>&nbsp;</td>';
+	}
+	
+	if ($plugin_stats['invalid'] > 0) {
+		$invalid_url = elgg_generate_url('default:translation_editor:plugin', [
+			'current_language' => $current_language,
+			'plugin_id' => $plugin_id,
+			'view_mode' => 'params',
+		]);
+		$list .= '<td>' . elgg_view_url($invalid_url, $plugin_stats['invalid']) . '</td>';
 	} else {
 		$list .= '<td>&nbsp;</td>';
 	}
 	
 	$list .= elgg_format_element('td', ['class' => $complete_class], "{$percentage}%");
-	if (!empty($plugin_stats['custom'])) {
+	if (!empty($plugin_stats['custom']) || !empty($plugin_stats['garbage'])) {
 		$list .= '<td class="translation-editor-plugin-actions">';
 		$list .= elgg_view('output/url', [
 			'href' => elgg_generate_action_url('translation_editor/merge', [
@@ -104,7 +127,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 			'text' => elgg_echo('translation_editor:plugin_list:merge'),
 			'icon' => 'download',
 		]);
-		if (elgg_is_admin_logged_in()) {
+		if (elgg_is_admin_logged_in() && !empty($plugin_stats['translated'])) {
 			$list .= elgg_view('output/url', [
 				'href' => elgg_generate_action_url('translation_editor/admin/delete', [
 					'current_language' => $current_language,
@@ -130,10 +153,11 @@ $list .= '</tbody>';
 $list .= '<tfoot>';
 $list .= '<tr>';
 $list .= '<th>&nbsp;</td>';
-$list .= '<th>' . $total . '</th>';
-$list .= '<th>' . $exists . '</th>';
-$list .= '<th>' . $custom . '</th>';
-$list .= '<th>' . round(($exists / $total) * 100, 2) . '%</th>';
+$list .= '<th>' . $running_total . '</th>';
+$list .= '<th>' . $running_exists . '</th>';
+$list .= '<th>' . $running_custom . '</th>';
+$list .= '<th>' . $running_invalid . '</th>';
+$list .= '<th>' . round(($running_exists / $running_total) * 100, 2) . '%</th>';
 $list .= '<th>&nbsp;</th>';
 $list .= '</tr>';
 $list .= '</tfoot>';
