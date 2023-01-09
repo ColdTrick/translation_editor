@@ -40,6 +40,16 @@ class Title {
 				'link_class' => 'elgg-button elgg-button-action',
 				'priority' => 220,
 			]);
+			$return[] = \ElggMenuItem::factory([
+				'name' => 'translation-editor-snapshots',
+				'text' => elgg_echo('translation_editor:snapshots'),
+				'icon' => 'eye',
+				'href' => elgg_http_add_url_query_elements("ajax/view/translation_editor/snapshots", [
+					'language' => $current_language,
+				]),
+				'link_class' => 'elgg-button elgg-button-action elgg-lightbox',
+				'priority' => 230,
+			]);
 		}
 		
 		// download button only on plugin page

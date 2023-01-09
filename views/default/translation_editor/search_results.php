@@ -10,6 +10,7 @@ $list = '';
 foreach ($search_results as $plugin => $data) {
 	$translated_language = elgg_extract('current_language', $data);
 	$original_language = elgg_extract('original_language', $data);
+	$snapshot_language = elgg_extract('snapshot_language', $data);
 	
 	$list .= '<table class="elgg-table translation-editor-translation-table mbl">';
 	$list .= '<col class="first_col" />';
@@ -31,6 +32,10 @@ foreach ($search_results as $plugin => $data) {
 			'original' => [
 				'key' => $key,
 				'value' => elgg_extract($key, $original_language),
+			],
+			'snapshot' => [
+				'key' => $key,
+				'value' => elgg_extract($key, $snapshot_language),
 			],
 			'plugin' => $plugin,
 			'language' => $current_language,

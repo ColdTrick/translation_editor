@@ -20,6 +20,7 @@ return array(
 	'translation_editor:menu:title:plugin' => "Translating %s to %s",
 	'translation_editor:show_language_selector' => "Show language selector",
 	'translation_editor:hide_language_selector' => "Hide language selector",
+	'translation_editor:snapshots' => "Snapshots",
 
 	// views
 	// language selector
@@ -70,6 +71,19 @@ When you're finished you can delete the file.",
 	'translation_editor:plugin_edit:show:custom' => "custom",
 	'translation_editor:plugin_edit:show:params' => "missing params",
 
+	// snapshots
+	'translation_editor:snapshots:title' => "Translation snapshots",
+	'translation_editor:snapshots:description' => "Here you can create a translation snapshot. A snapshot should be created before (potential) new translations are introduced, for example due to an upgrade of Elgg and or plugins.
+After the deployment the snapshot can be compared to the current translations to find out if there are any new or updated translations.",
+	'translation_editor:snapshots:create' => "Create new snapshot",
+	'translation_editor:snapshots:table:snapshot' => "Snapshot",
+	'translation_editor:snapshots:table:actions' => "Actions",
+	'translation_editor:snapshots:table:actions:compare' => "Compare",
+	
+	// compare snapshots
+	'translation_editor:compare' => "Compare %s snapshot to %s",
+	'translation_editor:compare:no_results' => "No differences found between the current translations and the snapshot.",
+	
 	// actions
 	'translation_editor:action:translate:error:input' => "Incorrect input provided to add a translation",
 	'translation_editor:action:translate:error:write' => "Error while writing the translations",
@@ -102,4 +116,9 @@ When you're finished you can delete the file.",
 	'translation_editor:action:cleanup:remove:error:no_file' => "The requested file to delete could not be found",
 	'translation_editor:action:cleanup:remove:error:remove' => "An error occured while deleting the file, please try again",
 	'translation_editor:action:cleanup:remove:success' => "The file was deleted",
+	
+	'translation_editor:action:snapshots:create:success' => "Snapshot successfully createdddd",
+	
+	'translation_editor:action:snapshot:delete:error' => "Snapshot could not be deleted",
+	'translation_editor:action:snapshot:delete:success' => "Snapshot successfully deleted",
 );

@@ -20,6 +20,9 @@ $english = elgg_extract('english', $vars);
 $original = elgg_extract('original', $vars);
 $original_value = elgg_extract('value', $original);
 
+$snapshot = elgg_extract('snapshot', $vars);
+$snapshot_value = elgg_extract('value', $snapshot);
+
 $translation = elgg_extract('translation', $vars);
 $translation_value = elgg_extract('value', $translation);
 $key = elgg_extract('key', $translation);
@@ -29,6 +32,7 @@ $row_rel = elgg_extract('row_rel', $vars);
 $row_class = elgg_extract('row_class', $vars);
 
 $show_original_translation = false;
+$show_snapshot_translation = !elgg_is_empty($snapshot_value);
 $toggle_id = elgg_get_friendly_title("{$plugin}-{$key}"); // friendly title replaces colons with underscores
 if (!elgg_is_empty($original_value) && !elgg_is_empty($translation_value) && $original_value !== $translation_value && $current_language !== 'en') {
 	$show_original_translation = true;
@@ -49,6 +53,7 @@ if ($show_original_translation) {
 		'data-toggle-selector' => "#{$toggle_id}",
 	]);
 }
+
 $icons .= elgg_view_icon('key', ['title' => $english['key']]);
 
 $row[] = elgg_format_element('td', ['class' => 'translation-editor-translation-key'], $icons);
@@ -62,6 +67,12 @@ if ($show_original_translation) {
 	$row[] = elgg_format_element('td', ['colspan' => 2], elgg_format_element('pre', [], nl2br(htmlspecialchars($original_value))));
 	
 	$rows[] = elgg_format_element('tr', ['id' => $toggle_id, 'class' => 'translation-editor-original', 'data-toggle-slide' => '0'], implode(PHP_EOL, $row));
+} elseif ($show_snapshot_translation) {
+	$row = [];
+	$row[] = elgg_format_element('td', ['class' => 'translation-editor-flag'], elgg_view('translation_editor/flag', ['language' => $current_language]));
+	$row[] = elgg_format_element('td', ['colspan' => 2], elgg_format_element('pre', [], nl2br(htmlspecialchars($snapshot_value))));
+	
+	$rows[] = elgg_format_element('tr', ['id' => $toggle_id, 'class' => 'translation-editor-snapshot', 'data-toggle-slide' => '0'], implode(PHP_EOL, $row));
 }
 
 // Custom language information

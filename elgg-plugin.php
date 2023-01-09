@@ -14,28 +14,34 @@ return [
 	],
 	'bootstrap' => Bootstrap::class,
 	'actions' => [
-		'translation_editor/admin/toggle_translation_editor' => [
+		'translation_editor/admin/add_language' => [
 			'access' => 'admin',
 		],
 		'translation_editor/admin/delete' => [
 			'access' => 'admin',
 		],
-		'translation_editor/admin/add_language' => [
-			'access' => 'admin',
-		],
 		'translation_editor/admin/delete_language' => [
-			'access' => 'admin',
-		],
-		'translation_editor/admin/import' => [
 			'access' => 'admin',
 		],
 		'translation_editor/admin/export' => [
 			'access' => 'admin',
 		],
-		'translation_editor/translate' => [],
-		'translation_editor/merge' => [],
+		'translation_editor/admin/import' => [
+			'access' => 'admin',
+		],
+		'translation_editor/admin/toggle_translation_editor' => [
+			'access' => 'admin',
+		],
 		'translation_editor/cleanup/remove' => [],
 		'translation_editor/cleanup/download' => [],
+		'translation_editor/merge' => [],
+		'translation_editor/translate' => [],
+		'translation_editor/snapshots/create' => [
+			'access' => 'admin',
+		],
+		'translation_editor/snapshots/delete' => [
+			'access' => 'admin',
+		],
 	],
 	'routes' => [
 		'default:translation_editor:import' => [
@@ -50,6 +56,16 @@ return [
 			'resource' => 'translation_editor/export',
 			'middleware' => [
 				AdminGatekeeper::class,
+			],
+		],
+		'default:translation_editor:compare' => [
+			'path' => '/translation_editor/compare/{language}/{snapshot}',
+			'resource' => 'translation_editor/compare',
+			'middleware' => [
+				AdminGatekeeper::class,
+			],
+			'requirements' => [
+				'snapshot' => '\d+',
 			],
 		],
 		'default:translation_editor:search' => [
@@ -102,6 +118,11 @@ return [
 	'view_extensions' => [
 		'css/elgg' => [
 			'translation_editor/site.css' => [],
+		],
+	],
+	'view_options' => [
+		'translation_editor/snapshots' => [
+			'ajax' => true,
 		],
 	],
 ];
