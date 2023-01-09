@@ -63,8 +63,12 @@ class Snapshot {
 	 */
 	public function getAll(): array {
 		$result = [];
+		$base_dir = $this->getBaseDir();
+		if (!is_dir($base_dir)) {
+			return [];
+		}
 		
-		$dh = new \DirectoryIterator($this->getBaseDir());
+		$dh = new \DirectoryIterator($base_dir);
 		/* @var $file_info \DirectoryIterator */
 		foreach ($dh as $file_info) {
 			if ($file_info->isFile() || $file_info->isDot()) {
