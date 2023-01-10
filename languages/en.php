@@ -114,10 +114,10 @@ After the deployment the snapshot can be compared to the current translations to
 	'translation_editor:action:add_custom_key:missing_input' => "Invalid input. Please enter a key and a default (English) translation.",
 
 	'translation_editor:action:cleanup:remove:error:no_file' => "The requested file to delete could not be found",
-	'translation_editor:action:cleanup:remove:error:remove' => "An error occured while deleting the file, please try again",
+	'translation_editor:action:cleanup:remove:error:remove' => "An error occurred while deleting the file, please try again",
 	'translation_editor:action:cleanup:remove:success' => "The file was deleted",
 	
-	'translation_editor:action:snapshots:create:success' => "Snapshot successfully createdddd",
+	'translation_editor:action:snapshots:create:success' => "Snapshot successfully created",
 	
 	'translation_editor:action:snapshot:delete:error' => "Snapshot could not be deleted",
 	'translation_editor:action:snapshot:delete:success' => "Snapshot successfully deleted",

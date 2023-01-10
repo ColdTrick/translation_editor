@@ -1,10 +1,24 @@
 <?php
 /**
- * This file was created by Translation Editor v8.0
- * On 2021-06-14 14:39
+ * This file was created by Translation Editor v11.0.1
+ * On 2023-01-10 10:01
  */
 
 return array (
+  'translation_editor:snapshots' => 'Momentopnames',
+  'translation_editor:plugin_list:garbage' => 'De vertaling bevat sleutels welke niet meer bestaan in de Engelse vertaling',
+  'translation_editor:snapshots:title' => 'Vertaling momentopnames',
+  'translation_editor:snapshots:description' => 'Hier kun je een momentopname maken van de vertalingen. Een momentopname kan het beste worden aangemaakt voordat er (potentiële) nieuwe vertalingen worden geïntroduceerd, bijvoorbeeld vanwege en update van Elgg en/of plugins.
+Na de uitrol kan een momentopname worden vergeleken met de huidige vertalingen om nieuwe of gewijzigde vertalingen te bekijken.',
+  'translation_editor:snapshots:create' => 'Maak een momentopname',
+  'translation_editor:snapshots:table:snapshot' => 'Momentopname',
+  'translation_editor:snapshots:table:actions' => 'Acties',
+  'translation_editor:snapshots:table:actions:compare' => 'Vergelijk',
+  'translation_editor:compare' => 'Vergelijk de %s momentopname met %s',
+  'translation_editor:compare:no_results' => 'Geen verschillen gevonden tussen de huidige vertalingen en de momentopname.',
+  'translation_editor:action:snapshots:create:success' => 'Momentopname is aangemaakt',
+  'translation_editor:action:snapshot:delete:error' => 'Momentopname kon niet worden verwijderd',
+  'translation_editor:action:snapshot:delete:success' => 'Momentopname is verwijderd',
   'translation_editor:language:unsupported' => 'Taal wordt niet ondersteund',
   'translation_editor:upgrade:2020042401:title' => 'Migreer uitgeschakelde talen van Translation Editor',
   'translation_editor:upgrade:2020042401:description' => 'Omdat het beheren van toegestane talen is verplaatst naar ELgg core kun je de instellingen van Translation Editor migreren naar de nieuwe instelling.',
