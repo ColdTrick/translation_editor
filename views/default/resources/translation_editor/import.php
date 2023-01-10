@@ -12,7 +12,7 @@ if (elgg_language_key_exists($current_language, $current_language)) {
 // breadcrumb
 elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), elgg_generate_url('default:translation_editor'));
 elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translation_editor', [
-	'current_language' => $translated_language,
+	'current_language' => $current_language,
 ]));
 
 echo elgg_view_page(elgg_echo('translation_editor:import'), [
