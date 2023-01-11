@@ -18,7 +18,7 @@ Dit is hoofdzakelijk bedoeld om de vertalingen te synchroniseren tussen een test
   'translation_editor:import:remote:title' => 'Van externe bron',
   'translation_editor:import:file:title' => 'Van bestand',
   'translation_editor:import:remote:description' => 'Vanaf hier is het mogelijk de aangepaste vertalingen te importen vanuit de bron %s.',
-  'translation_editor:import:remote:warning' => 'Dit zal alle aangepaste <b>%s</> vertalingen overschrijven met de aangepaste vertalingen van de externe bron.',
+  'translation_editor:import:remote:warning' => 'Dit zal alle aangepaste <b>%s</b> vertalingen overschrijven met de aangepaste vertalingen van de externe bron.',
   'translation_editor:import:remote:plugins' => 'Selecteer de plugins welke moeten worden bijgewerkt',
   'translation_editor:import:remote:plugins:filter' => 'Filter specifieke plugins',
   'translation_editor:import:remote:plugins:all' => 'Selecteer alle plugins',
