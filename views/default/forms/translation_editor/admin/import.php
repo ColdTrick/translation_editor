@@ -14,6 +14,7 @@ echo elgg_view_field([
 
 $footer = elgg_view_field([
 	'#type' => 'submit',
+	'icon' => 'file-import',
 	'value' => elgg_echo('import'),
 ]);
 

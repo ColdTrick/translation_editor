@@ -29,6 +29,9 @@ return [
 		'translation_editor/admin/import' => [
 			'access' => 'admin',
 		],
+		'translation_editor/admin/remote' => [
+			'access' => 'admin',
+		],
 		'translation_editor/admin/toggle_translation_editor' => [
 			'access' => 'admin',
 		],
@@ -112,6 +115,11 @@ return [
 			],
 			'menu:user_hover' => [
 				'\ColdTrick\TranslationEditor\Menus\UserHover::register' => [],
+			],
+		],
+		'rest' => [
+			'init' => [
+				'\ColdTrick\TranslationEditor\Rest::exposeFunctions' => [],
 			],
 		],
 	],

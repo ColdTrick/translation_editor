@@ -1,10 +1,31 @@
 <?php
 /**
  * This file was created by Translation Editor v11.0.1
- * On 2023-01-10 10:01
+ * On 2023-01-11 11:58
  */
 
 return array (
+  'translation_editor:settings:remote:title' => 'Externe vertalingsinstellingen',
+  'translation_editor:settings:remote:description' => 'Hier kun je een externe Elgg website configureren welke kan dienen als bron voor de vertalingen. Vervolgens kun je de aangepaste vertalingen van deze externe Elgg website importeren zodat deze de aangepaste vertalingen op deze website overschrijven.
+Dit is hoofdzakelijk bedoeld om de vertalingen te synchroniseren tussen een test- en productie server.',
+  'translation_editor:settings:remote:error:web_service' => 'De Web Services plugin moet zijn ingeschakeld op deze website om de externe vertalingen te kunnen synchroniseren.',
+  'translation_editor:settings:remote:web_service:info' => 'Zorg ervoor dat de Translation Editor en Web Services plugin zijn ingeschakeld op de externe website.',
+  'translation_editor:settings:remote:host' => 'Externe host',
+  'translation_editor:settings:remote:host:help' => 'Geef de URL op van de externe Elgg website welke dient als bron voor de synchronisatie van de vertalingen (inclusief sluitende /)',
+  'translation_editor:settings:remote:public_key' => 'Publieke API key',
+  'translation_editor:settings:remote:private_key' => 'Privé API key',
+  'translation_editor:settings:remote:private_key:help' => 'Ten behoeve van verbeterde security tijdens de synchronisatie van de vertalingen',
+  'translation_editor:import:remote:title' => 'Van externe bron',
+  'translation_editor:import:file:title' => 'Van bestand',
+  'translation_editor:import:remote:description' => 'Vanaf hier is het mogelijk de aangepaste vertalingen te importen vanuit de bron %s.',
+  'translation_editor:import:remote:warning' => 'Dit zal alle aangepaste <b>%s</> vertalingen overschrijven met de aangepaste vertalingen van de externe bron.',
+  'translation_editor:import:remote:plugins' => 'Selecteer de plugins welke moeten worden bijgewerkt',
+  'translation_editor:import:remote:plugins:filter' => 'Filter specifieke plugins',
+  'translation_editor:import:remote:plugins:all' => 'Selecteer alle plugins',
+  'translation_editor:action:remote:error:client' => 'Er is een fout opgetreden tijdens het aanmaken van een externe client, controleer je plugin instellingen',
+  'translation_editor:action:remote:error:request' => 'Er is een fout opgetreden tijdens het verzoek, controleer de logbestanden voor meer informatie',
+  'translation_editor:action:remote:error:result' => 'De externe bron gaf een onbekend resultaat',
+  'translation_editor:action:remote:success' => 'De aangepaste vertalingen zijn bijgewerkt vanaf de externe bron',
   'translation_editor:snapshots' => 'Momentopnames',
   'translation_editor:plugin_list:garbage' => 'De vertaling bevat sleutels welke niet meer bestaan in de Engelse vertaling',
   'translation_editor:snapshots:title' => 'Vertaling momentopnames',

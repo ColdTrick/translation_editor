@@ -22,6 +22,18 @@ return array(
 	'translation_editor:hide_language_selector' => "Hide language selector",
 	'translation_editor:snapshots' => "Snapshots",
 
+	// settings
+	'translation_editor:settings:remote:title' => "Remote translation settings",
+	'translation_editor:settings:remote:description' => "Here you can configure a remote Elgg website as a translation source. You can import custom translations from this remote Elgg website which will overrule the custom translations on this website.
+This should mostly be used to synchronize the translations between a test and production server.",
+	'translation_editor:settings:remote:error:web_service' => "The Web Services plugin needs te be enabled on this site in order to be able to use remote translation synchronization.",
+	'translation_editor:settings:remote:web_service:info' => "Make sure the Translation Editor and Web Services plugin are enabled on the remote website.",
+	'translation_editor:settings:remote:host' => "Remote host",
+	'translation_editor:settings:remote:host:help' => "Please enter the base URL of the remote Elgg website from which to synchronize the translations (including trailing /)",
+	'translation_editor:settings:remote:public_key' => "Public API key",
+	'translation_editor:settings:remote:private_key' => "Private API key",
+	'translation_editor:settings:remote:private_key:help' => "For improved security during the translation synchronization",
+	
 	// views
 	// language selector
 	'translation_editor:language_selector:title' => "Select the language you wish to edit",
@@ -47,8 +59,15 @@ return array(
 	'translation_editor:export:plugins' => 'Select plugins to export',
 	
 	// import
+	'translation_editor:import:remote:title' => "From remote source",
+	'translation_editor:import:file:title' => "From file",
 	'translation_editor:import' => 'Import custom translations',
 	'translation_editor:import:file' => 'Select importable file from previous export',
+	'translation_editor:import:remote:description' => "From here you can import the custom translations from the remote source %s.",
+	'translation_editor:import:remote:warning' => "This will override all the custom <b>%s</b> translations with the custom translations from the remote source.",
+	'translation_editor:import:remote:plugins' => "Please select the plugins to update",
+	'translation_editor:import:remote:plugins:filter' => "Filter specific plugins",
+	'translation_editor:import:remote:plugins:all' => "Select all plugins",
 	
 	// cleanup
 	'translation_editor:cleanup:title' => "Translation cleanup",
@@ -121,4 +140,9 @@ After the deployment the snapshot can be compared to the current translations to
 	
 	'translation_editor:action:snapshot:delete:error' => "Snapshot could not be deleted",
 	'translation_editor:action:snapshot:delete:success' => "Snapshot successfully deleted",
+	
+	'translation_editor:action:remote:error:client' => "An error occurred while creating a remote client, please check your plugin settings",
+	'translation_editor:action:remote:error:request' => "An error occurred during the request, check the log files for more information",
+	'translation_editor:action:remote:error:result' => "The remote source returned an unknown result",
+	'translation_editor:action:remote:success' => "The custom translations have been updated from the remote source",
 );

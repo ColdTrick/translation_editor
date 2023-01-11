@@ -16,7 +16,7 @@ elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translatio
 ]));
 
 echo elgg_view_page(elgg_echo('translation_editor:import'), [
-	'content' => elgg_view_form('translation_editor/admin/import', [], [
-		'current_language' => $current_language,
+	'content' => elgg_view('translation_editor/import', [
+		'language' => $current_language,
 	]),
 ]);
