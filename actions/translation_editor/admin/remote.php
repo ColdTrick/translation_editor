@@ -52,5 +52,6 @@ foreach ($plugin_results as $plugin_id => $values) {
 }
 
 translation_editor_merge_translations($language);
+translation_editor_log_last_import($language);
 
 return elgg_ok_response('', elgg_echo('translation_editor:action:remote:success'));

@@ -43,5 +43,6 @@ foreach ($plugins as $plugin => $translations) {
 }
 
 translation_editor_merge_translations($language);
+translation_editor_log_last_import($language);
 
 return elgg_ok_response('', elgg_echo('translation_editor:action:import:success'), elgg_generate_url('default:translation_editor', ['current_language' => $language]));

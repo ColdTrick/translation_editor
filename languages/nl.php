@@ -1,10 +1,12 @@
 <?php
 /**
  * This file was created by Translation Editor v11.0.1
- * On 2023-01-11 11:58
+ * On 2023-01-12 11:58
  */
 
 return array (
+  'translation_editor:import:remote:warning' => 'Dit zal alle aangepaste <b>%s</> vertalingen overschrijven met de aangepaste vertalingen van de externe bron.',
+  'translation_editor:last_import:actor' => 'Laatste import door: %s',
   'translation_editor:settings:remote:title' => 'Externe vertalingsinstellingen',
   'translation_editor:settings:remote:description' => 'Hier kun je een externe Elgg website configureren welke kan dienen als bron voor de vertalingen. Vervolgens kun je de aangepaste vertalingen van deze externe Elgg website importeren zodat deze de aangepaste vertalingen op deze website overschrijven.
 Dit is hoofdzakelijk bedoeld om de vertalingen te synchroniseren tussen een test- en productie server.',
@@ -18,7 +20,6 @@ Dit is hoofdzakelijk bedoeld om de vertalingen te synchroniseren tussen een test
   'translation_editor:import:remote:title' => 'Van externe bron',
   'translation_editor:import:file:title' => 'Van bestand',
   'translation_editor:import:remote:description' => 'Vanaf hier is het mogelijk de aangepaste vertalingen te importen vanuit de bron %s.',
-  'translation_editor:import:remote:warning' => 'Dit zal alle aangepaste <b>%s</b> vertalingen overschrijven met de aangepaste vertalingen van de externe bron.',
   'translation_editor:import:remote:plugins' => 'Selecteer de plugins welke moeten worden bijgewerkt',
   'translation_editor:import:remote:plugins:filter' => 'Filter specifieke plugins',
   'translation_editor:import:remote:plugins:all' => 'Selecteer alle plugins',

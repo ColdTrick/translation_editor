@@ -8,6 +8,7 @@ return array(
 	'translation_editor:gatekeeper' => "You're not an authorized translation editor",
 	
 	'translation_editor:exception:plugin_disabled' => "You can not translate a disabled plugin",
+	'translation_editor:last_import:actor' => "Last import by: %s",
 	
 	// upgrades
 	'translation_editor:upgrade:2020042401:title' => "Migrate Translation Editor disabled languages",

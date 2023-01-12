@@ -642,3 +642,44 @@ function translation_editor_get_available_languages() {
 	
 	return $result;
 }
+
+/**
+ * Log the last time an import was executed
+ *
+ * @param string $language the imported language
+ *
+ * @return void
+ * @interal
+ */
+function translation_editor_log_last_import(string $language): void {
+	$plugin = elgg_get_plugin_from_id('translation_editor');
+	$key = "last_import_{$language}";
+	
+	$plugin->$key = json_encode([
+		'actor' => elgg_get_logged_in_user_entity()->username,
+		'time' => time(),
+	]);
+}
+
+/**
+ * Get the last import information
+ *
+ * @param string $language the language to check for
+ *
+ * @return array
+ * @interal
+ */
+function translation_editor_get_last_import(string $language): array {
+	$plugin = elgg_get_plugin_from_id('translation_editor');
+	$key = "last_import_{$language}";
+	
+	$result = $plugin->$key;
+	if (empty($result)) {
+		return [];
+	}
+	
+	$result = json_decode($result, true);
+	$result['user'] = get_user_by_username($result['actor']);
+	
+	return $result;
+}

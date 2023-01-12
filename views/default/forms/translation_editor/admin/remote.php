@@ -86,10 +86,31 @@ echo elgg_view_field([
 ]);
 
 // footer
-$footer = elgg_view_field([
+$fields = [];
+
+$last_import = elgg_view('translation_editor/last_import', [
+	'language' => $language,
+]);
+if (!empty($last_import)) {
+	$fields[] = [
+		'#html' => $last_import,
+	];
+}
+
+$fields[] = [
 	'#type' => 'submit',
 	'icon' => 'cloud-download-alt',
 	'value' => elgg_echo('import'),
 	'confirm' => true,
-]);
+];
+
+if (count($fields) > 1) {
+	$footer = elgg_view_field([
+		'#type' => 'fieldset',
+		'fields' => $fields,
+	]);
+} else {
+	$footer = elgg_view_field($fields[0]);
+}
+
 elgg_set_form_footer($footer);
