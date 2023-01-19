@@ -1,6 +1,14 @@
 Version history
 ===============
 
+11.1 (2023-01-19):
+
+- added: remote translation synchronization
+- added: show translations with invalid variables in the plugin list
+- added: translation snapshots
+- changed: moved some js files and updated codestyle
+- fixed: import breadcrumb link
+
 11.0.1 (2022-10-27):
 
 - fixed: toggle language selector not working
