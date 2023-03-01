@@ -1,5 +1,8 @@
 <?php
+
 namespace ColdTrick\TranslationEditor\Menus;
+
+use Elgg\Menu\MenuItems;
 
 /**
  * Add menu items to the user_hover menu
@@ -7,33 +10,28 @@ namespace ColdTrick\TranslationEditor\Menus;
 class UserHover {
 	
 	/**
-	 * Add menu items to the usericon dropdown
+	 * Add menu items to the user_hover menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:user_hover'
+	 * @param \Elgg\Event $event 'register', 'menu:user_hover'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function register(\Elgg\Hook $hook) {
-		
+	public static function register(\Elgg\Event $event): ?MenuItems {
 		if (!elgg_is_admin_logged_in()) {
 			// only for admins
-			return;
+			return null;
 		}
 		
-		$user = $hook->getEntityParam();
-		if (!$user instanceof \ElggUser) {
-			// no user
-			return;
-		}
-		
-		if ($user->isAdmin()) {
-			// user is admin, so is already editor
-			return;
+		$user = $event->getEntityParam();
+		if (!$user instanceof \ElggUser || $user->isAdmin()) {
+			// no user, or user is admin and therefor is already editor
+			return null;
 		}
 		
 		$is_editor = translation_editor_is_translation_editor($user->guid);
 		
-		$return = $hook->getValue();
+		/* @var $return MenuItems */
+		$return = $event->getValue();
 		
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor_make_editor',

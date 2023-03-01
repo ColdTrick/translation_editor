@@ -5,35 +5,20 @@ namespace ColdTrick\TranslationEditor;
 use ColdTrick\TranslationEditor\Rest\GetTranslations;
 use Elgg\WebServices\ElggApiClient;
 
+/**
+ * Register REST API methods
+ */
 class Rest {
 	
 	/**
-	 * Expose the translation editor API functions
+	 * Get an Elgg API client to talk to another Elgg installation
 	 *
-	 * @param \Elgg\Hook $hook 'rest', 'init'
+	 * @param string $method API method to call
+	 * @param array  $params Params for the API call
 	 *
-	 * @return void
+	 * @return ElggApiClient|null
+	 * @throws \APIException
 	 */
-	public static function exposeFunctions(\Elgg\Hook $hook) {
-		elgg_ws_expose_function(
-			'translation_editor.get_translations',
-			GetTranslations::class,
-			[
-				'language' => [
-					'type' => 'string',
-					'required' => true,
-				],
-				'plugins' => [
-					'type' => 'array',
-					'required' => true,
-				],
-			],
-			elgg_echo('translation_editor:api:get_translations:description'),
-			'GET',
-			true,
-		);
-	}
-	
 	public static function getClient(string $method, array $params): ?ElggApiClient {
 		if (!elgg_is_active_plugin('web_services')) {
 			return null;

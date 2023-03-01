@@ -14,7 +14,7 @@ use Elgg\Exceptions\InvalidArgumentException;
  *
  * @return array
  */
-function translation_editor_get_plugins($current_language) {
+function translation_editor_get_plugins(string $current_language): array {
 	if (empty($current_language)) {
 		return [];
 	}
@@ -29,7 +29,9 @@ function translation_editor_get_plugins($current_language) {
 	$loaded_translations = $translator->getLoadedTranslations();
 	
 	// Core translation
-	$core = ['core' => translation_editor_get_core_statistics($loaded_translations, $current_language)];
+	$core = [
+		'core' => translation_editor_get_core_statistics($loaded_translations, $current_language),
+	];
 	
 	// Plugin translations
 	$plugins = elgg_get_plugins();
@@ -57,7 +59,7 @@ function translation_editor_get_plugins($current_language) {
  *
  * @return array
  */
-function translation_editor_get_core_statistics(array $loaded_translations, string $language) {
+function translation_editor_get_core_statistics(array $loaded_translations, string $language): array {
 	$cache_key = "core_{$language}_translation_stats";
 	$cached_result = elgg_load_system_cache($cache_key);
 	if (!is_null($cached_result)) {
@@ -106,7 +108,7 @@ function translation_editor_get_core_statistics(array $loaded_translations, stri
 		$result['exists'] = $result['total'] - count($missing_translations);
 		
 		foreach ($core_keys as $key => $value) {
-			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language]))) {
+			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language], ''))) {
 				$result['invalid']++;
 			}
 		}
@@ -120,13 +122,13 @@ function translation_editor_get_core_statistics(array $loaded_translations, stri
 /**
  * Returns (cached) stats for plugin translations
  *
- * @param ElggPlugin $plugin              plugin to get the stats for
- * @param array      $loaded_translations currently loaded translations
- * @param string     $language            language to get the stats for
+ * @param \ElggPlugin $plugin              plugin to get the stats for
+ * @param array       $loaded_translations currently loaded translations
+ * @param string      $language            language to get the stats for
  *
  * @return array
  */
-function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $loaded_translations, string $language) {
+function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $loaded_translations, string $language): array {
 	$plugin_id = $plugin->getID();
 	
 	$cache_key = "{$plugin_id}_{$language}_translation_stats";
@@ -185,7 +187,7 @@ function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $lo
 		$result['exists'] = $result['total'] - count($missing_translations);
 		
 		foreach ($plugin_keys as $key => $value) {
-			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language]))) {
+			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language], ''))) {
 				$result['invalid']++;
 			}
 		}
@@ -202,12 +204,11 @@ function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $lo
  * @param string $current_language which language to return
  * @param string $plugin           for which plugin do you want the translations
  *
- * @return false|array
+ * @return null|array
  */
-function translation_editor_get_plugin($current_language, $plugin) {
-	
+function translation_editor_get_plugin(string $current_language, string $plugin): ?array {
 	if (empty($current_language) || empty($plugin)) {
-		return false;
+		return null;
 	}
 
 	if ($plugin == 'core') {
@@ -216,9 +217,10 @@ function translation_editor_get_plugin($current_language, $plugin) {
 	} else {
 		// plugin translations
 		$plugin_object = elgg_get_plugin_from_id($plugin);
-		if (!($plugin_object instanceof ElggPlugin)) {
-			return false;
+		if (!$plugin_object instanceof \ElggPlugin) {
+			return null;
 		}
+		
 		$plugin_language_path = $plugin_object->getPath() . 'languages' . DIRECTORY_SEPARATOR;
 	}
 	
@@ -239,7 +241,7 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		$plugin_keys = Includer::includeFile("{$plugin_language_path}en.php");
 		if (!is_array($plugin_keys)) {
 			elgg_log("Please update the language file of '{$plugin}' to return an array", 'WARNING');
-			return false;
+			return null;
 		}
 		
 		$key_count = count($plugin_keys);
@@ -258,6 +260,7 @@ function translation_editor_get_plugin($current_language, $plugin) {
 		if (file_exists("{$plugin_language_path}{$current_language}.php")) {
 			$result['original_language'] = Includer::includeFile("{$plugin_language_path}{$current_language}.php");
 		}
+		
 		$result['custom'] = translation_editor_read_translation($current_language, $plugin);
 	}
 	
@@ -272,10 +275,9 @@ function translation_editor_get_plugin($current_language, $plugin) {
  *
  * @return false|array
  */
-function translation_editor_compare_translations(array $translated, array $plugin_original) {
-	
+function translation_editor_compare_translations(array $translated, array $plugin_original): ?array {
 	if (empty($translated)) {
-		return false;
+		return null;
 	}
 	
 	$result = [];
@@ -304,7 +306,7 @@ function translation_editor_compare_translations(array $translated, array $plugi
 			$new = trim($new);
 		}
 		
-		if (($original != $new) && strlen($new) > 0) {
+		if ($original !== $new && strlen($new) > 0) {
 			$result[$key] = $new;
 		}
 	}
@@ -319,7 +321,7 @@ function translation_editor_compare_translations(array $translated, array $plugi
  *
  * @return string
  */
-function translation_editor_clean_line_breaks($string) {
+function translation_editor_clean_line_breaks(string $string): string {
 	return preg_replace("/(\r\n)|(\n|\r)/", PHP_EOL, $string);
 }
 
@@ -328,16 +330,16 @@ function translation_editor_clean_line_breaks($string) {
  *
  * @param string $current_language the language for the translations
  * @param string $plugin           the translated plugin
- * @param array  $translation      the translations
+ * @param array  $translations     the translations
  *
  * @return false|int
  */
-function translation_editor_write_translation($current_language, $plugin, $translations) {
+function translation_editor_write_translation(string $current_language, string $plugin, array $translations) {
 	try {
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 		return $translation->saveTranslations($translations);
 	} catch (InvalidArgumentException $e) {
-		elgg_log($e->getMessage());
+		elgg_log($e);
 	}
 	
 	return false;
@@ -351,12 +353,12 @@ function translation_editor_write_translation($current_language, $plugin, $trans
  *
  * @return array
  */
-function translation_editor_read_translation($current_language, $plugin) {
+function translation_editor_read_translation(string $current_language, string $plugin): array {
 	try {
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 		return $translation->readTranslations() ?: [];
 	} catch (InvalidArgumentException $e) {
-		elgg_log($e->getMessage());
+		elgg_log($e);
 	}
 	
 	return [];
@@ -369,8 +371,7 @@ function translation_editor_read_translation($current_language, $plugin) {
  *
  * @return void
  */
-function translation_editor_load_translations($current_language = '') {
-	
+function translation_editor_load_translations(string $current_language = ''): void {
 	if (empty($current_language)) {
 		$current_language = elgg_get_current_language();
 	}
@@ -400,12 +401,12 @@ function translation_editor_load_translations($current_language = '') {
  *
  * @return bool
  */
-function translation_editor_delete_translation($current_language, $plugin) {
+function translation_editor_delete_translation(string $current_language, string $plugin): bool {
 	try {
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 		return $translation->removeTranslations();
 	} catch (InvalidArgumentException $e) {
-		elgg_log($e->getMessage());
+		elgg_log($e);
 	}
 	
 	return false;
@@ -414,16 +415,14 @@ function translation_editor_delete_translation($current_language, $plugin) {
 /**
  * Custom version of get_language_completeness() to give better results
  *
- * @see get_language_completeness()
- *
  * @param string $current_language the language to check
  *
- * @return float|false
+ * @return float|null
+ * @see get_language_completeness()
  */
-function translation_editor_get_language_completeness($current_language) {
-	
+function translation_editor_get_language_completeness(string $current_language): ?float {
 	if (empty($current_language) || ($current_language == 'en')) {
-		return false;
+		return null;
 	}
 	
 	$plugins = translation_editor_get_plugins($current_language);
@@ -449,7 +448,7 @@ function translation_editor_get_language_completeness($current_language) {
  *
  * @return bool
  */
-function translation_editor_is_translation_editor($user_guid = 0) {
+function translation_editor_is_translation_editor(int $user_guid = 0): bool {
 	static $editors_cache;
 	
 	if (empty($user_guid)) {
@@ -468,7 +467,7 @@ function translation_editor_is_translation_editor($user_guid = 0) {
 	// preload all editors
 	if (!isset($editors_cache)) {
 		$editors_cache = [];
-
+		
 		$guids = elgg_get_entities([
 			'type' => 'user',
 			'limit' => false,
@@ -495,13 +494,12 @@ function translation_editor_is_translation_editor($user_guid = 0) {
  * @param string $query    the text to search for
  * @param string $language the language to search in (defaults to English)
  *
- * @return array|bool
+ * @return array|null
  */
-function translation_editor_search_translation($query, $language = 'en') {
-	
+function translation_editor_search_translation(string $query, string $language = 'en'): ?array {
 	$plugins = translation_editor_get_plugins($language);
 	if (empty($plugins)) {
-		return false;
+		return null;
 	}
 	
 	$found = [];
@@ -514,7 +512,10 @@ function translation_editor_search_translation($query, $language = 'en') {
 		foreach ($translations['en'] as $key => $value) {
 			if (stristr($key, $query) || stristr($value, $query) || (array_key_exists($key, $translations['current_language']) && stristr($translations['current_language'][$key], $query))) {
 				if (!array_key_exists($plugin, $found)) {
-					$found[$plugin] = ['en' => [], 'current_language' => []];
+					$found[$plugin] = [
+						'en' => [],
+						'current_language' => [],
+					];
 				}
 				
 				$found[$plugin]['en'][$key] = $value;
@@ -526,7 +527,7 @@ function translation_editor_search_translation($query, $language = 'en') {
 		}
 	}
 	
-	return $found ?: false;
+	return $found ?: null;
 }
 
 /**
@@ -536,14 +537,13 @@ function translation_editor_search_translation($query, $language = 'en') {
  *
  * @return false|array
  */
-function translation_editor_merge_translations($language = '') {
-	
+function translation_editor_merge_translations(string $language = ''): ?array {
 	if (empty($language)) {
 		$language = elgg_get_current_language();
 	}
 	
 	if (empty($language)) {
-		return false;
+		return null;
 	}
 	
 	$translations = [];
@@ -554,7 +554,7 @@ function translation_editor_merge_translations($language = '') {
 		$translations = $core;
 	}
 		
-	// proccess all plugins
+	// process all plugins
 	$plugins = elgg_get_plugins();
 	if (!empty($plugins)) {
 		foreach ($plugins as $plugin) {
@@ -573,30 +573,30 @@ function translation_editor_merge_translations($language = '') {
 	
 	// clear system cache
 	$cache->delete("{$language}.lang");
-			
-	// let others know this happend
+	
+	// let others know this happened
 	elgg_trigger_event('language:merge', 'translation_editor', $language);
 	
 	return $translations;
 }
 
 /**
- *  parses a string meant for printf and returns an array of found parameters
+ * Parses a string meant for printf and returns an array of found parameters
  *
- *  @param string $string the string to search parameters for
- *  @param bool   $count  return the count of the parameters (default = true)
+ * @param string $string the string to search parameters for
+ * @param bool   $count  return the count of the parameters (default = true)
  *
- *  @return array
+ * @return array
  */
-function translation_editor_get_string_parameters($string, $count = true) {
+function translation_editor_get_string_parameters(string $string, bool $count = true): array {
 	$valid = '/%(?:\d+\$)?[-+]?(?:[ 0]|\'.)?a?\d*(?:\.\d*)?[%bcdeEufFgGosxX]/';
 	
 	$result = [];
 	
 	if (!empty($string)) {
-		if (!$string = preg_replace('/^[^%]*/', '', $string)) {
-			// no results
-		} elseif (preg_match_all($valid, $string, $matches)) {
+		$matches = [];
+		$string = preg_replace('/^[^%]*/', '', $string);
+		if (!empty($string) && preg_match_all($valid, $string, $matches)) {
 			$result = $matches[0];
 		}
 	}
@@ -605,14 +605,14 @@ function translation_editor_get_string_parameters($string, $count = true) {
 }
 
 /**
- * Returns an array of parameters invalid or missing in one of the translations
+ * Returns an array of invalid or missing parameters in one of the translations
  *
  * @param string $value            original value
  * @param string $translated_value translated value
  *
  * @return array
  */
-function translation_editor_get_invalid_parameters($value, $translated_value) {
+function translation_editor_get_invalid_parameters(string $value, string $translated_value): array {
 	if (empty($value) || empty($translated_value)) {
 		return [];
 	}
@@ -628,10 +628,10 @@ function translation_editor_get_invalid_parameters($value, $translated_value) {
  *
  * Used for caching purpose
  *
- * @see elgg()->translator->getAvailableLanguages()()
+ * @see elgg()->translator->getAvailableLanguages()
  * @return array
  */
-function translation_editor_get_available_languages() {
+function translation_editor_get_available_languages(): array {
 	static $result;
 	
 	if (isset($result)) {
@@ -679,7 +679,7 @@ function translation_editor_get_last_import(string $language): array {
 	}
 	
 	$result = json_decode($result, true);
-	$result['user'] = get_user_by_username($result['actor']);
+	$result['user'] = elgg_get_user_by_username($result['actor']);
 	
 	return $result;
 }

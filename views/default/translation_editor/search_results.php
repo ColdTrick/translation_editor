@@ -19,7 +19,6 @@ foreach ($search_results as $plugin => $data) {
 	$list .= '</th></tr>';
 	
 	foreach ($data['en'] as $key => $value) {
-		
 		$list .= elgg_view('translation_editor/key_edit', [
 			'english' => [
 				'key' => $key,

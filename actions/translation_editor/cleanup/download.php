@@ -2,10 +2,6 @@
 
 use Elgg\Project\Paths;
 
-if (!translation_editor_is_translation_editor()) {
-	return elgg_error_response(elgg_echo('translation_editor:gatekeeper'));
-}
-
 $language = get_input('language');
 if (empty($language)) {
 	return elgg_error_response(elgg_echo('error:missing_data'));
@@ -46,7 +42,7 @@ fclose($fh);
 
 // output the csv
 header('Content-Type: text/csv');
-header("Content-Disposition: attachment; filename=\"translations.csv\"");
+header('Content-Disposition: attachment; filename="translations.csv"');
 header('Content-Length: ' . strlen($contents));
 
 echo $contents;

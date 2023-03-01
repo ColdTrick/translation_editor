@@ -10,12 +10,6 @@ return array(
 	'translation_editor:exception:plugin_disabled' => "You can not translate a disabled plugin",
 	'translation_editor:last_import:actor' => "Last import by: %s",
 	
-	// upgrades
-	'translation_editor:upgrade:2020042401:title' => "Migrate Translation Editor disabled languages",
-	'translation_editor:upgrade:2020042401:description' => "Since allowed language management has moved to Elgg core, you might want to migratie the previous Translation Editor setting.",
-	'translation_editor:upgrade:2020051801:title' => "Remove remaining custom keys",
-	'translation_editor:upgrade:2020051801:description' => "Custom key support was removed in Translation Editor 7.0. This upgrade removes the left over keys.",
-	
 	// menu
 	'translation_editor:menu:title' => "Translation Editor",
 	'translation_editor:menu:title:plugin' => "Translating %s to %s",
@@ -34,6 +28,9 @@ This should mostly be used to synchronize the translations between a test and pr
 	'translation_editor:settings:remote:public_key' => "Public API key",
 	'translation_editor:settings:remote:private_key' => "Private API key",
 	'translation_editor:settings:remote:private_key:help' => "For improved security during the translation synchronization",
+	
+	// REST API methods
+	'web_services:api_methods:translation_editor.get_translations:get:description' => "Fetch custom translations from this website per plugin.",
 	
 	// views
 	// language selector

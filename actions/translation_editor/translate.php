@@ -4,11 +4,6 @@
  */
 
 $translation = get_input('translation', null, false);
-
-if (!translation_editor_is_translation_editor()) {
-	return elgg_error_response(elgg_echo('translation_editor:action:translate:error:not_authorized'));
-}
-
 if (!is_array($translation)) {
 	return elgg_error_response(elgg_echo('translation_editor:action:translate:error:input'));
 }
@@ -16,7 +11,6 @@ if (!is_array($translation)) {
 $trans = elgg()->translator->getInstalledTranslations();
 
 foreach ($translation as $language => $plugins) {
-	
 	if (!array_key_exists($language, $trans)) {
 		continue;
 	}
@@ -26,7 +20,6 @@ foreach ($translation as $language => $plugins) {
 	}
 	
 	foreach ($plugins as $plugin_name => $translate_input) {
-		
 		if (!is_array($translate_input)) {
 			continue;
 		}

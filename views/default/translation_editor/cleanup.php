@@ -14,7 +14,7 @@ if (!file_exists($file_name)) {
 $content = file_get_contents($file_name);
 $cleaned = json_decode($content, true);
 $count = 0;
-foreach ($cleaned as $plugin_id => $removed_translations){
+foreach ($cleaned as $plugin_id => $removed_translations) {
 	$count += count($removed_translations);
 }
 

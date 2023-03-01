@@ -12,6 +12,7 @@ $language_route = 'default:translation_editor';
 if (!empty($plugin)) {
 	$language_route = 'default:translation_editor:plugin';
 }
+
 $language_route_params = [
 	'current_language' => $current_language,
 	'plugin_id' => $plugin,
@@ -34,6 +35,7 @@ if (!empty($languages)) {
 	if (elgg_is_admin_logged_in()) {
 		$header[] = elgg_format_element('th', ['class' => 'translation-editor-delete'], elgg_echo('delete'));
 	}
+	
 	$header = elgg_format_element('tr', [], implode(PHP_EOL, $header));
 	$table_content .= elgg_format_element('thead', [], $header);
 	
@@ -109,6 +111,7 @@ if (!empty($languages)) {
 		
 		$rows[] = elgg_format_element('tr', [], implode(PHP_EOL, $row));
 	}
+	
 	$table_content .= elgg_format_element('tbody', [], implode(PHP_EOL, $rows));
 	
 	$content .= elgg_format_element('table', $table_attributes, $table_content);
@@ -123,6 +126,6 @@ if (empty($content)) {
 	return;
 }
 
-elgg_register_plugin_hook_handler('register', 'menu:title', '\ColdTrick\TranslationEditor\Menus\Title::registerLanguageSelector');
+elgg_register_event_handler('register', 'menu:title', '\ColdTrick\TranslationEditor\Menus\Title::registerLanguageSelector');
 
 echo elgg_format_element('div', ['id' => 'translation-editor-language-selection', 'class' => 'hidden'], $content);

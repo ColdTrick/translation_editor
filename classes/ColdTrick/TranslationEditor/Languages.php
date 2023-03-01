@@ -8,15 +8,14 @@ namespace ColdTrick\TranslationEditor;
 class Languages {
 	
 	/**
-	 * Add menu items to the page menu
+	 * Add languages to the languagelist
 	 *
-	 * @param \Elgg\Hook $hook 'languages', 'translations'
+	 * @param \Elgg\Event $event 'languages', 'translations'
 	 *
 	 * @return null|array
 	 */
-	public static function registerCustomLanguages(\Elgg\Hook $hook): ?array {
-		
-		$return = $hook->getValue();
+	public static function registerCustomLanguages(\Elgg\Event $event): ?array {
+		$return = $event->getValue();
 		
 		$custom_languages = elgg_get_plugin_setting('custom_languages', 'translation_editor');
 		if (empty($custom_languages)) {

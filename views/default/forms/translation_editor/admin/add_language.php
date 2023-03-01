@@ -24,8 +24,8 @@ echo elgg_view_field([
 	'fields' => [
 		[
 			'#type' => 'select',
-			'options_values' => $options,
 			'name' => 'code',
+			'options_values' => $options,
 		],
 		[
 			'#type' => 'submit',

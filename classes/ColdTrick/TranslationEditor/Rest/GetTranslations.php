@@ -5,6 +5,9 @@ namespace ColdTrick\TranslationEditor\Rest;
 use ColdTrick\TranslationEditor\PluginTranslation;
 use Elgg\Exceptions\InvalidArgumentException;
 
+/**
+ * Handle API call to translation_editor.get_translations
+ */
 class GetTranslations {
 	
 	/**

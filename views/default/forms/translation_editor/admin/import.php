@@ -14,6 +14,7 @@ echo elgg_view_field([
 	'#type' => 'file',
 	'#label' => elgg_echo('translation_editor:import:file'),
 	'name' => 'import',
+	'required' => true,
 ]);
 
 echo elgg_view_field([
@@ -42,8 +43,8 @@ $fields[] = [
 
 if (count($fields) > 1) {
 	$footer = elgg_view_field([
-	  '#type' => 'fieldset',
-	  'fields' => $fields,
+		'#type' => 'fieldset',
+		'fields' => $fields,
 	]);
 } else {
 	$footer = elgg_view_field($fields[0]);

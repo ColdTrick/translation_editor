@@ -2,6 +2,9 @@
 
 namespace ColdTrick\TranslationEditor;
 
+/**
+ * Handle the system upgrade event
+ */
 class Upgrade {
 	
 	/**
@@ -9,67 +12,46 @@ class Upgrade {
 	 *
 	 * @return void
 	 */
-	public static function cleanupCustomTranslations() {
-		
+	public static function cleanupCustomTranslations(): void {
 		$base_dir = elgg_get_data_path() . 'translation_editor' . DIRECTORY_SEPARATOR;
 		if (!is_dir($base_dir)) {
 			// no custom translations
 			return;
 		}
 		
-		$dh = opendir($base_dir);
-		if (empty($dh)) {
-			// something went wrong
-			return;
-		}
-		
-		while (($language = readdir($dh)) !== false) {
-			if (in_array($language, ['.', '..'])) {
+		$dh = new \DirectoryIterator($base_dir);
+		/* @var $language_info \DirectoryIterator */
+		foreach ($dh as $language_info) {
+			if ($language_info->isDot() || !$language_info->isDir()) {
 				continue;
 			}
 			
-			$language_dir = $base_dir . $language . DIRECTORY_SEPARATOR;
-			if (!is_dir($language_dir)) {
-				continue;
-			}
-			
-			$ldh = opendir($language_dir);
-			if (empty($ldh)) {
-				continue;
-			}
-			
-			while (($plugin_file = readdir($ldh)) !== false) {
-				$file_path = $language_dir . $plugin_file;
-				if (!is_file($file_path)) {
+			$ldh = new \DirectoryIterator($language_info->getPathname());
+			/* @var $plugin_translation \DirectoryIterator */
+			foreach ($ldh as $plugin_translation) {
+				if (!$plugin_translation->isFile()) {
 					continue;
 				}
 				
-				$plugin_id = basename($file_path, '.json');
+				$plugin_id = $plugin_translation->getBasename('.json');
 				
-				self::cleanupPlugin($language, $plugin_id);
+				self::cleanupPlugin($language_info->getFilename(), $plugin_id);
 			}
 			
 			// merge new translations for this language
-			translation_editor_merge_translations($language);
-			
-			// close $ldh
-			closedir($ldh);
+			translation_editor_merge_translations($language_info->getFilename());
 		}
-		
-		// close $dh
-		closedir($dh);
 	}
 	
 	/**
 	 * Cleanup the custom translations for one plugin
 	 *
-	 * @param string $language  the language to cleanup for
-	 * @param string $plugin_id the plugin to cleanup
+	 * @param string $language  the language to clean up for
+	 * @param string $plugin_id the plugin to clean up
 	 *
 	 * @return bool
 	 */
-	protected static function cleanupPlugin($language, $plugin_id) {
-		
+	protected static function cleanupPlugin(string $language, string $plugin_id): bool {
 		if (empty($language) || empty($plugin_id)) {
 			return false;
 		}
@@ -118,9 +100,8 @@ class Upgrade {
 	 *
 	 * @return void
 	 */
-	protected static function writeCleanupTranslations($language, $plugin_id, $translations) {
-		
-		if (empty($language) || empty($translations) || !is_array($translations)) {
+	protected static function writeCleanupTranslations(string $language, string $plugin_id, array $translations): void {
+		if (empty($language) || empty($translations) || empty($translations)) {
 			return;
 		}
 		
@@ -137,6 +118,7 @@ class Upgrade {
 		$new_translation = [$plugin_id => $translations];
 		
 		$new_content = array_merge($existing, $new_translation);
+		
 		// write new content
 		file_put_contents($cleanup_file, json_encode($new_content));
 	}

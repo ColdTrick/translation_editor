@@ -1,10 +1,9 @@
 <?php
 
-use Elgg\Router\Middleware\AdminGatekeeper;
-use ColdTrick\TranslationEditor\EditorGatekeeper;
 use ColdTrick\TranslationEditor\Bootstrap;
-use ColdTrick\TranslationEditor\Upgrades\MigrateDisabledLanguages;
-use ColdTrick\TranslationEditor\Upgrades\RemoveCustomKeysFolder;
+use ColdTrick\TranslationEditor\EditorGatekeeper;
+use ColdTrick\TranslationEditor\Rest\GetTranslations;
+use Elgg\Router\Middleware\AdminGatekeeper;
 
 require_once(__DIR__ . '/lib/functions.php');
 
@@ -35,10 +34,26 @@ return [
 		'translation_editor/admin/toggle_translation_editor' => [
 			'access' => 'admin',
 		],
-		'translation_editor/cleanup/remove' => [],
-		'translation_editor/cleanup/download' => [],
-		'translation_editor/merge' => [],
-		'translation_editor/translate' => [],
+		'translation_editor/cleanup/download' => [
+			'middleware' => [
+				EditorGatekeeper::class,
+			],
+		],
+		'translation_editor/cleanup/remove' => [
+			'middleware' => [
+				EditorGatekeeper::class,
+			],
+		],
+		'translation_editor/merge' => [
+			'middleware' => [
+				EditorGatekeeper::class,
+			],
+		],
+		'translation_editor/translate' => [
+			'middleware' => [
+				EditorGatekeeper::class,
+			],
+		],
 		'translation_editor/snapshots/create' => [
 			'access' => 'admin',
 		],
@@ -93,19 +108,15 @@ return [
 			],
 		],
 	],
-	'upgrades' => [
-		MigrateDisabledLanguages::class,
-		RemoveCustomKeysFolder::class,
-	],
-	'hooks' => [
+	'events' => [
 		'languages' => [
 			'translations' => [
 				'\ColdTrick\TranslationEditor\Languages::registerCustomLanguages' => [],
 			],
 		],
 		'register' => [
-			'menu:page' => [
-				'\ColdTrick\TranslationEditor\Menus\Page::register' => [],
+			'menu:admin_header' => [
+				'\ColdTrick\TranslationEditor\Menus\AdminHeader::register' => [],
 			],
 			'menu:site' => [
 				'\ColdTrick\TranslationEditor\Menus\Site::register' => [],
@@ -117,11 +128,6 @@ return [
 				'\ColdTrick\TranslationEditor\Menus\UserHover::register' => [],
 			],
 		],
-		'rest' => [
-			'init' => [
-				'\ColdTrick\TranslationEditor\Rest::exposeFunctions' => [],
-			],
-		],
 	],
 	'view_extensions' => [
 		'css/elgg' => [
@@ -131,6 +137,24 @@ return [
 	'view_options' => [
 		'translation_editor/snapshots' => [
 			'ajax' => true,
+		],
+	],
+	'web_services' => [
+		'translation_editor.get_translations' => [
+			'GET' => [
+				'callback' => GetTranslations::class,
+				'params' => [
+					'language' => [
+						'type' => 'string',
+						'required' => true,
+					],
+					'plugins' => [
+						'type' => 'array',
+						'required' => true,
+					],
+				],
+				'require_api_auth' => true,
+			],
 		],
 	],
 ];

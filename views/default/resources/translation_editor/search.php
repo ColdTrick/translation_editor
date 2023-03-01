@@ -1,15 +1,15 @@
 <?php
-use Elgg\Exceptions\Http\BadRequestException;
-
 /**
  * display the search results
  */
+
+use Elgg\Exceptions\Http\BadRequestException;
 
 // get inputs
 $q = get_input('q');
 if (empty($q)) {
 	$exception = new BadRequestException(elgg_echo('error:missing_data'));
-	$exception->setRedirectUrl(REFERER);
+	$exception->setRedirectUrl(REFERRER);
 	
 	throw $exception;
 }

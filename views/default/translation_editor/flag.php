@@ -6,7 +6,6 @@
  */
 
 $language = elgg_extract('language', $vars);
-
 if (empty($language)) {
 	return '&nbsp;';
 }

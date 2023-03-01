@@ -4,11 +4,13 @@ namespace ColdTrick\TranslationEditor;
 
 use Elgg\DefaultPluginBootstrap;
 
+/**
+ * Plugin bootstrap
+ */
 class Bootstrap extends DefaultPluginBootstrap {
 		
 	/**
 	 * {@inheritDoc}
-	 * @see \Elgg\DefaultPluginBootstrap::boot()
 	 */
 	public function boot() {
 		$this->loadCustomTranslations();
@@ -16,7 +18,6 @@ class Bootstrap extends DefaultPluginBootstrap {
 	
 	/**
 	 * {@inheritDoc}
-	 * @see \Elgg\DefaultPluginBootstrap::upgrade()
 	 */
 	public function upgrade() {
 		Upgrade::cleanupCustomTranslations();
@@ -27,8 +28,7 @@ class Bootstrap extends DefaultPluginBootstrap {
 	 *
 	 * @return void
 	 */
-	protected function loadCustomTranslations() {
-		
+	protected function loadCustomTranslations(): void {
 		$translator = $this->elgg()->translator;
 		
 		$user_language = $translator->getCurrentLanguage();

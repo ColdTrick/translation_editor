@@ -1,34 +1,36 @@
 <?php
+
 namespace ColdTrick\TranslationEditor\Menus;
+
+use Elgg\Menu\MenuItems;
 
 /**
  * Add menu items to the page menu
  */
-class Page {
+class AdminHeader {
 	
 	/**
 	 * Add menu items to the page menu
 	 *
-	 * @param \Elgg\Hook $hook 'register', 'menu:page'
+	 * @param \Elgg\Event $event 'register', 'menu:admin_header'
 	 *
-	 * @return void|\ElggMenuItem[]
+	 * @return null|MenuItems
 	 */
-	public static function register(\Elgg\Hook $hook) {
-		
+	public static function register(\Elgg\Event $event): ?MenuItems {
 		if (!elgg_is_admin_logged_in() || !elgg_in_context('admin')) {
-			return;
+			return null;
 		}
 		
-		$return = $hook->getValue();
+		/* @var $return MenuItems */
+		$return = $event->getValue();
 		
 		$return[] = \ElggMenuItem::factory([
 			'name' => 'translation_editor',
+			'text' => elgg_echo('translation_editor:menu:title'),
 			'href' => elgg_generate_url('default:translation_editor', [
 				'current_language' => elgg_get_current_language(),
 			]),
-			'text' => elgg_echo('translation_editor:menu:title'),
 			'parent_name' => 'configure_utilities',
-			'section' => 'configure',
 		]);
 		
 		return $return;

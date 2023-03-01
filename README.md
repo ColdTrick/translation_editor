@@ -2,8 +2,7 @@ Translation Editor
 ==================
 
 ![Elgg 4.3](https://img.shields.io/badge/Elgg-4.3-green.svg)
-[![Build Status](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/badges/build.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/ColdTrick/translation_editor/?branch=master)
+![Lint Checks](https://github.com/ColdTrick/translation_editor/actions/workflows/lint.yml/badge.svg?event=push)
 [![Latest Stable Version](https://poser.pugx.org/coldtrick/translation_editor/v/stable.svg)](https://packagist.org/packages/coldtrick/translation_editor)
 [![License](https://poser.pugx.org/coldtrick/translation_editor/license.svg)](https://packagist.org/packages/coldtrick/translation_editor)
 

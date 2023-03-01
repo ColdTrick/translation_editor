@@ -1,5 +1,4 @@
 define(['jquery', 'elgg/Ajax'], function($, Ajax) {
-	
 	var locked = false;
 	var data = new FormData();
 	
@@ -31,6 +30,7 @@ define(['jquery', 'elgg/Ajax'], function($, Ajax) {
 		for (var entry of data.entries()) {
 			i++;
 		}
+		
 		return i;
 	};
 	

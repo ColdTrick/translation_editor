@@ -80,6 +80,7 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 	if (!empty($plugin_title)) {
 		$list .= elgg_format_element('span', ['class' => 'elgg-subtext mls'], $plugin_title);
 	}
+	
 	$list .= '</td>';
 	$list .= '<td>' . $plugin_stats['total'] . '</td>';
 	
@@ -140,10 +141,12 @@ foreach ($plugins as $plugin_id => $plugin_stats) {
 				'class' => 'mlm',
 			]);
 		}
+		
 		$list .= '</td>';
 	} else {
 		$list .= '<td>&nbsp;</td>';
 	}
+	
 	$list .= '</tr>';
 }
 

@@ -33,7 +33,7 @@ if (!empty($snapshots)) {
 		$postfix = '';
 		$creator = elgg_extract('creator', $info);
 		if (!empty($creator)) {
-			$user = get_user_by_username($creator);
+			$user = elgg_get_user_by_username($creator);
 			if ($user instanceof \ElggUser) {
 				$postfix = ' - ' . elgg_format_element('span', ['class' => 'elgg-subtext'], elgg_echo('byline', [$user->getDisplayName()]));
 			}

@@ -6,8 +6,8 @@
 $current_language = get_input('current_language');
 $plugin = get_input('plugin');
 
-if (!translation_editor_is_translation_editor()) {
-	return elgg_error_response(elgg_echo('actionunauthorized'));
+if (empty($current_language) || empty($plugin)) {
+	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 
 $translation = translation_editor_get_plugin($current_language, $plugin);

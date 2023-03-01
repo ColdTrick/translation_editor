@@ -7,6 +7,9 @@ use Elgg\Includer;
 use Elgg\Project\Paths;
 use Elgg\Traits\Di\ServiceFacade;
 
+/**
+ * Translation snapshot service
+ */
 class Snapshot {
 	
 	use ServiceFacade;
@@ -16,7 +19,7 @@ class Snapshot {
 	 *
 	 * @return string
 	 */
-	public static function name() {
+	public static function name(): string {
 		return 'translation-editor-snapshot';
 	}
 	
@@ -127,6 +130,7 @@ class Snapshot {
 			} else {
 				$new_keys = array_diff_key($translations['en'], $snapshot_translations[$plugin]['en']);
 			}
+			
 			if (!empty($new_keys)) {
 				foreach ($new_keys as $key => $value) {
 					$result[$plugin]['en'][$key] = $translations['en'][$key];

@@ -17,7 +17,6 @@ elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translatio
 $plugins = translation_editor_get_plugins($current_language);
 $exportable_plugins = [];
 foreach ($plugins as $plugin_id => $plugin_stats) {
-	
 	if (empty($plugin_stats['custom'])) {
 		continue;
 	}
