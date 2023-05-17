@@ -1,10 +1,11 @@
 <?php
 /**
- * This file was created by Translation Editor v11.0.1
- * On 2023-01-12 11:58
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:22
  */
 
 return array (
+  'web_services:api_methods:translation_editor.get_translations:get:description' => 'Download de aangepaste vertalingen van deze website per plugin.',
   'translation_editor:import:remote:warning' => 'Dit zal alle aangepaste <b>%s</> vertalingen overschrijven met de aangepaste vertalingen van de externe bron.',
   'translation_editor:last_import:actor' => 'Laatste import door: %s',
   'translation_editor:settings:remote:title' => 'Externe vertalingsinstellingen',
@@ -70,15 +71,8 @@ Als je klaar bent kun je het bestand verwijderen.',
   'translation_editor:show_original' => 'Toon originele vertaling',
   'translation_editor:action:translate:error:input' => 'Onjuiste invoer voor het toevoegen van een vertaling',
   'translation_editor:action:translate:error:write' => 'Fout tijdens wegschrijven van vertalingen',
-  'translation_editor:action:translate:error:not_authorized' => 'Je bent niet geautoriseerd als vertaler',
   'translation_editor:action:translate:success' => 'Vertalingen opgeslagen',
   'translation_editor:action:unmake_translation_editor' => 'Verwijder vertaler',
-  'translation_editor:action:add_custom_key:success' => 'Custom sleutel toegevoegd',
-  'translation_editor:action:add_custom_key:file_error' => 'Fout tijdens wegschrijven van de custom sleutel',
-  'translation_editor:action:add_custom_key:exists' => 'Deze sleutel bestaat al. Voer een unieke sleutel in.',
-  'translation_editor:action:add_custom_key:invalid_chars' => 'De sleutel bevat ongeldige karakters. Alleen a-z, 0-9, dubbele punt of underscore zijn toegestaan.',
-  'translation_editor:action:add_custom_key:key_numeric' => 'Sleutel mag niet uit enkel getallen bestaan',
-  'translation_editor:action:add_custom_key:missing_input' => 'Ongeldige invoer. Voer een sleutel en een standaard (Engelse) vertaling in.',
   'translation_editor:action:delete:error:input' => 'Onjuiste invoer om de vertaling te verwijderen',
   'translation_editor:action:delete:error:delete' => 'Fout tijden het verwijderen van de vertaling',
   'translation_editor:action:delete:success' => 'Vertaling succesvol verwijderd',

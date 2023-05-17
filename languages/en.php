@@ -104,7 +104,6 @@ After the deployment the snapshot can be compared to the current translations to
 	// actions
 	'translation_editor:action:translate:error:input' => "Incorrect input provided to add a translation",
 	'translation_editor:action:translate:error:write' => "Error while writing the translations",
-	'translation_editor:action:translate:error:not_authorized' => "You are not authorized to translate",
 	'translation_editor:action:translate:success' => "Translations saved successfully",
 
 	'translation_editor:action:make_translation_editor' => "Make Translator",
@@ -122,13 +121,6 @@ After the deployment the snapshot can be compared to the current translations to
 	'translation_editor:action:import:incorrect_language' => "The import does not contain translations for %s",
 	'translation_editor:action:import:no_plugins' => "The import does not contain plugins to be imported",
 	'translation_editor:action:import:success' => "Successfully imported translations",
-
-	'translation_editor:action:add_custom_key:success' => "Custom key successfully added",
-	'translation_editor:action:add_custom_key:file_error' => "Error when saving the custom key to the file",
-	'translation_editor:action:add_custom_key:exists' => "Can't add this key as it already exists. Enter a unique key.",
-	'translation_editor:action:add_custom_key:invalid_chars' => "Key contains invalid characters. Only a-z, 0-9, colon or underscore are allowed.",
-	'translation_editor:action:add_custom_key:key_numeric' => "Key can not contain only numbers",
-	'translation_editor:action:add_custom_key:missing_input' => "Invalid input. Please enter a key and a default (English) translation.",
 
 	'translation_editor:action:cleanup:remove:error:no_file' => "The requested file to delete could not be found",
 	'translation_editor:action:cleanup:remove:error:remove' => "An error occurred while deleting the file, please try again",

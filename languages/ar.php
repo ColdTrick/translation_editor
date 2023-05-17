@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-14 17:09
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:25
  */
 
 return array (
@@ -29,7 +29,6 @@ return array (
   'translation_editor:plugin_edit:show:params' => 'ينقصها مُعطيات',
   'translation_editor:action:translate:error:input' => 'بيانات إضافة اللغة غير صحيحة',
   'translation_editor:action:translate:error:write' => 'حدث خطأ في حفظ الترجمة',
-  'translation_editor:action:translate:error:not_authorized' => 'ليست لديك صلاحيات الترجمة',
   'translation_editor:action:translate:success' => 'تم حفظ الترجمات',
   'translation_editor:action:make_translation_editor' => 'امنح صلاحية المترجمة',
   'translation_editor:action:unmake_translation_editor' => 'إزالة صلاحية المترجمة',
@@ -38,10 +37,4 @@ return array (
   'translation_editor:action:delete:success' => 'تم حذف الترجمة',
   'translation_editor:action:add_language:success' => 'تم إضافة اللغة بنجاح',
   'translation_editor:action:delete_language:success' => 'تم إزالة اللغة',
-  'translation_editor:action:add_custom_key:success' => 'تم إضافة الكلمة الجديدة',
-  'translation_editor:action:add_custom_key:file_error' => 'حدث خطأ في حفظ الكلمة الجديدة إلى الملف',
-  'translation_editor:action:add_custom_key:exists' => 'لا يمكن إضافة هذه الكلمة حيث أنها مضافة مسبقاً. اكتب كلمة جديدة.',
-  'translation_editor:action:add_custom_key:invalid_chars' => 'تحتوي الكلمة على أحرف غير صالحة لاستخدامها للترجمة. كلمة الترجمة يمكن أن تحتوي على الأحرف اللاتينية الصغيرة والأرقام والنقطتين (:) أو الشَّرطة السفلية (_) فقط.',
-  'translation_editor:action:add_custom_key:key_numeric' => 'لا يجب أن تحتوي كلمة الترجمة على أرقام فقط.',
-  'translation_editor:action:add_custom_key:missing_input' => 'حدث خطأ. رجاء اكتب الكلمة وترجمة (انجليزية) افتراضية.',
 );

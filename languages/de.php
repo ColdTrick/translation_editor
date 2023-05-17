@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-14 17:10
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:25
  */
 
 return array (
@@ -30,7 +30,6 @@ return array (
   'translation_editor:plugin_edit:show:params' => 'fehlender Parameter',
   'translation_editor:action:translate:error:input' => 'Falsche Eingabe, um eine neue Übersetzung hinzuzufügen',
   'translation_editor:action:translate:error:write' => 'Fehler beim Speichern der Übersetzung',
-  'translation_editor:action:translate:error:not_authorized' => 'Du bist nicht zum Übersetzen authorisiert',
   'translation_editor:action:translate:success' => 'Übersetzung erfolgreich gespeichert',
   'translation_editor:action:make_translation_editor' => 'Zum Übersetzer machen',
   'translation_editor:action:unmake_translation_editor' => 'Übersetzerrolle entfernen',
@@ -39,10 +38,4 @@ return array (
   'translation_editor:action:delete:success' => 'Übersetzung erfolgreich gelöscht',
   'translation_editor:action:add_language:success' => 'Sprache erfolgreich hinzugefügt',
   'translation_editor:action:delete_language:success' => 'Sprache erfolgreich gelöscht',
-  'translation_editor:action:add_custom_key:success' => 'Neuer Schlüssel erfolgreich hinzugefügt.',
-  'translation_editor:action:add_custom_key:file_error' => 'Fehler beim Speichern des selbst erstellten Schlüssels in die Datei.',
-  'translation_editor:action:add_custom_key:exists' => 'Kann einen existierenden Schlüssel nicht erstellen. Bitte gib einen eindeutigen Schlüssel ein.',
-  'translation_editor:action:add_custom_key:invalid_chars' => 'Schlüssel enthält ungültige Zeichen. Nur a-z, 0-9, Doppelpunkt und Unterstrich sind erlaubt.',
-  'translation_editor:action:add_custom_key:key_numeric' => 'Schlüssel darf nur Zahlen enthalten.',
-  'translation_editor:action:add_custom_key:missing_input' => 'Falsche Eingabe. Bitte gib einen Schlüssel und eine englische Übersetzung ein.',
 );

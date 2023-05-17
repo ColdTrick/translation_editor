@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-14 17:12
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:26
  */
 
 return array (
@@ -29,7 +29,6 @@ return array (
   'translation_editor:plugin_edit:show:params' => 'Paramètres manquant',
   'translation_editor:action:translate:error:input' => 'Une entrée incorrecte revient à ajouter une traduction',
   'translation_editor:action:translate:error:write' => 'Erreur pendant l\'écriture des traductions',
-  'translation_editor:action:translate:error:not_authorized' => 'Vous n\'êtes pas autorisé à traduire',
   'translation_editor:action:translate:success' => 'Les traduction ont été sauvegardée avec succès',
   'translation_editor:action:make_translation_editor' => 'Faire un fichier traduction',
   'translation_editor:action:unmake_translation_editor' => 'Défaire le fichier traduction',
@@ -38,10 +37,4 @@ return array (
   'translation_editor:action:delete:success' => 'Traduction effacé avec succès',
   'translation_editor:action:add_language:success' => 'Langage ajouté avec succès',
   'translation_editor:action:delete_language:success' => 'Langage enlevé avec succès',
-  'translation_editor:action:add_custom_key:success' => 'La clé personnalisé ajoutée avec succès',
-  'translation_editor:action:add_custom_key:file_error' => 'Erreur lors de la sauvegarde de la clé personnalisé dans le fichier',
-  'translation_editor:action:add_custom_key:exists' => 'Impossible d\'ajouter cet clé, car elle existe déjà. Entrer une clé unique.',
-  'translation_editor:action:add_custom_key:invalid_chars' => 'Une clé contient des caractères invalides. Seuls les caractères a-z, 0-9 les virgules "," et souligné "_" sont admis.',
-  'translation_editor:action:add_custom_key:key_numeric' => 'Une clé ne peut contenir que des chiffres',
-  'translation_editor:action:add_custom_key:missing_input' => 'Entrée invalide. Merci d\'entrer une clé (anglaise) et une traduction par défault',
 );

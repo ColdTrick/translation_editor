@@ -1,7 +1,7 @@
 <?php
 /**
- * This file was created by Translation Editor v7.0-beta
- * On 2018-12-14 17:11
+ * This file was created by Translation Editor v11.1
+ * On 2023-05-17 15:26
  */
 
 return array (
@@ -39,7 +39,6 @@ return array (
   'translation_editor:plugin_edit:show:params' => 'parametros perdidos',
   'translation_editor:action:translate:error:input' => 'Se ha introducido una entrada incorrecta para agregar una traducción.',
   'translation_editor:action:translate:error:write' => 'Error al escribir las traducciones',
-  'translation_editor:action:translate:error:not_authorized' => 'No tienes autorización para traducir',
   'translation_editor:action:translate:success' => 'Traducciones guardadas correctamente',
   'translation_editor:action:make_translation_editor' => 'Hacer traductor',
   'translation_editor:action:unmake_translation_editor' => 'Deshacer traductor',
@@ -51,12 +50,6 @@ return array (
   'translation_editor:action:import:incorrect_language' => 'La importación no contiene traducciones para %s',
   'translation_editor:action:import:no_plugins' => 'La importación no contiene plugins para importar',
   'translation_editor:action:import:success' => 'Traducciones importadas con éxito',
-  'translation_editor:action:add_custom_key:success' => 'Clave personalizada agregada correctamente',
-  'translation_editor:action:add_custom_key:file_error' => 'Error al guardar la clave personalizada en el archivo',
-  'translation_editor:action:add_custom_key:exists' => 'No se puede agregar esta clave ya que ya existe. Introduzca una clave única.',
-  'translation_editor:action:add_custom_key:invalid_chars' => 'La clave contiene caracteres no válidos. Sólo se permiten a-z, 0-9, dos puntos o subrayado.',
-  'translation_editor:action:add_custom_key:key_numeric' => 'La clave no puede contener sólo números',
-  'translation_editor:action:add_custom_key:missing_input' => 'Entrada inválida. Introduzca una clave y una traducción predeterminada (en inglés).',
   'translation_editor:action:cleanup:remove:error:no_file' => 'No se pudo encontrar el archivo solicitado a eliminar',
   'translation_editor:action:cleanup:remove:error:remove' => 'Se ha producido un error al eliminar el archivo, inténtalo de nuevo.',
   'translation_editor:action:cleanup:remove:success' => 'El archivo fue eliminado.',
