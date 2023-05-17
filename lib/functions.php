@@ -108,7 +108,7 @@ function translation_editor_get_core_statistics(array $loaded_translations, stri
 		$result['exists'] = $result['total'] - count($missing_translations);
 		
 		foreach ($core_keys as $key => $value) {
-			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language], ''))) {
+			if (translation_editor_get_invalid_parameters($value, (string) elgg_extract($key, $loaded_translations[$language], ''))) {
 				$result['invalid']++;
 			}
 		}
@@ -187,7 +187,7 @@ function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $lo
 		$result['exists'] = $result['total'] - count($missing_translations);
 		
 		foreach ($plugin_keys as $key => $value) {
-			if (translation_editor_get_invalid_parameters($value, elgg_extract($key, $loaded_translations[$language], ''))) {
+			if (translation_editor_get_invalid_parameters($value, (string) elgg_extract($key, $loaded_translations[$language], ''))) {
 				$result['invalid']++;
 			}
 		}

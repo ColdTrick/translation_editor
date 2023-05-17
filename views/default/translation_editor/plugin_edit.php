@@ -20,7 +20,7 @@ $custom_count = 0;
 $translation = [];
 if (!empty($english)) {
 	foreach ($english as $en_key => $en_value) {
-		$invalid_params = translation_editor_get_invalid_parameters($en_value, elgg_extract($en_key, $translated_language));
+		$invalid_params = translation_editor_get_invalid_parameters($en_value, (string) elgg_extract($en_key, $translated_language));
 		
 		$row_rel = null;
 		if (!array_key_exists($en_key, $translated_language)) {
