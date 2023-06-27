@@ -44,7 +44,9 @@ echo elgg_view_message('warning', elgg_echo('translation_editor:import:remote:wa
 
 // add plugin selection
 $plugins = elgg_get_plugins();
-$value = [];
+$value = [
+	'core',
+];
 $options_values = [];
 foreach ($plugins as $plugin) {
 	$value[] = $plugin->getID();
