@@ -60,12 +60,6 @@ function translation_editor_get_plugins(string $current_language): array {
  * @return array
  */
 function translation_editor_get_core_statistics(array $loaded_translations, string $language): array {
-	$cache_key = "core_{$language}_translation_stats";
-	$cached_result = elgg_load_system_cache($cache_key);
-	if (!is_null($cached_result)) {
-		return $cached_result;
-	}
-	
 	$language_file = Paths::elgg() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
 	if (!file_exists($language_file)) {
 		return [];
@@ -113,8 +107,6 @@ function translation_editor_get_core_statistics(array $loaded_translations, stri
 			}
 		}
 	}
-		
-	elgg_save_system_cache($cache_key, $result);
 	
 	return $result;
 }
@@ -130,12 +122,6 @@ function translation_editor_get_core_statistics(array $loaded_translations, stri
  */
 function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $loaded_translations, string $language): array {
 	$plugin_id = $plugin->getID();
-	
-	$cache_key = "{$plugin_id}_{$language}_translation_stats";
-	$cached_result = elgg_load_system_cache($cache_key);
-	if (!is_null($cached_result)) {
-		return $cached_result;
-	}
 	
 	$language_file = $plugin->getPath() . 'languages' . DIRECTORY_SEPARATOR . 'en.php';
 	if (!file_exists($language_file)) {
@@ -192,8 +178,6 @@ function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $lo
 			}
 		}
 	}
-	
-	elgg_save_system_cache($cache_key, $result);
 	
 	return $result;
 }

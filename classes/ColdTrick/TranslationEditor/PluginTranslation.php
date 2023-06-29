@@ -80,8 +80,6 @@ class PluginTranslation {
 			return false;
 		}
 		
-		$this->removeStatisticsCache();
-		
 		return $bytes;
 	}
 	
@@ -112,21 +110,10 @@ class PluginTranslation {
 	public function removeTranslations(): bool {
 		$filename = $this->getFilename();
 		
-		$this->removeStatisticsCache();
-		
 		if (file_exists($filename)) {
 			return unlink($filename);
 		}
 		
 		return true;
-	}
-	
-	/**
-	 * Removes statistics cache
-	 *
-	 * @return void
-	 */
-	protected function removeStatisticsCache(): void {
-		elgg_delete_system_cache("{$this->plugin_id}_{$this->language}_translation_stats");
 	}
 }
