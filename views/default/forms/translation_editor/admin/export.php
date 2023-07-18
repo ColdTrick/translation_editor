@@ -15,7 +15,7 @@ echo elgg_view_field([
 
 $footer = elgg_view_field([
 	'#type' => 'submit',
-	'value' => elgg_echo('export'),
+	'text' => elgg_echo('export'),
 ]);
 
 elgg_set_form_footer($footer);

@@ -38,7 +38,7 @@ if (!empty($last_import)) {
 $fields[] = [
 	'#type' => 'submit',
 	'icon' => 'file-import',
-	'value' => elgg_echo('import'),
+	'text' => elgg_echo('import'),
 ];
 
 if (count($fields) > 1) {

@@ -64,14 +64,14 @@ echo elgg_view_field([
 			'#type' => 'button',
 			'id' => 'translation-editor-import-filter',
 			'icon' => 'filter',
-			'value' => elgg_echo('translation_editor:import:remote:plugins:filter'),
+			'text' => elgg_echo('translation_editor:import:remote:plugins:filter'),
 		],
 		[
 			'#type' => 'button',
 			'#class' => 'hidden',
 			'id' => 'translation-editor-import-all',
 			'icon' => 'check',
-			'value' => elgg_echo('translation_editor:import:remote:plugins:all'),
+			'text' => elgg_echo('translation_editor:import:remote:plugins:all'),
 		],
 	],
 	'align' => 'horizontal',
@@ -102,7 +102,7 @@ if (!empty($last_import)) {
 $fields[] = [
 	'#type' => 'submit',
 	'icon' => 'cloud-download-alt',
-	'value' => elgg_echo('import'),
+	'text' => elgg_echo('import'),
 	'confirm' => true,
 ];
 
