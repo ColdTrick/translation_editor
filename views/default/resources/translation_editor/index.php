@@ -5,7 +5,6 @@
 
 use Elgg\Exceptions\Http\BadRequestException;
 
-// Get inputs
 $current_language = elgg_extract('current_language', $vars, elgg_get_current_language(), false);
 
 $translations = elgg()->translator->getInstalledTranslations();
@@ -16,15 +15,6 @@ if (!array_key_exists($current_language, $translations)) {
 	]));
 }
 
-// Build elements
-$title_text = elgg_echo('translation_editor:menu:title');
-
-// breadcrumb
-elgg_push_breadcrumb($title_text, elgg_generate_url('default:translation_editor', [
-	'current_language' => elgg_get_current_language(),
-]));
-
-// add current language to breadcrumb
 $translated_language = $current_language;
 if (elgg_language_key_exists($current_language, $current_language)) {
 	$translated_language = elgg_echo($current_language, [], $current_language);
@@ -32,9 +22,6 @@ if (elgg_language_key_exists($current_language, $current_language)) {
 	$translated_language = elgg_echo($current_language);
 }
 
-elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translation_editor', [
-	'current_language' => $current_language,
-]));
 set_input('current_language', $current_language);
 
 // build page elements
@@ -54,21 +41,18 @@ $form_vars = [
 	'class' => 'mbl',
 	'method' => 'GET',
 ];
-$body_vars  = [
-	'current_language' => $current_language,
-];
-$body .= elgg_view_form('translation_editor/search', $form_vars, $body_vars);
 
-$body .= elgg_view('translation_editor/cleanup', [
-	'current_language' => $current_language,
-]);
+$body .= elgg_view_form('translation_editor/search', $form_vars, ['current_language' => $current_language]);
+
+$body .= elgg_view('translation_editor/cleanup', ['current_language' => $current_language]);
 
 $body .= elgg_view('translation_editor/plugin_list', [
 	'plugins' => $plugins,
 	'current_language' => $current_language,
 ]);
 
-// draw page
-echo elgg_view_page($title_text, [
+$title_text = elgg_echo('translation_editor:menu:title');
+
+echo elgg_view_page("{$title_text} - {$translated_language}", [
 	'content' => $body,
 ]);

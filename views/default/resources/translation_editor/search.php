@@ -5,7 +5,6 @@
 
 use Elgg\Exceptions\Http\BadRequestException;
 
-// get inputs
 $q = get_input('q');
 if (empty($q)) {
 	$exception = new BadRequestException(elgg_echo('error:missing_data'));
@@ -33,9 +32,6 @@ if (elgg_language_key_exists($language, $language)) {
 	$trans_lan = elgg_echo($language, [], $language);
 }
 
-$title_text = elgg_echo('translation_editor:search', [$q, $trans_lan]);
-
-// breadcrumb
 elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), elgg_generate_url('default:translation_editor'));
 elgg_push_breadcrumb($trans_lan, elgg_generate_url('default:translation_editor', [
 	'current_language' => $language,
@@ -70,7 +66,6 @@ if (!empty($found)) {
 	]);
 }
 
-// draw page
-echo elgg_view_page($title_text, [
+echo elgg_view_page(elgg_echo('translation_editor:search', [$q, $trans_lan]), [
 	'content' => $body,
 ]);

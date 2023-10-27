@@ -15,7 +15,6 @@ $date = Values::normalizeTime($snapshot);
 
 $title_text = elgg_echo('translation_editor:compare', [$date->formatLocale(elgg_echo('friendlytime:date_format')), $trans_lan]);
 
-// breadcrumb
 elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), elgg_generate_url('default:translation_editor'));
 elgg_push_breadcrumb($trans_lan, elgg_generate_url('default:translation_editor', [
 	'current_language' => $language,
@@ -35,7 +34,6 @@ if (!empty($results)) {
 	]);
 }
 
-// draw page
 echo elgg_view_page($title_text, [
 	'content' => $body,
 ]);

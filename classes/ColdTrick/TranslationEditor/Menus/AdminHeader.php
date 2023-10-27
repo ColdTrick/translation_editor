@@ -17,7 +17,7 @@ class AdminHeader {
 	 * @return null|MenuItems
 	 */
 	public static function register(\Elgg\Event $event): ?MenuItems {
-		if (!elgg_is_admin_logged_in() || !elgg_in_context('admin')) {
+		if (!elgg_is_admin_logged_in()) {
 			return null;
 		}
 		
@@ -30,7 +30,7 @@ class AdminHeader {
 			'href' => elgg_generate_url('default:translation_editor', [
 				'current_language' => elgg_get_current_language(),
 			]),
-			'parent_name' => 'configure_utilities',
+			'parent_name' => 'configure',
 		]);
 		
 		return $return;

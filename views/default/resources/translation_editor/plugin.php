@@ -9,7 +9,6 @@
 use Elgg\Exceptions\Http\BadRequestException;
 use Elgg\Exceptions\Http\EntityNotFoundException;
 
-// Get inputs
 $current_language = elgg_extract('current_language', $vars);
 $plugin = elgg_extract('plugin_id', $vars);
 
@@ -36,7 +35,6 @@ if (!array_key_exists($current_language, $translations)) {
 	]));
 }
 
-// breadcrumb
 elgg_push_breadcrumb(elgg_echo('translation_editor:menu:title'), elgg_generate_url('default:translation_editor', [
 	'current_language' => elgg_get_current_language(),
 ]));
@@ -54,11 +52,6 @@ elgg_push_breadcrumb($translated_language, elgg_generate_url('default:translatio
 ]));
 set_input('current_language', $current_language);
 
-// show plugin keys
-elgg_push_breadcrumb($plugin, elgg_generate_url('default:translation_editor:plugin', [
-	'current_language' => $current_language,
-	'plugin_id' => $plugin,
-]));
 set_input('plugin_id', $plugin);
 
 // build page elements
@@ -77,7 +70,6 @@ $body .= elgg_view('translation_editor/plugin_edit', [
 	'current_language' => $current_language,
 ]);
 
-// draw page
 echo elgg_view_page($title_text, [
 	'content' => $body,
 ]);
