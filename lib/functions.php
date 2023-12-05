@@ -475,12 +475,13 @@ function translation_editor_is_translation_editor(int $user_guid = 0): bool {
 /**
  * Search for a translation
  *
- * @param string $query    the text to search for
- * @param string $language the language to search in (defaults to English)
+ * @param string $query       the text to search for
+ * @param string $language    the language to search in (defaults to English)
+ * @param bool   $search_keys should we search in the keys
  *
  * @return array|null
  */
-function translation_editor_search_translation(string $query, string $language = 'en'): ?array {
+function translation_editor_search_translation(string $query, string $language = 'en', bool $search_keys = true): ?array {
 	$plugins = translation_editor_get_plugins($language);
 	if (empty($plugins)) {
 		return null;
@@ -494,7 +495,7 @@ function translation_editor_search_translation(string $query, string $language =
 		}
 		
 		foreach ($translations['en'] as $key => $value) {
-			if (stristr($key, $query) || stristr($value, $query) || (array_key_exists($key, $translations['current_language']) && stristr($translations['current_language'][$key], $query))) {
+			if (($search_keys && stristr($key, $query)) || stristr($value, $query) || (array_key_exists($key, $translations['current_language']) && stristr($translations['current_language'][$key], $query))) {
 				if (!array_key_exists($plugin, $found)) {
 					$found[$plugin] = [
 						'en' => [],

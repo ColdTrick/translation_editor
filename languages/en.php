@@ -75,6 +75,7 @@ When you're finished you can delete the file.",
 	// search
 	'translation_editor:search' => "Search results for '%s' in %s",
 	'translation_editor:forms:search:default' => "Find a translation",
+	'translation_editor:forms:search:keys' => "Search in translations keys",
 	'translation_editor:search_results:no_results' => "No translation found",
 
 	'translation_editor:show_original' => "Show original translation",

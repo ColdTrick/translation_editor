@@ -13,11 +13,24 @@ echo elgg_view_field([
 	'#type' => 'fieldset',
 	'fields' => [
 		[
-			'#type' => 'text',
+			'#type' => 'fieldset',
 			'#class' => 'elgg-field-stretch',
-			'name' => 'q',
-			'value' => elgg_extract('query', $vars),
-			'placeholder' => elgg_echo('translation_editor:forms:search:default'),
+			'fields' => [
+				[
+					'#type' => 'text',
+					'name' => 'q',
+					'value' => elgg_extract('query', $vars),
+					'placeholder' => elgg_echo('translation_editor:forms:search:default'),
+				],
+				[
+					'#type' => 'checkbox',
+					'#label' => elgg_echo('translation_editor:forms:search:keys'),
+					'name' => 'search_keys',
+					'value' => 1,
+					'checked' => (bool) elgg_extract('search_keys', $vars, true),
+					'switch' => true,
+				],
+			],
 		],
 		[
 			'#type' => 'submit',

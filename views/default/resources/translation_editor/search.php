@@ -13,9 +13,11 @@ if (empty($q)) {
 	throw $exception;
 }
 
+$search_keys = (bool) get_input('search_keys', true);
+
 $language = get_input('language', 'en');
 
-$found = translation_editor_search_translation($q, $language);
+$found = translation_editor_search_translation($q, $language, $search_keys);
 $trans = elgg()->translator->getInstalledTranslations();
 
 if (!array_key_exists($language, $trans)) {
@@ -50,6 +52,7 @@ $form_vars = [
 $body_vars = [
 	'current_language' => $language,
 	'query' => $q,
+	'search_keys' => $search_keys,
 ];
 $body = elgg_view_form('translation_editor/search', $form_vars, $body_vars);
 
