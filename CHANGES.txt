@@ -1,6 +1,10 @@
 Version history
 ===============
 
+13.1 (2024-01-31):
+
+- added: option to exclude searching in translation keys
+
 13.0 (2023-11-30):
 
 - changed: updated for Elgg 5.1
