@@ -130,7 +130,7 @@ return [
 		],
 	],
 	'view_extensions' => [
-		'css/elgg' => [
+		'elgg.css' => [
 			'translation_editor/site.css' => [],
 		],
 	],
