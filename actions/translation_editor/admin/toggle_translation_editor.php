@@ -6,7 +6,7 @@
 $user_guid = (int) get_input('user');
 
 $user = get_user($user_guid);
-if (empty($user)) {
+if (!$user instanceof \ElggUser) {
 	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 

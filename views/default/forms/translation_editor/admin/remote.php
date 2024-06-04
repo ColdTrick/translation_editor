@@ -19,7 +19,7 @@ if (empty($plugin->remote_host) || empty($plugin->remote_public_key)) {
 	return;
 }
 
-elgg_require_js('forms/translation_editor/admin/remote');
+elgg_import_esm('forms/translation_editor/admin/remote');
 
 echo elgg_view_field([
 	'#type' => 'hidden',

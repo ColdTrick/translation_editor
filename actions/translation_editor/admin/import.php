@@ -3,11 +3,12 @@
  * Exports the custom translations for the selected plugins
  */
 
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 $language = get_input('language');
 
-$files = elgg_get_uploaded_files('import');
-$import = array_shift($files);
-if (!$import || !$import->isValid()) {
+$import = elgg_get_uploaded_file('import');
+if (!$import instanceof UploadedFile) {
 	return elgg_error_response(elgg_echo('error:missing_data'));
 }
 

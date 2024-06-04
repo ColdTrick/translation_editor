@@ -3,6 +3,7 @@
  * All helper function for this plugin are bundled here
  */
 
+use ColdTrick\TranslationEditor\PluginTranslation;
 use Elgg\Project\Paths;
 use Elgg\Includer;
 use Elgg\Exceptions\InvalidArgumentException;
@@ -318,7 +319,7 @@ function translation_editor_clean_line_breaks(string $string): string {
  *
  * @return false|int
  */
-function translation_editor_write_translation(string $current_language, string $plugin, array $translations) {
+function translation_editor_write_translation(string $current_language, string $plugin, array $translations): false|int {
 	try {
 		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
 		return $translation->saveTranslations($translations);
@@ -339,7 +340,7 @@ function translation_editor_write_translation(string $current_language, string $
  */
 function translation_editor_read_translation(string $current_language, string $plugin): array {
 	try {
-		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+		$translation = new PluginTranslation($plugin, $current_language);
 		return $translation->readTranslations() ?: [];
 	} catch (InvalidArgumentException $e) {
 		elgg_log($e);
@@ -387,7 +388,7 @@ function translation_editor_load_translations(string $current_language = ''): vo
  */
 function translation_editor_delete_translation(string $current_language, string $plugin): bool {
 	try {
-		$translation = new \ColdTrick\TranslationEditor\PluginTranslation($plugin, $current_language);
+		$translation = new PluginTranslation($plugin, $current_language);
 		return $translation->removeTranslations();
 	} catch (InvalidArgumentException $e) {
 		elgg_log($e);
@@ -520,7 +521,7 @@ function translation_editor_search_translation(string $query, string $language =
  *
  * @param string $language the language to merge
  *
- * @return false|array
+ * @return null|array
  */
 function translation_editor_merge_translations(string $language = ''): ?array {
 	if (empty($language)) {
@@ -571,9 +572,9 @@ function translation_editor_merge_translations(string $language = ''): ?array {
  * @param string $string the string to search parameters for
  * @param bool   $count  return the count of the parameters (default = true)
  *
- * @return array
+ * @return int|array
  */
-function translation_editor_get_string_parameters(string $string, bool $count = true): array {
+function translation_editor_get_string_parameters(string $string, bool $count = true): int|array {
 	$valid = '/%(?:\d+\$)?[-+]?(?:[ 0]|\'.)?a?\d*(?:\.\d*)?[%bcdeEufFgGosxX]/';
 	
 	$result = [];

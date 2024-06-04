@@ -10,14 +10,14 @@ use Elgg\DefaultPluginBootstrap;
 class Bootstrap extends DefaultPluginBootstrap {
 		
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function boot() {
 		$this->loadCustomTranslations();
 	}
 	
 	/**
-	 * {@inheritDoc}
+	 * {@inheritdoc}
 	 */
 	public function upgrade() {
 		Upgrade::cleanupCustomTranslations();

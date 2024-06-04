@@ -8,7 +8,7 @@ namespace ColdTrick\TranslationEditor;
 class Languages {
 	
 	/**
-	 * Add languages to the languagelist
+	 * Add languages to the language list
 	 *
 	 * @param \Elgg\Event $event 'languages', 'translations'
 	 *

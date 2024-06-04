@@ -11,8 +11,8 @@
  * @uses $vars['plugin'] plugin id
  */
 
-elgg_require_js('elgg/toggle');
-elgg_require_js('translation_editor/key_edit');
+elgg_import_esm('elgg/toggle');
+elgg_import_esm('translation_editor/key_edit');
 
 $current_language = elgg_extract('language', $vars);
 $english = elgg_extract('english', $vars);

@@ -70,11 +70,11 @@ class PluginTranslation {
 	 *
 	 * @return false|int
 	 */
-	public function saveTranslations($translations = []) {
+	public function saveTranslations(array $translations = []): false|int {
 		$this->createFolderStructure();
-				
+		
 		$contents = json_encode($translations);
-	
+		
 		$bytes = file_put_contents($this->getFilename(), $contents);
 		if (empty($bytes)) {
 			return false;

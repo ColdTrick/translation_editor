@@ -17,4 +17,4 @@ if (!translation_editor_delete_translation($lang, $plugin)) {
 // merge translations
 translation_editor_merge_translations($lang);
 
-return elgg_ok_response('', elgg_echo('translation_editor:action:delete:success'), "translation_editor/{$lang}");
+return elgg_ok_response('', elgg_echo('translation_editor:action:delete:success'), elgg_generate_url('default:translation_editor', ['current_language' => $lang]));

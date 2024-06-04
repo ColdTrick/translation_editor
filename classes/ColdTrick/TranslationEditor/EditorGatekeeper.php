@@ -4,11 +4,12 @@ namespace ColdTrick\TranslationEditor;
 
 use Elgg\Request;
 use Elgg\Exceptions\HttpException;
+use Elgg\Router\Middleware\Gatekeeper;
 
 /**
  * Gatekeeper to only allow translation editors view a page
  */
-class EditorGatekeeper {
+class EditorGatekeeper extends Gatekeeper {
 	
 	/**
 	 * Editor gatekeeper
@@ -19,7 +20,7 @@ class EditorGatekeeper {
 	 * @throws HttpException
 	 */
 	public function __invoke(Request $request) {
-		$request->elgg()->gatekeeper->assertAuthenticatedUser();
+		parent::__invoke($request);
 		
 		$user_guid = $request->elgg()->session_manager->getLoggedInUserGuid();
 		if (translation_editor_is_translation_editor($user_guid)) {

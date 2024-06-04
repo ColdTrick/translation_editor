@@ -1,6 +1,6 @@
 <?php
 /**
- * Download the custom trnslations for the provided plugin
+ * Download the custom translations for the provided plugin
  */
 	
 $current_language = get_input('current_language');

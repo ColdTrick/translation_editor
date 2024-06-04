@@ -70,7 +70,7 @@ foreach ($translation as $key_edit) {
 }
 
 // toggle between different filters
-elgg_require_js('translation_editor/plugin_edit');
+elgg_import_esm('translation_editor/plugin_edit');
 
 $menu_items = [];
 
