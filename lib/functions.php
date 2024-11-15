@@ -361,10 +361,7 @@ function translation_editor_load_translations(string $current_language = ''): vo
 		$current_language = elgg_get_current_language();
 	}
 	
-	// load translations
-	// using elgg_get_system_cache() to bypass enabled setting
-	$cache = elgg_get_system_cache();
-	$translations = $cache->load("translation_editor_merged_{$current_language}");
+	$translations = elgg_load_system_cache("translation_editor_merged_{$current_language}");
 	if (!is_array($translations)) {
 		// cache was reset rebuild it
 		$translations = translation_editor_merge_translations($current_language);
@@ -552,13 +549,9 @@ function translation_editor_merge_translations(string $language = ''): ?array {
 		}
 	}
 	
-	// write merged to cache
-	// using elgg_get_system_cache() to bypass enabled setting
-	$cache = elgg_get_system_cache();
-	$cache->save("translation_editor_merged_{$language}", $translations);
+	elgg_save_system_cache("translation_editor_merged_{$language}", $translations);
 	
-	// clear system cache
-	$cache->delete("{$language}.lang");
+	elgg_delete_system_cache("{$language}.lang");
 	
 	// let others know this happened
 	elgg_trigger_event('language:merge', 'translation_editor', $language);
