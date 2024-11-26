@@ -24,7 +24,7 @@ if (!$client instanceof ElggApiClient) {
 try {
 	$remote_result = $client->executeRequest();
 } catch (\Exception $e) {
-	elgg_log($e, 'ERROR');
+	elgg_log($e, \Psr\Log\LogLevel::ERROR);
 	return elgg_error_response(elgg_echo('translation_editor:action:remote:error:request'));
 }
 

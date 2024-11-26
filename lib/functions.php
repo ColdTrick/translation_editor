@@ -131,7 +131,7 @@ function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $lo
 	
 	$plugin_keys = Includer::includeFile($language_file);
 	if (!is_array($plugin_keys)) {
-		elgg_log("Please update the language file [en.php] of '{$plugin_id}' to return an array", 'WARNING');
+		elgg_log("Please update the language file [en.php] of '{$plugin_id}' to return an array", \Psr\Log\LogLevel::WARNING);
 		return [];
 	}
 	
@@ -225,7 +225,7 @@ function translation_editor_get_plugin(string $current_language, string $plugin)
 	if (file_exists("{$plugin_language_path}en.php")) {
 		$plugin_keys = Includer::includeFile("{$plugin_language_path}en.php");
 		if (!is_array($plugin_keys)) {
-			elgg_log("Please update the language file of '{$plugin}' to return an array", 'WARNING');
+			elgg_log("Please update the language file of '{$plugin}' to return an array", \Psr\Log\LogLevel::WARNING);
 			return null;
 		}
 		
