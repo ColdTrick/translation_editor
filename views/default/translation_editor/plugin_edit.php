@@ -32,7 +32,7 @@ if (!empty($english)) {
 		} elseif (count($invalid_params)) {
 			$row_rel = 'params';
 			$params_count++;
-		} elseif (array_key_exists($en_key, $custom) && ($custom[$en_key] !== $original_language[$en_key])) {
+		} elseif (array_key_exists($en_key, $custom) && ($custom[$en_key] !== elgg_extract($en_key, $original_language))) {
 			$row_rel = 'custom';
 			$custom_count++;
 		}
