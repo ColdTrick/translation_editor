@@ -18,7 +18,7 @@ $contents = file_get_contents($filename);
 $removed = json_decode($contents, true);
 
 $fh = tmpfile();
-fputcsv($fh, ['Plugin ID', 'key', 'translation'], ';');
+fputcsv($fh, ['Plugin ID', 'key', 'translation'], ';', '"');
 
 foreach ($removed as $plugin_id => $translations) {
 	if (!is_array($translations)) {
@@ -26,7 +26,7 @@ foreach ($removed as $plugin_id => $translations) {
 	}
 	
 	foreach ($translations as $key => $value) {
-		fputcsv($fh, [$plugin_id, $key, $value], ';');
+		fputcsv($fh, [$plugin_id, $key, $value], ';', '"');
 	}
 }
 
