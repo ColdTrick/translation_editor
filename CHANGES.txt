@@ -1,6 +1,10 @@
 Version history
 ===============
 
+14.0.4 (2025-11-13):
+
+- several small chores/fixes
+
 14.0.3 (2025-03-27):
 
 - fixed: php warning on plugin translation page
