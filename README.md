@@ -2,6 +2,7 @@ Translation Editor
 ==================
 
 ![Elgg 6.0](https://img.shields.io/badge/Elgg-6.0-green.svg)
+![Elgg 7.0](https://img.shields.io/badge/Elgg-7.0-green.svg)
 ![Lint Checks](https://github.com/ColdTrick/translation_editor/actions/workflows/lint.yml/badge.svg?event=push)
 [![Latest Stable Version](https://poser.pugx.org/coldtrick/translation_editor/v/stable.svg)](https://packagist.org/packages/coldtrick/translation_editor)
 [![License](https://poser.pugx.org/coldtrick/translation_editor/license.svg)](https://packagist.org/packages/coldtrick/translation_editor)
