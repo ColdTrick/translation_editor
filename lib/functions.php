@@ -79,7 +79,7 @@ function translation_editor_get_core_statistics(array $loaded_translations, stri
 		$core_translations = array_intersect_key($core_translations, $core_keys);
 	}
 	
-	$missing_translations = array_diff_key($core_keys, $loaded_translations[$language]);
+	$missing_translations = array_diff_key($core_keys, $loaded_translations[$language] ?? []);
 	$custom_translations = translation_editor_read_translation($language, 'core');
 	$custom_existing_translations = array_intersect_key($custom_translations, $core_keys);
 	
@@ -150,7 +150,7 @@ function translation_editor_get_plugin_statistics(\ElggPlugin $plugin, array $lo
 		}
 	}
 	
-	$missing_translations = array_diff_key($plugin_keys, $loaded_translations[$language]);
+	$missing_translations = array_diff_key($plugin_keys, $loaded_translations[$language] ?? []);
 	$custom_translations = translation_editor_read_translation($language, $plugin_id);
 	$custom_existing_translations = array_intersect_key($custom_translations, $plugin_keys);
 	
