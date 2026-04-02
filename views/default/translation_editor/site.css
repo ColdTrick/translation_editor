@@ -34,11 +34,11 @@ img.translation-editor-flag {
 	}
 	
 	.translation-editor-translation-complete {
-		color: green;
+		color: var(--elgg-state-success-font-color);
 	}
 	
 	.translation-editor-translation-needed {
-		color: red;
+		color: var(--elgg-state-danger-font-color);
 	}
 	
 	.translation-editor-plugin-actions {
