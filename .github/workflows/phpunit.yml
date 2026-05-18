@@ -4,7 +4,12 @@ on: [push, pull_request]
 
 jobs:
   phpunit:
-    name: Run PHPUnit test suites
+    name: Run PHPUnit test suites on Elgg 6
     uses: ColdTrick/.github/.github/workflows/phpunit.yml@master
     with:
       elgg_major_version: 6
+  phpunit7:
+    name: Run PHPUnit test suites on Elgg 7
+    uses: ColdTrick/.github/.github/workflows/phpunit.yml@master
+    with:
+      elgg_major_version: 7
