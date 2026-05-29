@@ -1,6 +1,10 @@
 Version history
 ===============
 
+14.0.5 (2026-05-29):
+
+- fixed: correct compare for empty languages
+
 14.0.4 (2025-11-13):
 
 - several small chores/fixes
