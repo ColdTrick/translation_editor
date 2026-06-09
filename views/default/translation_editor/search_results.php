@@ -14,7 +14,7 @@ foreach ($search_results as $plugin => $data) {
 	
 	$list .= '<table class="elgg-table translation-editor-translation-table mbl">';
 	$list .= '<col class="first_col" />';
-	$list .= '<tr class="first_row"><th colspan="2">';
+	$list .= '<tr class="first_row"><th colspan="3">';
 	$list .= elgg_view_url("translation_editor/{$current_language}/{$plugin}", $plugin);
 	$list .= '</th></tr>';
 	
