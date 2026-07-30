@@ -1,6 +1,10 @@
 Version history
 ===============
 
+14.0.6 (2026-07-30):
+
+- fixed: incorrect colspan for search results plugin title row
+
 14.0.5 (2026-05-29):
 
 - fixed: correct compare for empty languages

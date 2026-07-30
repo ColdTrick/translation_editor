@@ -9,7 +9,7 @@ require_once(__DIR__ . '/lib/functions.php');
 
 return [
 	'plugin' => [
-		'version' => '14.0.5',
+		'version' => '14.0.6',
 	],
 	'bootstrap' => Bootstrap::class,
 	'actions' => [
