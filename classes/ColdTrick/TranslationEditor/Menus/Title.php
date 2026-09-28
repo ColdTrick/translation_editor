@@ -53,7 +53,9 @@ class Title {
 				'name' => 'translation-editor-snapshots',
 				'icon' => 'eye',
 				'text' => elgg_echo('translation_editor:snapshots'),
-				'href' => elgg_http_add_url_query_elements('ajax/view/translation_editor/snapshots', [
+				'href' => elgg_generate_url('ajax', [
+					'type' => 'view',
+					'segments' => 'translation_editor/snapshots',
 					'language' => $current_language,
 				]),
 				'link_class' => 'elgg-button elgg-button-action elgg-lightbox',
