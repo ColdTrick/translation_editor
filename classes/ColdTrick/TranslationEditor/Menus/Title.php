@@ -23,7 +23,7 @@ class Title {
 		$current_language = get_input('current_language');
 		$plugin_id = get_input('plugin_id');
 		
-		/* @var $return MenuItems */
+		/** @var MenuItems $return */
 		$return = $event->getValue();
 		
 		// show import/export buttons only on language page (not on plugins)
@@ -92,7 +92,7 @@ class Title {
 			return null;
 		}
 		
-		/* @var $return MenuItems */
+		/** @var MenuItems $return */
 		$return = $event->getValue();
 		
 		// language selector

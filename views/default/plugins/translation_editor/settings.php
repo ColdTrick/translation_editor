@@ -1,6 +1,6 @@
 <?php
 
-/* @var $entity \ElggPlugin */
+/** @var \ElggPlugin $entity */
 $entity = elgg_extract('entity', $vars);
 
 // remote translations

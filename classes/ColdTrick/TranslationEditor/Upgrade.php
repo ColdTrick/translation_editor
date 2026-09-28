@@ -20,14 +20,14 @@ class Upgrade {
 		}
 		
 		$dh = new \DirectoryIterator($base_dir);
-		/* @var $language_info \DirectoryIterator */
+		/** @var \DirectoryIterator $language_info */
 		foreach ($dh as $language_info) {
 			if ($language_info->isDot() || !$language_info->isDir()) {
 				continue;
 			}
 			
 			$ldh = new \DirectoryIterator($language_info->getPathname());
-			/* @var $plugin_translation \DirectoryIterator */
+			/** @var \DirectoryIterator $plugin_translation */
 			foreach ($ldh as $plugin_translation) {
 				if (!$plugin_translation->isFile()) {
 					continue;

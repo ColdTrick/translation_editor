@@ -30,7 +30,7 @@ class UserHover {
 		
 		$is_editor = translation_editor_is_translation_editor($user->guid);
 		
-		/* @var $return MenuItems */
+		/** @var MenuItems $return */
 		$return = $event->getValue();
 		
 		$return[] = \ElggMenuItem::factory([

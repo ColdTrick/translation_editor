@@ -72,7 +72,7 @@ class Snapshot {
 		}
 		
 		$dh = new \DirectoryIterator($base_dir);
-		/* @var $file_info \DirectoryIterator */
+		/** @var \DirectoryIterator $file_info */
 		foreach ($dh as $file_info) {
 			if ($file_info->isFile() || $file_info->isDot()) {
 				continue;
@@ -197,7 +197,7 @@ class Snapshot {
 		
 		$result = [];
 		$dh = new \DirectoryIterator($snapshot_directory);
-		/* @var $plugin \DirectoryIterator */
+		/** @var \DirectoryIterator $plugin */
 		foreach ($dh as $plugin) {
 			if ($plugin->isFile() || $plugin->isDot()) {
 				continue;
@@ -253,7 +253,7 @@ class Snapshot {
 		
 		$dh = new \DirectoryIterator($source_directory);
 		
-		/* @var $file_info \DirectoryIterator */
+		/** @var \DirectoryIterator $file_info */
 		foreach ($dh as $file_info) {
 			if (!$file_info->isFile() || $file_info->getExtension() !== 'php') {
 				continue;
