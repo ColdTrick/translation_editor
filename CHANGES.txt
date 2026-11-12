@@ -1,6 +1,10 @@
 Version history
 ===============
 
+14.0.7 (2026-11-12):
+
+- several small chores/fixes
+
 14.0.6 (2026-07-30):
 
 - fixed: incorrect colspan for search results plugin title row
